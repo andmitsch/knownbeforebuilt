@@ -2,7 +2,12 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=1440">
+<script>
+  // Desktop-only layout for now: phones and tablets render the page at 1440 px and scale it to fit.
+  window.KB_TOUCH = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (!window.KB_TOUCH) document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1');
+</script>
 <title>Known Before Built — From Discovery to Decision for Enterprises in Transformation</title>
 <meta name="description" content="A working system for deciding what deserves to be built — before the organisation pays to find out. A book by Andreas Mitschke.">
 <meta name="author" content="Andreas Mitschke">
@@ -140,7 +145,7 @@ html.kbgrabbing,html.kbgrabbing *{cursor:grabbing!important}
 .kbpgimg.kbpgR::after{left:0;background:linear-gradient(270deg,rgba(60,45,30,0),rgba(60,45,30,.16))}
 .kbblank{flex:1;border:1.5px dashed rgba(17,17,17,.22);border-radius:2px}
 
-html { background: #ECE8E5; }
+html { background: #ECE8E5; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 #kb-page { width: 1440px; margin: 0 auto; }
 #kb-main > div, #kb-main2 > div { margin: 0 auto; }
@@ -1681,7 +1686,7 @@ window.KBB_PROPS = { showPlaceholders: true };
   // The design is drawn at 1440 px. Wider screens centre it; narrower ones scale it down.
   var page = document.getElementById('kb-page');
   function fit() {
-    var z = Math.min(1, document.documentElement.clientWidth / 1440);
+    var z = window.KB_TOUCH ? 1 : Math.min(1, document.documentElement.clientWidth / 1440);
     page.style.zoom = z === 1 ? '' : String(z);
   }
   fit(); window.addEventListener('resize', fit);
