@@ -944,7 +944,7 @@ void main(){
  gl_FragColor=vec4(C,A);}`;
   }
   addGL(cv, w, h, fs, isMain) {
-    const dpr = window.KB_SITE ? 0.45 : Math.min(window.devicePixelRatio || 1, 2);   // website: soft glow drawn at 45 %, scaled up by the browser
+    const dpr = window.KB_SITE ? 1 : Math.min(window.devicePixelRatio || 1, 2);   // website: one canvas pixel per CSS pixel (4× fewer than retina), sharp enough for the laser core
     cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
     const gl = cv.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false });
     if (!gl) return;
