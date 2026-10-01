@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy — Known Before Built</title>
-
+<title>Pre-launch — Known Before Built</title>
+<meta name="description" content="Known Before Built by Andreas Mitschke is in final peer review. Leave your name and email to be notified the day it launches.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#ECE8E5">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -46,6 +46,39 @@ a:hover{text-decoration-thickness:3px}
 .foot nav{display:flex;gap:24px;flex-wrap:wrap}
 .foot a{text-decoration:none}
 .foot a:hover{text-decoration:underline}
+
+.pre{max-width:1200px;margin:0 auto;padding:32px 24px 96px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:72px;align-items:center}
+.eyebrow{font:700 12px/1 'Hanken Grotesk',sans-serif;letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px rgba(245,113,6,.18)}
+.pre h1{font:900 clamp(44px,7vw,84px)/.95 Archivo,sans-serif;letter-spacing:-.035em;margin:22px 0 22px}
+.pre h1 i{font:italic 400 .9em/1 'Bodoni Moda',serif;letter-spacing:0}
+.lede{font:400 clamp(19px,2.2vw,23px)/1.45 'Bodoni Moda',serif;margin:0 0 18px;max-width:560px}
+.body{max-width:540px;margin:0 0 30px;color:#2B2826}
+.signal-note{display:none;border-left:3px solid var(--orange);padding:4px 0 4px 14px;margin:0 0 26px;max-width:540px}
+.from-signal .signal-note{display:block}
+form{display:grid;gap:14px;max-width:520px}
+.row{display:grid;grid-template-columns:1fr 1.4fr;gap:12px}
+label{display:flex;flex-direction:column;gap:6px;font:600 13px/1 'Hanken Grotesk',sans-serif;letter-spacing:.04em}
+input[type=text],input[type=email]{font:400 17px/1.2 'Hanken Grotesk',sans-serif;color:var(--ink);background:#F6F4F2;border:1.5px solid var(--ink);border-radius:2px;padding:14px 14px;width:100%;outline:none;transition:box-shadow .2s,border-color .2s}
+input:focus{box-shadow:0 0 0 3px rgba(245,113,6,.35)}
+button{all:unset;cursor:pointer;justify-self:start;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 32px;background:var(--orange);color:#FFFFFF;font:700 18px/1 'Hanken Grotesk',sans-serif;border-radius:2px;transition:background .25s,color .25s,transform .15s}
+button:hover{background:#111111;color:#ECE8E5}
+button:active{transform:scale(.97)}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+button[disabled]{opacity:.6;cursor:progress}
+.consent{font-size:13.5px;line-height:1.5;color:var(--muted);max-width:520px;margin:16px 0 0}
+.ok{display:none;max-width:540px;border:1.5px solid var(--ink);background:#F6F4F2;box-shadow:7px 7px 0 var(--orange);padding:24px 26px}
+.ok h2{font:900 30px/1.05 Archivo,sans-serif;letter-spacing:-.02em;margin:0 0 10px}
+.ok p{margin:0}
+.done form,.done .consent{display:none}
+.done .ok{display:block}
+.err{display:none;color:#8A2B00;font-weight:600;margin:0}
+.cover{justify-self:center;width:min(100%,380px);position:relative}
+.cover img{display:block;width:100%;height:auto;box-shadow:-2px 2px 0 #E2DBD3,-14px 26px 40px -14px rgba(46,33,24,.45);border-radius:2px 4px 4px 2px}
+.cover .tag{position:absolute;right:-12px;top:-14px;transform:rotate(4deg);background:#111111;color:#ECE8E5;font:700 12px/1 'Hanken Grotesk',sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:10px 12px}
+.facts{display:flex;gap:28px;margin:34px 0 0;padding:0;list-style:none;font-size:14px;color:var(--muted)}
+.facts b{display:block;color:var(--ink);font:800 20px/1.1 Archivo,sans-serif}
+@media (max-width:860px){.pre{grid-template-columns:1fr;gap:40px;padding-top:8px}.cover{order:-1;width:min(62%,260px)}.row{grid-template-columns:1fr}}
 </style>
 
 <!-- GoatCounter: cookie-free visitor stats. Replace [GOATCOUNTER-CODE] with your GoatCounter code. -->
@@ -53,65 +86,48 @@ a:hover{text-decoration-thickness:3px}
 </head>
 <body>
 <header class="top"><a class="brand" href="./">KNOWN <i>before</i> BUILT</a><a href="./" style="font-weight:600;font-size:15px">← Back to the book</a></header>
-<main class="wrap legal">
-<h1>Privacy</h1>
-<p>This policy explains what personal data is processed when you visit this website or sign up for the launch notification, why, and what rights you have. In short: no cookies, no advertising trackers, no profiles. Your name and email address are only stored if you sign up yourself — and only to tell you when the book launches.</p>
-
-<h2>1. Controller</h2>
-<p>Controller within the meaning of the General Data Protection Regulation (GDPR):</p>
-<address>Andreas Mitschke<br>
-<span class="ph">[Street and house number]</span><br>
-<span class="ph">[Postcode] [City]</span>, Germany<br>
-Email: <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.com</a></address>
-<p>A data protection officer is not required and has not been appointed.</p>
-
-<h2>2. Hosting (GitHub Pages)</h2>
-<p>This website is hosted on GitHub Pages, a service of GitHub B.V., Prins Bernhardplein 200, 1097 JB Amsterdam, Netherlands, and GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. When you open a page, your browser necessarily transmits technical data to GitHub's servers — in particular your IP address, the date and time of the request, the page requested, the referring page and your browser and operating system. GitHub processes this data to deliver the website and to ensure its security, and stores it in server logs.</p>
-<p>Legal basis: Art. 6(1)(f) GDPR — my legitimate interest in a secure, reliably delivered website. Data may be transferred to the USA; GitHub, Inc. is certified under the EU-U.S. Data Privacy Framework, for which the European Commission has issued an adequacy decision (Art. 45 GDPR). More: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
-
-<h2>3. Fonts</h2>
-<p>All fonts are served from this website itself. No connection is made to Google Fonts or any other font provider.</p>
-
-<h2>4. Visitor statistics (GoatCounter)</h2>
-<p>To understand how many people visit the site, where they come from (e.g. a link in an email signature) and which buttons are used, I use GoatCounter, operated by Martin Tournoij, Ireland. The data is stored on servers of Hetzner Online GmbH in Germany and Finland.</p>
-<p>GoatCounter sets no cookies, does not store IP addresses or full browser identifiers, and creates no profiles: only aggregated figures are recorded — the page visited, the referring site and campaign tags (such as <code>utm_source</code>), browser, operating system, screen size, approximate country and anonymous button clicks. The counting script is loaded from <code>gc.zgo.at</code>; for this, your IP address is technically transmitted but not stored.</p>
-<p>Legal basis: Art. 6(1)(f) GDPR — my legitimate interest in anonymous reach statistics to improve the website. As no information is stored on or read from your device beyond what is strictly necessary to display the page, no consent banner is required. More: <a href="https://www.goatcounter.com/help/privacy" rel="noopener">GoatCounter privacy</a>.</p>
-
-<h2>5. Launch notification (Kit)</h2>
-<p>On the pre-launch page you can leave your first name and email address to be told when the book is published.</p>
-<ul>
-<li><b>Purpose:</b> one email on the day the book launches. Nothing else is sent unless you separately agree to it.</li>
-<li><b>Data:</b> first name, email address, the time of sign-up and confirmation, and the IP address used for both (to be able to prove your consent), and from which button you came (book or Signal).</li>
-<li><b>Double opt-in:</b> after signing up you receive an email asking you to confirm your address. Only after you click the confirmation link are you added to the list.</li>
-<li><b>Legal basis:</b> your consent, Art. 6(1)(a) GDPR. You can withdraw consent at any time with effect for the future — via the unsubscribe link in every email or by emailing me. The lawfulness of processing up to that point is unaffected.</li>
-<li><b>Storage period:</b> until you unsubscribe or ask for deletion. Consent records are kept for as long as needed to demonstrate consent.</li>
-<li><b>Service provider:</b> the list is managed with Kit (formerly ConvertKit), USA, as a processor under a data processing agreement (Art. 28 GDPR). Kit is certified under the EU-U.S. Data Privacy Framework and additionally uses the EU Standard Contractual Clauses. More: <a href="https://kit.com/privacy" rel="noopener">Kit Privacy Policy</a>.</li>
-</ul>
-
-<h2>6. Contact by email</h2>
-<p>If you email me, I process your email address and the content of your message to answer your enquiry. Legal basis: Art. 6(1)(b) GDPR where your enquiry relates to a contract (e.g. bulk orders, speaking), otherwise Art. 6(1)(f) GDPR — my legitimate interest in answering enquiries. I delete these emails once your enquiry has been dealt with, unless statutory retention periods apply.</p>
-
-<h2>7. Links to other websites</h2>
-<p>This site links to other websites, for example LinkedIn or the publisher's page. Data is only transmitted to those providers if you click such a link; their own privacy policies then apply.</p>
-
-<h2>8. Your rights</h2>
-<p>Under the GDPR you have the right to:</p>
-<ul>
-<li>access the personal data stored about you (Art. 15),</li>
-<li>have incorrect data corrected (Art. 16),</li>
-<li>have your data deleted (Art. 17) or its processing restricted (Art. 18),</li>
-<li>receive your data in a portable format (Art. 20),</li>
-<li>object to processing based on legitimate interests (Art. 21),</li>
-<li>withdraw consent at any time with effect for the future (Art. 7(3)),</li>
-<li>lodge a complaint with a data protection supervisory authority (Art. 77), for example the authority of your place of residence or the one responsible for me: <span class="ph">[Data protection authority of your federal state, e.g. Landesbeauftragte(r) für den Datenschutz …]</span>.</li>
-</ul>
-<p>To exercise these rights, an email to <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.com</a> is enough.</p>
-
-<h2>9. No automated decisions</h2>
-<p>No automated decision-making or profiling within the meaning of Art. 22 GDPR takes place.</p>
-
-<p class="meta">Last updated: October 2026. I will update this policy if the website or the services used change.</p>
+<main class="pre" id="pre">
+<section aria-labelledby="pre-h">
+<p class="eyebrow">Pre-launch</p>
+<h1 id="pre-h">Almost <i>ready.</i></h1>
+<p class="lede"><i>Known Before Built</i> isn't published yet — but it's close.</p>
+<p class="body">The manuscript is finished, and printed review copies are with peers for a final read. Leave your first name and email address, and you'll get one email the day the book launches.</p>
+<p class="signal-note"><b>Looking for Signal?</b> The free seven-question intake tool opens together with the book. Sign up below and you'll hear about both.</p>
+<form id="kb-form" action="https://app.convertkit.com/forms/[KIT-FORM-ID]/subscriptions" method="post" novalidate>
+<div class="row">
+<label for="f-name">First name<input id="f-name" type="text" name="fields[first_name]" autocomplete="given-name" required maxlength="80"></label>
+<label for="f-mail">Email address<input id="f-mail" type="email" name="email_address" autocomplete="email" required maxlength="160"></label>
+</div>
+<input type="hidden" name="fields[source]" id="f-src" value="book">
+<button type="submit" id="f-btn" data-goatcounter-click="prelaunch-submit">Notify me at launch <span aria-hidden="true">→</span></button>
+<p class="err" id="f-err" role="alert">Please enter your first name and a valid email address.</p>
+</form>
+<p class="consent">You'll first get an email asking you to confirm your address (double opt-in). After that: one email when the book launches, nothing else. Unsubscribe any time with one click. Details in the <a href="privacy.html">privacy policy</a>.</p>
+<div class="ok" role="status" aria-live="polite"><h2>Almost done.</h2><p>Please check your inbox and click the confirmation link — only then are you on the list. If nothing arrives within a few minutes, look in your spam folder.</p></div>
+<ul class="facts"><li><b>311</b>pages</li><li><b>Paperback</b>format</li><li><b>Grant &amp; Bear</b>publisher</li></ul>
+</section>
+<figure class="cover" style="margin:0"><img src="assets/book-front.jpg" width="760" height="1216" alt="Cover of Known Before Built by Andreas Mitschke"><span class="tag">In peer review</span></figure>
 </main>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), from = q.get('from') === 'signal' ? 'signal' : 'book';
+  document.getElementById('f-src').value = from;
+  document.getElementById('f-btn').setAttribute('data-goatcounter-click', 'prelaunch-submit-' + from);
+  if (from === 'signal') document.body.classList.add('from-signal');
+  if (q.get('subscribed') === '1') document.body.classList.add('done');
+  var form = document.getElementById('kb-form'), btn = document.getElementById('f-btn'), err = document.getElementById('f-err');
+  form.addEventListener('submit', function (e) {
+    var name = form.elements['fields[first_name]'].value.trim(), mail = form.elements['email_address'].value.trim();
+    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { e.preventDefault(); err.style.display = 'block'; return; }
+    err.style.display = 'none';
+    if (!window.fetch || form.action.indexOf('[KIT-FORM-ID]') >= 0) return;   // no JS fetch, or not configured yet: plain form post
+    e.preventDefault(); btn.disabled = true;
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); document.body.classList.add('done'); window.scrollTo({ top: 0, behavior: 'smooth' }); })
+      .catch(function () { btn.disabled = false; form.submit(); });   // fall back to a normal post
+  });
+})();
+</script>
 <footer class="foot"><span>© Andreas Mitschke</span><nav><a href="grant-and-bear-publishing/">Grant &amp; Bear Publishing</a><a href="impressum.html">Impressum</a><a href="privacy.html">Privacy</a></nav></footer>
 </body>
 </html>
