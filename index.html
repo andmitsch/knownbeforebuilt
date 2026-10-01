@@ -154,11 +154,29 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 .kb-skip:focus { left: 8px; }
 .kb-noscript { max-width: 640px; margin: 40px auto; font: 400 16px/1.5 'Hanken Grotesk', sans-serif; }
 
+
+/* Page transitions (Chrome/Edge 126+, Safari 18.2+; other browsers simply load the page) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: kb-vt-out .42s cubic-bezier(.4,0,.2,1) both; }
+::view-transition-new(root) { animation: kb-vt-in .62s cubic-bezier(.22,1,.36,1) .08s both; }
+::view-transition-group(kb-brand) { animation-duration: .5s; animation-timing-function: cubic-bezier(.22,1,.36,1); }
+::view-transition-new(kb-sweep) { animation: kb-vt-sweep .7s cubic-bezier(.65,0,.35,1) both; }
+::view-transition-old(kb-sweep) { display: none; }
+@keyframes kb-vt-out { to { opacity: 0; transform: translateY(-14px) scale(.992); filter: blur(2px); } }
+@keyframes kb-vt-in { from { opacity: 0; transform: translateY(22px); } }
+@keyframes kb-vt-sweep { 0% { transform: scaleX(0); transform-origin: 0 50%; } 55% { transform: scaleX(1); transform-origin: 0 50%; } 56% { transform-origin: 100% 50%; } 100% { transform: scaleX(0); transform-origin: 100% 50%; } }
+.kb-sweep { display: none; position: fixed; left: 0; right: 0; top: 0; height: 3px; background: #F57106; pointer-events: none; z-index: 1000; view-transition-name: kb-sweep; }
+:active-view-transition .kb-sweep { display: block; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+#kb-main nav > a:first-child { view-transition-name: kb-brand; }
 </style>
 <!-- GoatCounter: cookie-free visitor stats. Replace [GOATCOUNTER-CODE] with your GoatCounter code. -->
 <script data-goatcounter="https://[GOATCOUNTER-CODE].goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
+<div class="kb-sweep" aria-hidden="true"></div>
 <a class="kb-skip" href="#top">Skip to content</a>
 <main id="kb-page">
   <div id="kb-main"></div>

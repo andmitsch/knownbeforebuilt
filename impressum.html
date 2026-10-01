@@ -23,7 +23,24 @@
 @font-face{font-family:'Bodoni Moda';font-style:italic;font-weight:400 900;font-display:swap;src:url(fonts/bodoni-moda-latin-ext-opsz-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
 @font-face{font-family:'Bodoni Moda';font-style:italic;font-weight:400 900;font-display:swap;src:url(fonts/bodoni-moda-math-opsz-italic.woff2) format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF;}
 </style>
-<style>
+<style>/* Page transitions (Chrome/Edge 126+, Safari 18.2+; other browsers simply load the page) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: kb-vt-out .42s cubic-bezier(.4,0,.2,1) both; }
+::view-transition-new(root) { animation: kb-vt-in .62s cubic-bezier(.22,1,.36,1) .08s both; }
+::view-transition-group(kb-brand) { animation-duration: .5s; animation-timing-function: cubic-bezier(.22,1,.36,1); }
+::view-transition-new(kb-sweep) { animation: kb-vt-sweep .7s cubic-bezier(.65,0,.35,1) both; }
+::view-transition-old(kb-sweep) { display: none; }
+@keyframes kb-vt-out { to { opacity: 0; transform: translateY(-14px) scale(.992); filter: blur(2px); } }
+@keyframes kb-vt-in { from { opacity: 0; transform: translateY(22px); } }
+@keyframes kb-vt-sweep { 0% { transform: scaleX(0); transform-origin: 0 50%; } 55% { transform: scaleX(1); transform-origin: 0 50%; } 56% { transform-origin: 100% 50%; } 100% { transform: scaleX(0); transform-origin: 100% 50%; } }
+.kb-sweep { display: none; position: fixed; left: 0; right: 0; top: 0; height: 3px; background: #F57106; pointer-events: none; z-index: 1000; view-transition-name: kb-sweep; }
+:active-view-transition .kb-sweep { display: block; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+
+.brand{view-transition-name:kb-brand}
+
 :root{--paper:#ECE8E5;--ink:#111111;--muted:#5E5954;--orange:#F57106}
 *{box-sizing:border-box}
 html{background:var(--paper);-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -52,6 +69,7 @@ a:hover{text-decoration-thickness:3px}
 <script data-goatcounter="https://[GOATCOUNTER-CODE].goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
+<div class="kb-sweep" aria-hidden="true"></div>
 <header class="top"><a class="brand" href="./">KNOWN <i>before</i> BUILT</a><a href="./" style="font-weight:600;font-size:15px">← Back to the book</a></header>
 <main class="wrap legal">
 <h1>Impressum</h1>
