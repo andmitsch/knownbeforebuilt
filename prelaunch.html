@@ -109,6 +109,10 @@ button[disabled]{opacity:.6;cursor:progress}
 .ok p{margin:0}
 .done form,.done .consent{display:none}
 .done .ok{display:block}
+.ok-c{display:none}
+.confirmed .ok-p{display:none}
+.confirmed .ok-c{display:block}
+.confirmed .body,.confirmed .signal-note{display:none}
 .err{display:none;color:#8A2B00;font-weight:600;margin:0}
 .cover{justify-self:center;width:min(100%,380px);position:relative}
 .cover img{display:block;width:100%;height:auto;box-shadow:-2px 2px 0 #E2DBD3,-14px 26px 40px -14px rgba(46,33,24,.45);border-radius:2px 4px 4px 2px}
@@ -132,7 +136,7 @@ button[disabled]{opacity:.6;cursor:progress}
 <section aria-labelledby="pre-h">
 <p class="eyebrow">Pre-launch</p>
 <h1 id="pre-h">Almost <i>ready.</i></h1>
-<p class="lede"><i>Known Before Built</i> isn't published yet, but it's close.</p>
+<p class="lede"><i>Known Before Built</i> isn't published yet — but it's close.</p>
 <p class="body">The manuscript is finished, and printed review copies are with peers for a final read. Leave your first name and email address, and you'll get one email the day the book launches.</p>
 <p class="signal-note"><b>Looking for Signal?</b> The free seven-question intake tool opens together with the book. Sign up below and you'll hear about both.</p>
 <form id="kb-form" action="https://app.convertkit.com/forms/9990304/subscriptions" method="post" novalidate>
@@ -144,8 +148,8 @@ button[disabled]{opacity:.6;cursor:progress}
 <button type="submit" id="f-btn" data-goatcounter-click="prelaunch-submit">Notify me at launch <span aria-hidden="true">→</span></button>
 <p class="err" id="f-err" role="alert">Please enter your first name and a valid email address.</p>
 </form>
-<p class="consent">You'll first get an email asking you to confirm your address. After that just one email when the book launches, nothing else. Unsubscribe any time with one click.</p>
-<div class="ok" role="status" aria-live="polite"><h2>Almost done.</h2><p>Please check your inbox and click the confirmation link — only then are you on the list. If nothing arrives within a few minutes, look in your spam folder.</p></div>
+<p class="consent">You'll first get an email asking you to confirm your address (double opt-in). After that: one email when the book launches, nothing else. Unsubscribe any time with one click. Details in the <a href="privacy.html">privacy policy</a>.</p>
+<div class="ok" role="status" aria-live="polite"><div class="ok-p"><h2>Almost done.</h2><p>Please check your inbox and click the confirmation link — only then are you on the list. If nothing arrives within a few minutes, look in your spam folder.</p></div><div class="ok-c"><h2>You're on the list.</h2><p>Thank you for confirming. You'll get one email the day <i>Known Before Built</i> launches — nothing else.</p></div></div>
 <ul class="facts"><li><b>311</b>pages</li><li><b>Paperback</b>format</li><li><b>Grant &amp; Bear</b>publisher</li></ul>
 </section>
 <figure class="cover" style="margin:0"><img src="assets/book-front.jpg" width="760" height="1216" alt="Cover of Known Before Built by Andreas Mitschke"><span class="tag">In peer review</span></figure>
@@ -157,6 +161,7 @@ button[disabled]{opacity:.6;cursor:progress}
   document.getElementById('f-btn').setAttribute('data-goatcounter-click', 'prelaunch-submit-' + from);
   if (from === 'signal') document.body.classList.add('from-signal');
   if (q.get('subscribed') === '1') document.body.classList.add('done');
+  if (q.get('confirmed') === '1') { document.body.classList.add('done', 'confirmed'); document.getElementById('pre-h').innerHTML = 'You’re <i>in.</i>'; }
   var form = document.getElementById('kb-form'), btn = document.getElementById('f-btn'), err = document.getElementById('f-err');
   form.addEventListener('submit', function (e) {
     var name = form.elements['fields[first_name]'].value.trim(), mail = form.elements['email_address'].value.trim();
