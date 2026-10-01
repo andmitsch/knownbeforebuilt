@@ -8,6 +8,7 @@
   window.KB_TOUCH = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   if (!window.KB_TOUCH) document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1');
 </script>
+<script>window.KB_SITE = true;</script>
 <title>Known Before Built — From Discovery to Decision for Enterprises in Transformation</title>
 <meta name="description" content="A working system for deciding what deserves to be built — before the organisation pays to find out. A book by Andreas Mitschke.">
 <meta name="author" content="Andreas Mitschke">
@@ -314,7 +315,7 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 </div>
 <div style="position: absolute; left: 920px; top: 596px; width: 420px; display: flex; flex-direction: column; gap: 6px">
 <p style="margin: 0; display: flex; align-items: baseline; gap: 12px"><span style="font: 800 20px/1 Archivo, sans-serif">Displacement cost</span><span style="font: italic 400 22px/1 'Bodoni Moda', serif">L<sub>D</sub></span></p>
-<p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif">What the team could have built instead. It appears on no budget line. Like opportunity cost, it is taught in every first business class, yet almost never attributed.</p>
+<p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif">What the team could have built instead. It appears on no budget line. The opportunity cost every first business class teaches, yet almost never attributed.</p>
 </div>
 <div style="position: absolute; left: 920px; top: 741px; width: 420px; display: flex; flex-direction: column; gap: 6px">
 <p style="margin: 0; display: flex; align-items: baseline; gap: 12px"><span style="font: 800 20px/1 Archivo, sans-serif">Correction cost</span><span style="font: italic 400 22px/1 'Bodoni Moda', serif">L<sub>R</sub></span></p>
@@ -736,7 +737,7 @@ class Component extends DCLogic {
       document.addEventListener('touchend', ask, { once: true });
     } else if (DOE) start();
   }
-  componentWillUnmount() { if (this.bergPM) { document.removeEventListener('pointermove', this.bergPM); document.removeEventListener('mousemove', this.bergPM); } if (this.fxDoc) { document.removeEventListener('pointermove', this.fxDoc); document.removeEventListener('mousemove', this.fxDoc); } if (this.tiltH) window.removeEventListener('deviceorientation', this.tiltH); cancelAnimationFrame(this.raf); this.raf = 0; cancelAnimationFrame(this.wraf); this.wraf = 0; }
+  componentWillUnmount() { if (this.visIO) this.visIO.disconnect(); if (this.bergPM) { document.removeEventListener('pointermove', this.bergPM); document.removeEventListener('mousemove', this.bergPM); } if (this.fxDoc) { document.removeEventListener('pointermove', this.fxDoc); document.removeEventListener('mousemove', this.fxDoc); } if (this.tiltH) window.removeEventListener('deviceorientation', this.tiltH); cancelAnimationFrame(this.raf); this.raf = 0; cancelAnimationFrame(this.wraf); this.wraf = 0; }
   componentDidUpdate() { if (this.ctxs.length && !this.raf) this.frame(performance.now()); if (!this.wraf) this.waveFrame(performance.now()); }
   isStill() {
     return (this.props.motion ?? true) === false ||
@@ -768,16 +769,28 @@ class Component extends DCLogic {
       G.bd.setAttribute('stroke-width', (4 + 2.5 * g).toFixed(2));
       G.bd.style.filter = g > 0.03 ? 'drop-shadow(0 0 ' + (4 * g).toFixed(1) + 'px rgba(245,113,6,' + (0.8 * g).toFixed(2) + '))' : 'none'; }
   }
+  onScreen(el) {
+    if (!window.KB_SITE || !el || !('IntersectionObserver' in window)) return true;
+    const V = this.visMap || (this.visMap = new WeakMap());
+    if (!this.visIO) this.visIO = new IntersectionObserver((es) => {
+      let any = false; for (const e of es) { V.set(e.target, e.isIntersecting); if (e.isIntersecting) any = true; }
+      if (any) { if (this.ctxs.length && !this.raf) this.frame(performance.now()); if (!this.wraf) this.waveFrame(performance.now()); }
+    }, { rootMargin: '300px 0px' });
+    if (!V.has(el)) { V.set(el, true); this.visIO.observe(el); }
+    return V.get(el);
+  }
   waveFrame(now) {
     const still = this.isStill();
     const t = still ? 0 : (now - this.wt0) / 1000;
     const W = this.waves;
-    this.fsStep(now, t, still);
-    if (W.w1) W.w1.setAttribute('d', this.wavePath(15, 4.5, 820, 0.55, 2.2, 430, 0.8, t));
-    if (W.w2) { W.w2.setAttribute('d', this.wavePath(20, 8, 900, 0.32, 3, 520, 0.22, t)); W.w2.setAttribute('stroke-dashoffset', (-t * 6).toFixed(1)); }
-    if (W.w3) { W.w3.setAttribute('d', this.wavePath(20, 8, 1000, 0.26, 3, 610, 0.18, t + 7)); W.w3.setAttribute('stroke-dashoffset', (-t * 5).toFixed(1)); }
+    const vHero = this.onScreen(W.w1), vMath = this.onScreen(this.parts.el), vBerg = this.onScreen(this.berg.el), vPds = this.onScreen(W.w2);
+    if (!(vHero || vMath || vBerg || vPds)) { this.wraf = 0; return; }
+    if (vMath) this.fsStep(now, t, still);
+    if (W.w1 && vHero) W.w1.setAttribute('d', this.wavePath(15, 4.5, 820, 0.55, 2.2, 430, 0.8, t));
+    if (W.w2 && vPds) { W.w2.setAttribute('d', this.wavePath(20, 8, 900, 0.32, 3, 520, 0.22, t)); W.w2.setAttribute('stroke-dashoffset', (-t * 6).toFixed(1)); }
+    if (W.w3 && vPds) { W.w3.setAttribute('d', this.wavePath(20, 8, 1000, 0.26, 3, 610, 0.18, t + 7)); W.w3.setAttribute('stroke-dashoffset', (-t * 5).toFixed(1)); }
     const P = this.parts;
-    if (P.items.length) {
+    if (P.items.length && vMath) {
       const pool = '∑∫∂πΔ≈±×÷√∞λσμθ∈∀∃≠≤≥01·−';
       for (const it of P.items) {
         const s = it.s; const ph = it.ph;
@@ -794,14 +807,14 @@ class Component extends DCLogic {
         } else if (s.dataset.plain) { s.innerHTML = it.html; delete s.dataset.plain; }
       }
     }
-    if (W.w4) W.w4.setAttribute('d', this.wavePath(6, 2.6, 300, 0.6, 1.2, 170, 0.9, t + 3, 440));
-    if (this.berg2) {
+    if (W.w4 && vMath) W.w4.setAttribute('d', this.wavePath(6, 2.6, 300, 0.6, 1.2, 170, 0.9, t + 3, 440));
+    if (this.berg2 && vMath) {
       const b2 = still ? 0 : 3 * Math.sin(t * 0.95 + 2) + 1.1 * Math.sin(t * 2.3);
       const r2 = still ? 0 : 0.7 * Math.sin(t * 0.55 + 1.1);
       this.berg2.style.transform = 'translateY(' + b2.toFixed(2) + 'px) rotate(' + r2.toFixed(3) + 'deg)';
     }
     const Bg = this.berg;
-    if (Bg.el) {
+    if (Bg.el && vBerg) {
       const now2 = performance.now(); const dt = Math.min(0.033, Math.max(0.001, (now2 - (Bg.last || now2)) / 1000)); Bg.last = now2;
       Bg.tl = (Bg.tl || 0) + (((still ? 0 : Bg.tilt || 0)) - (Bg.tl || 0)) * Math.min(1, dt * 1.6);
       Bg.tlY = (Bg.tlY || 0) + (((still ? 0 : Bg.tiltY || 0)) - (Bg.tlY || 0)) * Math.min(1, dt * 1.6);
@@ -931,8 +944,8 @@ void main(){
  gl_FragColor=vec4(C,A);}`;
   }
   addGL(cv, w, h, fs, isMain) {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    cv.width = w * dpr; cv.height = h * dpr;
+    const dpr = window.KB_SITE ? 0.45 : Math.min(window.devicePixelRatio || 1, 2);   // website: soft glow drawn at 45 %, scaled up by the browser
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
     const gl = cv.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false });
     if (!gl) return;
     const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
@@ -1140,6 +1153,9 @@ void main(){
     el.style.setProperty('--sheen', Math.max(-40, Math.min(110, 30 + rel * 1.4)).toFixed(1) + '%');
     if (B.shadow) { const l = c.lift / 28; B.shadow.style.setProperty('--ss', (1 + l * 0.12).toFixed(3)); B.shadow.style.setProperty('--so', (0.85 - l * 0.3).toFixed(3)); B.shadow.style.setProperty('--sx', (-Math.max(-60, Math.min(60, rel)) * 0.5).toFixed(1) + 'px'); } }
   frame(now) {
+    if (this.cvMain && !this.onScreen(this.cvMain)) { this.raf = 0; return; }   // website: stream sleeps off-screen
+    if (window.KB_SITE && this.lastGL && now - this.lastGL < 30) { this.raf = requestAnimationFrame((n) => this.frame(n)); return; }   // website: ~30 fps is plenty for the slow stream
+    this.lastGL = now;
     const still = this.isStill();
     const t = still ? 12.0 : (now - this.t0) / 1000 + 12.0;
     for (const c of this.ctxs) {
