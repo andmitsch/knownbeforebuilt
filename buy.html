@@ -22,9 +22,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pre-launch — Known Before Built</title>
-<meta name="description" content="Known Before Built by Andreas Mitschke is in final peer review. Leave your name and email to be notified the day it launches.">
-<meta name="robots" content="index,follow">
+<title>Get the book — Known Before Built</title>
+<meta name="description" content="Buy Known Before Built by Andreas Mitschke: Amazon, Bookshop.org or Blackwell’s.">
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#ECE8E5">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <style>@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/archivo-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
@@ -134,6 +134,21 @@ form button[disabled]{opacity:.6;cursor:progress}
 .facts{display:flex;gap:28px;margin:34px 0 0;padding:0;list-style:none;font-size:14px;color:var(--muted)}
 .facts b{display:block;color:var(--ink);font:800 20px/1.1 Archivo,sans-serif}
 @media (max-width:860px){.pre{grid-template-columns:1fr;gap:40px;padding-top:8px}.cover{order:-1;width:min(62%,260px)}.row{grid-template-columns:1fr}}
+
+.stamp{--stamp:var(--orange);--rot:6deg}
+.grp{font:700 12px/1 'Hanken Grotesk',sans-serif;letter-spacing:.2em;text-transform:uppercase;margin:34px 0 12px;color:var(--muted)}
+.shops{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:640px}
+.shop{position:relative;display:flex;flex-direction:column;gap:6px;min-height:78px;padding:16px 40px 16px 16px;box-sizing:border-box;border:1.5px solid var(--ink);border-radius:2px;background:#F6F4F2;color:var(--ink);text-decoration:none;transition:box-shadow .25s,transform .25s,background .25s}
+.shop:hover{box-shadow:6px 6px 0 var(--orange);transform:translate(-2px,-2px);background:#FFFFFF}
+.shop:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.shop-n{font:800 18px/1.1 Archivo,sans-serif;letter-spacing:-.01em}
+.shop-s{font:400 13px/1.35 'Hanken Grotesk',sans-serif;color:var(--muted)}
+.shop-a{position:absolute;right:14px;top:16px;font-weight:700;transition:transform .25s}
+.shop:hover .shop-a{transform:translateX(3px)}
+.isbn{margin:26px 0 0;max-width:560px;font-size:14.5px;color:var(--muted)}
+.isbn b{color:var(--ink);font-weight:600;letter-spacing:.02em}
+.facts{margin-top:28px}
+@media (max-width:860px){.pre{grid-template-columns:1fr;gap:40px;padding-top:8px}.cover{order:-1;width:min(62%,260px)}.shops{grid-template-columns:1fr}}
 </style>
 
 <!-- GoatCounter: cookie-free visitor stats. Replace [GOATCOUNTER-CODE] with your GoatCounter code. -->
@@ -146,49 +161,19 @@ form button[disabled]{opacity:.6;cursor:progress}
 <body>
 <div class="kb-sweep" aria-hidden="true"></div>
 <header class="top"><a class="brand" href="./">KNOWN <i>before</i> BUILT</a><a href="./" style="font-weight:600;font-size:15px">← Back to the book</a></header>
-<main class="pre" id="pre">
-<section aria-labelledby="pre-h">
-<p class="eyebrow">Pre-launch</p>
-<h1 id="pre-h">Almost <i>ready.</i></h1>
-<p class="lede"><i>Known Before Built</i> isn't published yet — but it's close.</p>
-<p class="body">The manuscript is finished, and printed review copies are with peers for a final read. Leave your first name and email address, and you'll get one email the day the book launches.</p>
-<p class="signal-note"><b>Looking for Signal?</b> The free seven-question intake tool opens together with the book. Sign up below and you'll hear about both.</p>
-<form id="kb-form" action="https://app.convertkit.com/forms/9990304/subscriptions" method="post" novalidate>
-<div class="row">
-<label for="f-name">First name<input id="f-name" type="text" name="fields[first_name]" autocomplete="given-name" required maxlength="80"></label>
-<label for="f-mail">Email address<input id="f-mail" type="email" name="email_address" autocomplete="email" required maxlength="160"></label>
-</div>
-<input type="hidden" name="fields[source]" id="f-src" value="book">
-<button type="submit" id="f-btn" data-goatcounter-click="prelaunch-submit">Notify me at launch <span aria-hidden="true">→</span></button>
-<p class="err" id="f-err" role="alert">Please enter your first name and a valid email address.</p>
-</form>
-<p class="consent">You'll first get an email asking you to confirm your address (double opt-in). After that: one email when the book launches, nothing else. Unsubscribe any time with one click. Details in the <a href="privacy.html">privacy policy</a>.</p>
-<div class="ok" role="status" aria-live="polite"><div class="ok-p"><h2>Almost done.</h2><p>Please check your inbox and click the confirmation link — only then are you on the list. If nothing arrives within a few minutes, look in your spam folder.</p></div><div class="ok-c"><h2>You're on the list.</h2><p>Thank you for confirming. You'll get one email the day <i>Known Before Built</i> launches — nothing else.</p></div></div>
-<ul class="facts"><li><b>311</b>pages</li><li><b>Paperback</b>format</li><li><b>Grant &amp; Bear</b>publisher</li></ul>
+<main class="pre" id="buy">
+<section aria-labelledby="buy-h">
+<p class="eyebrow">Out now</p>
+<h1 id="buy-h">Get the <i>book.</i></h1>
+<p class="lede"><i>Known Before Built</i> — paperback, 311 pages. Choose where you buy it.</p>
+<h2 class="grp">Amazon</h2>
+<div class="shops"><a class="shop" href="https://www.amazon.com/s?k=[ISBN-13]" target="_blank" rel="noopener" data-goatcounter-click="buy-amazon-com"><span class="shop-n">Amazon.com</span><span class="shop-s">United States</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.de/s?k=[ISBN-13]" target="_blank" rel="noopener" data-goatcounter-click="buy-amazon-de"><span class="shop-n">Amazon.de</span><span class="shop-s">Germany · Austria</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.co.uk/s?k=[ISBN-13]" target="_blank" rel="noopener" data-goatcounter-click="buy-amazon-co-uk"><span class="shop-n">Amazon.co.uk</span><span class="shop-s">United Kingdom</span><span class="shop-a" aria-hidden="true">→</span></a></div>
+<h2 class="grp">Not on Amazon</h2>
+<div class="shops"><a class="shop" href="https://bookshop.org/book/[ISBN-13]" target="_blank" rel="noopener" data-goatcounter-click="buy-bookshop-us"><span class="shop-n">Bookshop.org</span><span class="shop-s">US · supports indie bookshops</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://uk.bookshop.org/book/[ISBN-13]" target="_blank" rel="noopener" data-goatcounter-click="buy-bookshop-uk"><span class="shop-n">Bookshop.org</span><span class="shop-s">UK · supports indie bookshops</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://blackwells.co.uk/bookshop/product/[ISBN-13]" target="_blank" rel="noopener" data-goatcounter-click="buy-blackwells"><span class="shop-n">Blackwell's</span><span class="shop-s">Free delivery worldwide</span><span class="shop-a" aria-hidden="true">→</span></a></div>
+<p class="isbn">Prefer your local bookshop? Any bookshop can order it with the ISBN <b>[ISBN-13]</b>.</p>
 </section>
-<figure class="cover" style="margin:0"><img src="assets/book-front.jpg" width="760" height="1216" alt="Cover of Known Before Built by Andreas Mitschke"><button type="button" class="stamp" aria-label="Status: in peer review"><span class="stamp-ink" aria-hidden="true"><span class="stamp-top">Manuscript</span><span class="stamp-main">In peer review</span></span></button></figure><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="kb-ink" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -11 7.4" result="speck"/><feComposite in="SourceGraphic" in2="speck" operator="in" result="inked"/><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="3" result="w"/><feDisplacementMap in="inked" in2="w" scale="2.2" xChannelSelector="R" yChannelSelector="G"/></filter></svg><script>document.querySelectorAll(".stamp").forEach(function(b){b.addEventListener("click",function(){b.classList.remove("again");void b.offsetWidth;b.classList.add("again");});});</script>
+<figure class="cover" style="margin:0"><img src="assets/book-front.jpg" width="760" height="1216" alt="Cover of Known Before Built by Andreas Mitschke"><button type="button" class="stamp" aria-label="Status: out now"><span class="stamp-ink" aria-hidden="true"><span class="stamp-top">Grant &amp; Bear</span><span class="stamp-main">Out now</span></span></button></figure><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="kb-ink" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -11 7.4" result="speck"/><feComposite in="SourceGraphic" in2="speck" operator="in" result="inked"/><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="3" result="w"/><feDisplacementMap in="inked" in2="w" scale="2.2" xChannelSelector="R" yChannelSelector="G"/></filter></svg><script>document.querySelectorAll(".stamp").forEach(function(b){b.addEventListener("click",function(){b.classList.remove("again");void b.offsetWidth;b.classList.add("again");});});</script>
 </main>
-<script>
-(function () {
-  var q = new URLSearchParams(location.search), raw = (q.get('from') || '').toLowerCase(), from = /^(book|signal)(-[a-z]{1,16})?$/.test(raw) ? raw : 'book';
-  document.getElementById('f-src').value = from;
-  document.getElementById('f-btn').setAttribute('data-goatcounter-click', 'prelaunch-submit-' + from);
-  if (from.indexOf('signal') === 0) document.body.classList.add('from-signal');
-  if (q.get('subscribed') === '1') document.body.classList.add('done');
-  if (q.get('confirmed') === '1') { document.body.classList.add('done', 'confirmed'); document.getElementById('pre-h').innerHTML = 'You’re <i>in.</i>'; }
-  var form = document.getElementById('kb-form'), btn = document.getElementById('f-btn'), err = document.getElementById('f-err');
-  form.addEventListener('submit', function (e) {
-    var name = form.elements['fields[first_name]'].value.trim(), mail = form.elements['email_address'].value.trim();
-    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { e.preventDefault(); err.style.display = 'block'; return; }
-    err.style.display = 'none';
-    if (!window.fetch || form.action.indexOf('[KIT-FORM-ID]') >= 0) return;   // no JS fetch, or not configured yet: plain form post
-    e.preventDefault(); btn.disabled = true;
-    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); document.body.classList.add('done'); window.scrollTo({ top: 0, behavior: 'smooth' }); })
-      .catch(function () { btn.disabled = false; form.submit(); });   // fall back to a normal post
-  });
-})();
-</script>
 <footer class="foot"><span>© Andreas Mitschke</span><nav><a href="grant-and-bear-publishing/">Grant &amp; Bear Publishing</a><a href="impressum.html">Impressum</a><a href="privacy.html">Privacy</a></nav></footer>
 </body>
 </html>
