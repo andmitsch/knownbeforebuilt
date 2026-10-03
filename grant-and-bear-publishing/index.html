@@ -7,6 +7,9 @@
 <meta name="description" content="Grant &amp; Bear Publishing is the independent imprint of Andreas Mitschke, publisher of Known Before Built.">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#2a1d14">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Grant &amp; Bear Publishing">
 <meta property="og:description" content="The independent imprint of Andreas Mitschke, publisher of Known Before Built.">
@@ -148,8 +151,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gilt-deep);outline-
 @keyframes cue{0%{transform:scaleY(0);opacity:1}55%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
 
 /* ---------- Page ---------- */
-main{position:relative;z-index:1}
-.js main{will-change:transform}
+/* The page sits under the hero and is held in place (sticky) while the hero scrolls away over it.
+   Pure layout, so the browser scrolls it on its own compositor thread: no script, no jitter. */
+.under{position:relative;z-index:1;margin-top:calc(-1 * var(--heroH,100svh))}
+main{position:sticky;top:0}
+.under-spacer{height:var(--heroH,100svh)}
+/* the device sinks and fades as the hero lifts; driven by the scroll itself where the browser supports it */
+@keyframes heroOut{from{transform:none;opacity:1}66%{opacity:0}to{transform:translate3d(0,35vh,0) scale(.95);opacity:0}}
+@keyframes underDrift{from{transform:translate3d(0,calc(var(--heroH,100vh) * .22),0)}to{transform:none}}
+@keyframes cueOut{from{opacity:1}20%{opacity:0;visibility:hidden}to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:scroll()){
+    .hero-inner{animation:heroOut linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+    .scroll-cue{animation:cueOut linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+    /* the page beneath drifts up slowly while the hero lifts */
+    main{animation:underDrift linear both;animation-timeline:scroll(root);animation-range:0 var(--heroH,100vh)}
+  }
+}
 .wrap{max-width:var(--wide);margin:0 auto;padding:0 var(--gutter)}
 section.sec{padding:clamp(4.5rem,10vw,8rem) 0}
 section.sec + section.sec{border-top:1px solid rgba(167,132,68,.35)}
@@ -339,6 +357,7 @@ footer a:hover{color:var(--gilt-light)}
     <a class="scroll-cue" href="#list"><span>The List</span><span class="line" aria-hidden="true"></span></a>
   </header>
 
+<div class="under" id="under">
 <main id="main">
 
   <section class="sec featured" id="list" aria-labelledby="list-label">
@@ -498,6 +517,8 @@ footer a:hover{color:var(--gilt-light)}
   </footer>
 
 </main>
+<div class="under-spacer" aria-hidden="true"></div>
+</div>
 <script>
 (function(){
   var stage=document.getElementById('book-stage'),book=document.getElementById('book'),shadow=document.getElementById('book-shadow');
@@ -595,25 +616,38 @@ footer a:hover{color:var(--gilt-light)}
 })();
 </script>
 <script>
-/* Hero slides away above the page; the page underneath drifts up slowly, so it reads as a layer beneath. */
+/* Hero slides away above the page, which waits underneath. Only the hero's own contents fade here. */
 (function(){
   var hero=document.getElementById('hero'),inner=document.getElementById('hero-inner'),main=document.getElementById('main'),cue=hero&&hero.querySelector('.scroll-cue');
   if(!hero||!main)return;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var H=hero.offsetHeight,ticking=false,DEPTH=.78;
-  function update(){
-    ticking=false;
-    var y=Math.max(0,window.scrollY||window.pageYOffset),p=Math.min(1,y/H);
-    main.style.transform=(y<H)?'translate3d(0,'+(-(H-y)*DEPTH).toFixed(1)+'px,0)':'none';
-    if(inner){inner.style.transform='translate3d(0,'+(y*.35).toFixed(1)+'px,0) scale('+(1-p*.06).toFixed(3)+')';inner.style.opacity=Math.max(0,1-p*1.4).toFixed(3)}
+  var root=document.documentElement,H=0,ticking=false;
+  function measure(){H=hero.offsetHeight;root.style.setProperty('--heroH',H+'px')}
+  measure();
+  window.addEventListener('resize',function(){measure();onScroll()});
+  /* links to the list scroll to where the hero has fully lifted */
+  document.querySelectorAll('a[href="#list"]').forEach(function(a){a.addEventListener('click',function(e){
+    e.preventDefault();window.scrollTo({top:H,behavior:reduce?'auto':'smooth'})})});
+  /* fallback where scroll-driven CSS is missing (Firefox): follow the scroll with a soft ease,
+     so a late frame becomes a smooth lag instead of a shake */
+  var native=window.CSS&&CSS.supports&&CSS.supports('animation-timeline','scroll()');
+  var cur=0,raf=null;
+  function apply(y){
+    var p=Math.min(1,y/H);
+    /* the page beneath: held by sticky layout, plus a small eased drift (22% of the hero) */
+    main.style.transform=p<1?'translate3d(0,'+((1-p)*H*.22).toFixed(2)+'px,0)':'none';
+    if(inner){inner.style.transform='translate3d(0,'+(y*.35).toFixed(2)+'px,0) scale('+(1-p*.05).toFixed(4)+')';inner.style.opacity=Math.max(0,1-p*1.5).toFixed(3)}
     if(cue){var c=Math.max(0,1-p*5);cue.style.opacity=c.toFixed(3);cue.style.visibility=c?'visible':'hidden'}
   }
-  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(update)}}
-  if(!reduce){
-    window.addEventListener('scroll',onScroll,{passive:true});
-    window.addEventListener('resize',function(){H=hero.offsetHeight;onScroll()});
-    update();
+  function step(){
+    var y=Math.max(0,Math.min(H*1.2,window.scrollY||window.pageYOffset));
+    cur+=(y-cur)*.28;
+    if(Math.abs(y-cur)<.3)cur=y;
+    apply(cur);
+    raf=(cur!==y)?requestAnimationFrame(step):null;
   }
+  function onScroll(){if(native||reduce)return;if(!raf)raf=requestAnimationFrame(step)}
+  if(!reduce&&!native){cur=Math.max(0,window.scrollY||0);apply(cur);window.addEventListener('scroll',onScroll,{passive:true})}
 
   /* Gentle reveal as each block enters */
   var els=document.querySelectorAll('.reveal');
