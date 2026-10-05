@@ -22,12 +22,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=1440">
-<script>
-  // Desktop-only layout for now: phones and tablets render the page at 1440 px and scale it to fit.
-  window.KB_TOUCH = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-  if (!window.KB_TOUCH) document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1');
-</script>
-<script>window.KB_SITE = true;</script>
+<script src="js/head.js"></script>
+
 <title>Known Before Built — From Discovery to Decision for Enterprises in Transformation</title>
 <meta name="description" content="A working system for deciding what deserves to be built — before the organisation pays to find out. A book by Andreas Mitschke.">
 <meta name="author" content="Andreas Mitschke">
@@ -44,160 +40,10 @@
 <link rel="preload" href="fonts/archivo-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/bodoni-moda-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<style>
-@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/archivo-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
-@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/archivo-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
-@font-face{font-family:'Archivo';font-style:italic;font-weight:100 900;font-display:swap;src:url(fonts/archivo-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
-@font-face{font-family:'Archivo';font-style:italic;font-weight:100 900;font-display:swap;src:url(fonts/archivo-latin-ext-wght-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
-@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/hanken-grotesk-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
-@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/hanken-grotesk-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
-@font-face{font-family:'Hanken Grotesk';font-style:italic;font-weight:100 900;font-display:swap;src:url(fonts/hanken-grotesk-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
-@font-face{font-family:'Hanken Grotesk';font-style:italic;font-weight:100 900;font-display:swap;src:url(fonts/hanken-grotesk-latin-ext-wght-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
-@font-face{font-family:'Bodoni Moda';font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/bodoni-moda-latin-opsz-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
-@font-face{font-family:'Bodoni Moda';font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/bodoni-moda-latin-ext-opsz-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
-@font-face{font-family:'Bodoni Moda';font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/bodoni-moda-math-opsz-normal.woff2) format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF;}
-@font-face{font-family:'Bodoni Moda';font-style:italic;font-weight:400 900;font-display:swap;src:url(fonts/bodoni-moda-latin-opsz-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
-@font-face{font-family:'Bodoni Moda';font-style:italic;font-weight:400 900;font-display:swap;src:url(fonts/bodoni-moda-latin-ext-opsz-italic.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
-@font-face{font-family:'Bodoni Moda';font-style:italic;font-weight:400 900;font-display:swap;src:url(fonts/bodoni-moda-math-opsz-italic.woff2) format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF;}
-
-*{font-optical-sizing:none;font-variation-settings:"opsz" 11}
-@property --p{syntax:'<number>';inherits:false;initial-value:1}
-
-a{color:#111111;text-decoration-color:#F57106;text-decoration-thickness:2px;text-underline-offset:5px}
-a:hover{color:#000000;text-decoration-thickness:3px}
-sub{font-size:.56em;vertical-align:-.3em;line-height:0}
-.ph{font:600 10px/1 'Hanken Grotesk',Arial,sans-serif;letter-spacing:.08em;color:#5E5954;white-space:nowrap;vertical-align:middle}
-.hide-ph .ph{display:none}
-.spin{transform-origin:50% 50%;animation:kbspin 1.1s steps(12) infinite}
-@keyframes kbspin{to{transform:rotate(360deg)}}
-.breathe{animation:kbbreathe 9s ease-in-out infinite}
-@keyframes kbbreathe{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.025) rotate(1.2deg)}}
-.paint{-webkit-mask:conic-gradient(from 200deg,#000 calc(var(--p) * 360deg),transparent 0);mask:conic-gradient(from 200deg,#000 calc(var(--p) * 360deg),transparent 0);animation:kbpaint 2.8s cubic-bezier(.65,0,.25,1) .2s both}
-@keyframes kbpaint{from{--p:0}to{--p:1}}
-.drift1{animation:kbdrift 16s ease-in-out infinite}
-.drift2{animation:kbdrift 21s ease-in-out -7s infinite reverse}
-.drift3{animation:kbdrift 26s ease-in-out -13s infinite}
-@keyframes kbdrift{0%,100%{transform:translate(0,0)}50%{transform:translate(16px,-20px)}}
-.late{animation:kbfade .7s ease 1.9s both}
-@keyframes kbfade{from{opacity:0}to{opacity:1}}
-.flow{animation:kbflow 6s linear infinite}
-.flow2{animation:kbflow 9s linear infinite}
-@keyframes kbflow{to{stroke-dashoffset:-400}}
-.book3d{transform-style:preserve-3d;animation:kbturn 11s ease-in-out infinite alternate}
-@keyframes kbturn{from{transform:rotateX(-6deg) rotateY(32deg)}to{transform:rotateX(-6deg) rotateY(-26deg)}}
-.bookshadow{animation:kbshadow 11s ease-in-out infinite alternate}
-@keyframes kbshadow{from{transform:translateX(-18px) scaleX(0.9)}to{transform:translateX(18px) scaleX(1.05)}}
-.blob{animation-name:kbblob,kbswell;animation-timing-function:linear,ease-in-out;animation-iteration-count:infinite,infinite}
-.glowblob{opacity:0;animation-name:kbblob,kbglowop;animation-timing-function:linear,ease-in-out;animation-iteration-count:infinite,infinite}
-@keyframes kbblob{0%{transform:translate(-80px,704px)}20%{transform:translate(220px,692px)}40%{transform:translate(520px,707px)}60%{transform:translate(860px,697px)}80%{transform:translate(1160px,692px)}100%{transform:translate(1520px,704px)}}
-@keyframes kbswell{0%,100%{r:18px}50%{r:34px}}
-@keyframes kbglowop{0%,100%{opacity:0}50%{opacity:.85}}
-.rib{animation:kbrib 7s ease-in-out infinite alternate}
-@keyframes kbrib{from{d:path("M0 678 C 240 664, 480 690, 720 676 S 1200 664, 1440 680 L1440 728 C 1200 716, 960 740, 720 726 S 240 716, 0 730 Z")}to{d:path("M0 682 C 240 672, 480 684, 720 672 S 1200 670, 1440 676 L1440 732 C 1200 722, 960 734, 720 730 S 240 724, 0 726 Z")}}
-.wave1{animation:kbwave1 7s linear infinite}
-@keyframes kbwave1{from{transform:translateX(0)}to{transform:translateX(-360px)}}
-.bob{animation:kbwave1 7s linear infinite,kbbob 5s ease-in-out infinite}
-@keyframes kbbob{0%,100%{margin-top:0}50%{margin-top:2px}}
-.wave2{animation:kbwave2 16s linear infinite}
-@keyframes kbwave2{from{transform:translateX(0)}to{transform:translateX(-240px)}}
-.wave3{animation:kbwave3 21s linear infinite reverse}
-@keyframes kbwave3{from{transform:translateX(0)}to{transform:translateX(-300px)}}
-.still .wave1,.still .bob,.still .wave2,.still .wave3{animation:none}
-.still .blob{display:none}
-.still .blob,.still .glowblob,.still .rib,.still .spin,.still .breathe,.still .paint,.still .drift1,.still .drift2,.still .drift3,.still .late,.still .flow,.still .flow2,.still .book3d,.still .bookshadow{animation:none}
-.still .book3d{transform:rotateX(-6deg) rotateY(24deg)}
-@media (prefers-reduced-motion:reduce){.wave1,.bob,.wave2,.wave3{animation:none}.blob{display:none}.blob,.glowblob,.rib,.spin,.breathe,.paint,.drift1,.drift2,.drift3,.late,.flow,.flow2,.book3d,.bookshadow{animation:none}.book3d{transform:rotateX(-6deg) rotateY(24deg)}}
-.kbstage{--w:300px;--h:480px;--t:41px;width:var(--w);height:var(--h);perspective:1400px;cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}
-.kbstage img{-webkit-user-drag:none;pointer-events:none}
-.kbstage.dragging{cursor:grabbing}
-.kbbook{--ry:26deg;--rx:4deg;--lift:0px;--sheen:30%;position:absolute;inset:0;transform-style:preserve-3d;transform:translateZ(var(--lift)) rotateX(var(--rx)) rotateY(var(--ry));will-change:transform}
-.kbbook:focus{outline:none}
-.kbbook:focus-visible .kbfront{outline:2px solid #111111;outline-offset:6px}
-.kbface{position:absolute;backface-visibility:hidden}
-.kbface>.kbshade{position:absolute;inset:0;pointer-events:none;background:rgb(24,14,6);opacity:var(--sh,0);border-radius:inherit}
-.kbfront>.kbshade{--sh:var(--sh-front)}
-.kbback>.kbshade{--sh:var(--sh-back)}
-.kbspine>.kbshade{--sh:var(--sh-spine)}
-.kbfore>.kbshade{--sh:var(--sh-fore)}
-.kbtop>.kbshade{--sh:.06}
-.kbbottom>.kbshade{--sh:.22}
-.kbfront{inset:0;transform:translateZ(calc(var(--t)/2))}
-.kbfront img{width:100%;height:100%;object-fit:cover;border-radius:1px 3px 3px 1px;display:block}
-.kbfront::after{content:"";position:absolute;inset:0;border-radius:1px 3px 3px 1px;pointer-events:none;background:linear-gradient(105deg,rgba(255,255,255,0) calc(var(--sheen) - 18%),rgba(255,255,255,.28) var(--sheen),rgba(255,255,255,0) calc(var(--sheen) + 18%)),linear-gradient(90deg,rgba(0,0,0,.14) 0,rgba(0,0,0,0) 3.5%);mix-blend-mode:soft-light}
-.kbback{inset:0;background:#F57106;overflow:hidden;transform:rotateY(180deg) translateZ(calc(var(--t)/2));border-radius:3px 1px 1px 3px;box-shadow:-18px 26px 54px -14px rgba(46,33,24,.30),-6px 10px 22px -8px rgba(46,33,24,.22),-40px 60px 90px -30px rgba(46,33,24,.18)}
-.kbspine{top:0;left:calc(50% - var(--t)/2);width:var(--t);height:100%;transform:rotateY(-90deg) translateZ(calc(var(--w)/2))}
-.kbspine img,.kbback img{width:100%;height:100%;object-fit:cover;display:block}
-.kbspine::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(0,0,0,0) 40%,rgba(255,255,255,.08) 70%,rgba(0,0,0,.12))}
-.kbfore{top:2px;left:calc(50% - var(--t)/2);width:var(--t);height:calc(100% - 4px);transform:rotateY(90deg) translateZ(calc(var(--w)/2 - 1.5px));background:linear-gradient(90deg,rgba(70,48,26,.30) 0,rgba(70,48,26,.06) 14%,rgba(70,48,26,0) 30%,rgba(70,48,26,0) 70%,rgba(70,48,26,.08) 86%,rgba(70,48,26,.32) 100%),repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 1px,rgba(0,0,0,0) 1px 7px),repeating-linear-gradient(90deg,#f7f2e7 0 1px,#dcd2bd 1px 2px,#efe8d9 2px 3px),#ebe3d2;box-shadow:inset 1.5px 0 0 #e8e4de,inset -1.5px 0 0 #F57106}
-.kbtop,.kbbottom{left:2px;width:calc(100% - 4px);height:var(--t);top:calc(50% - var(--t)/2);background:linear-gradient(0deg,rgba(70,48,26,.28) 0,rgba(70,48,26,0) 22%,rgba(70,48,26,0) 78%,rgba(70,48,26,.28) 100%),repeating-linear-gradient(0deg,#f7f2e7 0 1px,#dcd2bd 1px 2px,#efe8d9 2px 3px),#ebe3d2}
-.kbtop{transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 1.5px))}
-.kbbottom{transform:rotateX(-90deg) translateZ(calc(var(--h)/2 - 1.5px))}
-.kbshadow{position:absolute;left:8%;right:-4%;bottom:-36px;height:48px;border-radius:50%;background:radial-gradient(closest-side,rgba(46,33,24,.34),rgba(46,33,24,0));filter:blur(14px);transform:translateX(var(--sx,0px)) scale(var(--ss,1));opacity:var(--so,.85);pointer-events:none}
-.kbhint{position:absolute;left:0;right:0;bottom:-72px;margin:0;text-align:center;font:italic 400 15px/1 'Bodoni Moda',serif;color:#5E5954;opacity:.85;transition:opacity .6s}
-.kbstage.touched .kbhint{opacity:0}
-.kbberg,.kbberg *{cursor:grab!important}
-html.kbgrabbing,html.kbgrabbing *{cursor:grabbing!important}
-.kbspreadbtn{all:unset;cursor:zoom-in;display:block;perspective:1600px;will-change:transform}
-.kbspreadbtn:focus-visible{outline:2px solid #111111;outline-offset:10px}
-.kbspread{display:flex;aspect-ratio:1.242/1;transform-style:preserve-3d;font-size:var(--fs)}
-.kbpg{flex:1;position:relative;display:flex;flex-direction:column;gap:1.4em;padding:3.2em 2.8em 2.4em;box-sizing:border-box;background:#FBF9F6;color:#111111;font-family:'Hanken Grotesk',sans-serif}
-.kbpgL{transform-origin:right center;transform:rotateY(9deg);background:linear-gradient(90deg,#FBF9F6 0,#FBF9F6 82%,#E9E4DE 100%);border-radius:3px 0 0 3px;box-shadow:-1px 1px 0 #EFEAE4,-2px 2px 0 #E6E0D9,-3px 3px 0 #EFEAE4,-4px 4px 0 #E2DBD3,-12px 18px 30px -10px rgba(46,33,24,.28)}
-.kbpgR{transform-origin:left center;transform:rotateY(-9deg);background:linear-gradient(270deg,#FBF9F6 0,#FBF9F6 82%,#E9E4DE 100%);border-radius:0 3px 3px 0;box-shadow:1px 1px 0 #EFEAE4,2px 2px 0 #E6E0D9,3px 3px 0 #EFEAE4,4px 4px 0 #E2DBD3,12px 18px 30px -10px rgba(46,33,24,.28)}
-.kbrun{font:700 .9em/1 'Hanken Grotesk',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#5E5954}
-.kbttl{font:italic 400 2.6em/1.1 'Bodoni Moda',serif}
-.kbph,.kbfig{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;border:1px dashed rgba(17,17,17,.35);font:500 1em/1.4 'Hanken Grotesk',sans-serif;color:#5E5954;padding:1em}
-.kbfol{font:400 .9em/1 'Bodoni Moda',serif;color:#5E5954}
-.kbzoom{position:fixed;inset:0;z-index:50;background:rgba(236,232,229,0);display:flex;align-items:center;justify-content:center;cursor:zoom-out}
-.kbspreadbig{height:min(92vh,1300px);max-width:96vw;perspective:2400px}
-.kbspreadbig{transform-origin:50% 50%;will-change:transform}
-.kbspreadbig .kbpgL{transform:rotateY(var(--ang,3deg))}
-.kbspreadbig .kbpgR{transform:rotateY(calc(-1 * var(--ang,3deg)))}
-.kbclose{all:unset;cursor:pointer;position:absolute;top:24px;right:32px;min-height:44px;padding:0 18px;display:flex;align-items:center;border:1.5px solid #111111;border-radius:999px;font:600 14px/1 'Hanken Grotesk',sans-serif;background:#ECE8E5}
-@keyframes kbzin{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
-.kbrip{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;opacity:0;z-index:2}
-.kbrip>i{position:absolute;left:-70px;top:-70px;width:140px;height:140px;border-radius:50%;will-change:transform,opacity}
-.kbripglow{background:radial-gradient(circle,rgba(255,200,140,.55) 0,rgba(245,113,6,.28) 38%,rgba(245,113,6,0) 70%);filter:blur(10px)}
-.kbripcore{background:radial-gradient(circle,rgba(255,252,246,1) 0,rgba(255,214,168,.95) 10%,rgba(250,150,60,.9) 24%,rgba(245,113,6,.75) 40%,rgba(245,113,6,.25) 58%,rgba(245,113,6,0) 70%)}
-.kbripring{box-shadow:0 0 0 1.5px rgba(245,113,6,.75),0 0 16px 3px rgba(255,170,90,.4),inset 0 0 14px 2px rgba(205,214,232,.55)}
-.kbpgimg{padding:0;overflow:hidden}
-.kbpgimg img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;user-select:none;-webkit-user-drag:none}
-.kbpgimg.kbpgL::after,.kbpgimg.kbpgR::after{content:"";position:absolute;top:0;bottom:0;width:14%;pointer-events:none}
-.kbpgimg.kbpgL::after{right:0;background:linear-gradient(90deg,rgba(60,45,30,0),rgba(60,45,30,.16))}
-.kbpgimg.kbpgR::after{left:0;background:linear-gradient(270deg,rgba(60,45,30,0),rgba(60,45,30,.16))}
-.kbblank{flex:1;border:1.5px dashed rgba(17,17,17,.22);border-radius:2px}
-
-html { background: #ECE8E5; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-#kb-page { width: 1440px; margin: 0 auto; }
-#kb-main > div, #kb-main2 > div { margin: 0 auto; }
-.kb-skip { position: absolute; left: -9999px; top: 8px; z-index: 100; background: #111111; color: #ECE8E5; padding: 10px 14px; font: 600 14px/1 'Hanken Grotesk', sans-serif; }
-.kb-skip:focus { left: 8px; }
-.kb-noscript { max-width: 640px; margin: 40px auto; font: 400 16px/1.5 'Hanken Grotesk', sans-serif; }
-
-
-/* Page transitions (Chrome/Edge 126+, Safari 18.2+; other browsers simply load the page) */
-@view-transition { navigation: auto; }
-::view-transition-old(root) { animation: kb-vt-out .42s cubic-bezier(.4,0,.2,1) both; }
-::view-transition-new(root) { animation: kb-vt-in .62s cubic-bezier(.22,1,.36,1) .08s both; }
-::view-transition-group(kb-brand) { animation-duration: .5s; animation-timing-function: cubic-bezier(.22,1,.36,1); }
-::view-transition-new(kb-sweep) { animation: kb-vt-sweep .7s cubic-bezier(.65,0,.35,1) both; }
-::view-transition-old(kb-sweep) { display: none; }
-@keyframes kb-vt-out { to { opacity: 0; transform: translateY(-14px) scale(.992); filter: blur(2px); } }
-@keyframes kb-vt-in { from { opacity: 0; transform: translateY(22px); } }
-@keyframes kb-vt-sweep { 0% { transform: scaleX(0); transform-origin: 0 50%; } 55% { transform: scaleX(1); transform-origin: 0 50%; } 56% { transform-origin: 100% 50%; } 100% { transform: scaleX(0); transform-origin: 100% 50%; } }
-.kb-sweep { display: none; position: fixed; left: 0; right: 0; top: 0; height: 3px; background: #F57106; pointer-events: none; z-index: 1000; view-transition-name: kb-sweep; }
-:active-view-transition .kb-sweep { display: block; }
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
-}
-#kb-main nav > a:first-child { view-transition-name: kb-brand; }
-</style>
+<link rel="stylesheet" href="css/book.css">
 <!-- GoatCounter: cookie-free visitor stats. Replace [GOATCOUNTER-CODE] with your GoatCounter code. -->
 <script data-goatcounter="https://[GOATCOUNTER-CODE].goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<script>
-/* hello, developer */
-(function(){try{console.log("%c"+"                     .-'''''''''''''-.\n                 .-'                   '-.\n               .'                         '.\n              /       .-.          .-.      \\\n             /       ( o )        ( o )      \\\n            |         '-'          '-'        |\n            |                                 |\n            |     \\                     /     |\n             \\     '.                 .'     /\n              \\      '-._         _.-'      /\n               '.        '''''''''        .'\n                 '-.                   .-'\n                    '-.._____________..-'\n\n          Thanks for the interest in the code.\n          The animations are great, right?","font:600 13px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#F57106");}catch(e){}})();
-</script>
+
 </head>
 <body>
 <div class="kb-sweep" aria-hidden="true"></div>
@@ -209,69 +55,67 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 <noscript><p class="kb-noscript">This page needs JavaScript for its interactive figures. Contact: <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.com</a></p></noscript>
 
 <template id="tpl-main">
-<div class="{{rootClass}}" style="width: 1440px; height: 5620px; position: relative; overflow: hidden; background: #ECE8E5; color: #111111; display: flex; flex-direction: column">
+<div class="{{rootClass}} tpl-main-box">
 
 <!-- NAV -->
-<nav aria-label="Primary" style="height: 88px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 80px; box-sizing: border-box">
-<a href="#top" style="text-decoration: none; display: flex; align-items: baseline; gap: 8px">
-<span style="font: 900 17px/1 Archivo, sans-serif; letter-spacing: -0.01em">KNOWN</span>
-<span style="font: italic 400 19px/1 'Bodoni Moda', serif">before</span>
-<span style="font: 900 17px/1 Archivo, sans-serif; letter-spacing: -0.01em">BUILT</span>
+<nav aria-label="Primary" class="nav-nav">
+<a href="#top" class="nav-link">
+<span class="nav-label">KNOWN</span>
+<span class="nav-label-2">before</span>
+<span class="nav-label">BUILT</span>
 </a>
-<div style="display: flex; align-items: center; gap: 40px; font: 500 15px/1 'Hanken Grotesk', sans-serif">
-<a href="#system" ref="{{fxRef}}" data-fx="nav" style="text-decoration: none">The System</a>
-<a href="#book" ref="{{fxRef}}" data-fx="nav" style="text-decoration: none">The Book</a>
-<a href="#author" ref="{{fxRef}}" data-fx="nav" style="text-decoration: none">Author</a>
-<a data-goatcounter-click="nav-signal" href="prelaunch.html?from=signal-nav" ref="{{fxRef}}" data-fx="outline" style="text-decoration: none; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border: 1.5px solid #111111; border-radius: 999px; box-sizing: border-box; font-weight: 600">Signal <span aria-hidden="true">→</span></a>
+<div class="nav-box">
+<a href="#system" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">The System</a>
+<a href="#book" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">The Book</a>
+<a href="#author" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Author</a>
+<a data-goatcounter-click="nav-signal" href="prelaunch.html?from=signal-nav" ref="{{fxRef}}" data-fx="outline" class="nav-link-3">Signal <span aria-hidden="true">→</span></a>
 </div>
 </nav>
 
 <!-- S1 HERO -->
-<section id="top" aria-label="Known Before Built" style="height: 782px; flex-shrink: 0; position: relative">
-<div style="position: absolute; left: 720px; top: 30px; width: 640px; height: 669px">
+<section id="top" aria-label="Known Before Built" class="top-section">
+<div class="top-box">
 <sc-if value="{{motionOn}}" hint-placeholder-val="{{ true }}"></sc-if>
-<sc-if value="{{motionOff}}" hint-placeholder-val="{{ false }}"><img src="assets/circle-static.webp" alt="" style="width: 640px; height: 669px; display: block"></sc-if>
-<img src="assets/circle-paint.webp" alt="" style="display: block; position: absolute; left: 41px; top: -47px"></div>
+<sc-if value="{{motionOff}}" hint-placeholder-val="{{ false }}"><img src="assets/circle-static.webp" alt="" class="top-img"></sc-if>
+<img src="assets/circle-paint.webp" alt="" class="top-img-2"></div>
 
-
-<div style="position: absolute; left: 120px; top: 44px; width: 640px; display: flex; flex-direction: column">
-<h1 style="margin: 0; display: flex; flex-direction: column; align-items: flex-start">
-<span style="font: 900 148px/0.86 Archivo, sans-serif; letter-spacing: -0.035em">KNOWN</span>
-<span style="display: flex; align-items: center; gap: 22px; margin: 6px 0 0 4px; justify-content: center; margin-top: 10px; margin-bottom: 10px"><span aria-hidden="true" style="width: 110px; height: 2px; background: #111111"></span><span style="font: italic 400 92px/1 'Bodoni Moda', serif">before</span><span aria-hidden="true" style="width: 110px; height: 2px; background: #111111"></span></span>
-<span style="font: 900 148px/0.86 Archivo, sans-serif; letter-spacing: -0.035em; text-align: center">BUILT</span>
+<div class="top-box-2">
+<h1 class="top-title">
+<span class="top-label">KNOWN</span>
+<span class="top-label-2"><span aria-hidden="true" class="top-label-3"></span><span class="top-label-4">before</span><span aria-hidden="true" class="top-label-3"></span></span>
+<span class="top-label-5">BUILT</span>
 </h1>
-<p style="margin: 28px 0 0; font: 400 25px/1.3 'Bodoni Moda', serif; font-size: 28px; width: 727px; line-height: 1.35">Stop the Innovation Theatre. <br>De-Risk Your Product Bets.</p><p style="margin: 12px 0 0; font: 400 15px/1.5 'Hanken Grotesk', sans-serif; font-size: 16px">You are bleeding R&amp;D capital on stumbling digitalisation and transformation initiatives, all while facing mounting pressure to productise your service IP. This book provides a structured methodology for knowledge-rich organisations that are building, fixing or optimising these initiatives.</p>
+<p class="top-text">Stop the Innovation Theatre. <br>De-Risk Your Product Bets.</p><p class="top-text-2">You are bleeding R&amp;D capital on stumbling digitalisation and transformation initiatives, all while facing mounting pressure to productise your service IP. This book provides a structured methodology for knowledge-rich organisations that are building, fixing or optimising these initiatives.</p>
 
-<div style="margin-top: 30px; display: flex; align-items: center; gap: 28px"><a data-goatcounter-click="go-to-the-book" href="#get" ref="{{fxRef}}" data-fx="ink" style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 26px; background: #111111; color: #ECE8E5; text-decoration: none; font: 600 16px/1 'Hanken Grotesk', sans-serif; border-radius: 2px">Go to the book <span aria-hidden="true" data-fx-arrow="down">↓</span></a></div>
+<div class="top-box-3"><a data-goatcounter-click="go-to-the-book" href="#get" ref="{{fxRef}}" data-fx="ink" class="top-link">Go to the book <span aria-hidden="true" data-fx-arrow="down">↓</span></a></div>
 </div>
 </section>
 
 <!-- S2 IS THIS YOU -->
-<section aria-labelledby="s2h" style="height: 540px; flex-shrink: 0; position: relative">
-<h2 id="s2h" style="position: absolute; left: 120px; top: 30px; margin: 0; font: 900 64px/1 Archivo, sans-serif; letter-spacing: -0.03em">Is this you?</h2>
-<div style="position: absolute; left: 120px; top: 190px; width: 1200px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 64px">
-<article style="display: flex; flex-direction: column; gap: 16px; border-top: 1.5px solid #111111; padding-top: 20px">
-<span style="font: italic 400 30px/1 'Bodoni Moda', serif">i.</span>
-<p style="margin: 0; font: 400 19px/1.55 'Hanken Grotesk', sans-serif; text-wrap: pretty">You lead a new innovation function in a firm that has only ever known custom delivery. Executives, sales and pet projects all pull at the roadmap. You need a system to filter the noise.</p>
+<section aria-labelledby="s2h" class="section-section">
+<h2 id="s2h" class="section-title">Is this you?</h2>
+<div class="section-box">
+<article class="section-article">
+<span class="section-label">i.</span>
+<p class="section-text">You lead a new innovation function in a firm that has only ever known custom delivery. Executives, sales and pet projects all pull at the roadmap. You need a system to filter the noise.</p>
 </article>
-<article style="display: flex; flex-direction: column; gap: 16px; border-top: 1.5px solid #111111; padding-top: 20px">
-<span style="font: italic 400 30px/1 'Bodoni Moda', serif">ii.</span>
-<p style="margin: 0; font: 400 19px/1.55 'Hanken Grotesk', sans-serif; text-wrap: pretty">You are in a running digital transformation. There is a steering committee for everything, yet no product decision that grew revenue.</p>
+<article class="section-article">
+<span class="section-label">ii.</span>
+<p class="section-text">You are in a running digital transformation. There is a steering committee for everything, yet no product decision that grew revenue.</p>
 </article>
-<article style="display: flex; flex-direction: column; gap: 16px; border-top: 1.5px solid #111111; padding-top: 20px">
-<span style="font: italic 400 30px/1 'Bodoni Moda', serif">iii.</span>
-<p style="margin: 0; font: 400 19px/1.55 'Hanken Grotesk', sans-serif; text-wrap: pretty">You run a practice. You suspect a method, a tool or an acquired piece of IP could stand on its own as a product and you want to know before committing delivery budget.</p>
+<article class="section-article">
+<span class="section-label">iii.</span>
+<p class="section-text">You run a practice. You suspect a method, a tool or an acquired piece of IP could stand on its own as a product and you want to know before committing delivery budget.</p>
 </article>
 </div>
 </section>
 
 <!-- GET THE BOOK -->
 
-
 <!-- S3 ICEBERG -->
-<section id="get" aria-labelledby="gbh" onMouseMove="{{bNear}}" onMouseLeave="{{bFar}}" style="height: 688px; flex-shrink: 0; position: relative; border-top: 1px solid rgba(17,17,17,0.2); border-bottom: 1px solid rgba(17,17,17,0.2)">
+<section id="get" aria-labelledby="gbh" onMouseMove="{{bNear}}" onMouseLeave="{{bFar}}" class="get-section">
 <!-- 3D book, ported from the Grant & Bear page: drag, arrow keys, leans towards the cursor -->
-<div ref="{{setStage}}" class="kbstage" onPointerDown="{{bDown}}" onPointerMove="{{bMove}}" onPointerUp="{{bUp}}" onPointerCancel="{{bUp}}" style="position: absolute; left: 280px; top: 92px">
+<div ref="{{setStage}}" class="kbstage get-box" onPointerDown="{{bDown}}" onPointerMove="{{bMove}}" onPointerUp="{{bUp}}" onPointerCancel="{{bUp}}">
 <div ref="{{setBook3}}" class="kbbook" role="img" aria-label="Known Before Built by Andreas Mitschke. Drag, or use the arrow keys, to turn the book." tabindex="0" onKeyDown="{{bKey}}">
 <div class="kbface kbfront"><img src="assets/book-front.jpg" width="760" height="1216" alt="" draggable="false"><i class="kbshade"></i></div>
 <div class="kbface kbback"><img src="assets/book-back.jpg" width="760" height="1216" alt="" draggable="false"><i class="kbshade"></i></div>
@@ -284,31 +128,29 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 <p class="kbhint" aria-hidden="true">Drag to turn the book</p>
 </div>
 
-<div style="position: absolute; left: 760px; top: 80px; width: 560px; display: flex; flex-direction: column; gap: 22px">
+<div class="get-box-2">
 
-<h2 id="gbh" style="margin: 0; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 30px"><span style="font: 900 52px/1 Archivo, sans-serif; letter-spacing: -0.03em">KNOWN</span><span style="font: italic 400 50px/1 'Bodoni Moda', serif">before</span><span style="font: 900 52px/1 Archivo, sans-serif; letter-spacing: -0.03em">BUILT</span></h2>
-<p style="margin: 0; font: 400 22px/1.3 'Bodoni Moda', serif">From Discovery to Decision for Enterprises in Transformation</p>
-<p style="margin: 0; font: 400 17px/1.6 'Hanken Grotesk', sans-serif; text-wrap: pretty; font-size: 16px"><span style="font-size: 15px">An intrapreneurial operating system that replaces the innovation theatre of brainstorming sessions and Post-it-plastered whiteboards with evidence-driven discovery methods, allowing you to de-risk every hypothesis before a major investment decision must be made.<br></span></p>
-<dl style="margin: 0; display: flex; gap: 48px; font: 400 15px/1.4 'Hanken Grotesk', sans-serif">
-<div style="display: flex; flex-direction: column; gap: 4px"><dt style="font: 700 11px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.16em; text-transform: uppercase; color: #5E5954">Format</dt><dd style="margin: 0">Paperback</dd></div>
-<div style="display: flex; flex-direction: column; gap: 4px"><dt style="font: 700 11px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.16em; text-transform: uppercase; color: #5E5954">Pages</dt><dd style="margin: 0">311</dd></div>
+<h2 id="gbh" class="get-title"><span class="get-label">KNOWN</span><span class="get-label-2">before</span><span class="get-label">BUILT</span></h2>
+<p class="get-text">From Discovery to Decision for Enterprises in Transformation</p>
+<p class="get-text-2"><span class="get-label-3">An intrapreneurial operating system that replaces the innovation theatre of brainstorming sessions and Post-it-plastered whiteboards with evidence-driven discovery methods, allowing you to de-risk every hypothesis before a major investment decision must be made.<br></span></p>
+<dl class="get-list">
+<div class="get-box-3"><dt class="get-term">Format</dt><dd class="get-detail">Paperback</dd></div>
+<div class="get-box-3"><dt class="get-term">Pages</dt><dd class="get-detail">311</dd></div>
 </dl>
-<div style="margin-top: 10px; display: flex; align-items: center; gap: 28px"><a data-goatcounter-click="get-the-book-main" href="prelaunch.html?from=book-main" ref="{{fxRef}}" data-fx="orange" style="display: flex; align-items: center; height: 56px; padding: 0 36px; background: #F57106; color: #FFFFFF; text-decoration: none; font: 700 18px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.01em; border-radius: 2px">Get the Book <span aria-hidden="true" data-fx-arrow="right" style="margin-left: 10px">→</span></a><a data-goatcounter-click="read-pages-first" href="#sample" ref="{{fxRef}}" data-fx="link" style="font: 500 16px/1.4 'Hanken Grotesk', sans-serif; color: #111111">or read some pages first <span aria-hidden="true" data-fx-arrow="down">↓</span></a></div>
+<div class="get-box-4"><a data-goatcounter-click="get-the-book-main" href="prelaunch.html?from=book-main" ref="{{fxRef}}" data-fx="orange" class="get-link">Get the Book <span aria-hidden="true" data-fx-arrow="right" class="get-label-4">→</span></a><a data-goatcounter-click="read-pages-first" href="#sample" ref="{{fxRef}}" data-fx="link" class="get-link-2">or read some pages first <span aria-hidden="true" data-fx-arrow="down">↓</span></a></div>
 </div>
 </section>
 
 <!-- S4 NVV -->
 <!-- THESIS -->
 
-
-
 <!-- RESOLUTION -->
-<section aria-labelledby="s3h" style="height: 245px; flex-shrink: 0; position: relative">
-<p style="position: absolute; left: 120px; top: 58px; margin: 0; font: 700 12px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; font-size: 18px">THE COST OF BUILDING BLINDLY</p>
-<h2 id="s3h" style="position: absolute; left: 120px; top: 88px; width: 1200px; margin: 0; font: 900 60px/1.04 Archivo, sans-serif; letter-spacing: -0.03em; text-wrap: balance">The true cost of shipping without validation is higher than you think.</h2>
-</section><section id="system" aria-label="The cost iceberg" style="height: 932px; flex-shrink: 0; position: relative">
+<section aria-labelledby="s3h" class="section-section-2">
+<p class="section-text-2">THE COST OF BUILDING BLINDLY</p>
+<h2 id="s3h" class="section-title-2">The true cost of shipping without validation is higher than you think.</h2>
+</section><section id="system" aria-label="The cost iceberg" class="system-section">
 
-<svg ref="{{setBerg}}" class="kbberg" onPointerDown="{{bergDown}}" onPointerMove="{{bergMove}}" onPointerUp="{{bergUp}}" onPointerCancel="{{bergUp}}" width="640" height="700" viewBox="0 0 640 700" aria-hidden="true" style="position: absolute; left: 330px; top: 150px; overflow: visible; transform-origin: 320px 150px; touch-action: pan-y">
+<svg ref="{{setBerg}}" class="kbberg system-svg" onPointerDown="{{bergDown}}" onPointerMove="{{bergMove}}" onPointerUp="{{bergUp}}" onPointerCancel="{{bergUp}}" width="640" height="700" viewBox="0 0 640 700" aria-hidden="true">
 <defs>
 <clipPath id="a3berg"><path d="M200 150 L165 205 L135 300 L118 400 L112 500 L128 590 L170 650 L240 690 L400 692 L470 655 L510 590 L528 500 L522 400 L505 300 L475 205 L440 150 Z"></path></clipPath>
 <clipPath id="a3notD"><rect x="0" y="0" width="640" height="410"></rect><rect x="0" y="540" width="640" height="200"></rect></clipPath>
@@ -330,88 +172,85 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 <path d="M200 150 L262 70 L285 88 L318 18 L352 80 L372 64 L440 150" fill="#ECE8E5" stroke="#111111" stroke-width="2" stroke-linejoin="round"></path>
 <path d="M318 18 L304 76 L322 110 M372 64 L362 104 M262 70 L270 112" fill="none" stroke="#111111" stroke-width="1.2"></path>
 </svg>
-<svg aria-hidden="true" width="1440" height="30" viewBox="0 0 1440 30" style="position: absolute; left: 0; top: 285px; overflow: visible; pointer-events: none"><path ref="{{setW1}}" d="M0 15 L1440 15" fill="none" stroke="#111111" stroke-width="1.5"></path></svg>
-<p style="position: absolute; left: 120px; top: 268px; margin: 0; font: 700 11px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.18em; text-transform: uppercase">Visible on the budget<br></p>
-<p style="position: absolute; left: 120px; top: 318px; margin: 0; font: 700 11px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.18em; text-transform: uppercase; color: #5E5954">Below the surface</p>
-<div ref="{{setBergTip}}" aria-hidden="true" style="position: absolute; left: 626px; top: 112px; width: 44px; height: 44px; pointer-events: none"><svg width="44" height="44" viewBox="-50 -50 100 100" class="spin" style="display: block"><g stroke="#F57106" stroke-width="7" stroke-linecap="round"><line x1="0" y1="-26" x2="0" y2="-44"></line><line x1="13" y1="-22.5" x2="22" y2="-38.1" opacity=".12"></line><line x1="22.5" y1="-13" x2="38.1" y2="-22" opacity=".15"></line><line x1="26" y1="0" x2="44" y2="0" opacity=".19"></line><line x1="22.5" y1="13" x2="38.1" y2="22" opacity=".24"></line><line x1="13" y1="22.5" x2="22" y2="38.1" opacity=".3"></line><line x1="0" y1="26" x2="0" y2="44" opacity=".37"></line><line x1="-13" y1="22.5" x2="-22" y2="38.1" opacity=".45"></line><line x1="-22.5" y1="13" x2="-38.1" y2="22" opacity=".54"></line><line x1="-26" y1="0" x2="-44" y2="0" opacity=".64"></line><line x1="-22.5" y1="-13" x2="-38.1" y2="-22" opacity=".76"></line><line x1="-13" y1="-22.5" x2="-22" y2="-38.1" opacity=".88"></line></g></svg></div>
+<svg aria-hidden="true" width="1440" height="30" viewBox="0 0 1440 30" class="system-svg-2"><path ref="{{setW1}}" d="M0 15 L1440 15" fill="none" stroke="#111111" stroke-width="1.5"></path></svg>
+<p class="system-text">Visible on the budget<br></p>
+<p class="system-text-2">Below the surface</p>
+<div ref="{{setBergTip}}" aria-hidden="true" class="system-box"><svg width="44" height="44" viewBox="-50 -50 100 100" class="spin system-svg-3"><g stroke="#F57106" stroke-width="7" stroke-linecap="round"><line x1="0" y1="-26" x2="0" y2="-44"></line><line x1="13" y1="-22.5" x2="22" y2="-38.1" opacity=".12"></line><line x1="22.5" y1="-13" x2="38.1" y2="-22" opacity=".15"></line><line x1="26" y1="0" x2="44" y2="0" opacity=".19"></line><line x1="22.5" y1="13" x2="38.1" y2="22" opacity=".24"></line><line x1="13" y1="22.5" x2="22" y2="38.1" opacity=".3"></line><line x1="0" y1="26" x2="0" y2="44" opacity=".37"></line><line x1="-13" y1="22.5" x2="-22" y2="38.1" opacity=".45"></line><line x1="-22.5" y1="13" x2="-38.1" y2="22" opacity=".54"></line><line x1="-26" y1="0" x2="-44" y2="0" opacity=".64"></line><line x1="-22.5" y1="-13" x2="-38.1" y2="-22" opacity=".76"></line><line x1="-13" y1="-22.5" x2="-22" y2="-38.1" opacity=".88"></line></g></svg></div>
 
 <!-- tip label -->
-<div style="position: absolute; left: 920px; top: 166px; width: 420px; display: flex; flex-direction: column; gap: 6px">
-<p style="margin: 0; display: flex; align-items: baseline; gap: 12px"><span style="font: 800 22px/1 Archivo, sans-serif">Build</span><span style="font: italic 400 24px/1 'Bodoni Moda', serif">L<sub>B</sub></span></p>
-<p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif; max-width: 420px">The visible part: designing, coding, preparing and launching.&nbsp;Engineering, management, go-to-market and marketing that is comfortable to track.</p>
+<div class="system-box-2">
+<p class="system-text-3"><span class="system-label">Build</span><span class="system-label-2">L<sub>B</sub></span></p>
+<p class="system-text-4">The visible part: designing, coding, preparing and launching.&nbsp;Engineering, management, go-to-market and marketing that is comfortable to track.</p>
 </div>
-<div aria-hidden="true" style="position: absolute; left: 672px; top: 190px; width: 228px; height: 1px; background: #111111"></div>
+<div aria-hidden="true" class="system-box-3"></div>
 
 <!-- layer labels -->
-<div aria-hidden="true" style="position: absolute; left: 820px; top: 365px; width: 80px; height: 1px; background: #111111"></div>
-<div aria-hidden="true" style="position: absolute; left: 853px; top: 495px; width: 47px; height: 1px; background: #111111"></div>
-<div aria-hidden="true" style="position: absolute; left: 866px; top: 625px; width: 34px; height: 0; border-top: 1px dashed #111111"></div>
-<div aria-hidden="true" style="position: absolute; left: 832px; top: 770px; width: 68px; height: 1px; background: #111111"></div>
-<div style="position: absolute; left: 920px; top: 336px; width: 420px; display: flex; flex-direction: column; gap: 6px">
-<p style="margin: 0; display: flex; align-items: baseline; gap: 12px"><span style="font: 800 20px/1 Archivo, sans-serif">Implementation cost</span><span style="font: italic 400 22px/1 'Bodoni Moda', serif">L<sub>I</sub></span></p>
-<p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif">Rolling it out: integration, onboarding, training, enablement, progressive optimisation, etc.</p>
+<div aria-hidden="true" class="system-box-4"></div>
+<div aria-hidden="true" class="system-box-5"></div>
+<div aria-hidden="true" class="system-box-6"></div>
+<div aria-hidden="true" class="system-box-7"></div>
+<div class="system-box-8">
+<p class="system-text-3"><span class="system-label-3">Implementation cost</span><span class="system-label-4">L<sub>I</sub></span></p>
+<p class="system-text-5">Rolling it out: integration, onboarding, training, enablement, progressive optimisation, etc.</p>
 </div>
-<div style="position: absolute; left: 920px; top: 466px; width: 420px; display: flex; flex-direction: column; gap: 6px">
-<p style="margin: 0; display: flex; align-items: baseline; gap: 12px"><span style="font: 800 20px/1 Archivo, sans-serif">Carrying cost</span><span style="font: italic 400 22px/1 'Bodoni Moda', serif">L<sub>C</sub></span></p>
-<p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif">Keeping it alive: maintenance, support, and an ever-increasing complexity that never leaves the codebase.</p>
+<div class="system-box-9">
+<p class="system-text-3"><span class="system-label-3">Carrying cost</span><span class="system-label-4">L<sub>C</sub></span></p>
+<p class="system-text-5">Keeping it alive: maintenance, support, and an ever-increasing complexity that never leaves the codebase.</p>
 </div>
-<div style="position: absolute; left: 920px; top: 596px; width: 420px; display: flex; flex-direction: column; gap: 6px">
-<p style="margin: 0; display: flex; align-items: baseline; gap: 12px"><span style="font: 800 20px/1 Archivo, sans-serif">Displacement cost</span><span style="font: italic 400 22px/1 'Bodoni Moda', serif">L<sub>D</sub></span></p>
-<p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif">What the team could have built instead. It appears on no budget line. The opportunity cost every first business class teaches, yet almost never attributed.</p>
+<div class="system-box-10">
+<p class="system-text-3"><span class="system-label-3">Displacement cost</span><span class="system-label-4">L<sub>D</sub></span></p>
+<p class="system-text-5">What the team could have built instead. It appears on no budget line. The opportunity cost every first business class teaches, yet almost never attributed.</p>
 </div>
-<div style="position: absolute; left: 920px; top: 741px; width: 420px; display: flex; flex-direction: column; gap: 6px">
-<p style="margin: 0; display: flex; align-items: baseline; gap: 12px"><span style="font: 800 20px/1 Archivo, sans-serif">Correction cost</span><span style="font: italic 400 22px/1 'Bodoni Moda', serif">L<sub>R</sub></span></p>
-<p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif">Unwinding it once it's dead: sunsetting, migration, reputational friction.</p>
+<div class="system-box-11">
+<p class="system-text-3"><span class="system-label-3">Correction cost</span><span class="system-label-4">L<sub>R</sub></span></p>
+<p class="system-text-5">Unwinding it once it's dead: sunsetting, migration, reputational friction.</p>
 </div>
 
 <!-- assembled equation -->
-<p aria-label="C sub b equals L sub B plus L sub I plus L sub C plus L sub D plus L sub R" style="position: absolute; left: -74px; top: 866px; width: 1440px; margin: 0; text-align: center; font: 800 56px/1 Archivo, sans-serif; letter-spacing: -0.01em; word-spacing: 0.08em; font-size: 32px; font-weight: 400; font-family: Bodoni Moda">C<sub>b</sub> = L<sub>B</sub> + L<sub>I</sub> + L<sub>C</sub> + L<sub>D</sub> + L<sub>R</sub></p>
+<p aria-label="C sub b equals L sub B plus L sub I plus L sub C plus L sub D plus L sub R" class="system-text-6">C<sub>b</sub> = L<sub>B</sub> + L<sub>I</sub> + L<sub>C</sub> + L<sub>D</sub> + L<sub>R</sub></p>
 
-</section><section aria-labelledby="s4h" style="height: 762px; flex-shrink: 0; position: relative">
+</section><section aria-labelledby="s4h" class="section-section-3">
 <!-- particles -->
-<div ref="{{setParts}}" aria-hidden="true" style="position: absolute; inset: 0; color: #111111; opacity: 0.16; font-family: 'Bodoni Moda', serif; font-style: italic; pointer-events: none; height: 726px; top: 14px">
-<span style="position: absolute; left: 820px; top: 40px; font-size: 26px">Σ</span>
-<span style="position: absolute; left: 1396px; top: 440px; font-size: 26px">∂</span>
-<span style="position: absolute; left: 462px; top: 250px; font-size: 26px">Δ</span>
-<span style="position: absolute; left: 860px; top: 668px; font-size: 19px; font-style: normal; font-family: Archivo, sans-serif">E[V]</span>
-<span style="position: absolute; left: 560px; top: 58px; font-size: 26px">p</span>
-<span style="position: absolute; left: 520px; top: 656px; font-size: 19px">F<sub>s</sub> = p · d · C<sub>b</sub></span>
-<span style="position: absolute; left: 1000px; top: 660px; font-size: 19px">D<sub>l</sub> = (1 − p) · W<sub>v</sub> · V<sub>w</sub></span>
-<span style="position: absolute; left: 1010px; top: 30px; font-size: 19px">G<sub>s</sub> = (1 − p) · f · V</span>
+<div ref="{{setParts}}" aria-hidden="true" class="section-box-2">
+<span class="section-label-2">Σ</span>
+<span class="section-label-3">∂</span>
+<span class="section-label-4">Δ</span>
+<span class="section-label-5">E[V]</span>
+<span class="section-label-6">p</span>
+<span class="section-label-7">F<sub>s</sub> = p · d · C<sub>b</sub></span>
+<span class="section-label-8">D<sub>l</sub> = (1 − p) · W<sub>v</sub> · V<sub>w</sub></span>
+<span class="section-label-9">G<sub>s</sub> = (1 − p) · f · V</span>
 </div>
 <!-- shrunken iceberg; failures stopped: hull dissolved -->
-<svg ref="{{setBerg2}}" width="320" height="350" viewBox="0 0 640 700" aria-hidden="true" style="position: absolute; left: 110px; top: 250px; overflow: visible; transform-origin: 160px 75px">
+<svg ref="{{setBerg2}}" width="320" height="350" viewBox="0 0 640 700" aria-hidden="true" class="section-svg">
 <path ref="{{setBergDash}}" d="M200 150 L165 205 L135 300 L118 400 L112 500 L128 590 L170 650 L240 690 L400 692 L470 655 L510 590 L528 500 L522 400 L505 300 L475 205 L440 150" fill="none" stroke="#F57106" stroke-width="4" stroke-dasharray="4 12" stroke-linecap="round"></path>
 <path d="M200 150 L262 70 L285 88 L318 18 L352 80 L372 64 L440 150" fill="#ECE8E5" stroke="#111111" stroke-width="3" stroke-linejoin="round"></path>
 </svg>
-<svg width="440" height="12" viewBox="0 0 440 12" aria-hidden="true" style="position: absolute; left: 60px; top: 319px; overflow: visible"><path ref="{{setW4}}" d="M0 6 C 70 2, 150 10, 220 6 S 370 2, 440 6" fill="none" stroke="#111111" stroke-width="1.5"></path></svg>
+<svg width="440" height="12" viewBox="0 0 440 12" aria-hidden="true" class="section-svg-2"><path ref="{{setW4}}" d="M0 6 C 70 2, 150 10, 220 6 S 370 2, 440 6" fill="none" stroke="#111111" stroke-width="1.5"></path></svg>
 
+<div class="section-box-3">
 
-<div style="position: absolute; left: 540px; top: 157px; width: 800px; display: flex; flex-direction: column; gap: 28px; height: 466px">
-
-<h3 style="margin: 0; font: 800 28px/1.1 Archivo, sans-serif; font-family: Hanken Grotesk; font-size: 18px; font-weight: 700; letter-spacing: 0.2em; line-height: 0">WHY CAN'T WE JUST SHIP IT?</h3><h2 id="s4h" style="margin: 0; font: italic 400 46px/1.3 'Bodoni Moda', serif; text-wrap: balance; color: #111111; font-weight: 400; font-style: normal; line-height: 1.5; height: 211px"><b>N</b>et <b>V</b>alue of <b>V</b>alidation per idea <b>=</b> <mark style="position: relative; display: inline-block; white-space: nowrap; background: none; color: #111111; padding: 0 14px; margin: 0 2px; line-height: 1.25">Failures Stopped<svg aria-hidden="true" width="100%" height="100%" style="position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none"><rect ref="{{setFS}}" data-k="0" x="0" y="0" width="100%" height="100%" rx="16" ry="16" fill="none" stroke="#F57106" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"></rect></svg></mark> <b>−</b> Validation cost <b>−</b> Delay cost <b>−</b> Good ideas stopped</h2>
-<div style="display: flex; flex-direction: column">
-<p aria-label="NVV equals p times d times C sub b, minus V sub c, minus one minus p times W sub v times V sub w, minus one minus p times f times V" style="margin: 0; font: 700 29px/1.25 Archivo, sans-serif; word-spacing: 0.04em; white-space: nowrap">NVV = <span style="position: relative; display: inline-block; white-space: nowrap; padding: 0 8px">p · d · C<sub>b</sub><svg aria-hidden="true" width="100%" height="100%" style="position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none"><rect ref="{{setFS}}" data-k="1" x="0" y="0" width="100%" height="100%" rx="12" ry="12" fill="none" stroke="#F57106" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"></rect></svg></span> − V<sub>c</sub> − (1 − p) · W<sub>v</sub> · V<sub>w</sub> − (1 − p) · f · V</p>
-</div><p style="margin: 0; font-size: 18px; font-family: &quot;Hanken Grotesk&quot;, sans-serif; line-height: 0; color: rgb(94, 89, 84); width: 900px">Chapter 2 shows you how to calculate the value of discovery.</p>
-<div style="display: flex; flex-direction: column; gap: 4px; margin-top: 12px; font: 400 14px/1.5 'Hanken Grotesk', sans-serif; color: #5E5954">
-
+<h3 class="section-heading">WHY CAN'T WE JUST SHIP IT?</h3><h2 id="s4h" class="section-title-3"><b>N</b>et <b>V</b>alue of <b>V</b>alidation per idea <b>=</b> <mark class="section-mark">Failures Stopped<svg aria-hidden="true" width="100%" height="100%" class="section-svg-3"><rect ref="{{setFS}}" data-k="0" x="0" y="0" width="100%" height="100%" rx="16" ry="16" fill="none" stroke="#F57106" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"></rect></svg></mark> <b>−</b> Validation cost <b>−</b> Delay cost <b>−</b> Good ideas stopped</h2>
+<div class="section-box-4">
+<p aria-label="NVV equals p times d times C sub b, minus V sub c, minus one minus p times W sub v times V sub w, minus one minus p times f times V" class="section-text-3">NVV = <span class="section-label-10">p · d · C<sub>b</sub><svg aria-hidden="true" width="100%" height="100%" class="section-svg-3"><rect ref="{{setFS}}" data-k="1" x="0" y="0" width="100%" height="100%" rx="12" ry="12" fill="none" stroke="#F57106" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"></rect></svg></span> − V<sub>c</sub> − (1 − p) · W<sub>v</sub> · V<sub>w</sub> − (1 − p) · f · V</p>
+</div><p class="section-text-4">Chapter 2 shows you how to calculate the value of discovery.</p>
+<div class="section-box-5">
 
 </div>
 </div>
-</section><section aria-labelledby="resh" style="height: 351px; flex-shrink: 0; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0">
-<h2 id="resh" style="margin: 0; width: 1200px; font: 900 60px/1.08 Archivo, sans-serif; letter-spacing: -0.03em; text-wrap: balance; text-align: center">Discovery and validation turn faster delivery into <mark style="background: #F57106; color: #111111; padding: 0 10px">outcomes</mark>, not just output.</h2>
-<p style="margin: 40px 0 0; font: italic 400 36px/1.2 'Bodoni Moda', serif; text-align: center">Ship value, not just tickets!</p>
-<div style="margin-top: 32px"><a data-goatcounter-click="get-the-book-outcomes" href="prelaunch.html?from=book-outcomes" ref="{{fxRef}}" data-fx="orange" style="flex-shrink: 0; display: flex; align-items: center; height: 56px; padding: 0 36px; background: #F57106; color: #FFFFFF; text-decoration: none; font: 700 18px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.01em; border-radius: 2px">Get the Book <span aria-hidden="true" data-fx-arrow="right" style="margin-left: 10px">→</span></a></div>
+</section><section aria-labelledby="resh" class="section-section-4">
+<h2 id="resh" class="section-title-4">Discovery and validation turn faster delivery into <mark class="section-mark-2">outcomes</mark>, not just output.</h2>
+<p class="section-text-5">Ship value, not just tickets!</p>
+<div class="section-box-6"><a data-goatcounter-click="get-the-book-outcomes" href="prelaunch.html?from=book-outcomes" ref="{{fxRef}}" data-fx="orange" class="section-link">Get the Book <span aria-hidden="true" data-fx-arrow="right" class="get-label-4">→</span></a></div>
 </section>
 
 <!-- S5 PDS -->
-<section aria-labelledby="s5h" onMouseMove="{{onMove}}" onMouseLeave="{{onLeave}}" style="height: 963px; flex-shrink: 0; position: relative">
-<p style="position: absolute; left: 80px; top: 150px; margin: 0; font: 700 12px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.2em; text-transform: uppercase">The Product Decision System</p>
-<h2 id="s5h" style="position: absolute; left: 80px; top: 178px; margin: 0; font: 900 52px/1 Archivo, sans-serif; letter-spacing: -0.03em">Structured discovery is simple, but not easy.</h2>
-
+<section aria-labelledby="s5h" onMouseMove="{{onMove}}" onMouseLeave="{{onLeave}}" class="section-section-5">
+<p class="section-text-6">The Product Decision System</p>
+<h2 id="s5h" class="section-title-5">Structured discovery is simple, but not easy.</h2>
 
 <!-- light travelling through the system -->
-<svg aria-hidden="true" width="1440" height="600" viewBox="0 0 1440 600" style="position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none">
+<svg aria-hidden="true" width="1440" height="600" viewBox="0 0 1440 600" class="section-svg-3">
 <defs><filter id="kbsysglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5"></feGaussianBlur></filter></defs>
 <path ref="{{setRoute}}" d="M135 352 L136 352" fill="none" stroke="none"></path>
 <path ref="{{setTrailGlow}}" d="M135 352 L136 352" fill="none" stroke="#F57106" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 100000" filter="url(#kbsysglow)" opacity="0"></path>
@@ -420,30 +259,29 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 <circle ref="{{setHead}}" cx="-50" cy="-50" r="3.2" fill="#FFF6EC" opacity="0"></circle>
 </svg>
 <!-- path -->
-<div style="position: absolute; left: 80px; top: 320px; width: 1280px; height: 64px">
-<div aria-hidden="true" style="position: absolute; left: 60px; top: 32px; width: 1060px; height: 1.5px; background: #111111"></div>
-<div ref="{{setOutLine}}" aria-hidden="true" style="position: absolute; left: 1120px; top: 32px; width: 40px; height: 0; border-top: 1.5px dashed #8E8984"></div>
-<div style="position: absolute; left: 0; top: -23px; width: 110px; height: 110px; display: flex; align-items: center; justify-content: center">
-<div ref="{{setDiamond}}" aria-hidden="true" style="position: absolute; left: 16px; top: 16px; width: 78px; height: 78px; background: #ECE8E5; border: 1.5px solid #111111; transform: rotate(45deg); box-sizing: border-box; box-shadow: 0 0 14px rgba(245,113,6,0.22)"></div>
-<span style="position: relative; font: 600 14px/1 'Hanken Grotesk', sans-serif">Hypothesis</span>
+<div class="section-box-7">
+<div aria-hidden="true" class="section-box-8"></div>
+<div ref="{{setOutLine}}" aria-hidden="true" class="section-box-9"></div>
+<div class="section-box-10">
+<div ref="{{setDiamond}}" aria-hidden="true" class="section-box-11"></div>
+<span class="section-label-11">Hypothesis</span>
 </div>
-<div ref="{{setNAV}}" style="position: absolute; left: 150px; top: 0; width: 220px; height: 64px; background: #ECE8E5; border: 1.5px solid #111111; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font: 600 16px/1 'Hanken Grotesk', sans-serif">Assumption Validation</div>
-<div ref="{{setNG1}}" style="position: absolute; left: 400px; top: 0; width: 130px; height: 64px; background: #111111; color: #ECE8E5; display: flex; align-items: center; justify-content: center; font: 900 17px/1 Archivo, sans-serif; letter-spacing: 0.04em">GATE 1</div>
-<div ref="{{setNP}}" style="position: absolute; left: 560px; top: 0; width: 220px; height: 64px; background: #ECE8E5; border: 1.5px solid #111111; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font: 600 16px/1 'Hanken Grotesk', sans-serif">Pilot Validation</div>
-<div ref="{{setNINV}}" style="position: absolute; left: 810px; top: 0; width: 310px; height: 64px; background: #111111; color: #ECE8E5; display: flex; align-items: center; justify-content: center; gap: 12px; font: 900 17px/1 Archivo, sans-serif; letter-spacing: 0.04em">
+<div ref="{{setNAV}}" class="section-box-12">Assumption Validation</div>
+<div ref="{{setNG1}}" class="section-box-13">GATE 1</div>
+<div ref="{{setNP}}" class="section-box-14">Pilot Validation</div>
+<div ref="{{setNINV}}" class="section-box-15">
 <span>INVESTMENT DECISION</span>
 </div>
-<p ref="{{setBuild}}" style="position: absolute; left: 1170px; top: 32.75px; transform: translateY(-50%); margin: 0; width: 120px; font: 500 14px/1 'Hanken Grotesk', sans-serif; color: #6F6A64; white-space: nowrap">Build &amp; Scale</p>
+<p ref="{{setBuild}}" class="section-text-7">Build &amp; Scale</p>
 </div>
-<svg aria-hidden="true" width="1440" height="600" viewBox="0 0 1440 600" style="position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none"><circle ref="{{setSparkCore}}" cx="-50" cy="-50" r="3" fill="#FFF6EC" opacity="0" filter="url(#kbsysglow)"></circle><g ref="{{setMotes}}"><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle></g><g ref="{{setSpark}}"><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle></g></svg>
-
+<svg aria-hidden="true" width="1440" height="600" viewBox="0 0 1440 600" class="section-svg-3"><circle ref="{{setSparkCore}}" cx="-50" cy="-50" r="3" fill="#FFF6EC" opacity="0" filter="url(#kbsysglow)"></circle><g ref="{{setMotes}}"><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle></g><g ref="{{setSpark}}"><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle></g></svg>
 
 <!-- waterline -->
-<svg aria-hidden="true" width="1440" height="40" viewBox="0 0 1440 40" style="position: absolute; left: 0; top: 628px; overflow: visible"><path ref="{{setW2}}" d="M0 20 L1440 20" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="9 8"></path></svg>
-<svg aria-hidden="true" width="1440" height="40" viewBox="0 0 1440 40" style="position: absolute; left: 0; top: 740px; overflow: visible"><path ref="{{setW3}}" d="M0 20 L1440 20" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="9 8"></path></svg>
+<svg aria-hidden="true" width="1440" height="40" viewBox="0 0 1440 40" class="section-svg-4"><path ref="{{setW2}}" d="M0 20 L1440 20" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="9 8"></path></svg>
+<svg aria-hidden="true" width="1440" height="40" viewBox="0 0 1440 40" class="section-svg-5"><path ref="{{setW3}}" d="M0 20 L1440 20" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="9 8"></path></svg>
 
 <!-- connectors + the living current -->
-<svg width="1440" height="1250" viewBox="0 0 1440 1250" aria-hidden="true" style="position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none">
+<svg width="1440" height="1250" viewBox="0 0 1440 1250" aria-hidden="true" class="section-svg-3">
 <defs>
 <marker id="kbarr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#111111"></path></marker>
 <marker id="kbarrO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#F57106"></path></marker>
@@ -460,61 +298,57 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 <path d="M1100 386 L1100 624" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#kbarr)"></path>
 <!-- the flow feeds the hypothesis -->
 
-</svg><p style="position: absolute; left: -354px; top: 811px; width: 1440px; margin: 0; text-align: center; font: 900 16px/1 Archivo, sans-serif; letter-spacing: 0.26em; text-transform: uppercase; color: #111111; font-family: Archivo, sans-serif; font-weight: 900; line-height: 1">Continuous Opportunity Discovery</p>
-<div aria-hidden="true" style="position: absolute; left: 0; top: 610px; width: 1440px; height: 190px">
-<sc-if value="{{glOff}}" hint-placeholder-val="{{ true }}"><svg width="1440" height="190" viewBox="0 0 1440 190" style="position: absolute; left: 0; top: 0"><path d="M0 68 C 240 54, 480 80, 720 66 S 1200 54, 1440 70 L1440 118 C 1200 106, 960 130, 720 116 S 240 106, 0 120 Z" fill="#F57106"></path></svg></sc-if>
-<canvas ref="{{setCanvas}}" width="1440" height="620" style="position: absolute; left: 0; top: -310px; width: 1440px; height: 620px; display: block; pointer-events: none"></canvas>
+</svg><p class="section-text-8">Continuous Opportunity Discovery</p>
+<div aria-hidden="true" class="section-box-16">
+<sc-if value="{{glOff}}" hint-placeholder-val="{{ true }}"><svg width="1440" height="190" viewBox="0 0 1440 190" class="section-svg-6"><path d="M0 68 C 240 54, 480 80, 720 66 S 1200 54, 1440 70 L1440 118 C 1200 106, 960 130, 720 116 S 240 106, 0 120 Z" fill="#F57106"></path></svg></sc-if>
+<canvas ref="{{setCanvas}}" width="1440" height="620" class="section-canvas"></canvas>
 </div>
-<span style="position: absolute; left: 172px; top: 560px; font: italic 400 15px/1 'Bodoni Moda', serif">feeds</span>
-<span style="position: absolute; left: 422px; top: 466px; font: italic 400 15px/1 'Bodoni Moda', serif">informs</span>
-<span style="position: absolute; left: 866px; top: 474px; font: italic 400 15px/1 'Bodoni Moda', serif">informs</span>
-<span style="position: absolute; left: 668px; top: 580px; font: italic 400 15px/1 'Bodoni Moda', serif">informs</span>
-<span style="position: absolute; left: 568px; top: 600px; font: italic 400 15px/1 'Bodoni Moda', serif">informs</span>
-<span style="position: absolute; left: 1108px; top: 600px; font: italic 400 15px/1 'Bodoni Moda', serif">informs</span>
+<span class="section-label-12">feeds</span>
+<span class="section-label-13">informs</span>
+<span class="section-label-14">informs</span>
+<span class="section-label-15">informs</span>
+<span class="section-label-16">informs</span>
+<span class="section-label-17">informs</span>
 
-
-
-
-</section><section aria-labelledby="moreh" style="height: 240px; flex-shrink: 0; position: relative">
-<h2 id="moreh" style="position: absolute; left: 88px; top: 9px; width: 1200px; margin: 0; font: 900 52px/1.1 Archivo, sans-serif; letter-spacing: -0.03em; text-wrap: balance">And there is much more in the book to help your transformation initiative turn ideas into products proven by evidence, not belief.</h2>
+</section><section aria-labelledby="moreh" class="section-section-6">
+<h2 id="moreh" class="section-title-6">And there is much more in the book to help your transformation initiative turn ideas into products proven by evidence, not belief.</h2>
 </section>
 
 </div>
 </template>
 <template id="tpl-main2">
-<div class="{{rootClass}}" style="width: 1440px; height: 2400px; position: relative; overflow: hidden; background: #ECE8E5; color: #111111; display: flex; flex-direction: column">
-
+<div class="{{rootClass}} tpl-main2-box">
 
 <!-- S7 AUTHOR / SIGNAL / CLOSE -->
-<section id="book" aria-labelledby="s6h" onMouseMove="{{spNear}}" onPointerMove="{{spNear}}" onMouseLeave="{{spFar}}" onPointerLeave="{{spFar}}" style="height: 1080px; flex-shrink: 0; position: relative">
-<h2 id="s6h" style="position: absolute; left: 80px; top: 60px; margin: 0; font: 900 52px/1 Archivo, sans-serif; letter-spacing: -0.03em">Inside the book</h2>
-<div ref="{{setAcc}}" style="position: absolute; left: 80px; top: 170px; width: 740px; display: flex; flex-direction: column; border-top: 1.5px solid #111111">
+<section id="book" aria-labelledby="s6h" onMouseMove="{{spNear}}" onPointerMove="{{spNear}}" onMouseLeave="{{spFar}}" onPointerLeave="{{spFar}}" class="book-section">
+<h2 id="s6h" class="book-title">Inside the book</h2>
+<div ref="{{setAcc}}" class="book-box">
 <sc-for list="{{chapters}}" as="c" hint-placeholder-count="9">
-<div style="display: flex; flex-direction: column; border-bottom: 1px solid rgba(17,17,17,0.25); position: relative; isolation: isolate">
-<span ref="{{c.setGlow}}" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: -1"></span>
-<button type="button" aria-expanded="{{c.expanded}}" onClick="{{c.toggle}}" style="all: unset; cursor: pointer; display: grid; grid-template-columns: 64px minmax(0, 1fr) 32px; align-items: center; min-height: 76px; padding: 12px 0; box-sizing: border-box"><span style="font: italic 400 26px/1 'Bodoni Moda', serif">{{c.num}}</span><span style="display: flex; flex-direction: column; gap: 5px"><span style="font: 800 20px/1.1 Archivo, sans-serif">{{c.title}}</span><span style="font: 400 15px/1.4 'Hanken Grotesk', sans-serif; color: #5E5954">{{c.sub}}</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" style="justify-self: end"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{c.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button>
-<div ref="{{c.setBody}}" style="height: 0px; overflow: hidden"><p style="margin: 0; padding: 0 32px 22px 64px; font: 400 16px/1.6 'Hanken Grotesk', sans-serif; text-wrap: pretty">{{c.body}}<sc-if value="{{c.link}}" hint-placeholder-val="{{ false }}"> <a data-goatcounter-click="signal-appendix" href="prelaunch.html?from=signal-appendix" ref="{{fxRef}}" data-fx="link" style="font-weight: 600; white-space: nowrap">Try Signal <span aria-hidden="true" data-fx-arrow="right">→</span></a></sc-if></p></div>
+<div class="book-box-2">
+<span ref="{{c.setGlow}}" aria-hidden="true" class="book-label"></span>
+<button type="button" aria-expanded="{{c.expanded}}" onClick="{{c.toggle}}" class="book-btn"><span class="book-label-2">{{c.num}}</span><span class="book-label-3"><span class="book-label-4">{{c.title}}</span><span class="book-label-5">{{c.sub}}</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{c.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button>
+<div ref="{{c.setBody}}" class="book-box-3"><p class="book-text">{{c.body}}<sc-if value="{{c.link}}" hint-placeholder-val="{{ false }}"> <a data-goatcounter-click="signal-appendix" href="prelaunch.html?from=signal-appendix" ref="{{fxRef}}" data-fx="link" class="book-link">Try Signal <span aria-hidden="true" data-fx-arrow="right">→</span></a></sc-if></p></div>
 </div>
 </sc-for>
 <!-- quiet CTA under the chapters: ink outline, no orange -->
-<div style="display: flex; justify-content: center; align-items: center; padding: 30px 0 0"><a data-goatcounter-click="get-the-book-chapters" href="prelaunch.html?from=book-chapters" ref="{{fxRef}}" data-fx="card" style="text-decoration: none; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 22px; border: 1.5px solid #111111; border-radius: 999px; box-sizing: border-box; color: #111111; font: 600 16px/1 'Hanken Grotesk', sans-serif">Get the Book <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
-<canvas ref="{{setRipCv}}" aria-hidden="true" width="740" height="820" style="position: absolute; left: 0; top: 0; width: 740px; height: 820px; pointer-events: none; z-index: 2"></canvas>
+<div class="book-box-4"><a data-goatcounter-click="get-the-book-chapters" href="prelaunch.html?from=book-chapters" ref="{{fxRef}}" data-fx="card" class="book-link-2">Get the Book <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
+<canvas ref="{{setRipCv}}" aria-hidden="true" width="740" height="820" class="book-canvas"></canvas>
 </div>
 
 <!-- one interior spread: magnet on approach, opens full width on click -->
-<figure id="sample" style="position: absolute; left: 880px; top: 190px; width: 500px; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 18px">
+<figure id="sample" class="book-figure">
 <button data-goatcounter-click="open-sample-spread" type="button" ref="{{setSpread}}" class="kbspreadbtn" onClick="{{openSpread}}" aria-label="Open pages 60–61 from Chapter III: A lesson from history: the Solow Paradox for today’s AI">
-<div class="kbspread" style="--fs: 7px; width: 460px">
+<div class="kbspread book-box-5">
 <div class="kbpg kbpgL kbpgimg"><img src="assets/page-60.webp" alt="" draggable="false"></div>
 <div class="kbpg kbpgR kbpgimg"><img src="assets/page-61.webp" alt="" draggable="false"></div>
 </div>
 </button>
-<div ref="{{setSpreadShadow}}" aria-hidden="true" style="width: 420px; height: 26px; margin-top: -8px; border-radius: 50%; background: radial-gradient(closest-side, rgba(46,33,24,0.28), rgba(46,33,24,0)); filter: blur(8px)"></div>
-<figcaption style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; max-width: 440px"><span style="font: 700 11px / 1 &quot;Hanken Grotesk&quot;, sans-serif; letter-spacing: 0.18em; text-transform: uppercase">Chapter III · Pages 60-61</span><span style="font: italic 400 20px / 1.3 &quot;Bodoni Moda&quot;, serif; text-wrap: balance">A lesson from history: the Solow Paradox for today’s AI</span><span style="font: 500 13px / 1 &quot;Hanken Grotesk&quot;, sans-serif; color: rgb(94, 89, 84)">Click to read</span></figcaption>
+<div ref="{{setSpreadShadow}}" aria-hidden="true" class="book-box-6"></div>
+<figcaption class="book-caption"><span class="book-label-6">Chapter III · Pages 60-61</span><span class="book-label-7">A lesson from history: the Solow Paradox for today’s AI</span><span class="book-label-8">Click to read</span></figcaption>
 </figure>
 <sc-if value="{{spreadOpen}}" hint-placeholder-val="{{ false }}">
 <div class="kbzoom" role="dialog" aria-modal="true" aria-label="Pages 60–61 from Chapter III. Click or press Escape to close." tabindex="-1" ref="{{setZoom}}" onClick="{{closeSpread}}" onKeyDown="{{zoomKey}}">
-<div ref="{{setBig}}" class="kbspread kbspreadbig" style="--fs: 18px">
+<div ref="{{setBig}}" class="kbspread kbspreadbig book-box-7">
 <div class="kbpg kbpgL kbpgimg"><img src="assets/page-60.webp" alt="Page 60 of Known Before Built: A lesson from history — the Solow Paradox" draggable="false"></div>
 <div class="kbpg kbpgR kbpgimg"><img src="assets/page-61.webp" alt="Page 61 of Known Before Built: the Solow Paradox, continued, applied to AI-assisted delivery" draggable="false"></div>
 </div>
@@ -522,1229 +356,58 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 </sc-if>
 
 <!-- stories -->
-</section><section id="author" aria-labelledby="s7h" style="height: 1320px; flex-shrink: 0; position: relative">
-<p style="position: absolute; left: 80px; top: 60px; margin: 0; font: 700 12px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.2em; text-transform: uppercase">Author</p>
-<div style="position: absolute; left: 80px; top: 100px; width: 360px; height: 360px; border-radius: 50%; border: 1.5px dashed #111111; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font: 500 13px/1.4 'Hanken Grotesk', sans-serif; color: #5E5954">
-<img ref="{{setPortrait}}" src="assets/portrait.png" alt="Portrait of Andreas Mitschke" style="position: absolute; left: -1.5px; top: -1.5px; width: 360px; height: 360px; border-radius: 50%; object-fit: cover; display: block">
+</section><section id="author" aria-labelledby="s7h" class="author-section">
+<p class="author-text">Author</p>
+<div class="author-box">
+<img ref="{{setPortrait}}" src="assets/portrait.png" alt="Portrait of Andreas Mitschke" class="author-img">
 </div>
-<div style="position: absolute; left: 520px; top: 100px; width: 460px; display: flex; flex-direction: column; gap: 20px">
-<h2 id="s7h" style="margin: 0; font: 900 44px/1 Archivo, sans-serif; letter-spacing: -0.02em">Andreas Mitschke</h2>
-<p style="margin: 0; font: 400 17px/1.6 'Hanken Grotesk', sans-serif; text-wrap: pretty; width: 823px">I've spent over fifteen years running experiments on products, initially for B2C and SaaS companies, and later for B2B industrial and deep tech organisations. My non-linear venture journey began at the age of 15 with web design services and building a travel experience platform. I wrote Known Before Built out of the stark contrast between these worlds. In high-volume tech, “ship fast at all costs, learn, repeat” is a working mantra because a failed release costs you a few anonymous users, a silent digit in churn. In organisations whose customers have names, that same method costs you a relationship. <br>It is for those who must decide what is worth building first. I've advised start-ups and scale-ups through funds including 500 Global and Loyal VC, evaluated and brokered deal flow for venture funds across Europe, New York and Silicon Valley, and helped build Germany's largest academic deep tech programme with KIT. Closer to the ground, I coached founders at Mannheim's startup centres and lectured on entrepreneurship and product discovery at universities in Germany.</p>
-<div style="display: flex; gap: 14px; margin-top: 16px">
-
-
-
+<div class="author-box-2">
+<h2 id="s7h" class="author-title">Andreas Mitschke</h2>
+<p class="author-text-2">I've spent over fifteen years running experiments on products, initially for B2C and SaaS companies, and later for B2B industrial and deep tech organisations. My non-linear venture journey began at the age of 15 with web design services and building a travel experience platform. I wrote Known Before Built out of the stark contrast between these worlds. In high-volume tech, “ship fast at all costs, learn, repeat” is a working mantra because a failed release costs you a few anonymous users, a silent digit in churn. In organisations whose customers have names, that same method costs you a relationship. <br>It is for those who must decide what is worth building first. I've advised start-ups and scale-ups through funds including 500 Global and Loyal VC, evaluated and brokered deal flow for venture funds across Europe, New York and Silicon Valley, and helped build Germany's largest academic deep tech programme with KIT. Closer to the ground, I coached founders at Mannheim's startup centres and lectured on entrepreneurship and product discovery at universities in Germany.</p>
+<div class="author-box-3">
+<a data-goatcounter-click="author-site" href="https://andreasmitschke.com" ref="{{fxRef}}" data-fx="link" class="get-link-2">More about me at andreasmitschke.com <span aria-hidden="true" data-fx-arrow="right">→</span></a>
 </div>
 
 </div>
 
-
-
-<div ref="{{setCirc}}" aria-hidden="true" style="position: absolute; left: 1100px; top: 640px; width: 250px; height: 261px">
+<div ref="{{setCirc}}" aria-hidden="true" class="author-box-4">
 
 </div>
 
-<div style="position: absolute; left: 80px; top: 640px; width: 1280px; display: flex; flex-direction: column; gap: 88px">
-<img src="assets/circle.webp" alt="" class="breathe" style="width: 420px; height: 440px; display: block; position: absolute; left: 863px; top: -77px"><div style="width: 740px; display: flex; flex-direction: column; gap: 28px">
-<p ref="{{setQuote}}" style="margin: 0; font: italic 400 40px/1.3 'Bodoni Moda', serif; text-wrap: pretty; font-family: Bodoni Moda">If you run the system inside your organisation, I would like to hear what happened. What worked, what got adopted, and what you think is missing.</p>
-<div ref="{{setMailRow}}" style="align-self: flex-start"><a data-goatcounter-click="email-author" href="mailto:andreas@knownbeforebuilt.com" ref="{{fxRef}}" data-fx="link" style="font: 800 24px/1 Archivo, sans-serif; align-self: flex-start">andreas@knownbeforebuilt.com</a></div>
+<div class="author-box-5">
+<img src="assets/circle.webp" alt="" class="breathe author-img-2"><div class="author-box-6">
+<p ref="{{setQuote}}" class="author-text-3">If you run the system inside your organisation, I would like to hear what happened. What worked, what got adopted, and what you think is missing.</p>
+<div ref="{{setMailRow}}" class="author-box-7"><a data-goatcounter-click="email-author" href="mailto:andreas@knownbeforebuilt.com" ref="{{fxRef}}" data-fx="link" class="author-link">andreas@knownbeforebuilt.com</a></div>
 </div>
-<div ref="{{setWays}}" style="display: flex; flex-direction: column; gap: 18px">
-<h3 style="margin: 0; font: 700 12px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.2em; text-transform: uppercase">Other ways to work with the book</h3>
-<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px">
-<div style="border-top: 1px solid rgba(17,17,17,0.3); padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font: 800 17px/1.25 Archivo, sans-serif">Buying for a team</h3><p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif; color: #3F3B37; margin-bottom: 6px">Bulk and corporate orders.</p><a href="mailto:andreas@knownbeforebuilt.com?subject=Bulk%20order" ref="{{fxRef}}" data-fx="link" style="align-self: flex-start; font: 600 15px/1.4 'Hanken Grotesk', sans-serif">Ask about bulk orders <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
-<div style="border-top: 1px solid rgba(17,17,17,0.3); padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font: 800 17px/1.25 Archivo, sans-serif">Teaching with it</h3><p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif; color: #3F3B37; margin-bottom: 6px">Inspection copies for faculty using the book in a course.</p><a href="mailto:andreas@knownbeforebuilt.com?subject=Faculty%20copy" ref="{{fxRef}}" data-fx="link" style="align-self: flex-start; font: 600 15px/1.4 'Hanken Grotesk', sans-serif">Request a faculty copy <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
-<div style="border-top: 1px solid rgba(17,17,17,0.3); padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font: 800 17px/1.25 Archivo, sans-serif">Speaking &amp; advisory</h3><p style="margin: 0; font: 400 15px/1.45 'Hanken Grotesk', sans-serif; color: #3F3B37">Talks, workshops and advisory on running the Product Decision System.<br></p><a href="mailto:andreas@knownbeforebuilt.com?subject=Speaking%20and%20advisory" ref="{{fxRef}}" data-fx="link" style="align-self: flex-start; font: 600 15px/1.4 'Hanken Grotesk', sans-serif">Ask about availability <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
-<a data-goatcounter-click="signal-card" href="prelaunch.html?from=signal-card" ref="{{fxRef}}" data-fx="card" style="position: relative; margin-top: -26px; align-self: start; box-sizing: border-box; border: 1.5px solid #111111; background: #F6F4F2; box-shadow: 7px 7px 0 #F57106; padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: #111111">
-<span style="font: 700 11px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75">Free · No sign-up</span>
-<span style="font: 900 30px/1 Archivo, sans-serif; letter-spacing: -0.02em">Try Signal</span>
-<span style="font: 400 15px/1.45 'Hanken Grotesk', sans-serif">A seven-question intake tool that turns what colleagues notice into scored input.</span>
-<span style="display: flex; align-items: center; gap: 8px; margin-top: 4px; font: 600 15px/1 'Hanken Grotesk', sans-serif; text-decoration: underline; text-decoration-color: #F57106; text-decoration-thickness: 2px; text-underline-offset: 5px">Open Signal <span aria-hidden="true" data-fx-arrow="right">→</span></span>
+<div ref="{{setWays}}" class="author-box-8">
+<h3 class="author-heading">Other ways to work with the book</h3>
+<div class="author-box-9">
+<div class="author-box-10"><h3 class="author-heading-2">Buying for a team</h3><p class="author-text-4">Bulk and corporate orders.</p><a href="mailto:andreas@knownbeforebuilt.com?subject=Bulk%20order" ref="{{fxRef}}" data-fx="link" class="author-link-2">Ask about bulk orders <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
+<div class="author-box-10"><h3 class="author-heading-2">Teaching with it</h3><p class="author-text-4">Inspection copies for faculty using the book in a course.</p><a href="mailto:andreas@knownbeforebuilt.com?subject=Faculty%20copy" ref="{{fxRef}}" data-fx="link" class="author-link-2">Request a faculty copy <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
+<div class="author-box-10"><h3 class="author-heading-2">Speaking &amp; advisory</h3><p class="author-text-5">Talks, workshops and advisory on running the Product Decision System.<br></p><a href="mailto:andreas@knownbeforebuilt.com?subject=Speaking%20and%20advisory" ref="{{fxRef}}" data-fx="link" class="author-link-2">Ask about availability <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
+<a data-goatcounter-click="signal-card" href="prelaunch.html?from=signal-card" ref="{{fxRef}}" data-fx="card" class="author-link-3">
+<span class="author-label">Free · No sign-up</span>
+<span class="author-label-2">Try Signal</span>
+<span class="author-label-3">A seven-question intake tool that turns what colleagues notice into scored input.</span>
+<span class="author-label-4">Open Signal <span aria-hidden="true" data-fx-arrow="right">→</span></span>
 </a>
 </div>
 </div>
 </div>
 
-<footer style="position: absolute; left: 80px; top: 1240px; width: 1280px; height: 60px; border-top: 1px solid rgba(17,17,17,0.25); display: flex; align-items: center; justify-content: space-between; font: 400 14px/1 'Hanken Grotesk', sans-serif">
-<span style="display: flex; align-items: center; gap: 7px; color: #3F3B37">Built with <svg width="16" height="15" viewBox="0 0 24 22" role="img" aria-label="love" style="display: block"><path d="M12 21.5 C 5 16.2 1 12.4 1 7.4 C 1 3.8 3.7 1 7.1 1 C 9.2 1 10.9 2 12 3.7 C 13.1 2 14.8 1 16.9 1 C 20.3 1 23 3.8 23 7.4 C 23 12.4 19 16.2 12 21.5 Z" fill="#F57106"></path></svg> by Andreas Mitschke</span>
-<div style="display: flex; gap: 28px"><a href="grant-and-bear-publishing/" ref="{{fxRef}}" data-fx="nav" style="text-decoration: none">Grant &amp; Bear Publishing</a><a href="impressum.html" ref="{{fxRef}}" data-fx="nav" style="text-decoration: none">Impressum</a><a href="privacy.html" ref="{{fxRef}}" data-fx="nav" style="text-decoration: none">Privacy</a></div>
+<footer class="footer-footer">
+<span class="footer-label">Built with <svg width="16" height="15" viewBox="0 0 24 22" role="img" aria-label="love" class="system-svg-3"><path d="M12 21.5 C 5 16.2 1 12.4 1 7.4 C 1 3.8 3.7 1 7.1 1 C 9.2 1 10.9 2 12 3.7 C 13.1 2 14.8 1 16.9 1 C 20.3 1 23 3.8 23 7.4 C 23 12.4 19 16.2 12 21.5 Z" fill="#F57106"></path></svg> by Andreas Mitschke</span>
+<div class="footer-box"><a href="grant-and-bear-publishing/" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Grant &amp; Bear Publishing</a><a href="impressum.html" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Impressum</a><a href="privacy.html" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Privacy</a></div>
 </footer>
 </section>
 </div>
 </template>
 
-<script>
-!function(n){"function"==typeof define&&define.amd?define(n):n()}(function(){var n,t,e,i,r,o,f,u,c,a,s,h,l,p,y,d,v,_="http://www.w3.org/2000/svg",w="http://www.w3.org/1999/xhtml",m=null,g=void 0,b={},k=[],x=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i,C=Array.isArray;function M(n,t){for(var e in t)n[e]=t[e];return n}function S(n){n&&n.parentNode&&n.parentNode.removeChild(n)}function $(t,e,i){var r,o,f,u={};for(f in e)"key"==f?r=e[f]:"ref"==f?o=e[f]:u[f]=e[f];if(arguments.length>2&&(u.children=arguments.length>3?n.call(arguments,2):i),"function"==typeof t&&t.defaultProps!=m)for(f in t.defaultProps)u[f]===g&&(u[f]=t.defaultProps[f]);return A(t,u,r,o,m)}function A(n,i,r,o,f){var u={type:n,props:i,key:r,ref:o,__k:m,__:m,__b:0,__e:m,__c:m,constructor:g,__v:f==m?++e:f,__i:-1,__u:0};return f==m&&t.vnode!=m&&t.vnode(u),u}function I(n){return n.children}function P(n,t){this.props=n,this.context=t}function E(n,t){if(t==m)return n.__?E(n.__,n.__i+1):m;for(var e;t<n.__k.length;t++)if((e=n.__k[t])!=m&&e.__e!=m)return e.__e;return"function"==typeof n.type?E(n):m}function F(n){if(n.__P&&n.__d){var e=n.__v,i=e.__e,r=[],o=[],f=M({},e);f.__v=e.__v+1,t.vnode&&t.vnode(f),B(n.__P,f,e,n.__n,n.__P.namespaceURI,32&e.__u?[i]:m,r,i==m?E(e):i,!!(32&e.__u),o),f.__v=e.__v,f.__.__k[f.__i]=f,G(r,f,o),e.__e=e.__=null,f.__e!=i&&H(f)}}function H(n){if((n=n.__)!=m&&n.__c!=m)return n.__e=n.__c.base=m,n.__k.some(function(t){if(t!=m&&t.__e!=m)return n.__e=n.__c.base=t.__e}),H(n)}function L(n){(!n.__d&&(n.__d=!0)&&r.push(n)&&!T.__r++||o!=t.debounceRendering)&&((o=t.debounceRendering)||f)(T)}function T(){try{for(var n,t=1;r.length;)r.length>t&&r.sort(u),n=r.shift(),t=r.length,F(n)}finally{r.length=T.__r=0}}function j(n,t,e,i,r,o,f,u,c,a,s){var h,l,p,y,d,v,_=i&&i.__k||k,w=t.length;for(c=O(e,t,_,c,w),h=0;h<w;h++)(p=e.__k[h])!=m&&(l=-1!=p.__i&&_[p.__i]||b,p.__i=h,v=B(n,p,l,r,o,f,u,c,a,s),y=p.__e,p.ref&&l.ref!=p.ref&&(l.ref&&Q(l.ref,m,p),s.push(p.ref,p.__c||y,p)),d==m&&y!=m&&(d=y),4&p.__u?(c=V(p,c,n),l.__e&&(l.__e=m)):"function"==typeof p.type&&v!==g?c=v:y&&(c=y.nextSibling),p.__u&=-7);return e.__e=d,c}function O(n,t,e,i,r){var o,f,u,c,a,s=e.length,h=s,l=0;for(n.__k=new Array(r),o=0;o<r;o++)(f=t[o])!=m&&"boolean"!=typeof f&&"function"!=typeof f?("string"==typeof f||"number"==typeof f||"bigint"==typeof f||f.constructor==String?f=n.__k[o]=A(m,f,m,m,m):C(f)?f=n.__k[o]=A(I,{children:f},m,m,m):f.constructor===g&&f.__b>0?f=n.__k[o]=A(f.type,f.props,f.key,f.ref?f.ref:m,f.__v):n.__k[o]=f,c=o+l,f.__=n,f.__b=n.__b+1,a=f.__i=z(f,e,c,h),u=m,-1!=a&&(h--,(u=e[a])&&(u.__u|=2)),u==m||u.__v==m?(-1==a&&(r>s?l--:r<s&&l++),"function"!=typeof f.type&&(f.__u|=4)):a!=c&&(a==c-1?l--:a==c+1?l++:(a>c?l--:l++,f.__u|=4))):n.__k[o]=m;if(h)for(o=0;o<s;o++)(u=e[o])!=m&&0==(2&u.__u)&&(u.__e==i&&(i=E(u)),U(u,u));return i}function V(n,t,e){var i,r;if("function"==typeof n.type){for(i=n.__k,r=0;i&&r<i.length;r++)i[r]&&(i[r].__=n,t=V(i[r],t,e));return t}n.__e!=t&&(t&&n.type&&!t.parentNode&&(t=E(n)),t=e.insertBefore(n.__e,t||m));do{t=t&&t.nextSibling}while(t!=m&&8==t.nodeType);return t}function z(n,t,e,i){var r,o,f,u=n.key,c=n.type,a=t[e],s=a!=m&&0==(2&a.__u);if(a===m&&null==u||s&&u==a.key&&c==a.type)return e;if(i>(s?1:0))for(r=e-1,o=e+1;r>=0||o<t.length;)if((a=t[f=r>=0?r--:o++])!=m&&0==(2&a.__u)&&u==a.key&&c==a.type)return f;return-1}function N(n,t,e){"-"==t[0]?n.setProperty(t,e==m?"":e):n[t]=e==m?"":"number"!=typeof e||x.test(t)?e:e+"px"}function R(n,t,e,i,r){var o,f;n:if("style"==t)if("string"==typeof e)n.style.cssText=e;else{if("string"==typeof i&&(n.style.cssText=i=""),i)for(t in i)e&&t in e||N(n.style,t,"");if(e)for(t in e)i&&e[t]==i[t]||N(n.style,t,e[t])}else if("o"==t[0]&&"n"==t[1])o=t!=(t=t.replace(h,"$1")),f=t.toLowerCase(),t=f in n||"onFocusOut"==t||"onFocusIn"==t?f.slice(2):t.slice(2),n.l||(n.l={}),n.l[t+o]=e,e?i?e[s]=i[s]:(e[s]=l,n.addEventListener(t,o?y:p,o)):n.removeEventListener(t,o?y:p,o);else{if(r==_)t=t.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!=t&&"height"!=t&&"href"!=t&&"list"!=t&&"form"!=t&&"tabIndex"!=t&&"download"!=t&&"rowSpan"!=t&&"colSpan"!=t&&"role"!=t&&"popover"!=t&&t in n)try{n[t]=e==m?"":e;break n}catch(n){}"function"==typeof e||(e==m||!1===e&&"-"!=t[4]?n.removeAttribute(t):n.setAttribute(t,"popover"==t&&1==e?"":e))}}function q(n){return function(e){if(this.l){var i=this.l[e.type+n];if(e[a]==m)e[a]=l++;else if(e[a]<i[s])return;return i(t.event?t.event(e):e)}}}function B(n,e,i,r,o,f,u,c,a,s){var h,l,p,y,d,v,_,w,b,x,$,A,F,H,L,T,O=e.type;if(e.constructor!==g)return m;128&i.__u&&(a=!!(32&i.__u),f=[c=e.__e=i.__e]),(h=t.__b)&&h(e);n:if("function"==typeof O){l=u.length;try{if(b=e.props,x=O.prototype&&O.prototype.render,$=(h=O.contextType)&&r[h.__c],A=h?$?$.props.value:h.__:r,i.__c?w=(p=e.__c=i.__c).__=p.__E:(x?e.__c=p=new O(b,A):(e.__c=p=new P(b,A),p.constructor=O,p.render=W),$&&$.sub(p),p.state||(p.state={}),p.__n=r,y=p.__d=!0,p.__h=[],p._sb=[]),x&&p.__s==m&&(p.__s=p.state),x&&O.getDerivedStateFromProps!=m&&(p.__s==p.state&&(p.__s=M({},p.__s)),M(p.__s,O.getDerivedStateFromProps(b,p.__s))),d=p.props,v=p.state,p.__v=e,y)x&&O.getDerivedStateFromProps==m&&p.componentWillMount!=m&&p.componentWillMount(),x&&p.componentDidMount!=m&&p.__h.push(p.componentDidMount);else{if(x&&O.getDerivedStateFromProps==m&&b!==d&&p.componentWillReceiveProps!=m&&p.componentWillReceiveProps(b,A),e.__v==i.__v||!p.__e&&p.shouldComponentUpdate!=m&&!1===p.shouldComponentUpdate(b,p.__s,A)){e.__v!=i.__v&&(p.props=b,p.state=p.__s,p.__d=!1),e.__e=i.__e,e.__k=i.__k,e.__k.some(function(n){n&&(n.__=e)}),k.push.apply(p.__h,p._sb),p._sb=[],p.__h.length&&u.push(p),c=E(i);break n}p.componentWillUpdate!=m&&p.componentWillUpdate(b,p.__s,A),x&&p.componentDidUpdate!=m&&p.__h.push(function(){p.componentDidUpdate(d,v,_)})}if(p.context=A,p.props=b,p.__P=n,p.__e=!1,F=t.__r,H=0,x)p.state=p.__s,p.__d=!1,F&&F(e),h=p.render(p.props,p.state,p.context),k.push.apply(p.__h,p._sb),p._sb=[];else do{p.__d=!1,F&&F(e),h=p.render(p.props,p.state,p.context),p.state=p.__s}while(p.__d&&++H<25);p.state=p.__s,p.getChildContext!=m&&(r=M(M({},r),p.getChildContext())),x&&!y&&p.getSnapshotBeforeUpdate!=m&&(_=p.getSnapshotBeforeUpdate(d,v)),L=h!=m&&h.type===I&&h.key==m?J(h.props.children):h,c=j(n,C(L)?L:[L],e,i,r,o,f,u,c,a,s),p.base=e.__e,e.__u&=-161,p.__h.length&&u.push(p),w&&(p.__E=p.__=m)}catch(n){if(u.length=l,e.__v=m,a||f!=m){if(n.then){for(e.__u|=a?160:128;c&&8==c.nodeType&&c.nextSibling;)c=c.nextSibling;f!=m&&(f[f.indexOf(c)]=m),e.__e=c}else if(f!=m)for(T=f.length;T--;)S(f[T])}else e.__e=i.__e;e.__k==m&&(e.__k=i.__k||[]),n.then||D(e),t.__e(n,e,i)}}else f==m&&e.__v==i.__v?(e.__k=i.__k,e.__e=i.__e):c=e.__e=K(i.__e,e,i,r,o,f,u,a,s);return(h=t.diffed)&&h(e),128&e.__u?void 0:c}function D(n){n&&(n.__c&&(n.__c.__e=!0),n.__k&&n.__k.some(D))}function G(n,e,i){for(var r=0;r<i.length;r++)Q(i[r],i[++r],i[++r]);t.__c&&t.__c(e,n),n.some(function(e){try{n=e.__h,e.__h=[],n.some(function(n){n.call(e)})}catch(n){t.__e(n,e.__v)}})}function J(n){return"object"!=typeof n||n==m||n.__b>0?n:C(n)?n.map(J):n.constructor!==g?null:M({},n)}function K(e,i,r,o,f,u,c,a,s){var h,l,p,y,d,v,k,x=r.props||b,M=i.props,$=i.type;if("svg"==$?f=_:"math"==$?f="http://www.w3.org/1998/Math/MathML":f||(f=w),u!=m)for(h=0;h<u.length;h++)if((d=u[h])&&"setAttribute"in d==!!$&&($?d.localName==$:3==d.nodeType)){e=d,u[h]=m;break}if(e==m){if($==m)return document.createTextNode(M);e=document.createElementNS(f,$,M.is&&M),a&&(t.__m&&t.__m(i,u),a=!1),u=m}if($==m)x===M||a&&e.data==M||(e.data=M);else{if(u="textarea"==$&&M.defaultValue!=m?m:u&&n.call(e.childNodes),!a&&u!=m)for(x={},h=0;h<e.attributes.length;h++)x[(d=e.attributes[h]).name]=d.value;for(h in x)d=x[h],"dangerouslySetInnerHTML"==h?p=d:"children"==h||h in M||"value"==h&&"defaultValue"in M||"checked"==h&&"defaultChecked"in M||R(e,h,m,d,f);for(h in M)d=M[h],"children"==h?y=d:"dangerouslySetInnerHTML"==h?l=d:"value"==h?v=d:"checked"==h?k=d:a&&"function"!=typeof d||x[h]===d||R(e,h,d,x[h],f);if(l)a||p&&(l.__html==p.__html||l.__html==e.innerHTML)||(e.innerHTML=l.__html),i.__k=[];else if(p&&(e.innerHTML=""),j("template"==i.type?e.content:e,C(y)?y:[y],i,r,o,"foreignObject"==$?w:f,u,c,u?u[0]:r.__k&&E(r,0),a,s),u!=m)for(h=u.length;h--;)S(u[h]);a&&"textarea"!=$||(h="value","progress"==$&&v==m?e.removeAttribute("value"):v!=g&&(v!==e[h]||"progress"==$&&!v||"option"==$&&v!=x[h])&&R(e,h,v,x[h],f),h="checked",k!=g&&k!=e[h]&&R(e,h,k,x[h],f))}return e}function Q(n,e,i){try{if("function"==typeof n){var r="function"==typeof n.__u;r&&n.__u(),r&&e==m||(n.__u=n(e))}else n.current=e}catch(n){t.__e(n,i)}}function U(n,e,i){var r,o;if(t.unmount&&t.unmount(n),(r=n.ref)&&(r.current&&r.current!=n.__e||Q(r,m,e)),(r=n.__c)!=m){if(r.componentWillUnmount)try{r.componentWillUnmount()}catch(n){t.__e(n,e)}r.base=r.__P=r.__n=m}if(r=n.__k)for(o=0;o<r.length;o++)r[o]&&U(r[o],e,i||"function"!=typeof n.type);i||S(n.__e),n.__c=n.__=n.__e=g}function W(n,t,e){return this.constructor(n,e)}function X(e,i,r){var o,f,u,c;i==document&&(i=document.documentElement),t.__&&t.__(e,i),f=(o="function"==typeof r)?m:r&&r.__k||i.__k,u=[],c=[],B(i,e=(!o&&r||i).__k=$(I,m,[e]),f||b,b,i.namespaceURI,!o&&r?[r]:f?m:i.firstChild?n.call(i.childNodes):m,u,!o&&r?r:f?f.__e:i.firstChild,o,c),G(u,e,c),e.props.children=m}n=k.slice,t={__e:function(n,t,e,i){for(var r,o,f;t=t.__;)if((r=t.__c)&&!r.__)try{if((o=r.constructor)&&o.getDerivedStateFromError!=m&&(r.setState(o.getDerivedStateFromError(n)),f=r.__d),r.componentDidCatch!=m&&(r.componentDidCatch(n,i||{}),f=r.__d),f)return r.__E=r}catch(t){n=t}throw n}},e=0,i=function(n){return n!=m&&n.constructor===g},P.prototype.setState=function(n,t){var e;e=this.__s!=m&&this.__s!=this.state?this.__s:this.__s=M({},this.state),"function"==typeof n&&(n=n(M({},e),this.props)),n&&M(e,n),n!=m&&this.__v&&(t&&this._sb.push(t),L(this))},P.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),L(this))},P.prototype.render=I,r=[],f="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,u=function(n,t){return n.__v.__b-t.__v.__b},T.__r=0,c=Math.random().toString(8),a="__d"+c,s="__a"+c,h=/(PointerCapture)$|Capture$/i,l=0,p=q(!1),y=q(!0),d=0,v={__proto__:null,render:X,hydrate:function n(t,e){X(t,e,n)},createElement:$,h:$,Fragment:I,createRef:function(){return{current:m}},isValidElement:i,Component:P,cloneElement:function(t,e,i){var r,o,f,u,c=M({},t.props);for(f in t.type&&t.type.defaultProps&&(u=t.type.defaultProps),e)"key"==f?r=e[f]:"ref"==f?o=e[f]:c[f]=e[f]===g&&u!=g?u[f]:e[f];return arguments.length>2&&(c.children=arguments.length>3?n.call(arguments,2):i),A(t.type,c,r||t.key,o||t.ref,m)},createContext:function(n){function t(n){var e,i;return this.getChildContext||(e=new Set,(i={})[t.__c]=this,this.getChildContext=function(){return i},this.componentWillUnmount=function(){e=m},this.shouldComponentUpdate=function(n){this.props.value!=n.value&&e.forEach(function(n){n.__e=!0,L(n)})},this.sub=function(n){e.add(n);var t=n.componentWillUnmount;n.componentWillUnmount=function(){e&&e.delete(n),t&&t.call(n)}}),n.children}return t.__c="__cC"+d++,t.__=n,t.Provider=t.__l=(t.Consumer=function(n,t){return n.children(t)}).contextType=t,t},toChildArray:function n(t,e){return e=e||[],t==m||"boolean"==typeof t||(C(t)?t.some(function(t){n(t,e)}):e.push(t)),e},options:t},typeof module<"u"?module.exports=v:self.preact=v});
-//# sourceMappingURL=preact.min.umd.js.map
+<script src="js/vendor/preact.min.js"></script>
+<script src="js/runtime.js"></script>
+<script src="js/main.js"></script>
+<script src="js/main2.js"></script>
+<script src="js/boot.js"></script>
 
-</script>
-<script>
-/*
- * kbb-runtime — renders the Design canvas artboards (.dc.html) as a normal web page.
- * Templates use {{holes}}, <sc-if>, <sc-for>, ref / on* handlers; logic classes extend DCLogic.
- * Rendering is done with Preact (React-compatible, MIT).
- */
-(function () {
-  'use strict';
-  var P = window.preact, h = P.h, Fragment = P.Fragment;
-  var HOLE = /\{\{\s*([^}]*?)\s*\}\}/g;
-  var WHOLE = /^\s*\{\{\s*([^}]*?)\s*\}\}\s*$/;
-
-  function lookup(expr, scopes) {
-    if (expr === 'true') return true;
-    if (expr === 'false') return false;
-    if (expr === 'null') return null;
-    if (expr === 'undefined' || expr === '') return undefined;
-    if (/^-?\d+(\.\d+)?$/.test(expr)) return parseFloat(expr);
-    var q = expr.match(/^(['"])(.*)\1$/); if (q) return q[2];
-    var parts = expr.split('.'), head = parts[0], v;
-    for (var i = 0; i < scopes.length; i++) { if (scopes[i] && head in scopes[i]) { v = scopes[i][head]; break; } }
-    for (var j = 1; j < parts.length && v != null; j++) v = v[parts[j]];
-    return v;
-  }
-  function interp(str, scopes) {
-    return str.replace(HOLE, function (_, e) { var v = lookup(e, scopes); return v == null ? '' : String(v); });
-  }
-
-  function build(node, scopes) {
-    if (node.nodeType === 3) {
-      var t = node.nodeValue; return t.indexOf('{{') < 0 ? t : interp(t, scopes);
-    }
-    if (node.nodeType !== 1) return null;
-    var tag = node.localName;
-    if (tag === 'helmet') return null;
-    if (tag === 'sc-if') {
-      var cond = lookup((node.getAttribute('value') || '').replace(WHOLE, '$1'), scopes);
-      return cond ? h(Fragment, null, kids(node, scopes)) : null;
-    }
-    if (tag === 'sc-for') {
-      var list = lookup((node.getAttribute('list') || '').replace(WHOLE, '$1'), scopes) || [];
-      var as = node.getAttribute('as') || 'item';
-      return h(Fragment, null, list.map(function (item, idx) {
-        var sc = {}; sc[as] = item; sc.$index = idx;
-        return h(Fragment, { key: idx }, kids(node, [sc].concat(scopes)));
-      }));
-    }
-    var props = {};
-    for (var a = 0; a < node.attributes.length; a++) {
-      var at = node.attributes[a], name = at.name, val = at.value;
-      if (name.indexOf('hint-') === 0) continue;
-      var m = val.match(WHOLE);
-      var v = m ? lookup(m[1], scopes) : (val.indexOf('{{') >= 0 ? interp(val, scopes) : val);
-      if (name === 'ref') { if (typeof v === 'function') props.ref = v; continue; }
-      if (v === false || v == null) { if (/^on/.test(name)) continue; if (v == null) continue; }
-      props[name] = v;
-    }
-    return h(tag, props, kids(node, scopes));
-  }
-  function kids(node, scopes) {
-    var out = [];
-    for (var c = node.firstChild; c; c = c.nextSibling) { var r = build(c, scopes); if (r !== null && r !== undefined) out.push(r); }
-    return out;
-  }
-
-  function DCLogic(props) { P.Component.call(this, props); this.state = this.state || {}; }
-  DCLogic.prototype = Object.create(P.Component.prototype);
-  DCLogic.prototype.constructor = DCLogic;
-  DCLogic.prototype.render = function () {
-    var vals = this.renderVals ? this.renderVals() : {};
-    return h(Fragment, null, kids(this.constructor.__tpl, [vals]));
-  };
-  window.DCLogic = DCLogic;
-
-  window.kbbMount = function (Cls, tplId, mountEl, props) {
-    var tpl = document.getElementById(tplId);
-    Cls.__tpl = tpl.content;
-    P.render(h(Cls, props || {}), mountEl);
-  };
-})();
-
-</script>
-<script>
-(window.KBB = window.KBB || {})["main"] = (function () {
-class Component extends DCLogic {
-  constructor(props) {
-    super(props);
-    if (!window.__kbAnchor) { window.__kbAnchor = true;
-      document.addEventListener('click', (e) => {
-        const a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null; if (!a) return;
-        const id = a.getAttribute('href').slice(1); if (!id) return; const el = document.getElementById(id); if (!el) return;
-        e.preventDefault();
-        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const y0 = window.scrollY || document.documentElement.scrollTop; const y1 = y0 + el.getBoundingClientRect().top;
-        const dist = Math.abs(y1 - y0); if (reduce || dist < 2) { window.scrollTo(0, y1); return; }
-        const D = Math.min(2200, 1000 + dist * 0.35); const t0 = performance.now();
-        const ease = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-        let stop = false; const cancel = () => { stop = true; };
-        window.addEventListener('wheel', cancel, { once: true, passive: true }); window.addEventListener('touchstart', cancel, { once: true, passive: true });
-        const step = (n) => { if (stop) return; const k = Math.min(1, (n - t0) / D); window.scrollTo(0, y0 + (y1 - y0) * ease(k)); if (k < 1) requestAnimationFrame(step); else { try { history.replaceState(null, '', '#' + id); } catch (_) {} try { el.focus({ preventScroll: true }); } catch (_) {} } };
-        requestAnimationFrame(step);
-      });
-    }
-    this.fxRef = (el) => this.fxAttach(el);
-    this.state = { glOk: false };
-    this.ctxs = []; this.raf = 0; this.t0 = performance.now();
-    this.cvMain = null; this.cvBranch = null;
-    this.diamond = null;
-    this.parts = { items: [] };
-    this.setParts = (el) => { if (!el || el === this.parts.el) return; this.parts.el = el;
-      this.parts.items = Array.from(el.children).map((s, i) => ({ s, html: s.innerHTML, len: Math.max(1, s.textContent.length), ph: i * 1.7 + Math.random() * 3, next: 1 + Math.random() * 6, start: -9, lastSwap: 0 })); };
-    this.berg = { y: 0, v: 0, lastY: null };
-    this.setBerg = (el) => { this.berg.el = el; }; this.setBergTip = (el) => { this.berg.tip = el; };
-    this.berg.x = 0; this.berg.vx = 0; this.berg.drag = null; this.berg.mx = 0; this.berg.my = 0; this.berg.magW = 1; this.berg.dropT = -1e9;
-    this.bergPtr = null;
-    this.bergPM = (e) => { if (e.pointerType && e.pointerType !== 'mouse') return; this.bergPtr = { x: e.clientX, y: e.clientY }; };
-    document.addEventListener('pointermove', this.bergPM, { passive: true }); document.addEventListener('mousemove', this.bergPM, { passive: true });
-    this.bergDown = (e) => { const B = this.berg; if (e.button !== undefined && e.button !== 0) return; e.preventDefault();
-      const r = e.currentTarget.getBoundingClientRect(); B.sc = (r.width / 640) || 1;
-      B.drag = { x0: e.clientX, y0: e.clientY, id: e.pointerId, tx: 0, ty: 0, t0: performance.now(), moved: 0, type: e.pointerType };
-      document.documentElement.classList.add('kbgrabbing');
-      try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {} };
-    this.bergMove = (e) => { const B = this.berg; if (!B.drag || e.pointerId !== B.drag.id) return;
-      const rub = (d) => d * 0.55 / (1 + Math.abs(d) / 260);
-      const ddx = (e.clientX - B.drag.x0) / B.sc, ddy = (e.clientY - B.drag.y0) / B.sc; B.drag.moved = Math.max(B.drag.moved, Math.hypot(ddx, ddy));
-      B.drag.tx = rub(ddx); B.drag.ty = rub(ddy); };
-    this.bergUp = (e) => { const B = this.berg; if (!B.drag) return;
-      const tap = e && e.type !== 'pointercancel' && B.drag.moved < 8 && performance.now() - B.drag.t0 < 350;
-      if (tap) { B.v += 260; B.vx += (Math.random() - 0.5) * 120; }
-      B.drag = null; B.dropT = performance.now(); B.magW = 0; B.mx = 0; B.my = 0; document.documentElement.classList.remove('kbgrabbing'); };
-    this.bk = { cur: { ry: 26, rx: 4, lift: 0 }, tgt: { ry: 26, rx: 4, lift: 0 }, turn: 0, mode: 'idle', vel: 0, drag: null, raf: 0, rt: 0 };
-    this.setStage = (el) => { this.bk.stage = el; }; this.setBook3 = (el) => { this.bk.book = el; if (el) this.bRender(); }; this.setBShadow = (el) => { this.bk.shadow = el; };
-    this.bDown = (e) => { const B = this.bk; if (e.button !== undefined && e.button !== 0) return; if (e.pointerType === 'mouse') e.preventDefault();
-      clearTimeout(B.rt); B.mode = 'drag'; B.vel = 0; B.drag = { x: e.clientX, y: e.clientY, t: performance.now(), id: e.pointerId, type: e.pointerType };
-      try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {}
-      if (B.stage) { B.stage.classList.add('dragging'); B.stage.classList.add('touched'); } B.tgt.lift = 18; this.bKick(); };
-    this.bMove = (e) => { const B = this.bk; if (B.mode !== 'drag' || !B.drag || e.pointerId !== B.drag.id) return;
-      const now = performance.now(), dx = e.clientX - B.drag.x, dy = e.clientY - B.drag.y, dt = Math.max(1, now - B.drag.t);
-      B.tgt.ry += dx * 0.55; if (B.drag.type !== 'touch') B.tgt.rx = Math.max(-28, Math.min(28, B.tgt.rx - dy * 0.3));
-      B.vel = B.vel * 0.5 + (dx * 0.55) / dt * 16 * 0.5; B.drag.x = e.clientX; B.drag.y = e.clientY; B.drag.t = now; this.bKick(); };
-    this.bUp = (e) => { const B = this.bk; if (B.mode !== 'drag' || !B.drag || (e && e.pointerId !== B.drag.id)) return;
-      if (B.stage) B.stage.classList.remove('dragging'); B.drag = null; B.tgt.lift = 0;
-      if (!this.isStill() && Math.abs(B.vel) > 0.3) B.mode = 'inertia'; else { B.mode = 'rest'; this.bReturn(); } this.bKick(); };
-    this.bKey = (e) => { const B = this.bk; const step = { ArrowLeft: -20, ArrowRight: 20 }[e.key]; if (step === undefined) return;
-      e.preventDefault(); clearTimeout(B.rt); B.mode = 'rest'; B.tgt.ry += step; this.bKick(); this.bReturn(); };
-    this.bNear = (e) => { const B = this.bk; if (B.mode !== 'idle' || !B.stage || this.isStill()) return;
-      const r = B.stage.getBoundingClientRect(); const sc = r.width / 300 || 1; const R = 520 * sc;
-      const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2), d = Math.hypot(dx, dy);
-      let p = Math.max(0, 1 - d / R); p = p * p * (3 - 2 * p);
-      const nx = Math.max(-1, Math.min(1, dx / R)), ny = Math.max(-1, Math.min(1, dy / R));
-      B.tgt.ry = B.turn + 26 - p * 20 + nx * 16 * p; B.tgt.rx = 4 - ny * 10 * p; B.tgt.lift = p * 28; this.bKick(); };
-    this.bFar = () => { const B = this.bk; if (B.mode !== 'idle') return; B.tgt.ry = B.turn + 26; B.tgt.rx = 4; B.tgt.lift = 0; this.bKick(); };
-    this.mouse = null;
-    this.onMove = (e) => { const cv = this.cvMain; if (!cv) return; const r = cv.getBoundingClientRect(); if (!r.width) return;
-      this.mouse = { x: (e.clientX - r.left) / r.width * 1440, y: (e.clientY - r.top) / r.height * 620 }; };
-    this.onLeave = () => { this.mouse = null; };
-    this.sys = { nodes: {} }; this.setOutLine = (el) => { this.sys.outLine = el; }; this.setSpark = (el) => { this.sys.spark = el; }; this.setMotes = (el) => { this.sys.motes = el; }; this.setSparkCore = (el) => { this.sys.sparkCore = el; }; this.setBuild = (el) => { this.sys.build = el; }; this.glowLv = { AV: 0, G1: 0, P: 0, INV: 0 }; this.curCyc = -1; this.routeLen = 0;
-    const S = this.sys;
-    this.setRoute = (el) => { S.route = el; }; this.setTrail = (el) => { S.trail = el; }; this.setTrailGlow = (el) => { S.trailGlow = el; };
-    this.setHead = (el) => { S.head = el; }; this.setHeadGlow = (el) => { S.headGlow = el; };
-    this.setNAV = (el) => { S.nodes.AV = el; }; this.setNG1 = (el) => { S.nodes.G1 = el; }; this.setNP = (el) => { S.nodes.P = el; }; this.setNINV = (el) => { S.nodes.INV = el; };
-    this.setDiamond = (el) => { this.diamond = el; };
-    this.setCanvas = (el) => { if (el && el !== this.cvMain) { this.cvMain = el; this.addGL(el, 1440, 620, this.mainFS(), true); } };
-    this.waves = {};
-    this.setW1 = (el) => { this.waves.w1 = el; };
-    this.setW2 = (el) => { this.waves.w2 = el; };
-    this.setW3 = (el) => { this.waves.w3 = el; };
-    this.setW4 = (el) => { this.waves.w4 = el; };
-    this.setBerg2 = (el) => { this.berg2 = el; };
-    this.fsg = { els: [], hov: 0, hovT: 0, off: 0, boff: 0, last: 0 };
-    this.setFS = (el) => { if (!el) return; const k = +el.getAttribute('data-k'); this.fsg.els[k] = el;
-      const host = el.parentNode && el.parentNode.parentNode; if (host && !host.__fs) { host.__fs = 1; host.style.cursor = 'default';
-        host.addEventListener('mouseenter', () => { this.fsg.hovT = 1; }); host.addEventListener('mouseleave', () => { this.fsg.hovT = 0; }); } };
-    this.setBergDash = (el) => { this.fsg.bd = el; };
-    this.wt0 = 0; this.wraf = 0;
-  }
-  componentDidMount() { this.wt0 = performance.now(); this.waveFrame(this.wt0); this.tiltInit(); }
-  tiltInit() {
-    const B = this.berg; B.tilt = 0; B.tiltY = 0;
-    this.tiltH = (e) => {
-      if (e.gamma == null) return;
-      const ang = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
-      let g = e.gamma, b = (e.beta || 0) - 40;
-      if (ang === 90) { g = -(e.beta || 0); b = e.gamma; } else if (ang === -90 || ang === 270) { g = e.beta || 0; b = -e.gamma; }
-      B.tilt = Math.max(-1, Math.min(1, g / 30)); B.tiltY = Math.max(-1, Math.min(1, b / 40));
-    };
-    const start = () => { window.addEventListener('deviceorientation', this.tiltH); };
-    const DOE = window.DeviceOrientationEvent;
-    if (DOE && typeof DOE.requestPermission === 'function') {
-      const ask = () => { document.removeEventListener('touchend', ask); DOE.requestPermission().then((r) => { if (r === 'granted') start(); }).catch(() => {}); };
-      document.addEventListener('touchend', ask, { once: true });
-    } else if (DOE) start();
-  }
-  componentWillUnmount() { if (this.visIO) this.visIO.disconnect(); if (this.bergPM) { document.removeEventListener('pointermove', this.bergPM); document.removeEventListener('mousemove', this.bergPM); } if (this.fxDoc) { document.removeEventListener('pointermove', this.fxDoc); document.removeEventListener('mousemove', this.fxDoc); } if (this.tiltH) window.removeEventListener('deviceorientation', this.tiltH); cancelAnimationFrame(this.raf); this.raf = 0; cancelAnimationFrame(this.wraf); this.wraf = 0; }
-  componentDidUpdate() { if (this.ctxs.length && !this.raf) this.frame(performance.now()); if (!this.wraf) this.waveFrame(performance.now()); }
-  isStill() {
-    return (this.props.motion ?? true) === false ||
-      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  }
-  wavePath(y0, a1, l1, s1, a2, l2, s2, t, W) {
-    let d = ''; const WW = W || 1440;
-    for (let x = 0; x <= WW; x += 8) {
-      const y = y0 + a1 * Math.sin((x / l1) * 6.2832 - t * s1) + a2 * Math.sin((x / l2) * 6.2832 - t * s2 + 1.3);
-      d += (x === 0 ? 'M' : ' L') + x + ' ' + y.toFixed(2);
-    }
-    return d;
-  }
-  fsStep(now, t, still) {
-    const G = this.fsg; if (!G) return;
-    const dt = Math.min(0.05, Math.max(0, (now - (G.last || now)) / 1000)); G.last = now;
-    G.hov += (G.hovT - G.hov) * Math.min(1, dt * 4);
-    if (!still) { G.off += dt * (5 + 9 * G.hov); G.boff += dt * 22 * G.hov; }
-    // travelling pulse every 6.5s (faster loop while hovered): Failures stopped -> F_s -> p·d·C_b -> iceberg hull
-    const per = 6.5 - 3 * G.hov; G.ph = ((G.ph || 0) + dt / per) % 1; const ph = still ? -1 : G.ph * per;
-    const pulse = (i) => { const d = (ph - 0.35 - i * 0.38) / 0.2; return Math.exp(-d * d); };
-    G.els.forEach((el, i) => { if (!el) return;
-      const g = Math.max(pulse(i), 0.35 * G.hov);
-      el.setAttribute('stroke-dashoffset', (-G.off).toFixed(2));
-      el.setAttribute('stroke-width', (2 + 1.3 * g).toFixed(2));
-      el.style.filter = g > 0.03 ? 'drop-shadow(0 0 ' + (5 * g).toFixed(1) + 'px rgba(245,113,6,' + (0.85 * g).toFixed(2) + '))' : 'none'; });
-    if (G.bd) { const g = Math.max(pulse(2), 0.4 * G.hov);
-      G.bd.setAttribute('stroke-dashoffset', (-G.boff).toFixed(2));
-      G.bd.setAttribute('stroke-width', (4 + 2.5 * g).toFixed(2));
-      G.bd.style.filter = g > 0.03 ? 'drop-shadow(0 0 ' + (4 * g).toFixed(1) + 'px rgba(245,113,6,' + (0.8 * g).toFixed(2) + '))' : 'none'; }
-  }
-  onScreen(el) {
-    if (!window.KB_SITE || !el || !('IntersectionObserver' in window)) return true;
-    const V = this.visMap || (this.visMap = new WeakMap());
-    if (!this.visIO) this.visIO = new IntersectionObserver((es) => {
-      let any = false; for (const e of es) { V.set(e.target, e.isIntersecting); if (e.isIntersecting) any = true; }
-      if (any) { if (this.ctxs.length && !this.raf) this.frame(performance.now()); if (!this.wraf) this.waveFrame(performance.now()); }
-    }, { rootMargin: '300px 0px' });
-    if (!V.has(el)) { V.set(el, true); this.visIO.observe(el); }
-    return V.get(el);
-  }
-  waveFrame(now) {
-    const still = this.isStill();
-    const t = still ? 0 : (now - this.wt0) / 1000;
-    const W = this.waves;
-    const vHero = this.onScreen(W.w1), vMath = this.onScreen(this.parts.el), vBerg = this.onScreen(this.berg.el), vPds = this.onScreen(W.w2);
-    if (!(vHero || vMath || vBerg || vPds)) { this.wraf = 0; return; }
-    if (vMath) this.fsStep(now, t, still);
-    if (W.w1 && vHero) W.w1.setAttribute('d', this.wavePath(15, 4.5, 820, 0.55, 2.2, 430, 0.8, t));
-    if (W.w2 && vPds) { W.w2.setAttribute('d', this.wavePath(20, 8, 900, 0.32, 3, 520, 0.22, t)); W.w2.setAttribute('stroke-dashoffset', (-t * 6).toFixed(1)); }
-    if (W.w3 && vPds) { W.w3.setAttribute('d', this.wavePath(20, 8, 1000, 0.26, 3, 610, 0.18, t + 7)); W.w3.setAttribute('stroke-dashoffset', (-t * 5).toFixed(1)); }
-    const P = this.parts;
-    if (P.items.length && vMath) {
-      const pool = '∑∫∂πΔ≈±×÷√∞λσμθ∈∀∃≠≤≥01·−';
-      for (const it of P.items) {
-        const s = it.s; const ph = it.ph;
-        const dx = still ? 0 : 10 * Math.sin(t * 0.22 + ph), dy = still ? 0 : 12 * Math.cos(t * 0.17 + ph * 1.3), rot = still ? 0 : 8 * Math.sin(t * 0.13 + ph * 0.7);
-        s.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg)';
-        if (still) continue;
-        if (t > it.next) { it.start = t; it.next = t + 5 + Math.random() * 9; }
-        const age = t - it.start;
-        if (age >= 0 && age < 0.9) {
-          if (t - it.lastSwap > 0.07) { it.lastSwap = t; let str = ''; const keep = Math.floor(it.len * (age / 0.9));
-            const plain = s.dataset.plain || (s.dataset.plain = s.textContent);
-            for (let k = 0; k < it.len; k++) str += k < keep ? plain[k] : pool[Math.floor(Math.random() * pool.length)];
-            s.textContent = str; }
-        } else if (s.dataset.plain) { s.innerHTML = it.html; delete s.dataset.plain; }
-      }
-    }
-    if (W.w4 && vMath) W.w4.setAttribute('d', this.wavePath(6, 2.6, 300, 0.6, 1.2, 170, 0.9, t + 3, 440));
-    if (this.berg2 && vMath) {
-      const b2 = still ? 0 : 3 * Math.sin(t * 0.95 + 2) + 1.1 * Math.sin(t * 2.3);
-      const r2 = still ? 0 : 0.7 * Math.sin(t * 0.55 + 1.1);
-      this.berg2.style.transform = 'translateY(' + b2.toFixed(2) + 'px) rotate(' + r2.toFixed(3) + 'deg)';
-    }
-    const Bg = this.berg;
-    if (Bg.el && vBerg) {
-      const now2 = performance.now(); const dt = Math.min(0.033, Math.max(0.001, (now2 - (Bg.last || now2)) / 1000)); Bg.last = now2;
-      Bg.tl = (Bg.tl || 0) + (((still ? 0 : Bg.tilt || 0)) - (Bg.tl || 0)) * Math.min(1, dt * 1.6);
-      Bg.tlY = (Bg.tlY || 0) + (((still ? 0 : Bg.tiltY || 0)) - (Bg.tlY || 0)) * Math.min(1, dt * 1.6);
-      let mtx = 0, mty = 0;
-      if (!Bg.drag && !still && this.bergPtr) {
-        const r = Bg.el.getBoundingClientRect(); const sc = (r.width / 640) || 1;
-        const cx = r.left + r.width / 2 - Bg.x * sc, cy = r.top + r.height * 0.42 - Bg.y * sc;
-        const dx = (this.bergPtr.x - cx) / sc, dy = (this.bergPtr.y - cy) / sc; const d = Math.hypot(dx, dy);
-        let p = Math.max(0, 1 - d / 520); p = p * p * (3 - 2 * p);
-        mtx = Math.max(-22, Math.min(22, dx * 0.06)) * p; mty = Math.max(-14, Math.min(14, dy * 0.04)) * p;
-      }
-      if (!Bg.drag && now2 - Bg.dropT > 1500) Bg.magW = Math.min(1, Bg.magW + dt / 1.2);
-      Bg.mx += (mtx * Bg.magW - Bg.mx) * Math.min(1, dt * 1.3); Bg.my += (mty * Bg.magW - Bg.my) * Math.min(1, dt * 1.3);
-      const tx = Bg.drag ? Bg.drag.tx : Bg.tl * 46 + Bg.mx, ty = Bg.drag ? Bg.drag.ty : Bg.tlY * 10 + Bg.my;
-      const k = Bg.drag ? 60 : 38, c = Bg.drag ? 11 : 2.6;
-      Bg.vx += ((tx - Bg.x) * k - Bg.vx * c) * dt; Bg.v += ((ty - Bg.y) * k - Bg.v * c) * dt;
-      Bg.x += Bg.vx * dt; Bg.y += Bg.v * dt;
-      const bob = still ? 0 : 4 * Math.sin(t * 0.9) + 1.5 * Math.sin(t * 2.1 + 1);
-      const sway = still ? 0 : 0.5 * Math.sin(t * 0.6 + 0.4);
-      const rot = sway + Math.max(-6, Math.min(6, Bg.x * 0.03 + Bg.vx * 0.006));
-      const tr = 'translate(' + Bg.x.toFixed(2) + 'px,' + (bob + Bg.y).toFixed(2) + 'px) rotate(' + rot.toFixed(3) + 'deg)';
-      Bg.el.style.transform = tr;
-      if (Bg.tip) Bg.tip.style.transform = 'translate(' + Bg.x.toFixed(2) + 'px,' + (bob + Bg.y).toFixed(2) + 'px)';
-    }
-    this.wraf = still ? 0 : requestAnimationFrame((n) => this.waveFrame(n));
-  }
-  common() {
-    return `precision highp float;uniform vec2 R;uniform float T;uniform vec4 G;uniform vec4 F;
-vec2 h2(vec2 p){p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));return -1.+2.*fract(sin(p)*43758.5453);}
-float hs(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
-float nz(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(dot(h2(i),f),dot(h2(i+vec2(1.,0.)),f-vec2(1.,0.)),u.x),mix(dot(h2(i+vec2(0.,1.)),f-vec2(0.,1.)),dot(h2(i+vec2(1.,1.)),f-vec2(1.,1.)),u.x),u.y);}
-float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*nz(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
-float seg(vec2 p,vec2 a,vec2 b){vec2 pa=p-a,ba=b-a;float h=clamp(dot(pa,ba)/dot(ba,ba),0.,1.);return length(pa-ba*h);}
-const vec3 ORANGE=vec3(.961,.443,.024),HOT=vec3(1.,.72,.40),WHITE=vec3(1.,.98,.95),SILVER=vec3(.86,.89,.94);
-`;
-  }
-  mainFS() {
-    return this.common() + `
-float cyf(float u){return 403.+7.*sin(u*.0045+T*.35)+4.*sin(u*.011-T*.6);}
-float smin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}
-vec2 bz(float t){float s=1.-t;return s*s*s*vec2(262.,406.)+3.*s*s*t*vec2(190.,392.)+3.*s*t*t*vec2(110.,292.)+t*t*t*vec2(135.,122.);}
-vec2 bp(float t){return bz(t)+vec2(5.*sin(t*8.-T*1.1)*sin(t*3.1416),0.);}
-void main(){
- float u=gl_FragCoord.x/R.x*1440.; float v=(R.y-gl_FragCoord.y)/R.y*620.; vec2 P=vec2(u,v);
- float cy=cyf(u);
- float best=1e5; float bt=0.;
- if(u<340.&&v<440.){vec2 prev=bp(0.);
-  for(int i=1;i<=22;i++){float t=float(i)/22.;vec2 p=bp(t);vec2 pa=P-prev,ba=p-prev;float hh=clamp(dot(pa,ba)/dot(ba,ba),0.,1.);
-   float dd=length(pa-ba*hh);if(dd<best){best=dd;bt=(float(i)-1.+hh)/22.;}prev=p;}}
- float ip=fract(T*.16); float ipe=smoothstep(0.,.1,ip)*smoothstep(1.,.85,ip);
- float bw=mix(9.,3.5,bt)+16.*exp(-bt*10.)+5.*exp(-pow((bt-ip)/.05,2.))*ipe+1.2*sin(bt*18.-T*2.4);
- float into=smoothstep(.78,1.,bt);
- bw+=into*3.;
- float Db=best-bw;
- float h=14.+5.*fbm(vec2(u*.004-T*.2,T*.07));
- for(int k=0;k<3;k++){float fk=float(k);float pos=mod(T*(55.+20.*fk)+fk*560.,1760.)-160.;h+=(4.+2.*fk)*exp(-pow((u-pos)/(60.+12.*fk),2.));}
- float idea=0.;
- for(int k=0;k<2;k++){float fk=float(k);float per=24.+9.*fk;float ph=mod(T+fk*13.,per)/per;float pos=-120.+ph*1700.;
-  float env=smoothstep(0.,.08,ph)*smoothstep(1.,.9,ph);idea+=exp(-pow((u-pos)/40.,2.))*env*(1.+.12*sin(T*3.+fk*2.));}
- h+=15.*idea;
- float Ds=abs(v-cy)-h; float D=smin(Ds,Db,30.); D=smin(D,length((P-vec2(250.,cyf(250.)))*vec2(.45,1.))-15.,26.); float bhl=0.;
- for(int i=0;i<5;i++){float fi=float(i);float per=5.+1.7*fi;float life=3.2+.6*fi;float cyc=floor((T+fi*2.3)/per);float age=mod(T+fi*2.3,per);
-  if(age<life){float a=age/life;float x=hs(vec2(fi,cyc))*1300.+70.+55.*age;float side=hs(vec2(cyc,fi+4.))>.5?1.:-1.;
-   float r=11.*sin(3.1416*min(a*1.3,1.))*(1.-a*.45);float off=16.+a*40.;vec2 c=vec2(x,cyf(x)+side*off);
-   if(r>.4){D=smin(D,length(P-c)-r,9.);vec2 hl=c+vec2(-.3,-.35)*r;bhl+=exp(-dot(P-hl,P-hl)/(.07*r*r+.4));}}}
- if(G.w>.01){vec2 GA=vec2(G.z,cyf(G.z));vec2 GB=G.xy;vec2 pa=P-GA,ba=GB-GA;float bl=max(dot(ba,ba),1e-3);float hh=clamp(dot(pa,ba)/bl,0.,1.);
-  float st=clamp(sqrt(bl)/190.,0.,1.);float rr=mix(30.,13.,pow(hh,.55))*(1.-.25*st)*G.w;
-  D=smin(D,length((P-GA)*vec2(.55,1.))-16.*G.w,24.);D=smin(D,length(pa-ba*hh)-rr,26.);D=smin(D,length(P-GB)-(17.+2.*sin(T*4.))*G.w,14.);}
- if(F.z>.5){D=smin(D,length(P-F.xy)-F.z,26.);}
- if(D>120.&&abs(v-cy)>95.&&length(P-vec2(135.,120.))>90.){gl_FragColor=vec4(0.);return;}
- float fadeTip=1.-into*.75*step(Db,Ds);
- float m=smoothstep(1.4,-1.4,D)*fadeTip; float ms=smoothstep(1.2,-1.2,Ds); float mb=smoothstep(1.2,-1.2,Db)*(1.-ms);
- float hl2=mix(h,bw,mb);
- float dn=clamp(-D/hl2,0.,1.); float depth=sqrt(dn*(2.-dn));
- float s=clamp((v-cy)/h,-1.3,1.3);
- vec2 q=vec2(u*.006,s*1.1);
- vec2 wq=vec2(fbm(q*1.3+vec2(T*.14,-T*.06)),fbm(q*1.1+vec2(-T*.1,T*.08)));
- vec2 cq=mix(vec2(u*.013-T*.7,s*2.),vec2(bt*16.-T*2.2,best*.25),mb);
- vec3 cau;
- cau.r=pow(1.-abs(nz(cq+1.4*wq+vec2(.03,0.))),16.);
- cau.g=pow(1.-abs(nz(cq+1.4*wq)),16.);
- cau.b=pow(1.-abs(nz(cq+1.4*wq-vec2(.03,0.))),16.);
- cau*=m*(.35+.65*smoothstep(.0,.3,nz(vec2(u*.004,T*.35))));
- vec3 tint=mix(ORANGE,HOT,depth*.5);
- float ab=m*(.24+.26*depth);
- float gloss=ms*exp(-pow((s+.62)/.16,2.))*(.55+.45*nz(vec2(u*.012-T*.9,1.)));
- float refl=ms*exp(-pow((s-.7)/.14,2.))*.35;
- float rim=m*(1.-depth)*.3;
- float ly=cy+1.5*sin(u*.021-T*2.6); float fl=.7+.3*nz(vec2(u*.03-T*7.,T*.5));
- float lc=exp(-pow((v-ly)/1.1,2.))*fl*ms; float lb=exp(-abs(v-ly)/7.)*.75*fl*ms;
- float flb=.7+.3*nz(vec2(bt*30.-T*6.,1.));
- lc+=exp(-best*best/.5)*flb*(1.-into)*(1.-ms); lb+=exp(-best/4.5)*.55*flb*(1.-ms)*(1.-into*.6);
- float og=exp(-max(D,0.)/18.)*(1.-m)*.55;
- float halo=exp(-max(D,0.)/42.)*(1.-m)*.2;
- float E=idea*exp(-pow((v-cy)/(h*.55),2.))*(.8+.2*sin(T*4.));
- E+=exp(-pow((bt-ip)/.05,2.))*ipe*exp(-best*best/(bw*bw*.3))*(1.-ms);
- vec2 dc=(P-vec2(135.,120.))*vec2(1.,1.6); float arrive=exp(-pow((ip-.97)/.04,2.));
- float melt=exp(-dot(dc,dc)/(260.+320.*arrive))*(.10+.22*arrive);
- vec3 C=tint*ab; float A=ab;
- C+=SILVER*(cau*.9); A+=max(cau.r,max(cau.g,cau.b))*.7;
- C+=WHITE*gloss*.9; A+=gloss*.8;
- C+=HOT*refl; A+=refl*.6;
- C+=ORANGE*rim; A+=rim*.8;
- C+=WHITE*bhl*.9*m; A+=bhl*.8*m;
- C+=vec3(1.,.62,.22)*lb; A+=lb*.8;
- C+=WHITE*lc; A+=lc;
- C+=mix(HOT,WHITE,.4)*E*.9; A+=E*.7;
- C+=vec3(1.,.6,.25)*og; A+=og;
- C+=vec3(1.,.55,.18)*halo; A+=halo;
- C+=vec3(1.,.66,.32)*melt; A+=melt*.9;
- vec2 gp=vec2((u-T*55.)/18.,v/18.); vec2 cl=floor(gp); vec2 f=fract(gp)-.5;
- float r0=hs(cl); vec2 o=(vec2(hs(cl+3.1),hs(cl+7.3))-.5)*.6; vec2 dp=(f-o)*18.;
- float tw=pow(max(0.,sin(T*2.6+r0*60.)),10.)*step(.84,r0);
- float star=exp(-dot(dp,dp)/1.2)+.45*(exp(-abs(dp.x)/.4)*exp(-abs(dp.y)/5.)+exp(-abs(dp.y)/.4)*exp(-abs(dp.x)/5.));
- float glint=tw*star*smoothstep(4.,-2.,D);
- C+=SILVER*glint*1.2; A+=glint;
- float sk=0.;
- for(int L=0;L<2;L++){for(int n=-2;n<=1;n++){
-  float cw=90.;float c=floor(u/cw)+float(n);float key=c+float(L)*97.;
-  float r1=hs(vec2(key,1.)),r2=hs(vec2(key,2.)),r3=hs(vec2(key,3.));
-  float per=4.+5.*r1;float age=mod(T+r2*per,per);float lf=.7+.5*r3;
-  if(age<lf&&r3>.45){float x0=c*cw+cw*r2;vec2 vel=vec2(70.+110.*r3,(r1-.5)*120.);
-   vec2 p0=vec2(x0,cyf(x0))+vel*age+vec2(0.,40.*age*age*sign(vel.y));vec2 p1=p0-vel*.07;float b=pow(1.-age/lf,2.);
-   float dd=seg(P,p1,p0);sk+=b*(exp(-dd*dd/.9)+.35*exp(-dd/3.));}}}
- C+=vec3(1.,.86,.62)*sk; A+=sk;
- A=clamp(A,0.,1.); C=min(C,vec3(A));
- gl_FragColor=vec4(C,A);}`;
-  }
-  addGL(cv, w, h, fs, isMain) {
-    const dpr = window.KB_SITE ? 1 : Math.min(window.devicePixelRatio || 1, 2);   // website: one canvas pixel per CSS pixel (4× fewer than retina), sharp enough for the laser core
-    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
-    const gl = cv.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false });
-    if (!gl) return;
-    const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
-    const a = sh(gl.VERTEX_SHADER, vs), b = sh(gl.FRAGMENT_SHADER, fs);
-    if (!a || !b) return;
-    const pr = gl.createProgram(); gl.attachShader(pr, a); gl.attachShader(pr, b); gl.linkProgram(pr);
-    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
-    gl.useProgram(pr);
-    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    gl.viewport(0, 0, cv.width, cv.height);
-    this.ctxs.push({ gl, cv, uR: gl.getUniformLocation(pr, 'R'), uT: gl.getUniformLocation(pr, 'T'), uG: gl.getUniformLocation(pr, 'G'), uF: gl.getUniformLocation(pr, 'F') });
-    if (isMain) this.setState({ glOk: true });
-    if (!this.raf) this.frame(performance.now());
-  }
-  moteStart(t) {
-    const S = this.sys; if (!S.motes) return;
-    const cols = ['#FFF6EC', '#FFD2A0', '#FFB36B', '#F57106', '#E6EAF2'];
-    this.motes = { t0: t, ps: Array.from(S.motes.children).map((el, i) => {
-      el.setAttribute('fill', cols[i % cols.length]);
-      const x0 = i < 8 ? 1240 + Math.random() * 12 : 1248 + Math.random() * 96;
-      return { el, x0, y0: 352 + (Math.random() - 0.5) * 10, delay: (i / 34) * 1.0 + Math.random() * 0.2, rise: 45 + Math.pow(Math.random(), 0.9) * 70, sway: 4 + Math.random() * 9, ph: Math.random() * 6.28, r: 0.8 + Math.random() * 1.6, life: 1.8 + Math.random() * 1.2 };
-    }) };
-  }
-  moteStep(t) {
-    const M = this.motes; if (!M) return; const age = t - M.t0; let live = false;
-    for (const q of M.ps) {
-      const a = age - q.delay; if (a < 0) { q.el.setAttribute('opacity', '0'); live = true; continue; }
-      const k = a / q.life; if (k >= 1) { q.el.setAttribute('opacity', '0'); continue; } live = true;
-      const e = 1 - Math.pow(1 - k, 2);
-      const x = q.x0 + Math.sin(a * 3 + q.ph) * q.sway * k, y = q.y0 - q.rise * e;
-      const fade = Math.min(1, k / 0.12) * (1 - k);
-      q.el.setAttribute('cx', x.toFixed(1)); q.el.setAttribute('cy', y.toFixed(1));
-      q.el.setAttribute('r', (q.r * (1 - 0.4 * k)).toFixed(2)); q.el.setAttribute('opacity', (fade * (0.65 + 0.35 * Math.sin(a * 14 + q.ph))).toFixed(3));
-    }
-    if (!live) this.motes = null;
-  }
-  sparkStart(x, y, t) {
-    const S = this.sys; if (!S.spark) return;
-    const cols = ['#FFF6EC', '#FFB36B', '#F57106', '#DDE4F0'];
-    this.sparks = { t0: t, x, y, ps: Array.from(S.spark.children).map((el, i) => {
-      const ang = Math.random() * Math.PI * 2, sp = 18 + Math.pow(Math.random(), 1.6) * 52;
-      el.setAttribute('fill', cols[i % cols.length]);
-      return { el, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp * 0.7 - 12, r: 0.9 + Math.random() * 1.7, life: 1.1 + Math.random() * 0.8, tw: Math.random() * 6.28 };
-    }) };
-  }
-  sparkStep(t) {
-    const P = this.sparks; if (!P) return; const age = t - P.t0; let live = false;
-    for (const q of P.ps) {
-      const k = age / q.life; if (k >= 1) { q.el.setAttribute('opacity', '0'); continue; } live = true;
-      const d = 1 - Math.exp(-age * 1.8);
-      const x = P.x + q.vx * d * 1.1, y = P.y + q.vy * d * 1.1 + 9 * age * age;
-      const tw = 0.6 + 0.4 * Math.sin(age * 20 + q.tw);
-      q.el.setAttribute('cx', x.toFixed(1)); q.el.setAttribute('cy', y.toFixed(1));
-      q.el.setAttribute('r', (q.r * (1 - k * 0.6)).toFixed(2)); q.el.setAttribute('opacity', ((1 - k) * tw).toFixed(3));
-    }
-    if (this.sys.sparkCore) { const c = Math.max(0, 1 - age / 0.6); this.sys.sparkCore.setAttribute('cx', P.x.toFixed(1)); this.sys.sparkCore.setAttribute('cy', P.y.toFixed(1)); this.sys.sparkCore.setAttribute('r', (3 + 9 * (1 - c)).toFixed(1)); this.sys.sparkCore.setAttribute('opacity', (0.8 * c).toFixed(3)); }
-    if (!live && age > 0.7) this.sparks = null;
-  }
-  systemLight(t, still) {
-    const S = this.sys; if (!S.route || !S.head) return;
-    const H = 'M135 352 L340 352 L545 352', FWD = ' L750 352 L1045 352';
-    const G1AV = ' L530 388 A 85 72 0 0 1 360 390 L340 352 L545 352';
-    const G2P = ' L1010 388 A 120 80 0 0 1 770 390 L750 352 L1045 352';
-    const G2AV = ' L1070 388 A 375 185 0 0 1 320 390 L340 352 L545 352 L750 352 L1045 352';
-    const OUT = ' L1200 352 L1246 352';
-    const routes = [
-      { d: H + FWD + OUT, w: 0.6, win: true },
-      { d: H + G1AV + FWD + OUT, w: 0.9, win: true },
-      { d: H + FWD + G2P + OUT, w: 0.9, win: true },
-      { d: H + FWD + G2AV + OUT, w: 0.6, win: true },
-      { d: H, w: 1.5 },
-      { d: H + FWD, w: 1.5 },
-      { d: H + G1AV, w: 1.2 },
-      { d: H + G1AV + FWD, w: 1.4 },
-      { d: H + FWD + G2P, w: 1.4 }
-    ];
-    const V = 340, EXIT = 46, EXD = 1.1;
-    if (this.runT0 === undefined || t - this.runT0 > this.runDur) {
-      let r = Math.random(); let first = false;
-      if (!this.pdsSeen) {
-        const sv = S.route.ownerSVGElement; const rc = sv ? sv.getBoundingClientRect() : null; const vh = window.innerHeight || 800;
-        const inView = !rc || (rc.top + rc.height * 0.4 < vh && rc.top + rc.height * 0.7 > 0);
-        if (inView) { this.pdsSeen = true; first = true; }
-        else { this.runT0 = t; this.runDur = 0.4; this.routeLen = 0; return; }
-      }
-      const tot = routes.reduce((q, x) => q + x.w, 0); let acc = 0, pick = routes[0];
-      for (const x of routes) { acc += x.w / tot; if (r <= acc) { pick = x; break; } }
-      if (first) pick = routes[1];
-      for (const el of [S.route, S.trail, S.trailGlow]) if (el) el.setAttribute('d', pick.d);
-      this.routeLen = S.route.getTotalLength ? S.route.getTotalLength() : 0;
-      this.routeWin = !!pick.win; this.winHit = false; this.stopHit = false; this.runT0 = t;
-      this.runDur = (this.routeWin ? (this.routeLen - EXIT) / V + EXD + 1.4 : this.routeLen / V + 1.6);
-    }
-    const since = t - this.runT0;
-    const len = this.routeLen; if (!len) return;
-    let Ls;
-    if (still) Ls = -1;
-    else if (this.routeWin) { const t1 = (len - EXIT) / V; if (since <= t1) Ls = since * V; else { const k = Math.min(1, (since - t1) / EXD); Ls = len - EXIT + EXIT * (1 - Math.pow(1 - k, 2)) + (since - t1 > EXD ? (since - t1 - EXD) * 400 : 0); } }
-    else Ls = since * V;
-    const tail = 120;
-    let a = Ls < 0 ? 0 : Math.min(1, Ls / 30) * Math.max(0, Math.min(1, (len - Ls) / (this.routeWin ? 16 : 70) + 0.001));
-    if (Ls > len) a = 0;
-    const L = Math.max(0, Math.min(Ls, len));
-    const p = S.route.getPointAtLength(L);
-    const boxes = { AV: [230, 450], G1: [480, 610], P: [640, 860], INV: [890, 1200] };
-    let inside = false;
-    for (const k in boxes) {
-      const b = boxes[k]; const hit = a > 0 && p.y > 318 && p.y < 386 && p.x > b[0] && p.x < b[1];
-      if (hit) inside = true;
-      this.glowLv[k] = Math.max(this.glowLv[k] * 0.955, hit ? 1 : 0);
-      const n = S.nodes[k]; const g = this.glowLv[k];
-      if (n) {
-        n.style.boxShadow = g > 0.02 ? '0 0 ' + (6 + 20 * g).toFixed(1) + 'px rgba(245,113,6,' + (0.6 * g).toFixed(3) + ')' : 'none';
-        if (k === 'AV' || k === 'P') n.style.borderColor = g > 0.05 ? 'rgb(' + Math.round(17 + 200 * g) + ',' + Math.round(17 + 80 * g) + ',17)' : '#111111';
-      }
-    }
-    if (this.routeWin && !this.winHit && Ls >= len - 3 && Ls < len + 200) { this.winHit = true; this.winT = t; this.moteStart(t); }
-    this.moteStep(t);
-    if (!this.routeWin && !this.stopHit && Ls >= len && Ls < len + 200) { this.stopHit = true; const q = S.route.getPointAtLength(len); this.sparkStart(q.x, q.y, t); }
-    this.sparkStep(t);
-    const wg = this.winT !== undefined ? Math.max(0, (t - this.winT) < 0.25 ? (t - this.winT) / 0.25 : Math.exp(-(t - this.winT - 0.25) / 1.4)) : 0;
-    const exitLv = p.x > 1195 && a > 0 ? a : 0; const og = Math.max(wg, exitLv);
-    if (S.build) {
-      const c = (a0, b0) => Math.round(a0 + (b0 - a0) * wg);
-      S.build.style.color = 'rgb(' + c(111, 17) + ',' + c(106, 17) + ',' + c(100, 17) + ')';
-      S.build.style.textShadow = wg > 0.02 ? '0 0 ' + (4 + 14 * wg).toFixed(1) + 'px rgba(245,113,6,' + (0.7 * wg).toFixed(3) + ')' : 'none';
-    }
-    if (S.outLine) {
-      S.outLine.style.borderTopColor = og > 0.05 ? 'rgb(' + Math.round(142 + 103 * og) + ',' + Math.round(137 - 24 * og) + ',' + Math.round(132 - 126 * og) + ')' : '#8E8984';
-      S.outLine.style.boxShadow = og > 0.05 ? '0 0 ' + (8 * og).toFixed(1) + 'px rgba(245,113,6,' + (0.6 * og).toFixed(3) + ')' : 'none';
-    }
-    S.head.setAttribute('cx', p.x.toFixed(1)); S.head.setAttribute('cy', p.y.toFixed(1)); S.head.setAttribute('opacity', (a * (inside ? 0 : 1)).toFixed(3));
-    if (S.headGlow) { S.headGlow.setAttribute('cx', p.x.toFixed(1)); S.headGlow.setAttribute('cy', p.y.toFixed(1)); S.headGlow.setAttribute('opacity', (a * (inside ? 0.2 : 0.9)).toFixed(3)); }
-    const segLen = Math.min(tail, L);
-    for (const el of [S.trail, S.trailGlow]) {
-      if (!el) continue;
-      el.setAttribute('stroke-dasharray', segLen.toFixed(1) + ' 100000');
-      el.setAttribute('stroke-dashoffset', (-(L - segLen)).toFixed(1));
-      el.setAttribute('opacity', (a * (el === S.trail ? 0.95 : 0.55)).toFixed(3));
-    }
-  }
-  gooStep(t) {
-    const now = performance.now(); const dt = Math.min(0.033, Math.max(0.001, (now - (this.gLast || now)) / 1000)); this.gLast = now;
-    const cyf = (x) => 403 + 7 * Math.sin(x * 0.0045 + t * 0.35) + 4 * Math.sin(x * 0.011 - t * 0.6);
-    const G = this.goo || (this.goo = { px: 0, py: 0, vx: 0, vy: 0, ax: 0, grab: false, s: 0 });
-    const m = this.mouse;
-    if (m && !G.grab && Math.abs(m.y - cyf(m.x)) < 26 && m.x > 20 && m.x < 1420) {
-      G.grab = true; G.ax = m.x; if (G.s < 0.05) { G.px = m.x; G.py = cyf(m.x); G.vx = 0; G.vy = 0; }
-    }
-    if (G.grab) {
-      if (!m) G.grab = false;
-      else {
-        G.ax += (m.x - G.ax) * Math.min(1, dt * 0.3);
-        const ay = cyf(G.ax);
-        if (Math.hypot(G.px - G.ax, G.py - ay) > 190) {
-          G.grab = false;
-          const dl = Math.hypot(G.px - G.ax, G.py - ay) || 1;
-          this.ball = { x: G.px, y: G.py, vx: G.vx * 0.3 + (G.px - G.ax) / dl * 38, vy: G.vy * 0.3 + (G.py - ay) / dl * 38, r0: 18, r: 18, age: 0, life: 4.5, back: Math.random() < 0.5, merge: 0 };
-          G.px = G.ax + (G.px - G.ax) * 0.4; G.py = ay + (G.py - ay) * 0.4; G.vx *= -0.3; G.vy *= -0.3;
-        }
-      }
-    }
-    const tx = G.grab ? m.x : G.ax, ty = G.grab ? m.y : cyf(G.ax);
-    const k = G.grab ? 13 : 18, c = G.grab ? 7 : 3.2;
-    G.vx += ((tx - G.px) * k - G.vx * c) * dt; G.vy += ((ty - G.py) * k - G.vy * c) * dt;
-    G.px += G.vx * dt; G.py += G.vy * dt;
-    const away = Math.hypot(G.px - G.ax, G.py - cyf(G.ax)); const speed = Math.hypot(G.vx, G.vy);
-    const target = G.grab || away > 2 || speed > 15 ? 1 : 0;
-    G.s += (target - G.s) * Math.min(1, dt * 4);
-    const B = this.ball;
-    if (B) {
-      B.age += dt; const dr = Math.exp(-dt * 2.4); B.vx *= dr; B.vy *= dr;
-      const dy = cyf(B.x) - B.y; const g = B.back ? 2.2 : 0.35;
-      B.vy += dy * g * dt; B.vx += 8 * dt;
-      B.x += B.vx * dt; B.y += B.vy * dt;
-      if (B.back) {
-        if (Math.abs(dy) < 16) B.merge += dt;
-        B.r = B.r0 * Math.max(0, 1 - B.merge / 0.9);
-        if (B.merge > 0.9 || B.age > 12) this.ball = null;
-      } else {
-        const f = Math.max(0, 1 - B.age / B.life); B.r = B.r0 * Math.pow(f, 0.5);
-        if (B.age > B.life) this.ball = null;
-      }
-    }
-    return G;
-  }
-  bKick() { if (!this.bk.raf) this.bk.raf = requestAnimationFrame(() => this.bTick()); }
-  bReturn() { const B = this.bk; clearTimeout(B.rt);
-    B.rt = setTimeout(() => { B.turn = 360 * Math.round((B.cur.ry - 26) / 360); B.tgt.ry = 26 + B.turn; B.tgt.rx = 4; B.tgt.lift = 0; B.mode = 'idle'; this.bKick(); }, 2600); }
-  bTick() { const B = this.bk; B.raf = 0;
-    if (B.mode === 'inertia') { B.tgt.ry += B.vel; B.vel *= 0.94; if (Math.abs(B.vel) < 0.05) { B.mode = 'rest'; this.bReturn(); } }
-    const k = (B.mode === 'drag' || B.mode === 'inertia') ? 0.35 : 0.09; let moving = false;
-    for (const key in B.tgt) { B.cur[key] += (B.tgt[key] - B.cur[key]) * k; if (Math.abs(B.tgt[key] - B.cur[key]) > 0.01) moving = true; }
-    this.bRender();
-    if (moving || B.mode === 'inertia') B.raf = requestAnimationFrame(() => this.bTick()); }
-  bRender() { const B = this.bk, el = B.book; if (!el) return; const c = B.cur;
-    el.style.setProperty('--ry', c.ry.toFixed(2) + 'deg'); el.style.setProperty('--rx', c.rx.toFixed(2) + 'deg'); el.style.setProperty('--lift', c.lift.toFixed(1) + 'px');
-    const Lr = -10 * Math.PI / 180, a = c.ry * Math.PI / 180;
-    const sh = (off) => (0.34 * (1 - Math.max(-1, Math.min(1, Math.cos(a + off * Math.PI / 180 - Lr))))).toFixed(3);
-    el.style.setProperty('--sh-front', sh(0)); el.style.setProperty('--sh-spine', sh(-90)); el.style.setProperty('--sh-fore', sh(90)); el.style.setProperty('--sh-back', sh(180));
-    const rel = ((c.ry - 26) % 360 + 540) % 360 - 180;
-    el.style.setProperty('--sheen', Math.max(-40, Math.min(110, 30 + rel * 1.4)).toFixed(1) + '%');
-    if (B.shadow) { const l = c.lift / 28; B.shadow.style.setProperty('--ss', (1 + l * 0.12).toFixed(3)); B.shadow.style.setProperty('--so', (0.85 - l * 0.3).toFixed(3)); B.shadow.style.setProperty('--sx', (-Math.max(-60, Math.min(60, rel)) * 0.5).toFixed(1) + 'px'); } }
-  frame(now) {
-    if (this.cvMain && !this.onScreen(this.cvMain)) { this.raf = 0; return; }   // website: stream sleeps off-screen
-    if (window.KB_SITE && this.lastGL && now - this.lastGL < 30) { this.raf = requestAnimationFrame((n) => this.frame(n)); return; }   // website: ~30 fps is plenty for the slow stream
-    this.lastGL = now;
-    const still = this.isStill();
-    const t = still ? 12.0 : (now - this.t0) / 1000 + 12.0;
-    for (const c of this.ctxs) {
-      c.gl.clearColor(0, 0, 0, 0); c.gl.clear(c.gl.COLOR_BUFFER_BIT);
-      c.gl.uniform2f(c.uR, c.cv.width, c.cv.height); c.gl.uniform1f(c.uT, t);
-      if (c.uG) { const G = still ? { px: 0, py: 0, ax: 0, s: 0 } : this.gooStep(t); c.gl.uniform4f(c.uG, G.px, G.py, G.ax, G.s);
-        const B = still ? null : this.ball; c.gl.uniform4f(c.uF, B ? B.x : 0, B ? B.y : 0, B ? B.r : 0, 1); }
-      c.gl.drawArrays(c.gl.TRIANGLES, 0, 6);
-    }
-    if (this.diamond) {
-      const ip = (t * 0.16) % 1; let dd = Math.abs(ip - 0.985); dd = Math.min(dd, 1 - dd);
-      const k = Math.exp(-Math.pow(dd / 0.035, 2));
-      this.diamond.style.boxShadow = '0 0 ' + (14 + 16 * k).toFixed(1) + 'px rgba(245,113,6,' + (0.22 + 0.4 * k).toFixed(3) + ')';
-      this.diamond.style.borderColor = k > 0.05 ? 'rgb(' + Math.round(17 + 200 * k) + ',' + Math.round(17 + 80 * k) + ',17)' : '#111111';
-    }
-    this.systemLight(t, still);
-    this.raf = still ? 0 : requestAnimationFrame((n) => this.frame(n));
-  }
-  fxAttach(el) {
-    if (!el || el.__fx) return;
-    const kind = el.getAttribute('data-fx') || 'orange';
-    const P = { orange: { fill: '17,17,17', from: '255,255,255', to: '255,255,255', mag: 0 }, ink: { fill: '245,113,6', from: '236,232,229', to: '17,17,17', mag: 0 }, outline: { fill: '17,17,17', from: '17,17,17', to: '236,232,229', mag: 0.6 }, card: { fill: '17,17,17', from: '17,17,17', to: '236,232,229', mag: 0 }, link: { fill: '', from: '', to: '', mag: 0 }, nav: { fill: '', from: '', to: '', mag: 0 } }[kind] || {};
-    const F = { el, kind, P, h: 0, hv: 0, ht: 0, x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0, s: 1, vs: 0, ts: 1, ox: 0.5, oy: 0.5, raf: 0, last: 0 };
-    el.__fx = F; (this.fxList = this.fxList || []).push(F);
-    el.style.willChange = 'translate, scale'; el.style.backfaceVisibility = 'hidden'; el.style.transition = kind === 'outline' ? 'translate 1.6s cubic-bezier(.22,1,.36,1)' : 'translate .9s cubic-bezier(.22,1,.36,1)';
-    if (kind !== 'link' && kind !== 'nav') {
-      el.style.position = el.style.position || 'relative'; el.style.overflow = 'hidden'; el.style.isolation = 'isolate';
-      const b = document.createElement('span'); b.setAttribute('aria-hidden', 'true');
-      b.style.cssText = 'position:absolute;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;pointer-events:none;z-index:-1;transform:scale(0);background:rgb(' + P.fill + ')';
-      el.insertBefore(b, el.firstChild); F.blob = b;
-      const sh = document.createElement('span'); sh.setAttribute('aria-hidden', 'true');
-      sh.style.cssText = 'position:absolute;top:-20%;bottom:-20%;left:0;width:36%;pointer-events:none;z-index:1;opacity:0;background:linear-gradient(100deg,rgba(255,255,255,0) 0,rgba(255,255,255,.38) 50%,rgba(255,255,255,0) 100%);transform:translateX(-120%) skewX(-18deg)';
-      if (kind === 'orange' || kind === 'ink') { el.appendChild(sh); F.sheen = sh; }
-    } else {
-      el.style.textDecoration = 'none'; el.style.position = 'relative'; el.style.display = el.style.display || 'inline-block';
-      const u = document.createElement('span'); u.setAttribute('aria-hidden', 'true');
-      u.style.cssText = 'position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#F57106;transform-origin:0 50%;transform:scaleX(0);pointer-events:none';
-      const u0 = document.createElement('span'); u0.setAttribute('aria-hidden', 'true');
-      u0.style.cssText = 'position:absolute;left:0;right:0;bottom:-3px;height:1px;background:rgba(17,17,17,.35);pointer-events:none';
-      if (kind === 'nav') { u.style.left = '-6px'; u.style.right = '-6px'; u.style.bottom = '-7px'; u.style.height = '1.5px'; u.style.background = '#111111'; u.style.transformOrigin = '50% 50%'; u.style.borderRadius = '1px'; el.appendChild(u); }
-      else { el.appendChild(u0); el.appendChild(u); }
-      F.line = u;
-    }
-    F.arrow = el.querySelector('[data-fx-arrow]');
-    const loc = (e) => { const r = el.getBoundingClientRect(); return [(e.clientX - r.left) / (r.width || 1), (e.clientY - r.top) / (r.height || 1)]; };
-    el.addEventListener('pointerenter', (e) => { const [x, y] = loc(e); F.ox = x; F.oy = y; F.ht = 1; F.sheenT = performance.now(); this.fxKick(F); });
-    if (kind === 'orange' || kind === 'ink') {
-      el.addEventListener('pointermove', (e) => {
-        if (e.pointerType !== 'mouse' || this.fxStill()) return;
-        const r = el.getBoundingClientRect(); const t = getComputedStyle(el).translate;
-        const m = t && t !== 'none' ? t.split(' ').map(parseFloat) : [0, 0];
-        const sc = (el.offsetWidth ? r.width / (el.offsetWidth * (F.s || 1)) : 1) || 1;
-        const dx = (e.clientX - (r.left + r.width / 2 - (m[0] || 0) * sc)) / sc, dy = (e.clientY - (r.top + r.height / 2 - (m[1] || 0) * sc)) / sc;
-        el.style.translate = (dx * 0.22).toFixed(1) + 'px ' + (dy * 0.3).toFixed(1) + 'px';
-      });
-      el.addEventListener('pointerleave', () => { el.style.translate = '0px 0px'; });
-    }
-    el.addEventListener('pointerleave', (e) => { const [x, y] = loc(e); F.ox = x; F.oy = y; F.ht = 0; F.ts = 1; this.fxKick(F); });
-    el.addEventListener('pointerdown', (e) => { F.ts = 0.94; if (e.pointerType !== 'mouse') { const [x, y] = loc(e); F.ox = x; F.oy = y; F.ht = 1; F.sheenT = performance.now(); } this.fxKick(F); });
-    const up = (e) => { F.ts = 1; F.vs += 1.2; if (e && e.pointerType && e.pointerType !== 'mouse') setTimeout(() => { F.ht = 0; this.fxKick(F); }, 380); this.fxKick(F); };
-    el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
-    el.addEventListener('focus', () => { F.ox = 0.5; F.oy = 0.5; F.ht = 1; this.fxKick(F); });
-    el.addEventListener('blur', () => { F.ht = 0; this.fxKick(F); });
-    if (!this.fxDoc) {
-      this.fxDoc = (e) => {
-        if (e.pointerType && e.pointerType !== 'mouse') return;
-        this.fxPtr = { x: e.clientX, y: e.clientY };
-        if (!this.fxPF) this.fxPF = requestAnimationFrame(() => this.fxFrame());
-      };
-      document.addEventListener('pointermove', this.fxDoc, { passive: true });
-      document.addEventListener('mousemove', this.fxDoc, { passive: true });
-    }
-  }
-  fxFrame() {
-    this.fxPF = 0; const P0 = this.fxPtr; if (!P0) return; const still = this.fxStill();
-    const rd = this.fxList.map((G) => {
-      if (!G.P.mag || !G.el.isConnected) return null;
-      const r = G.el.getBoundingClientRect(); const t = getComputedStyle(G.el).translate;
-      const m = t && t !== 'none' ? t.split(' ').map(parseFloat) : [0, 0];
-      return { r, ox: m[0] || 0, oy: m[1] || 0 };
-    });
-    this.fxList.forEach((G, i) => {
-      const q = rd[i]; if (!q) return; const r = q.r;
-      const sc = (G.el.offsetWidth ? r.width / (G.el.offsetWidth * (G.s || 1)) : 1) || 1;
-      const cx = r.left + r.width / 2 - q.ox * sc, cy = r.top + r.height / 2 - q.oy * sc;
-      const dx = (P0.x - cx) / sc, dy = (P0.y - cy) / sc;
-      const R = Math.max(G.el.offsetWidth, G.el.offsetHeight) / 2 + 110;
-      let p = still ? 0 : Math.max(0, 1 - Math.hypot(dx, dy) / R); p = p * p * p * (p * (6 * p - 15) + 10);
-      const ntx = p ? dx * 0.32 * p * G.P.mag : 0, nty = p ? dy * 0.42 * p * G.P.mag : 0;
-      if (Math.abs(ntx - G.tx) > 0.75 || Math.abs(nty - G.ty) > 0.75 || (!p && (G.tx || G.ty))) {
-        G.tx = ntx; G.ty = nty; G.el.style.translate = ntx.toFixed(1) + 'px ' + nty.toFixed(1) + 'px';
-      }
-    });
-  }
-  fxStill() { return (this.props.motion ?? true) === false || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
-  fxKick(F) { if (!F.raf) { F.last = performance.now(); F.raf = requestAnimationFrame((n) => this.fxStep(F, n)); } }
-  fxStep(F, now) {
-    F.raf = 0; if (!F.el.isConnected) return;
-    const dt = Math.min(0.033, Math.max(0.001, (now - F.last) / 1000)); F.last = now;
-    const still = this.fxStill();
-    const spring = (k, t, v, K, D) => { const a = K * (t - F[k]) - D * F[v]; F[v] += a * dt; F[k] += F[v] * dt; };
-    if (still) { F.h = F.ht; F.s = 1; } else {
-      spring('h', F.ht, 'hv', F.ht > F.h ? 90 : 120, 15);
-      
-      spring('s', F.ts, 'vs', 520, 18);
-    }
-    const h = Math.max(0, Math.min(1.08, F.h));
-    const el = F.el, W = el.offsetWidth, H = el.offsetHeight;
-    el.style.scale = F.s.toFixed(4);
-    if (F.blob) {
-      const bx = F.ox * W, by = F.oy * H; const far = Math.hypot(Math.max(bx, W - bx), Math.max(by, H - by));
-      const sc = (far * 2.5 / 10) * Math.min(1, h);
-      const wob = still ? 1 : 1 + 0.06 * Math.sin(now / 90) * (1 - Math.min(1, h));
-      F.blob.style.transform = 'translate(' + bx.toFixed(1) + 'px,' + by.toFixed(1) + 'px) scale(' + (sc * wob).toFixed(3) + ',' + (sc / wob).toFixed(3) + ')';
-      const m = (a, b) => a.split(',').map((v, i) => Math.round(+v + (+b.split(',')[i] - +v) * Math.min(1, h))).join(',');
-      el.style.color = 'rgb(' + m(F.P.from, F.P.to) + ')';
-      if (F.kind === 'outline' || F.kind === 'card') el.style.borderColor = '#111111';
-    }
-    if (F.sheen) {
-      const t = F.sheenT ? (now - F.sheenT) / 700 : 2;
-      const on = t < 1 && !still; F.sheen.style.opacity = on ? (Math.sin(Math.PI * t) * 0.9).toFixed(3) : '0';
-      F.sheen.style.transform = 'translateX(' + (-120 + 420 * Math.min(1, t)).toFixed(1) + '%) skewX(-18deg)';
-    }
-    if (F.line) F.line.style.transform = 'scaleX(' + Math.min(1, h).toFixed(3) + ')';
-    if (F.arrow) { F.arrow.style.display = 'inline-block'; const ax = F.arrow.getAttribute('data-fx-arrow') === 'down' ? 0 : 5 * h + (still ? 0 : Math.sin(now / 160) * 1.2 * Math.min(1, h)); const ay = F.arrow.getAttribute('data-fx-arrow') === 'down' ? 4 * h + (still ? 0 : Math.sin(now / 160) * 1.2 * Math.min(1, h)) : 0; F.arrow.style.transform = 'translate(' + ax.toFixed(2) + 'px,' + ay.toFixed(2) + 'px)'; }
-    const moving = Math.abs(F.ht - F.h) > 0.002 || Math.abs(F.hv) > 0.01 || Math.abs(F.ts - F.s) > 0.001 || Math.abs(F.vs) > 0.01 || (F.sheenT && now - F.sheenT < 720) || (F.arrow && F.h > 0.01);
-    if (moving && !still) F.raf = requestAnimationFrame((n) => this.fxStep(F, n));
-  }
-  renderVals() {
-    const ph = this.props.showPlaceholders ?? true;
-    const motion = this.props.motion ?? true;
-    const s = this.state || {};
-    return { fxRef: this.fxRef,
-      rootClass: [ph ? "" : "hide-ph", motion ? "" : "still"].join(" ").trim(),
-      motionOn: motion, motionOff: !motion,
-      setCanvas: this.setCanvas, setDiamond: this.setDiamond, setParts: this.setParts, setBerg: this.setBerg, setBergTip: this.setBergTip, bergDown: this.bergDown, bergMove: this.bergMove, bergUp: this.bergUp, setStage: this.setStage, setBook3: this.setBook3, setBShadow: this.setBShadow, bDown: this.bDown, bMove: this.bMove, bUp: this.bUp, bKey: this.bKey, bNear: this.bNear, bFar: this.bFar, onMove: this.onMove, onLeave: this.onLeave, setRoute: this.setRoute, setTrail: this.setTrail, setTrailGlow: this.setTrailGlow, setHead: this.setHead, setHeadGlow: this.setHeadGlow, setNAV: this.setNAV, setNG1: this.setNG1, setNP: this.setNP, setNINV: this.setNINV, setOutLine: this.setOutLine, setSpark: this.setSpark, setMotes: this.setMotes, setSparkCore: this.setSparkCore, setBuild: this.setBuild, glOff: !s.glOk,
-      setW1: this.setW1, setW2: this.setW2, setW3: this.setW3, setW4: this.setW4, setBerg2: this.setBerg2, setFS: this.setFS, setBergDash: this.setBergDash
-    };
-  }
-}
-return Component;
-})();
-window.KBB["main"].defaults = {"showPlaceholders": true, "motion": true};
-
-</script>
-<script>
-(window.KBB = window.KBB || {})["main2"] = (function () {
-class Component extends DCLogic {
-  constructor(props) {
-    super(props);
-    if (!window.__kbAnchor) { window.__kbAnchor = true;
-      document.addEventListener('click', (e) => {
-        const a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null; if (!a) return;
-        const id = a.getAttribute('href').slice(1); if (!id) return; const el = document.getElementById(id); if (!el) return;
-        e.preventDefault();
-        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const y0 = window.scrollY || document.documentElement.scrollTop; const y1 = y0 + el.getBoundingClientRect().top;
-        const dist = Math.abs(y1 - y0); if (reduce || dist < 2) { window.scrollTo(0, y1); return; }
-        const D = Math.min(2200, 1000 + dist * 0.35); const t0 = performance.now();
-        const ease = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-        let stop = false; const cancel = () => { stop = true; };
-        window.addEventListener('wheel', cancel, { once: true, passive: true }); window.addEventListener('touchstart', cancel, { once: true, passive: true });
-        const step = (n) => { if (stop) return; const k = Math.min(1, (n - t0) / D); window.scrollTo(0, y0 + (y1 - y0) * ease(k)); if (k < 1) requestAnimationFrame(step); else { try { history.replaceState(null, '', '#' + id); } catch (_) {} try { el.focus({ preventScroll: true }); } catch (_) {} } };
-        requestAnimationFrame(step);
-      });
-    }
-    this.fxRef = (el) => this.fxAttach(el);
-    this.setPortrait = (el) => { if (!el || el.__pw) return; el.__pw = 1; const hide = () => { el.style.visibility = 'hidden'; };
-      const show = () => { el.style.visibility = ''; }; el.addEventListener('error', hide); el.addEventListener('load', show);
-      if (el.complete && !el.naturalWidth) hide(); };
-    this.al = {};
-    this.setCirc = (el) => { this.al.c = el; this.alignCirc(); };
-    this.setQuote = (el) => { this.al.q = el; this.alignCirc(); };
-    this.setWays = (el) => { this.al.w = el; this.alignCirc(); };
-    this.setMailRow = (el) => { this.al.m = el; this.alignCirc(); if (el && document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.alignCirc()); if (el) setTimeout(() => this.alignCirc(), 600); };
-    this.state = { open: false, ch: 3 };
-    this.acc = { bodies: [], bars: [], h: [], from: [], to: [], t0: 0, raf: 0, el: null, prevCh: 3 };
-    this.bodySet = []; this.barSet = []; this.glowSet = []; this.glow = [];
-    for (let i = 0; i < 9; i++) {
-      this.bodySet[i] = (el) => { this.acc.bodies[i] = el; if (el && this.acc.h[i] === undefined) { const h = i === 3 ? el.scrollHeight : 0; this.acc.h[i] = h; el.style.height = h + 'px'; } };
-      this.glowSet[i] = (el) => { const G = this.glow[i] || (this.glow[i] = { lv: 0, t0: -1e9, x: 60, y: 38, want: 0 }); G.el = el; if (el && i === 3 && G.want === 0) { G.want = 1; G.lv = 1; G.t0 = -1e9; this.glowPaint(i, performance.now()); } };
-      this.barSet[i] = (el) => { this.acc.bars[i] = el; if (el) el.setAttribute('transform', i === 3 ? 'rotate(90)' : 'rotate(0)'); };
-    }
-    this.setAcc = (el) => { this.acc.el = el; };
-    this.rip = { els: [], n: 0, live: [] };
-    this.setRipCv = (el) => { if (el && el !== this.rip.cv) { this.rip.cv = el; this.ripGL(el); } };
-    this.sp = { x: 0, y: 0, rx: 0, ry: 0, s: 1, vx: 0, vy: 0, vrx: 0, vry: 0, vs: 0, t: { x: 0, y: 0, rx: 0, ry: 0, s: 1 }, raf: 0, last: 0 };
-    this.setSpread = (el) => { this.sp.el = el; };
-    this.setSpreadShadow = (el) => { this.sp.sh = el; };
-    this.zm = { raf: 0, closing: false };
-    this.setZoom = (el) => { this.zm.ov = el; if (el) { try { el.focus({ preventScroll: true }); } catch (_) {} this.tryOpen(); } };
-    this.setBig = (el) => { this.zm.big = el; if (el) { el.style.opacity = '0'; this.tryOpen(); } };
-    this.openSpread = () => { this.setState({ open: true }); };
-    this.closeSpread = (e) => { if (e) e.stopPropagation(); this.zoomAnim(false); };
-    this.zoomKey = (e) => { if (e.key === 'Escape') this.zoomAnim(false); };
-    this.spNear = (e) => {
-      const S = this.sp; if (!S.el || this.still() || (this.state && this.state.open)) return;
-      const r = S.el.getBoundingClientRect(); const sc = r.width / 460 || 1; const R = 420 * sc;
-      const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2), d = Math.hypot(dx, dy);
-      let p = Math.max(0, 1 - d / R); p = p * p * (3 - 2 * p);
-      S.t = { x: dx / sc * 0.12 * p, y: dy / sc * 0.12 * p, ry: Math.max(-1, Math.min(1, dx / R)) * 12 * p, rx: -Math.max(-1, Math.min(1, dy / R)) * 9 * p, s: 1 + 0.04 * p };
-      this.kick();
-    };
-    this.spFar = () => { this.sp.t = { x: 0, y: 0, rx: 0, ry: 0, s: 1 }; this.kick(); };
-  }
-  still() { return (this.props.motion ?? true) === false || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
-  tryOpen() {
-    const Z = this.zm; if (!Z.big || !Z.ov || Z.started === Z.big) return; Z.started = Z.big;
-    Z.ov.style.background = 'rgba(236,232,229,0)';
-    requestAnimationFrame(() => { if (Z.big) { Z.big.style.opacity = ''; this.zoomAnim(true); } });
-  }
-  step(now) {
-    const S = this.sp; S.raf = 0; if (!S.el) return;
-    const dt = Math.min(0.033, (now - S.last) / 1000 || 0.016); S.last = now;
-    const K = 140, Dm = 16; let moving = false;
-    for (const k of ['x', 'y', 'rx', 'ry', 's']) {
-      const vk = 'v' + k; const a = K * (S.t[k] - S[k]) - Dm * S[vk];
-      S[vk] += a * dt; S[k] += S[vk] * dt;
-      if (Math.abs(S.t[k] - S[k]) > (k === 's' ? 0.0005 : 0.02) || Math.abs(S[vk]) > 0.02) moving = true;
-    }
-    S.el.style.transform = 'translate(' + S.x.toFixed(2) + 'px,' + S.y.toFixed(2) + 'px) rotateX(' + S.rx.toFixed(2) + 'deg) rotateY(' + S.ry.toFixed(2) + 'deg) scale(' + S.s.toFixed(4) + ')';
-    if (S.sh) { const lift = (S.s - 1) / 0.04; S.sh.style.transform = 'translateX(' + (S.x * 0.6).toFixed(2) + 'px) scale(' + (1 - 0.08 * lift).toFixed(3) + ')'; S.sh.style.opacity = (1 - 0.3 * lift).toFixed(3); }
-    if (moving) S.raf = requestAnimationFrame((n) => this.step(n));
-  }
-  kick() { if (!this.sp.raf) { this.sp.last = performance.now(); this.sp.raf = requestAnimationFrame((n) => this.step(n)); } }
-  componentWillUnmount() { if (this.fxDoc) { document.removeEventListener('pointermove', this.fxDoc); document.removeEventListener('mousemove', this.fxDoc); } cancelAnimationFrame(this.sp.raf); cancelAnimationFrame(this.acc.raf); cancelAnimationFrame(this.rip.raf); }
-  componentDidUpdate() {
-    const A = this.acc; const cur = this.state && this.state.ch !== undefined ? this.state.ch : 3;
-    if (cur === A.prevCh) return; A.prevCh = cur;
-    for (let i = 0; i < 9; i++) { const b = A.bodies[i]; if (!b) continue; A.from[i] = A.h[i] || 0; A.to[i] = i === cur ? b.scrollHeight : 0; }
-    if (this.still()) { for (let i = 0; i < 9; i++) this.accApply(i, 1); return; }
-    A.t0 = performance.now(); cancelAnimationFrame(A.raf); A.raf = requestAnimationFrame((n) => this.accStep(n));
-  }
-  accApply(i, k) {
-    const A = this.acc; const b = A.bodies[i]; if (!b) return;
-    const h = A.from[i] + (A.to[i] - A.from[i]) * k; A.h[i] = h; b.style.height = h.toFixed(2) + 'px';
-    const full = Math.max(1, b.scrollHeight); const vis = h / full; b.style.opacity = Math.min(1, vis * 1.3).toFixed(3);
-    const bar = A.bars[i]; if (bar) bar.setAttribute('transform', 'rotate(' + (90 * Math.min(1, vis)).toFixed(1) + ')');
-  }
-  accStep(now) {
-    const A = this.acc; const d = 560; const x = Math.min(1, (now - A.t0) / d);
-    const k = x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-    for (let i = 0; i < 9; i++) this.accApply(i, k);
-    A.raf = x < 1 ? requestAnimationFrame((n) => this.accStep(n)) : 0;
-  }
-  zoomAnim(opening) {
-    const Z = this.zm; const big = Z.big, ov = Z.ov, small = this.sp.el;
-    if (!big || !ov) { if (!opening) this.setState({ open: false }); return; }
-    if (!opening && Z.closing) return; Z.closing = !opening;
-    const br = big.getBoundingClientRect(); const sr = small ? small.getBoundingClientRect() : null;
-    const cur = big.style.transform; big.style.transform = 'none'; const nat = big.getBoundingClientRect(); big.style.transform = cur;
-    let dx = 0, dy = 0, s = 0.35;
-    if (sr && sr.width) { dx = (sr.left + sr.width / 2) - (nat.left + nat.width / 2); dy = (sr.top + sr.height / 2) - (nat.top + nat.height / 2); s = sr.width / nat.width; }
-    else { dx = window.innerWidth * 0.3; dy = window.innerHeight * 0.3; }
-    if (this.still()) { if (opening) { big.style.transform = 'none'; ov.style.background = 'rgba(236,232,229,.96)'; if (small) small.style.opacity = '0'; } else { if (small) small.style.opacity = ''; Z.started = null; this.setState({ open: false }); Z.closing = false; } return; }
-    if (small && opening) small.style.opacity = '0';
-    const t0 = performance.now(); const D = opening ? 820 : 620;
-    const easeO = (x) => 1 - Math.pow(1 - x, 4) * (1 - 0.0 * x);
-    const easeIO = (x) => x < 0.5 ? 8 * x * x * x * x : 1 - Math.pow(-2 * x + 2, 4) / 2;
-    cancelAnimationFrame(Z.raf);
-    const step = (now) => {
-      const x = Math.min(1, (now - t0) / D);
-      const k = opening ? easeO(x) : 1 - easeIO(x);
-      const arc = Math.sin(Math.PI * k) * 40 * (opening ? 1 : 0.6);
-      const tx = dx * (1 - k), ty = dy * (1 - k) - arc, sc = s + (1 - s) * k;
-      const rx = (1 - k) * 10, ry = (1 - k) * -14, rz = (1 - k) * 4;
-      big.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) scale(' + sc.toFixed(4) + ') rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) rotateZ(' + rz.toFixed(2) + 'deg)';
-      big.style.setProperty('--ang', (3 + 6 * (1 - k)).toFixed(2) + 'deg');
-      big.style.boxShadow = '0 ' + (30 * k).toFixed(0) + 'px ' + (80 * k).toFixed(0) + 'px -20px rgba(46,33,24,' + (0.35 * k).toFixed(3) + ')';
-      ov.style.background = 'rgba(236,232,229,' + (0.96 * Math.min(1, k * 1.2)).toFixed(3) + ')';
-      if (x < 1) Z.raf = requestAnimationFrame(step);
-      else { Z.raf = 0; if (!opening) { if (small) small.style.opacity = ''; Z.closing = false; Z.started = null; Z.big = null; Z.ov = null; this.setState({ open: false }); } }
-    };
-    step(t0);
-  }
-  ripGL(cv) {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2); cv.width = 740 * dpr; cv.height = 820 * dpr;
-    const gl = cv.getContext('webgl', { premultipliedAlpha: true, alpha: true }); if (!gl) return;
-    const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-    const fs = `precision highp float;uniform vec2 R;uniform vec4 P[3];
-float hs(float n){return fract(sin(n)*43758.5453);}
-float smin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}
-void main(){
- vec2 X=vec2(gl_FragCoord.x/R.x*740.,(R.y-gl_FragCoord.y)/R.y*820.);
- vec3 C=vec3(0.); float A=0.;
- for(int j=0;j<3;j++){
-  vec4 Q=P[j]; float a=Q.z; if(a<0.||a>1.3) continue;
-  vec2 c=Q.xy; float sd=Q.w;
-  if(length(X-c)>90.) continue;
-  float wob=1.+.18*sin(a*26.)*exp(-a*4.5);
-  float rc=11.*(1.-exp(-a*12.))*(1.-smoothstep(.35,1.05,a))*wob;
-  vec2 dv=X-c; dv.y*=1.+.12*sin(a*20.)*exp(-a*5.);
-  float D=length(dv)-rc;
-  for(int k=0;k<5;k++){float fk=float(k);float h=hs(sd*7.13+fk*3.7);
-   float ang=sd*6.2831+fk*1.2566+.5*(h-.5);
-   float dist=(18.+14.*h)*(1.-exp(-a*4.2));
-   vec2 pk=c+vec2(cos(ang),sin(ang))*dist;
-   float rd=(3.2+2.6*h)*(1.-smoothstep(.15,.95,a));
-   D=smin(D,length(X-pk)-rd,9.);}
-  float fade=1.-smoothstep(.75,1.25,a);
-  float m=smoothstep(1.2,-1.2,D)*fade;
-  float dn=clamp(-D/max(rc,4.),0.,1.); float depth=sqrt(dn*(2.-dn));
-  vec3 org=vec3(.961,.443,.024),hot=vec3(1.,.74,.42),wht=vec3(1.,.97,.92),sil=vec3(.86,.89,.94);
-  vec3 col=mix(org,hot,depth*.6);
-  float core=exp(-dot(X-c,X-c)/(rc*rc*.18+1.))*(1.-smoothstep(.2,.8,a));
-  float rim=m*(1.-depth)*.5;
-  float glow=exp(-max(D,0.)/7.)*(1.-m)*.45*fade;
-  float body=m*(.16+.22*depth);
-  vec2 sp=X-(c+vec2(-.35,-.4)*max(rc,3.)); float spec=exp(-dot(sp,sp)/(rc*rc*.05+.8))*m*(1.-smoothstep(.4,1.,a));
-  float fres=m*pow(1.-depth,2.)*.85;
-  C+=col*body+wht*core*m*.7+sil*fres*.8+org*rim*.4+vec3(1.,.6,.25)*glow+wht*spec;
-  A+=body+core*m*.5+fres*.55+rim*.25+glow*.8+spec*.9;
- }
- A=clamp(A,0.,1.); C=min(C,vec3(A)); gl_FragColor=vec4(C,A);}`;
-    const sh = (ty, src) => { const s = gl.createShader(ty); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
-    const a = sh(gl.VERTEX_SHADER, vs), b = sh(gl.FRAGMENT_SHADER, fs); if (!a || !b) return;
-    const pr = gl.createProgram(); gl.attachShader(pr, a); gl.attachShader(pr, b); gl.linkProgram(pr); if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
-    gl.useProgram(pr); const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    gl.viewport(0, 0, cv.width, cv.height);
-    this.rip.gl = gl; this.rip.uR = gl.getUniformLocation(pr, 'R'); this.rip.uP = gl.getUniformLocation(pr, 'P');
-  }
-  glowGo(i, e) {
-    const was = this.state && this.state.ch !== undefined ? this.state.ch : 3; const now = performance.now();
-    for (let j = 0; j < 9; j++) {
-      const G = this.glow[j] || (this.glow[j] = { lv: 0, t0: -1e9, x: 60, y: 38, want: 0 });
-      if (j === i && was !== i) {
-        G.want = 1; G.t0 = now;
-        if (G.el && e) { const r = G.el.getBoundingClientRect(); const sc = (G.el.offsetWidth ? r.width / G.el.offsetWidth : 1) || 1; G.x = (e.clientX - r.left) / sc; G.y = (e.clientY - r.top) / sc; }
-      } else if (G.want) { G.want = 0; G.from = G.lv; G.t0 = now; }
-    }
-    if (this.fxStill()) { for (let j = 0; j < 9; j++) { const G = this.glow[j]; if (G) { G.lv = G.want; G.t0 = -1e9; this.glowPaint(j, now); } } return; }
-    if (!this.glowRaf) this.glowRaf = requestAnimationFrame((n) => this.glowStep(n));
-  }
-  glowStep(now) {
-    this.glowRaf = 0; let live = false;
-    for (let j = 0; j < 9; j++) {
-      const G = this.glow[j]; if (!G) continue;
-      const age = (now - G.t0) / 1000;
-      if (G.want) { G.lv = 1; if (age < 1.6) live = true; }
-      else { const k = Math.min(1, age / 0.45); G.lv = (G.from || 0) * (1 - k * k); if (k < 1) live = true; }
-      this.glowPaint(j, now);
-    }
-    if (live) this.glowRaf = requestAnimationFrame((n) => this.glowStep(n));
-  }
-  glowPaint(j, now) {
-    const G = this.glow[j]; if (!G || !G.el) return;
-    if (G.lv <= 0.001) { G.el.style.background = 'none'; return; }
-    const W = G.el.offsetWidth || 740; const age = (now - G.t0) / 1000;
-    const x = G.x.toFixed(0) + 'px ' + G.y.toFixed(0) + 'px';
-    const rest = 'linear-gradient(90deg, rgba(245,113,6,' + (0.10 * G.lv).toFixed(3) + ') 0, rgba(245,113,6,' + (0.04 * G.lv).toFixed(3) + ') 45%, rgba(245,113,6,0) 85%)';
-    let layers = [];
-    if (G.want && age >= 0 && age < 1.6) {
-      const k = Math.min(1, age / 1.6); const e = 1 - Math.pow(1 - k, 3);
-      const R = 24 + e * W * 1.05; const f = Math.pow(1 - k, 1.4);
-      const bloom = 'radial-gradient(' + (R * 0.55).toFixed(0) + 'px ' + (R * 0.28).toFixed(0) + 'px at ' + x + ', rgba(255,196,140,' + (0.32 * f).toFixed(3) + ') 0, rgba(245,113,6,' + (0.12 * f).toFixed(3) + ') 50%, rgba(245,113,6,0) 100%)';
-      const ring = 'radial-gradient(circle at ' + x + ', rgba(245,113,6,0) ' + Math.max(0, R - 46).toFixed(0) + 'px, rgba(245,113,6,' + (0.26 * f).toFixed(3) + ') ' + Math.max(1, R - 12).toFixed(0) + 'px, rgba(210,220,236,' + (0.35 * f).toFixed(3) + ') ' + R.toFixed(0) + 'px, rgba(245,113,6,0) ' + (R + 14).toFixed(0) + 'px)';
-      layers = [bloom];
-      G.el.style.background = layers.concat(['linear-gradient(90deg, rgba(245,113,6,' + (0.10 * e).toFixed(3) + ') 0, rgba(245,113,6,' + (0.04 * e).toFixed(3) + ') 45%, rgba(245,113,6,0) 85%)']).join(',');
-      return;
-    }
-    G.el.style.background = rest;
-  }
-  ripple(e) {
-    const R = this.rip, A = this.acc; if (!A.el || !e || this.still() || !R.gl) return;
-    const r = A.el.getBoundingClientRect(); const sc = r.width / 740 || 1;
-    R.list = (R.list || []).filter((q) => performance.now() - q.t0 < 1300).slice(-2);
-    R.list.push({ x: (e.clientX - r.left) / sc, y: (e.clientY - r.top) / sc, t0: performance.now(), sd: Math.random() });
-    if (!R.raf) R.raf = requestAnimationFrame((n) => this.ripStep(n));
-  }
-  ripStep(now) {
-    const R = this.rip; R.raf = 0; const gl = R.gl; if (!gl) return;
-    const arr = new Float32Array(12); let live = false;
-    for (let j = 0; j < 3; j++) {
-      const q = R.list[j]; if (!q) { arr[j * 4 + 2] = -1; continue; }
-      const age = (now - q.t0) / 1000; if (age <= 1.3) live = true;
-      arr[j * 4] = q.x; arr[j * 4 + 1] = q.y; arr[j * 4 + 2] = age; arr[j * 4 + 3] = q.sd;
-    }
-    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniform2f(R.uR, gl.canvas.width, gl.canvas.height); gl.uniform4fv(R.uP, arr); gl.drawArrays(gl.TRIANGLES, 0, 6);
-    if (live) R.raf = requestAnimationFrame((n) => this.ripStep(n)); else { R.list = []; gl.clear(gl.COLOR_BUFFER_BIT); }
-  }
-  fxAttach(el) {
-    if (!el || el.__fx) return;
-    const kind = el.getAttribute('data-fx') || 'orange';
-    const P = { orange: { fill: '17,17,17', from: '255,255,255', to: '255,255,255', mag: 0 }, ink: { fill: '245,113,6', from: '236,232,229', to: '17,17,17', mag: 0 }, outline: { fill: '17,17,17', from: '17,17,17', to: '236,232,229', mag: 0.6 }, card: { fill: '17,17,17', from: '17,17,17', to: '236,232,229', mag: 0 }, link: { fill: '', from: '', to: '', mag: 0 }, nav: { fill: '', from: '', to: '', mag: 0 } }[kind] || {};
-    const F = { el, kind, P, h: 0, hv: 0, ht: 0, x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0, s: 1, vs: 0, ts: 1, ox: 0.5, oy: 0.5, raf: 0, last: 0 };
-    el.__fx = F; (this.fxList = this.fxList || []).push(F);
-    el.style.willChange = 'translate, scale'; el.style.backfaceVisibility = 'hidden'; el.style.transition = kind === 'outline' ? 'translate 1.6s cubic-bezier(.22,1,.36,1)' : 'translate .9s cubic-bezier(.22,1,.36,1)';
-    if (kind !== 'link' && kind !== 'nav') {
-      el.style.position = el.style.position || 'relative'; el.style.overflow = 'hidden'; el.style.isolation = 'isolate';
-      const b = document.createElement('span'); b.setAttribute('aria-hidden', 'true');
-      b.style.cssText = 'position:absolute;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;pointer-events:none;z-index:-1;transform:scale(0);background:rgb(' + P.fill + ')';
-      el.insertBefore(b, el.firstChild); F.blob = b;
-      const sh = document.createElement('span'); sh.setAttribute('aria-hidden', 'true');
-      sh.style.cssText = 'position:absolute;top:-20%;bottom:-20%;left:0;width:36%;pointer-events:none;z-index:1;opacity:0;background:linear-gradient(100deg,rgba(255,255,255,0) 0,rgba(255,255,255,.38) 50%,rgba(255,255,255,0) 100%);transform:translateX(-120%) skewX(-18deg)';
-      if (kind === 'orange' || kind === 'ink') { el.appendChild(sh); F.sheen = sh; }
-    } else {
-      el.style.textDecoration = 'none'; el.style.position = 'relative'; el.style.display = el.style.display || 'inline-block';
-      const u = document.createElement('span'); u.setAttribute('aria-hidden', 'true');
-      u.style.cssText = 'position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#F57106;transform-origin:0 50%;transform:scaleX(0);pointer-events:none';
-      const u0 = document.createElement('span'); u0.setAttribute('aria-hidden', 'true');
-      u0.style.cssText = 'position:absolute;left:0;right:0;bottom:-3px;height:1px;background:rgba(17,17,17,.35);pointer-events:none';
-      if (kind === 'nav') { u.style.left = '-4px'; u.style.right = '-4px'; u.style.bottom = '-6px'; u.style.height = '1.5px'; u.style.background = '#111111'; u.style.transformOrigin = '50% 50%'; u.style.borderRadius = '1px'; el.appendChild(u); }
-      else { el.appendChild(u0); el.appendChild(u); }
-      F.line = u;
-    }
-    F.arrow = el.querySelector('[data-fx-arrow]');
-    const loc = (e) => { const r = el.getBoundingClientRect(); return [(e.clientX - r.left) / (r.width || 1), (e.clientY - r.top) / (r.height || 1)]; };
-    el.addEventListener('pointerenter', (e) => { const [x, y] = loc(e); F.ox = x; F.oy = y; F.ht = 1; F.sheenT = performance.now(); this.fxKick(F); });
-    if (kind === 'orange' || kind === 'ink') {
-      el.addEventListener('pointermove', (e) => {
-        if (e.pointerType !== 'mouse' || this.fxStill()) return;
-        const r = el.getBoundingClientRect(); const t = getComputedStyle(el).translate;
-        const m = t && t !== 'none' ? t.split(' ').map(parseFloat) : [0, 0];
-        const sc = (el.offsetWidth ? r.width / (el.offsetWidth * (F.s || 1)) : 1) || 1;
-        const dx = (e.clientX - (r.left + r.width / 2 - (m[0] || 0) * sc)) / sc, dy = (e.clientY - (r.top + r.height / 2 - (m[1] || 0) * sc)) / sc;
-        el.style.translate = (dx * 0.22).toFixed(1) + 'px ' + (dy * 0.3).toFixed(1) + 'px';
-      });
-      el.addEventListener('pointerleave', () => { el.style.translate = '0px 0px'; });
-    }
-    el.addEventListener('pointerleave', (e) => { const [x, y] = loc(e); F.ox = x; F.oy = y; F.ht = 0; F.ts = 1; this.fxKick(F); });
-    el.addEventListener('pointerdown', (e) => { F.ts = 0.94; if (e.pointerType !== 'mouse') { const [x, y] = loc(e); F.ox = x; F.oy = y; F.ht = 1; F.sheenT = performance.now(); } this.fxKick(F); });
-    const up = (e) => { F.ts = 1; F.vs += 1.2; if (e && e.pointerType && e.pointerType !== 'mouse') setTimeout(() => { F.ht = 0; this.fxKick(F); }, 380); this.fxKick(F); };
-    el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
-    el.addEventListener('focus', () => { F.ox = 0.5; F.oy = 0.5; F.ht = 1; this.fxKick(F); });
-    el.addEventListener('blur', () => { F.ht = 0; this.fxKick(F); });
-    if (!this.fxDoc) {
-      this.fxDoc = (e) => {
-        if (e.pointerType && e.pointerType !== 'mouse') return;
-        this.fxPtr = { x: e.clientX, y: e.clientY };
-        if (!this.fxPF) this.fxPF = requestAnimationFrame(() => this.fxFrame());
-      };
-      document.addEventListener('pointermove', this.fxDoc, { passive: true });
-      document.addEventListener('mousemove', this.fxDoc, { passive: true });
-    }
-  }
-  fxFrame() {
-    this.fxPF = 0; const P0 = this.fxPtr; if (!P0) return; const still = this.fxStill();
-    const rd = this.fxList.map((G) => {
-      if (!G.P.mag || !G.el.isConnected) return null;
-      const r = G.el.getBoundingClientRect(); const t = getComputedStyle(G.el).translate;
-      const m = t && t !== 'none' ? t.split(' ').map(parseFloat) : [0, 0];
-      return { r, ox: m[0] || 0, oy: m[1] || 0 };
-    });
-    this.fxList.forEach((G, i) => {
-      const q = rd[i]; if (!q) return; const r = q.r;
-      const sc = (G.el.offsetWidth ? r.width / (G.el.offsetWidth * (G.s || 1)) : 1) || 1;
-      const cx = r.left + r.width / 2 - q.ox * sc, cy = r.top + r.height / 2 - q.oy * sc;
-      const dx = (P0.x - cx) / sc, dy = (P0.y - cy) / sc;
-      const R = Math.max(G.el.offsetWidth, G.el.offsetHeight) / 2 + 110;
-      let p = still ? 0 : Math.max(0, 1 - Math.hypot(dx, dy) / R); p = p * p * p * (p * (6 * p - 15) + 10);
-      const ntx = p ? dx * 0.32 * p * G.P.mag : 0, nty = p ? dy * 0.42 * p * G.P.mag : 0;
-      if (Math.abs(ntx - G.tx) > 0.75 || Math.abs(nty - G.ty) > 0.75 || (!p && (G.tx || G.ty))) {
-        G.tx = ntx; G.ty = nty; G.el.style.translate = ntx.toFixed(1) + 'px ' + nty.toFixed(1) + 'px';
-      }
-    });
-  }
-  alignCirc() {
-    const A = this.al; if (!A.c || !A.q || !A.w || !A.c.firstElementChild) return;   // circle is now placed by hand in the canvas
-    const par = A.c.offsetParent; if (!par) return;
-    const top = (el) => { let y = 0, n = el; while (n && n !== par) { y += n.offsetTop; n = n.offsetParent; } return y; };
-    const sig = par.querySelector('a[href="signal.html"]');
-    const band0 = sig ? top(sig) + sig.offsetHeight + 36 : top(A.q) - 40, band1 = top(A.w) - 28;   // below the Signal card to just above "Other ways"
-    const left0 = 860, right = 1400;                               // right of the quote column to the page's right edge
-    let h = band1 - band0, w = h * 1100 / 1175;
-    if (w > right - left0) { w = right - left0; h = w * 1175 / 1100; }
-    const y = band1 - h;                                            // sit on the band's bottom so it never touches "Other ways"
-    A.c.style.top = y.toFixed(0) + 'px'; A.c.style.height = h.toFixed(0) + 'px'; A.c.style.width = w.toFixed(0) + 'px';
-    A.c.style.left = (right - w).toFixed(0) + 'px';
-  }
-  fxStill() { return (this.props.motion ?? true) === false || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
-  fxKick(F) { if (!F.raf) { F.last = performance.now(); F.raf = requestAnimationFrame((n) => this.fxStep(F, n)); } }
-  fxStep(F, now) {
-    F.raf = 0; if (!F.el.isConnected) return;
-    const dt = Math.min(0.033, Math.max(0.001, (now - F.last) / 1000)); F.last = now;
-    const still = this.fxStill();
-    const spring = (k, t, v, K, D) => { const a = K * (t - F[k]) - D * F[v]; F[v] += a * dt; F[k] += F[v] * dt; };
-    if (still) { F.h = F.ht; F.s = 1; } else {
-      spring('h', F.ht, 'hv', F.ht > F.h ? 90 : 120, 15);
-      
-      spring('s', F.ts, 'vs', 520, 18);
-    }
-    const h = Math.max(0, Math.min(1.08, F.h));
-    const el = F.el, W = el.offsetWidth, H = el.offsetHeight;
-    el.style.scale = F.s.toFixed(4);
-    if (F.blob) {
-      const bx = F.ox * W, by = F.oy * H; const far = Math.hypot(Math.max(bx, W - bx), Math.max(by, H - by));
-      const sc = (far * 2.5 / 10) * Math.min(1, h);
-      const wob = still ? 1 : 1 + 0.06 * Math.sin(now / 90) * (1 - Math.min(1, h));
-      F.blob.style.transform = 'translate(' + bx.toFixed(1) + 'px,' + by.toFixed(1) + 'px) scale(' + (sc * wob).toFixed(3) + ',' + (sc / wob).toFixed(3) + ')';
-      const m = (a, b) => a.split(',').map((v, i) => Math.round(+v + (+b.split(',')[i] - +v) * Math.min(1, h))).join(',');
-      el.style.color = 'rgb(' + m(F.P.from, F.P.to) + ')';
-      if (F.kind === 'outline' || F.kind === 'card') el.style.borderColor = '#111111';
-    }
-    if (F.sheen) {
-      const t = F.sheenT ? (now - F.sheenT) / 700 : 2;
-      const on = t < 1 && !still; F.sheen.style.opacity = on ? (Math.sin(Math.PI * t) * 0.9).toFixed(3) : '0';
-      F.sheen.style.transform = 'translateX(' + (-120 + 420 * Math.min(1, t)).toFixed(1) + '%) skewX(-18deg)';
-    }
-    if (F.line) F.line.style.transform = 'scaleX(' + Math.min(1, h).toFixed(3) + ')';
-    if (F.arrow) { F.arrow.style.display = 'inline-block'; const ax = F.arrow.getAttribute('data-fx-arrow') === 'down' ? 0 : 5 * h + (still ? 0 : Math.sin(now / 160) * 1.2 * Math.min(1, h)); const ay = F.arrow.getAttribute('data-fx-arrow') === 'down' ? 4 * h + (still ? 0 : Math.sin(now / 160) * 1.2 * Math.min(1, h)) : 0; F.arrow.style.transform = 'translate(' + ax.toFixed(2) + 'px,' + ay.toFixed(2) + 'px)'; }
-    const moving = Math.abs(F.ht - F.h) > 0.002 || Math.abs(F.hv) > 0.01 || Math.abs(F.ts - F.s) > 0.001 || Math.abs(F.vs) > 0.01 || (F.sheenT && now - F.sheenT < 720) || (F.arrow && F.h > 0.01);
-    if (moving && !still) F.raf = requestAnimationFrame((n) => this.fxStep(F, n));
-  }
-  renderVals() {
-    const ph = this.props.showPlaceholders ?? true;
-    const motion = this.props.motion ?? true;
-    const open = !!(this.state && this.state.open);
-    const cur = this.state && this.state.ch !== undefined ? this.state.ch : 3;
-    const C = [
-      ['I', 'Trapped Capital', 'Does your company know more than it can see?', 'Where the expertise, institutional knowledge, internal tools and IP that could become products are hiding inside your organisation - be it product-led sales, self-serve or service-embedded.'],
-      ['II', 'The Cost of Building Wrong', 'What lacking product thinking costs you.', 'Why the build is the smallest part of what a blindly shipped decision costs: the cost iceberg. And why a backlog-driven culture naturally pushes out a de-risking, outcome-driven one.'],
-      ['III', 'The AI Productivity Fallacy', 'What happens to the cost of building wrong, when building gets cheaper and faster?', 'Why “speed at all costs” multiplies bad decisions as readily as good ones. Why AI is the answer to delivery speed, not outcome quality. And the pain–gain ratio: how much value your product must deliver before it can even replace pen and paper.'],
-      ['IV', 'The Product Decision System', 'Find decisions that convert to value.', 'An overview of how everything fits together.'],
-      ['V', 'Continuous Opportunity Discovery', 'The permanent layer that makes the invisible visible.', 'Discovery doesn’t stop and become a hand-off. It runs continuously.'],
-      ['VI', 'Assumption Validation', 'When observation becomes testing.', 'Turning a hypothesis into lean, fast tests that can fail, before pilot resources are committed.'],
-      ['VII', 'Pilot Validation', 'Where informed decisions are found.', 'Proving value is real, repeatable and commercially viable, ideally without your people in the room.'],
-      ['VIII', 'Get Things Done and Drive Impact', 'From here, you lead.', 'Putting the system to work inside your organisation, and keeping it running.'],
-      ['App.', 'Appendix', 'The Signal Verification System.', 'The scoring method for internal inbound patterns: a seven-question, natural pattern-mining tool that is less intimidating than a ticket form.']
-    ];
-    const chapters = C.map((c, i) => ({ num: c[0], title: c[1], sub: c[2], body: c[3], open: i === cur, expanded: i === cur ? 'true' : 'false', sign: i === cur ? '−' : '+',
-      setBody: this.bodySet[i], setBar: this.barSet[i], link: i === 8,
-      setGlow: this.glowSet[i],
-      toggle: (e) => { this.ripple(e); this.glowGo(i, e); this.setState({ ch: (this.state && this.state.ch) === i ? -1 : i }); } }));
-    return { fxRef: this.fxRef,
-      rootClass: [ph ? "" : "hide-ph", motion ? "" : "still"].join(" ").trim(),
-      chapters, setAcc: this.setAcc, setPortrait: this.setPortrait, setCirc: this.setCirc, setQuote: this.setQuote, setMailRow: this.setMailRow, setWays: this.setWays, setRipCv: this.setRipCv, setBig: this.setBig, spreadOpen: open, setSpread: this.setSpread, setSpreadShadow: this.setSpreadShadow, setZoom: this.setZoom,
-      openSpread: this.openSpread, closeSpread: this.closeSpread, zoomKey: this.zoomKey, spNear: this.spNear, spFar: this.spFar
-    };
-  }
-}
-return Component;
-})();
-window.KBB["main2"].defaults = {"showPlaceholders": true, "motion": true};
-
-</script>
-<script>
-window.KBB_PROPS = { showPlaceholders: false };
-</script>
-<script>
-(function () {
-  // The design is drawn at 1440 px. Wider screens centre it; narrower ones scale it down.
-  var page = document.getElementById('kb-page');
-  function fit() {
-    var z = window.KB_TOUCH ? 1 : Math.min(1, document.documentElement.clientWidth / 1440);
-    page.style.zoom = z === 1 ? '' : String(z);
-  }
-  fit(); window.addEventListener('resize', fit);
-  var cfg = window.KBB_PROPS || {};
-  function props(k) { var d = window.KBB[k].defaults || {}, o = {}; for (var p in d) o[p] = d[p]; for (var q in cfg) o[q] = cfg[q]; return o; }
-  kbbMount(window.KBB.main, 'tpl-main', document.getElementById('kb-main'), props('main'));
-  kbbMount(window.KBB.main2, 'tpl-main2', document.getElementById('kb-main2'), props('main2'));
-})();
-</script>
 </body>
 </html>
