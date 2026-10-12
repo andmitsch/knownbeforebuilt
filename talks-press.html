@@ -76,10 +76,11 @@ a:not(.fx-on):hover .arw,button:not(.fx-on):hover .arw{transform:translateX(4px)
 .toc{margin:36px 0 0;padding:20px 0 0;border-top:1.5px solid var(--ink);display:flex;flex-wrap:wrap;gap:6px 28px;list-style:none;font:500 15px/1 'Hanken Grotesk',sans-serif}
 .toc a{display:inline-block}
 .portrait{margin:0;width:clamp(200px,26vw,360px);aspect-ratio:1;border-radius:50%;border:1.5px dashed var(--ink);display:flex;align-items:center;justify-content:center;text-align:center;font:500 13px/1.4 'Hanken Grotesk',sans-serif;color:var(--muted);overflow:hidden;position:relative}
-.portrait img{position:absolute;inset:-1.5px;width:calc(100% + 3px);height:calc(100% + 3px);object-fit:cover;border-radius:50%;opacity:0;transition:opacity .8s var(--ease)}
-.portrait.has-img{border-color:transparent}
-.portrait.has-img img{opacity:1}
+.portrait img{position:absolute;inset:-1.5px;width:calc(100% + 3px);height:calc(100% + 3px);object-fit:cover;border-radius:50%}
+.js .portrait img:not(.kbp-img){opacity:0}
 .portrait.has-img .tbd{visibility:hidden}
+.portrait.has-img:not(.kbp){border-color:transparent}
+.portrait.has-img img:not(.kbp-img){opacity:1}
 @media (max-width:860px){.intro{grid-template-columns:1fr}.portrait{order:-1;width:min(56vw,220px)}}
 
 /* ---------- placeholder tag (visible on purpose, same idea as .ph on the book page) ---------- */
@@ -295,10 +296,10 @@ div.dl-row .dl-n{color:var(--soft)}
 <li><a class="u-link" href="#contact">Contact</a></li>
 </ul>
 </div>
-<!-- PORTRAIT: shows assets/andreas-mitschke-portrait-circle.png once that file exists; until then the dashed placeholder stays. -->
+<!-- PORTRAIT: shows assets/andreas-mitschke-portrait-circle-web.webp (800 px web copy of the round portrait) once that file exists; until then the dashed placeholder stays. -->
 <figure class="portrait">
 <span class="tbd">[Portrait]</span>
-<img src="assets/andreas-mitschke-portrait-circle.png" alt="Portrait of Andreas Mitschke" width="720" height="720" decoding="async">
+<img src="assets/andreas-mitschke-portrait-circle-web.webp" alt="Portrait of Andreas Mitschke" width="800" height="800" decoding="async">
 </figure>
 </section>
 
@@ -617,6 +618,7 @@ div.dl-row .dl-n{color:var(--soft)}
 
 <div class="sr" role="status" aria-live="polite" id="live"></div>
 
+<script src="js/portrait.js"></script>
 <script>
 /* Page behaviour. The function between the KB-INIT markers is also what the design canvas runs. */
 (/*KB-INIT-START*/function (root, flag) {
@@ -725,7 +727,11 @@ div.dl-row .dl-n{color:var(--soft)}
   /* ================================================================ portrait: fades in once the image file exists, otherwise the placeholder stays */
   $$('.portrait img').forEach(function (img) {
     var fig = img.parentNode, ok = function () { if (img.naturalWidth) fig.classList.add('has-img'); }, bad = function () { img.remove(); };
-    if (img.complete) { if (img.naturalWidth) ok(); else bad(); } else { img.addEventListener('load', ok); img.addEventListener('error', bad); }
+    if (img.complete && !img.naturalWidth) { bad(); return; }
+    img.addEventListener('error', bad);
+    /* js/portrait.js (shared with the book page): painted reveal + ink-lens shader. Without it: a plain fade. */
+    if (window.KBPortrait) { window.KBPortrait.attach(fig, img); return; }
+    if (img.complete) ok(); else img.addEventListener('load', ok);
   });
 
   /* ================================================================ copy buttons */
