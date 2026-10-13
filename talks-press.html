@@ -111,9 +111,8 @@ a:not(.fx-on):hover .arw,button:not(.fx-on):hover .arw{transform:translateX(4px)
 .talk{border-bottom:1px solid rgba(17,17,17,.25);position:relative;isolation:isolate}
 .t-glow{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .talk h3{margin:0}
-.t-btn{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:72px minmax(0,1fr) auto 32px;gap:8px 24px;align-items:center;min-height:96px;padding:20px 0}
+.t-btn{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto 32px;gap:8px 24px;align-items:center;min-height:96px;padding:20px 0}
 .t-btn:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
-.t-num{font:italic 400 30px/1 'Bodoni Moda',serif}
 .t-txt{display:flex;flex-direction:column;gap:7px;min-width:0}
 .t-title{font:800 clamp(21px,2.2vw,26px)/1.1 Archivo,sans-serif;letter-spacing:-.01em}
 .t-sub{font:400 16px/1.45 'Hanken Grotesk',sans-serif;color:var(--muted)}
@@ -125,13 +124,13 @@ a:not(.fx-on):hover .arw,button:not(.fx-on):hover .arw{transform:translateX(4px)
 .t-btn:hover .t-title{text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:2px;text-underline-offset:5px}
 .t-panel{overflow:hidden}
 .js:not(.ready) .t-panel{display:none}
-.t-in{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:32px 64px;padding:4px 0 40px 96px}
+.t-in{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:32px 64px;padding:4px 0 40px 0}
 .lab{margin:0 0 10px;font:700 12px/1 'Hanken Grotesk',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .abs{margin:0;font-size:17px;line-height:1.65;text-wrap:pretty}
 .abs-row{display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap}
-.take{margin:0;padding:0;list-style:none;counter-reset:t;display:grid;gap:14px}
-.take li{counter-increment:t;display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;font-size:16px;line-height:1.5}
-.take li::before{content:counter(t);font:italic 400 20px/1.15 'Bodoni Moda',serif}
+.take{margin:0;padding:0;list-style:none;display:grid;gap:14px}
+.take li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;font-size:16px;line-height:1.5}
+.take li::before{content:"";width:14px;height:1.5px;margin-top:.78em;background:var(--ink)}
 .side{display:grid;gap:28px;align-content:start}
 .side p{margin:0;font-size:16px;line-height:1.5}
 .lens{margin:0;display:grid;gap:8px;font-size:16px}
@@ -140,9 +139,9 @@ a:not(.fx-on):hover .arw,button:not(.fx-on):hover .arw{transform:translateX(4px)
 .ctl{all:unset;cursor:pointer;font:600 15px/1 'Hanken Grotesk',sans-serif;padding:14px 0;position:relative}
 .ctl:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 @media (max-width:860px){
-  .t-btn{grid-template-columns:44px minmax(0,1fr) 28px;min-height:84px}
-  .t-fmt{grid-column:2 / 3;justify-content:flex-start;order:3}
-  .t-pm{grid-row:1;grid-column:3}
+  .t-btn{grid-template-columns:minmax(0,1fr) 28px;min-height:84px}
+  .t-fmt{grid-column:1 / 2;justify-content:flex-start;order:3}
+  .t-pm{grid-row:1;grid-column:2}
   .t-in{grid-template-columns:1fr;padding-left:0}
 }
 
@@ -169,16 +168,13 @@ a:not(.fx-on):hover .arw,button:not(.fx-on):hover .arw{transform:translateX(4px)
 
 /* ---------- angles ---------- */
 .angles{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
-.angles li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px 24px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule)}
-.angles .rn{font:italic 400 26px/1 'Bodoni Moda',serif}
+.angles li{padding:22px 0;border-bottom:1px solid var(--rule)}
 .angles p{margin:0;font:400 clamp(20px,2.2vw,26px)/1.35 'Bodoni Moda',serif;text-wrap:balance}
-@media (max-width:600px){.angles li{grid-template-columns:40px minmax(0,1fr)}}
 
 /* ---------- quotes: stacked deck ---------- */
 .qcard{margin:0;display:flex;flex-direction:column;gap:22px;min-height:340px}
 .qcard blockquote{margin:0;flex:1;display:flex;align-items:center}
 .qcard blockquote p{margin:0;font:italic 400 clamp(24px,3vw,38px)/1.3 'Bodoni Moda',serif;text-wrap:balance}
-.qn{font:700 12px/1 'Hanken Grotesk',sans-serif;letter-spacing:.2em;color:var(--muted)}
 .qcard .src{margin:0;font-size:14px;color:var(--muted)}
 .qcard .src i{font-family:'Bodoni Moda',serif}
 .deck{max-width:820px}
@@ -312,18 +308,16 @@ div.dl-row .dl-n{color:var(--soft)}
 <section id="talks" class="sec rv" aria-labelledby="h-talks">
 <div class="sec-head">
 <div>
-<p class="eyebrow">Four talks</p>
-<h2 class="h2" id="h-talks">Each tailored to the audience and industry.</h2>
+<h2 class="h2" id="h-talks">Keynotes &amp; Sessions</h2>
 </div>
 <button type="button" class="ctl u-link" id="toggle-all" aria-controls="talk-1-p talk-2-p talk-3-p talk-4-p">Expand all</button>
 </div>
 
-<ol class="talks">
+<ul class="talks">
 
 <li class="talk">
 <span class="t-glow" aria-hidden="true"></span>
 <h3><button type="button" class="t-btn" aria-expanded="true" aria-controls="talk-1-p" id="talk-1-b">
-<span class="t-num" aria-hidden="true">01</span>
 <span class="t-txt"><span class="t-title">Known before built</span><span class="t-sub">How enterprises decide what is worth building, before the big budget is spent</span></span>
 <span class="t-fmt"><span class="chip">Keynote</span><span class="chip">Executive session</span><span class="chip">Guest lecture</span></span>
 <svg class="t-pm" aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/><line class="bar" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -337,12 +331,12 @@ div.dl-row .dl-n{color:var(--soft)}
 </div>
 <div class="side">
 <div><p class="lab">Takeaways</p>
-<ol class="take">
+<ul class="take">
 <li>Why the build cost is the cheapest part of a wrong decision, and the four cost layers (implementation, carrying, displacement, correction) that never appear in the business case.</li>
 <li>A staged path from first signal to investment decision, with clear decision rights at each gate: continue, hold, pivot or kill.</li>
 <li>How to answer “Why can’t we just ship it?” with a number instead of an opinion.</li>
-</ol></div>
-<div><p class="lab">Audience</p><p>Executive teams, CEOs and COOs of industrial, consulting and professional-services firms, CPOs, heads of innovation and transformation, investment committees.</p></div>
+</ul></div>
+<div><p class="lab">Audience</p><p>Executive teams, CEOs and COOs of industrial, consulting and professional-services firms, CPOs, executive roles in product, innovation and transformation, investment committees.</p></div>
 <div><p class="lab">Lengths</p><dl class="lens"><div><dt>Keynote</dt><dd>30 or 45 min</dd></div><div><dt>Executive session</dt><dd>90 min</dd></div><div><dt>Guest lecture</dt><dd>60–90 min</dd></div></dl></div>
 </div>
 </div>
@@ -352,7 +346,6 @@ div.dl-row .dl-n{color:var(--soft)}
 <li class="talk">
 <span class="t-glow" aria-hidden="true"></span>
 <h3><button type="button" class="t-btn" aria-expanded="true" aria-controls="talk-2-p" id="talk-2-b">
-<span class="t-num" aria-hidden="true">02</span>
 <span class="t-txt"><span class="t-title">The AI productivity fallacy</span><span class="t-sub">Why engineering speed was never the bottleneck, and what is</span></span>
 <span class="t-fmt"><span class="chip">Keynote</span><span class="chip">Fireside</span><span class="chip">Panel</span></span>
 <svg class="t-pm" aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/><line class="bar" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -366,12 +359,12 @@ div.dl-row .dl-n{color:var(--soft)}
 </div>
 <div class="side">
 <div><p class="lab">Takeaways</p>
-<ol class="take">
+<ul class="take">
 <li>Why output metrics (velocity, commits, features shipped) mislead boards about AI returns, and which outcome measures to track instead.</li>
 <li>The electric-motor lesson from economist Paul David: gains come from redesigning the system around a tool, not from the tool.</li>
 <li>Why AI removes engineering as product’s alibi, and what that means for accountability in the leadership team.</li>
-</ol></div>
-<div><p class="lab">Audience</p><p>CEOs, CTOs, CPOs, CFOs and boards sponsoring AI programs; main stages at AI, digital transformation and industry conferences.</p></div>
+</ul></div>
+<div><p class="lab">Audience</p><p>Leadership, executives, sponsors and budget holders for AI programs; stages for AI, digital transformation, innovation.</p></div>
 <div><p class="lab">Lengths</p><dl class="lens"><div><dt>Keynote</dt><dd>20, 30 or 45 min</dd></div><div><dt>Fireside</dt><dd>30–45 min</dd></div><div><dt>Panel</dt><dd>45–60 min</dd></div></dl></div>
 </div>
 </div>
@@ -381,7 +374,6 @@ div.dl-row .dl-n{color:var(--soft)}
 <li class="talk">
 <span class="t-glow" aria-hidden="true"></span>
 <h3><button type="button" class="t-btn" aria-expanded="true" aria-controls="talk-3-p" id="talk-3-b">
-<span class="t-num" aria-hidden="true">03</span>
 <span class="t-txt"><span class="t-title">Stop asking customers what they think</span><span class="t-sub">Customer research that predicts what people will actually do</span></span>
 <span class="t-fmt"><span class="chip">Workshop</span><span class="chip">Guest lecture</span></span>
 <svg class="t-pm" aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/><line class="bar" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -395,12 +387,12 @@ div.dl-row .dl-n{color:var(--soft)}
 </div>
 <div class="side">
 <div><p class="lab">Takeaways</p>
-<ol class="take">
+<ul class="take">
 <li>The evidence hierarchy: reported behavior beats opinion, and observed behavior beats both.</li>
 <li>Interview question patterns that pull out past behavior, workarounds and spend instead of predictions.</li>
 <li>How to set confirming and disconfirming behaviors before the interview, so findings cannot be bent to fit the plan.</li>
-</ol></div>
-<div><p class="lab">Audience</p><p>Product managers, UX and market researchers, innovation and venture-building teams, consultants moving into product roles, and the leaders who sign off on their research.</p></div>
+</ul></div>
+<div><p class="lab">Audience</p><p>From COOs to Product managers, UX and market researchers, innovation and venture-building teams including corporate venture building, and the leaders who sign off on their research.</p></div>
 <div><p class="lab">Lengths</p><dl class="lens"><div><dt>Workshop</dt><dd>90 min or half day</dd></div><div><dt>Guest lecture</dt><dd>60–90 min</dd></div></dl></div>
 </div>
 </div>
@@ -410,7 +402,6 @@ div.dl-row .dl-n{color:var(--soft)}
 <li class="talk">
 <span class="t-glow" aria-hidden="true"></span>
 <h3><button type="button" class="t-btn" aria-expanded="true" aria-controls="talk-4-p" id="talk-4-b">
-<span class="t-num" aria-hidden="true">04</span>
 <span class="t-txt"><span class="t-title">One growth engine</span><span class="t-sub">Marketing and product experiments that move revenue, long after launch</span></span>
 <span class="t-fmt"><span class="chip">Fireside</span><span class="chip">Panel</span></span>
 <svg class="t-pm" aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/><line class="bar" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -424,32 +415,31 @@ div.dl-row .dl-n{color:var(--soft)}
 </div>
 <div class="side">
 <div><p class="lab">Takeaways</p>
-<ol class="take">
+<ul class="take">
 <li>Why growth that stops at marketing leaves most revenue levers untouched: activation, pricing, adoption and retention live in the product.</li>
 <li>How growth and product split the work after launch: product owns discovery and delivery, growth experiments on what is live, each with its own backlog.</li>
 <li>How growth gets enough involvement in feature development to run product experiments without becoming a second product team.</li>
-</ol></div>
-<div><p class="lab">Audience</p><p>CMOs, CROs, CPOs, heads of growth and marketing; B2B, SaaS and growth conferences.</p></div>
+</ul></div>
+<div><p class="lab">Audience</p><p>CMOs, CROs, CPOs, VP/Director/Heads of growth, product and marketing; B2B, SaaS and growth conferences.</p></div>
 <div><p class="lab">Lengths</p><dl class="lens"><div><dt>Fireside</dt><dd>30–45 min</dd></div><div><dt>Panel</dt><dd>45–60 min</dd></div></dl></div>
 </div>
 </div>
 </div>
 </li>
 
-</ol>
+</ul>
 </section>
 
 <!-- 3 · FORMATS -->
 <section id="formats" class="sec rv" aria-labelledby="h-formats">
 <div class="sec-head"><div>
-<p class="eyebrow">Formats and lengths</p>
-<h2 class="h2" id="h-formats">From a 20-minute keynote to a half-day workshop.</h2>
+<h2 class="h2" id="h-formats">Formats</h2>
 </div></div>
 <dl class="fmts">
 <div class="fmt"><dt>Keynote</dt><dd class="len">20, 30 or 45 min</dd></div>
 <div class="fmt"><dt>Fireside chat</dt><dd class="len">30–45 min</dd></div>
 <div class="fmt"><dt>Panel</dt><dd class="len">45–60 min</dd><dd class="note">As one of 3–5 panellists</dd></div>
-<div class="fmt"><dt>Executive session</dt><dd class="len">90 min</dd><dd class="note">Leadership team, up to ~15</dd></div>
+<div class="fmt"><dt>Executive session</dt><dd class="len">90 min</dd><dd class="note">Leadership team, up to ~8</dd></div>
 <div class="fmt"><dt>Workshop</dt><dd class="len">90 min or half day</dd><dd class="note">Up to ~30 participants</dd></div>
 <div class="fmt"><dt>Guest lecture</dt><dd class="len">60–90 min</dd><dd class="note">MBA and executive education</dd></div>
 </dl>
@@ -459,8 +449,7 @@ div.dl-row .dl-n{color:var(--soft)}
 <!-- 4 · BIOS -->
 <section id="bios" class="sec rv" aria-labelledby="h-bios">
 <div class="sec-head"><div>
-<p class="eyebrow">Bios</p>
-<h2 class="h2" id="h-bios">For programmes, show notes and introductions.</h2>
+<h2 class="h2" id="h-bios">Biographies</h2>
 </div></div>
 <div class="bios">
 <article class="sheet">
@@ -483,13 +472,13 @@ div.dl-row .dl-n{color:var(--soft)}
 </div>
 <button type="button" class="copy" data-copy="angle-list" data-what="Conversation angles"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy all angles</span></button>
 </div>
-<ol class="angles" id="angle-list">
-<li><span class="rn" aria-hidden="true">i.</span><p>Why knowledge-rich companies struggle to turn their expertise into products</p></li>
-<li><span class="rn" aria-hidden="true">ii.</span><p>Why the consulting habit of saying yes to every client stalls productization</p></li>
-<li><span class="rn" aria-hidden="true">iii.</span><p>What “Why can’t we just ship it?” really costs</p></li>
-<li><span class="rn" aria-hidden="true">iv.</span><p>Why faster engineering with AI hasn’t produced better products</p></li>
-<li><span class="rn" aria-hidden="true">v.</span><p>What to ask customers instead of their opinion</p></li>
-</ol>
+<ul class="angles" id="angle-list">
+<li><p>Why knowledge-rich companies struggle to turn their expertise into products</p></li>
+<li><p>Why the consulting habit of saying yes to every client stalls productization</p></li>
+<li><p>What “Why can’t we just ship it?” really costs</p></li>
+<li><p>Why faster engineering with AI hasn’t produced better products</p></li>
+<li><p>What to ask customers instead of their opinion</p></li>
+</ul>
 </section>
 
 <!-- 6 · QUOTES: a stacked deck. Without JS the cards simply list one under another. -->
@@ -504,67 +493,56 @@ div.dl-row .dl-n{color:var(--soft)}
 <div class="deck" id="quote-deck" role="region" aria-roledescription="carousel" aria-label="Quotes from Known Before Built">
 <div class="deck-stage" id="deck-stage">
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 1 of 11">
-<span class="qn" aria-hidden="true">01</span>
 <blockquote id="q-1"><p>“Opinions describe what people believe they would do. Behavior shows what they did. Reported behavior beats opinion, and observed behavior beats both.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-1" data-cite="1" data-what="Quote 1"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 2 of 11">
-<span class="qn" aria-hidden="true">02</span>
 <blockquote id="q-2"><p>“Discovery is cheap. Correction is expensive.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-2" data-cite="1" data-what="Quote 2"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 3 of 11">
-<span class="qn" aria-hidden="true">03</span>
 <blockquote id="q-3"><p>“They are the rock stars. You are their fan.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-3" data-cite="1" data-what="Quote 3"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 4 of 11">
-<span class="qn" aria-hidden="true">04</span>
 <blockquote id="q-4"><p>“AI has made building cheaper. It has not made finding the right thing to build easier.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-4" data-cite="1" data-what="Quote 4"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 5 of 11">
-<span class="qn" aria-hidden="true">05</span>
 <blockquote id="q-5"><p>“The team keeps building. The product stops growing.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-5" data-cite="1" data-what="Quote 5"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 6 of 11">
-<span class="qn" aria-hidden="true">06</span>
 <blockquote id="q-6"><p>“The feature factory is running faster, but it remains a feature factory.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-6" data-cite="1" data-what="Quote 6"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 7 of 11">
-<span class="qn" aria-hidden="true">07</span>
 <blockquote id="q-7"><p>“We cannot ask our way to behavioral truth. We can only observe it.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-7" data-cite="1" data-what="Quote 7"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 8 of 11">
-<span class="qn" aria-hidden="true">08</span>
 <blockquote id="q-8"><p>“The status quo wins not because it is so good, but because switching is expensive in ways that do not appear on a pricing page.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-8" data-cite="1" data-what="Quote 8"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 9 of 11">
-<span class="qn" aria-hidden="true">09</span>
 <blockquote id="q-9"><p>“Workarounds don’t lie.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-9" data-cite="1" data-what="Quote 9"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 10 of 11">
-<span class="qn" aria-hidden="true">10</span>
 <blockquote id="q-10"><p>“An organization where killing a hypothesis carries career risk is an organization where bad ideas survive to production.”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-10" data-cite="1" data-what="Quote 10"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
 </figure>
 <figure class="sheet qcard" role="group" aria-roledescription="slide" aria-label="Quote 11 of 11">
-<span class="qn" aria-hidden="true">11</span>
 <blockquote id="q-11"><p>“When did your organization last kill a product on evidence and call it a success?”</p></blockquote>
 <figcaption class="src">Andreas Mitschke, <i>Known Before Built</i></figcaption>
 <div><button type="button" class="copy sm" data-copy="q-11" data-cite="1" data-what="Quote 11"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy quote</span></button></div>
@@ -574,7 +552,6 @@ div.dl-row .dl-n{color:var(--soft)}
 <button type="button" class="deck-btn" id="deck-prev" aria-controls="deck-stage"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 9H3M7.5 4.5 3 9l4.5 4.5"/></svg><span class="sr">Previous quote</span></button>
 <p class="deck-count" id="deck-count" aria-live="polite"><b>01</b> / 11</p>
 <button type="button" class="deck-btn" id="deck-next" aria-controls="deck-stage"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h12M10.5 4.5 15 9l-4.5 4.5"/></svg><span class="sr">Next quote</span></button>
-<p class="deck-hint">Swipe, or use the arrow keys</p>
 </div>
 </div>
 </section>
@@ -584,16 +561,14 @@ div.dl-row .dl-n{color:var(--soft)}
      The headshot row is a placeholder until assets/press/andreas-mitschke-headshot.jpg exists; then it becomes a link by itself. -->
 <section id="downloads" class="sec rv" aria-labelledby="h-downloads">
 <div class="sec-head"><div>
-<p class="eyebrow">Downloads</p>
 <h2 class="h2" id="h-downloads">Press kit.</h2>
 </div></div>
 <ul class="dl">
 <li><div class="dl-row" data-src="assets/andreas-mitschke-portrait-square.jpg" data-kind="JPG"><span><span class="dl-n">Portrait, square</span><span class="dl-d">1920 × 1920 px, for programmes, posters and articles</span></span><span class="dl-m"><span class="tbd">Placeholder</span></span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></div></li>
 <li><div class="dl-row" data-src="assets/andreas-mitschke-portrait-circle.png" data-kind="PNG"><span><span class="dl-n">Portrait, round cut-out</span><span class="dl-d">Transparent background, for speaker grids and event pages</span></span><span class="dl-m"><span class="tbd">Placeholder</span></span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></div></li>
 <li><a class="dl-row" href="assets/book-front.jpg" download="known-before-built-cover-front.jpg" data-goatcounter-click="press-cover-front"><span><span class="dl-n">Book cover, front</span><span class="dl-d">760 × 1216 px</span></span><span class="dl-m" data-size>JPG · 103 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
-<li><div class="dl-row" data-src="assets/press/Speaker%20one-sheet.pdf" data-name="andreas-mitschke-speaker-one-sheet.pdf" data-kind="PDF"><span><span class="dl-n">Speaker one-sheet</span><span class="dl-d">Four talks, formats and bio on one page</span></span><span class="dl-m"><span class="tbd">Placeholder</span></span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></div></li>
 <li><a class="dl-row" href="assets/press/Book%20%26%20media%20one-sheet.pdf" download="known-before-built-media-one-sheet.pdf" data-goatcounter-click="press-known-before-built-media-one-sheet"><span><span class="dl-n">Book and media one-sheet</span><span class="dl-d">Synopsis, conversation angles, quotes and author bio</span></span><span class="dl-m" data-size>PDF · 903 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
-<li><a class="dl-row" href="assets/press/Talks%20%C2%B7%20overview.pdf" download="andreas-mitschke-talks-overview.pdf" data-goatcounter-click="press-andreas-mitschke-talks-overview"><span><span class="dl-n">Talks overview</span><span class="dl-d">All four talks, formats and lengths, and bio</span></span><span class="dl-m" data-size>PDF · 698 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
+<li><a class="dl-row" href="assets/press/Talks%20%C2%B7%20overview.pdf" download="andreas-mitschke-talks-overview.pdf" data-goatcounter-click="press-andreas-mitschke-talks-overview"><span><span class="dl-n">Talks overview</span><span class="dl-d">Talk topics, formats and lengths, and bio</span></span><span class="dl-m" data-size>PDF · 698 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
 <li><a class="dl-row" href="assets/press/Talk%201%20%C2%B7%20Known%20before%20built.pdf" download="talk-01-known-before-built.pdf" data-goatcounter-click="press-talk-01-known-before-built"><span><span class="dl-n">Talk 01 · Known before built</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 637 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
 <li><a class="dl-row" href="assets/press/Talk%202%20%C2%B7%20AI%20productivity%20fallacy.pdf" download="talk-02-the-ai-productivity-fallacy.pdf" data-goatcounter-click="press-talk-02-the-ai-productivity-fallacy"><span><span class="dl-n">Talk 02 · The AI productivity fallacy</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 581 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
 <li><a class="dl-row" href="assets/press/Talk%203%20%C2%B7%20Stop%20asking%20customers.pdf" download="talk-03-stop-asking-customers-what-they-think.pdf" data-goatcounter-click="press-talk-03-stop-asking-customers-what-they-think"><span><span class="dl-n">Talk 03 · Stop asking customers what they think</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 618 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
@@ -745,7 +720,7 @@ div.dl-row .dl-n{color:var(--soft)}
   function textOf(id, cite) {
     var el = root.querySelector('#' + id); if (!el) return '';
     if (el.classList.contains('deck')) return Array.prototype.map.call(el.querySelectorAll('blockquote'), function (b) { return b.textContent.replace(/\s+/g, ' ').trim(); }).join('\n\n') + '\n\n— Andreas Mitschke, Known Before Built';
-    if (el.tagName === 'OL') return Array.prototype.map.call(el.querySelectorAll('p'), function (p) { return '— ' + p.textContent.trim(); }).join('\n');
+    if (el.classList.contains('angles')) return Array.prototype.map.call(el.querySelectorAll('p'), function (p) { return '— ' + p.textContent.trim(); }).join('\n');
     var t = el.textContent.replace(/\s+/g, ' ').trim();
     return cite ? t + '\n— Andreas Mitschke, Known Before Built' : t;
   }
