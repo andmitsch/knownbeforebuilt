@@ -93,20 +93,8 @@ class Component extends DCLogic {
   }
   componentDidMount() { this.wt0 = performance.now(); this.waveFrame(this.wt0); this.tiltInit(); }
   tiltInit() {
+    // Phone tilt (gyroscope) removed: it made iPhones ask for motion permission. The iceberg still follows the mouse and dragging.
     const B = this.berg; B.tilt = 0; B.tiltY = 0;
-    this.tiltH = (e) => {
-      if (e.gamma == null) return;
-      const ang = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
-      let g = e.gamma, b = (e.beta || 0) - 40;
-      if (ang === 90) { g = -(e.beta || 0); b = e.gamma; } else if (ang === -90 || ang === 270) { g = e.beta || 0; b = -e.gamma; }
-      B.tilt = Math.max(-1, Math.min(1, g / 30)); B.tiltY = Math.max(-1, Math.min(1, b / 40));
-    };
-    const start = () => { window.addEventListener('deviceorientation', this.tiltH); };
-    const DOE = window.DeviceOrientationEvent;
-    if (DOE && typeof DOE.requestPermission === 'function') {
-      const ask = () => { document.removeEventListener('touchend', ask); DOE.requestPermission().then((r) => { if (r === 'granted') start(); }).catch(() => {}); };
-      document.addEventListener('touchend', ask, { once: true });
-    } else if (DOE) start();
   }
   componentWillUnmount() { if (this.visIO) this.visIO.disconnect(); if (this.bergPM) { document.removeEventListener('pointermove', this.bergPM); document.removeEventListener('mousemove', this.bergPM); } if (this.fxDoc) { document.removeEventListener('pointermove', this.fxDoc); document.removeEventListener('mousemove', this.fxDoc); } if (this.tiltH) window.removeEventListener('deviceorientation', this.tiltH); cancelAnimationFrame(this.raf); this.raf = 0; cancelAnimationFrame(this.wraf); this.wraf = 0; }
   componentDidUpdate() { if (this.ctxs.length && !this.raf) this.frame(performance.now()); if (!this.wraf) this.waveFrame(performance.now()); }
