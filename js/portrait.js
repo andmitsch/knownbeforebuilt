@@ -6,7 +6,10 @@
  *    placeholder ring fades as the wave reaches it. It resets once the portrait has left the screen
  *    completely, so the drop falls again on every return.
  * 2. Interaction: moving over the photo swells it gently towards the pointer and warms it with the
- *    site's orange; a click sends the same wave out from that point.
+ *    site's orange; a click sends the same wave out from that point. Hovering the andreasmitschke.com
+ *    link (or any link marked data-portrait-wave) sends a wave in from the side the link is on.
+ *    Hover effects (over the photo, and the link wave) bend the image only, without orange; the reveal
+ *    and the click keep their orange crest.
  * The whole thing is one WebGL shader drawing the photo, so there is no swap between an image and the
  * effect. Without WebGL, or with reduced motion: the plain image fades in, no effect.
  *
@@ -38,7 +41,7 @@
     'uniform sampler2D tex;',
     'uniform vec2 mouse;',
     'uniform float hover,time,front,settle;', // front: radius of the reveal wave (0 to .8); settle: 1 while it rolls, fades to 0
-    'uniform vec4 rip[3];',                   // click waves: x, y, age (s), alive
+    'uniform vec4 rip[3];',                   // waves: x, y, age (s), strength (0 = none, 1 = click; negative = no orange)
     'void main(){',
     '  vec2 uv=v;',
     '  vec2 d=uv-mouse; float r2=dot(d,d);',
@@ -52,13 +55,13 @@
     '  disp+=normalize(qc+1e-5)*(crest*0.03+trail*0.006);',
     '  ring+=crest*.9;',
     '  for(int i=0;i<3;i++){',
-    '    vec4 R=rip[i]; if(R.w<.5) continue;',
+    '    vec4 R=rip[i]; float st=abs(R.w); if(st<.5) continue;',
     '    vec2 q=uv-R.xy; float dist=length(q); float rad=R.z*.62;',
     '    float w=exp(-pow((dist-rad)*20.,2.))*max(0.,1.-R.z/1.3);',
-    '    disp+=normalize(q+1e-5)*w*0.018; ring+=w;',
+    '    disp+=normalize(q+1e-5)*w*0.018*st; ring+=w*min(st,1.6)*step(0.,R.w);',
     '  }',
     '  vec4 c=texture2D(tex,uv+disp);',
-    '  float glow=hover*exp(-r2*9.);',
+    '  float glow=0.;', // hover warmth off: hover only bends the photo
     '  vec3 warm=c.rgb*vec3(1.,.9,.8)+vec3(.96,.44,.02)*.22;',
     '  c.rgb=mix(c.rgb,warm*c.a,clamp(glow*.38+ring*.4,0.,1.));',
     '  float shown=1.-smoothstep(front-.03,front+.006,dc);', // only what the wave has passed is visible
@@ -103,7 +106,7 @@
     function draw(now) {
       var arr = new Float32Array(12);
       S.rips = S.rips.filter(function (r) { return now - r.t < 1300; }).slice(-3);
-      S.rips.forEach(function (r, i) { arr[i * 4] = r.x; arr[i * 4 + 1] = r.y; arr[i * 4 + 2] = (now - r.t) / 1000; arr[i * 4 + 3] = 1; });
+      S.rips.forEach(function (r, i) { if (now < r.t) return; arr[i * 4] = r.x; arr[i * 4 + 1] = r.y; arr[i * 4 + 2] = (now - r.t) / 1000; arr[i * 4 + 3] = r.s || 1; });
       gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform2f(U.mouse, S.mx, S.my); gl.uniform1f(U.hover, S.h); gl.uniform1f(U.time, (now - S.t0) / 1000);
       gl.uniform1f(U.front, S.front); gl.uniform1f(U.settle, S.settle); gl.uniform4fv(U.rip, arr);
@@ -153,6 +156,12 @@
         S.rv = { t0: performance.now(), onHalf: onHalf, onDone: onDone, half: false };
         draw(performance.now()); kick();
       },
+      /* a wave that starts at uv point (x, y); points outside 0..1 roll in from that side */
+      wave: function (x, y, delay, strength) {
+        if (!S.live) return false; /* also during the reveal: the waves simply overlap */
+        var t = performance.now() + (delay || 0);
+        S.rips.push({ x: x, y: y, t: t, s: strength || 1 }); kick(); return true;
+      },
       reset: function () { S.live = false; S.rv = null; S.front = 0; S.settle = 0; S.h = S.ht = 0; S.rips = []; cancelAnimationFrame(S.raf); S.raf = 0; draw(performance.now()); }
     };
   }
@@ -184,6 +193,20 @@
       void box.offsetWidth; box.classList.remove('kbp-reset');
     }
     function ok() { if (!img.naturalWidth) return; loaded = true; go(); }
+    /* Links marked data-portrait-wave (or the andreasmitschke.com link): hovering or focusing one sends
+       a wave into the portrait from the edge that faces the link. */
+    function waveFrom(el) {
+      if (!fx || !shown) return;
+      var r = box.getBoundingClientRect(), l = el.getBoundingClientRect();
+      var dx = (l.left + l.width / 2) - (r.left + r.width / 2), dy = (l.top + l.height / 2) - (r.top + r.height / 2);
+      var d = Math.hypot(dx, dy) || 1, ux = 0.5 + dx / d * 0.5, uy = 0.5 + dy / d * 0.5;
+      if (fx.wave(ux, uy, 0, -2.2)) fx.wave(ux, uy, 240, -1.3); /* negative strength: ripple without orange */
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-portrait-wave], a[href*="andreasmitschke"]'), function (el) {
+      if (el.__kbpWave) return; el.__kbpWave = true;
+      el.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') waveFrom(el); });
+      el.addEventListener('focus', function () { waveFrom(el); });
+    });
     if (img.complete) ok(); else img.addEventListener('load', ok);
     if ('IntersectionObserver' in window && !reduce) {
       var io = new IntersectionObserver(function (es) {
