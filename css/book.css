@@ -334,3 +334,170 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 .footer-footer{position: absolute; left: 80px; top: 1240px; width: 1280px; height: 60px; border-top: 1px solid rgba(17,17,17,0.25); display: flex; align-items: center; justify-content: space-between; font: 400 14px/1 'Hanken Grotesk', sans-serif}
 .footer-label{display: flex; align-items: center; gap: 7px; color: #3F3B37}
 .footer-box{display: flex; gap: 28px}
+
+/* ==== Phone layout ======================================================================
+   html.kb-m is set by js/head.js on phones (or with ?m=1). The desktop page above is drawn
+   at 1440 px with absolute positions; here every section becomes a single column. The
+   Product Decision System runs top to bottom, and its live stream canvas is the desktop
+   one turned 90° (same shader, same motion), so nothing of the animation is lost. */
+.pds-mconn{display:none}
+html.kb-m #kb-page{width:auto}
+html.kb-m .tpl-main-box,html.kb-m .tpl-main2-box{width:auto;height:auto}
+html.kb-m sub{font-size:.6em}
+
+/* nav */
+html.kb-m .nav-nav{height:64px;padding:0 20px}
+html.kb-m .nav-link{gap:5px}
+html.kb-m .nav-label{font-size:14px}
+html.kb-m .nav-label-2{font-size:15px}
+html.kb-m .nav-box{gap:16px;font-size:14px}
+html.kb-m .nav-nav .nav-link-3{display:none}
+
+/* hero */
+html.kb-m .top-section{height:auto;padding:20px 20px 64px;overflow:hidden}
+html.kb-m .top-box{left:auto;right:-118px;top:-6px;width:280px;height:293px;pointer-events:none}
+html.kb-m .top-img{width:280px;height:auto}
+html.kb-m .top-img-2{left:18px;top:-21px;width:280px;height:auto}
+html.kb-m .top-box-2{position:relative;left:auto;top:auto;width:auto}
+html.kb-m .top-label,html.kb-m .top-label-5{font-size:clamp(60px,20.5vw,128px)}
+html.kb-m .top-label-2{gap:14px;margin:8px 0 8px 2px}
+html.kb-m .top-label-3{width:15vw}
+html.kb-m .top-label-4{font-size:clamp(40px,14.5vw,80px)}
+html.kb-m .top-text{width:auto;margin-top:26px;font-size:23px;line-height:1.3}
+html.kb-m .top-text-2{font-size:16px;line-height:1.55;margin-top:14px}
+html.kb-m .top-box-3{margin-top:28px}
+
+/* is this you */
+html.kb-m .section-section{height:auto;padding:8px 20px 64px}
+html.kb-m .section-title{position:static;font-size:40px}
+html.kb-m .section-box{position:static;width:auto;grid-template-columns:1fr;gap:30px;margin-top:30px}
+html.kb-m .section-text{font-size:17px}
+
+/* get the book */
+html.kb-m .get-section{height:auto;padding:52px 20px 60px;display:flex;flex-direction:column;align-items:center}
+html.kb-m .kbstage{--w:216px;--h:346px;--t:30px}
+html.kb-m .get-box{position:relative;left:auto;top:auto;margin:0 0 92px}
+html.kb-m .kbhint{bottom:-66px;font-size:14px}
+html.kb-m .get-box-2{position:static;width:auto;align-self:stretch;gap:18px}
+html.kb-m .get-title{margin-top:0;gap:8px}
+html.kb-m .get-label{font-size:38px}
+html.kb-m .get-label-2{font-size:36px}
+html.kb-m .get-text{font-size:20px}
+html.kb-m .get-box-4{flex-direction:column;align-items:flex-start;gap:18px}
+
+/* cost of building blindly */
+html.kb-m .section-section-2{height:auto;padding:60px 20px 0}
+html.kb-m .section-text-2{position:static;font-size:13px}
+html.kb-m .section-title-2{position:static;width:auto;margin-top:14px;font-size:35px;line-height:1.06}
+
+/* iceberg: figure on top, the five cost layers as a list below */
+html.kb-m .system-section{height:auto;padding:440px 0 44px;overflow:hidden}
+html.kb-m .system-svg{left:calc(100% - 300px);top:40px;width:300px;height:328px;transform-origin:150px 70px}
+html.kb-m .system-svg-2{top:95px}
+html.kb-m .system-text{left:20px;top:78px;width:110px;line-height:1.35}
+html.kb-m .system-text-2{left:20px;top:122px;width:110px;line-height:1.35}
+html.kb-m .system-box{left:calc(100% - 300px + 135px);top:18px;width:28px;height:28px}
+html.kb-m .system-box svg{width:28px;height:28px}
+html.kb-m .system-box-3,html.kb-m .system-box-4,html.kb-m .system-box-5,html.kb-m .system-box-6,html.kb-m .system-box-7{display:none}
+html.kb-m .system-text-6{left:0;top:384px;width:100%;font-size:23px}
+html.kb-m .system-box-2,html.kb-m .system-box-8,html.kb-m .system-box-9,html.kb-m .system-box-10,html.kb-m .system-box-11{position:relative;left:auto;top:auto;width:auto;margin:0 20px;padding:16px 0 16px 38px;border-top:1px solid rgba(17,17,17,.2)}
+html.kb-m .system-box-11{border-bottom:1px solid rgba(17,17,17,.2)}
+html.kb-m .system-box-2::before,html.kb-m .system-box-8::before,html.kb-m .system-box-9::before,html.kb-m .system-box-10::before,html.kb-m .system-box-11::before{content:"";position:absolute;left:0;top:18px;width:20px;height:20px;box-sizing:border-box;border:1.5px solid #111111;background:#ECE8E5}
+html.kb-m .system-box-8::before{background:rgba(245,113,6,.12)}
+html.kb-m .system-box-9::before{background:rgba(245,113,6,.26)}
+html.kb-m .system-box-10::before{background:rgba(245,113,6,.42);border-style:dashed}
+html.kb-m .system-box-11::before{background:rgba(245,113,6,.62)}
+html.kb-m .system-label{font-size:20px}
+html.kb-m .system-label-3{font-size:18px}
+html.kb-m .system-text-4,html.kb-m .system-text-5{max-width:none}
+
+/* net value of validation */
+html.kb-m .section-section-3{height:auto;padding:228px 20px 60px;overflow:hidden}
+html.kb-m .section-box-2{height:auto;top:0;bottom:0}
+html.kb-m .section-label-2{left:74%;top:34px;font-size:22px}
+html.kb-m .section-label-3{left:88%;top:150px;font-size:22px}
+html.kb-m .section-label-4{left:8%;top:150px;font-size:22px}
+html.kb-m .section-label-5{left:62%;top:auto;bottom:22px;font-size:15px}
+html.kb-m .section-label-6{left:24%;top:46px;font-size:22px}
+html.kb-m .section-label-7{left:6%;top:auto;bottom:16px;font-size:15px}
+html.kb-m .section-label-8{display:none}
+html.kb-m .section-label-9{left:40%;top:12px;font-size:15px}
+html.kb-m .section-svg{left:calc(50% - 75px);top:44px;width:150px;height:164px;transform-origin:75px 35px}
+html.kb-m .section-svg-2{left:calc(50% - 130px);top:76px;width:260px;height:8px}
+html.kb-m .section-box-3{position:relative;left:auto;top:auto;width:auto;height:auto;gap:22px}
+html.kb-m .section-heading{font-size:13px;line-height:1.3}
+html.kb-m .section-title-3{font-size:27px;line-height:1.5;height:auto}
+html.kb-m .section-mark{padding:0 10px}
+html.kb-m .section-text-3{font-size:18px;line-height:1.6;white-space:normal}
+html.kb-m .section-text-4{font-size:15px;line-height:1.45;width:auto}
+
+/* outcomes */
+html.kb-m .section-section-4{height:auto;padding:52px 20px 64px}
+html.kb-m .section-title-4{width:auto;font-size:34px}
+html.kb-m .section-text-5{margin-top:26px;font-size:26px}
+
+/* the Product Decision System, vertical. Diagram origin: (--ox, --oy); 360 px wide. */
+html.kb-m .section-section-5{--ox:calc(50% - 180px);--oy:190px;height:1100px;overflow:hidden}
+html.kb-m .section-text-6{left:20px;top:44px;font-size:12px}
+html.kb-m .section-title-5{left:20px;right:20px;top:68px;font-size:31px;line-height:1.08}
+html.kb-m .pds-light,html.kb-m .pds-sparks{left:var(--ox);top:var(--oy);width:360px;height:700px}
+html.kb-m .pds-conn,html.kb-m .section-label-12,html.kb-m .section-label-13,html.kb-m .section-label-14,html.kb-m .section-label-15,html.kb-m .section-label-16,html.kb-m .section-label-17{display:none}
+html.kb-m .pds-mconn{display:block;position:absolute;left:var(--ox);top:var(--oy);overflow:visible;pointer-events:none}
+html.kb-m .section-box-7{left:var(--ox);top:var(--oy);width:360px;height:700px}
+html.kb-m .section-box-8{left:265.25px;top:139px;width:1.5px;height:396px}
+html.kb-m .section-box-9{left:265.25px;top:559px;width:0;height:50px;border-top:0;border-left:1.5px dashed #8E8984}
+html.kb-m .section-box-10{left:221px;top:49px;width:90px;height:90px}
+html.kb-m .section-box-11{left:13px;top:13px;width:64px;height:64px}
+html.kb-m .section-label-11{font-size:12px}
+html.kb-m .section-box-12{left:182px;top:179px;width:168px;height:52px;font-size:15px}
+html.kb-m .section-box-13{left:206px;top:291px;width:120px;height:48px;font-size:15px}
+html.kb-m .section-box-14{left:182px;top:399px;width:168px;height:52px;font-size:15px}
+html.kb-m .section-box-15{left:173px;top:511px;width:186px;height:48px;font-size:13px;letter-spacing:.02em;white-space:nowrap}
+html.kb-m .section-text-7{left:206px;top:618px;width:120px;text-align:center;transform:none}
+/* the stream: the desktop canvas, scaled 0.62 and turned 90° clockwise. Desktop point (x, y) lands at
+   (ox + 95 − 0.62·(y − 610), oy + 10 + 0.62·x), so the feed curve still meets the Hypothesis diamond. */
+html.kb-m .section-box-16,html.kb-m .section-svg-4,html.kb-m .section-svg-5{top:calc(var(--oy) + 10px);transform-origin:0 0;transform:rotate(90deg) scale(.62)}
+html.kb-m .section-box-16{left:calc(var(--ox) + 95px)}
+html.kb-m .section-svg-4{left:calc(var(--ox) + 83.84px)}
+html.kb-m .section-svg-5{left:calc(var(--ox) + 14.4px)}
+html.kb-m .section-canvas,html.kb-m .section-svg-4,html.kb-m .section-svg-5,html.kb-m .section-svg-6{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 70px,#000 1200px,transparent 1420px);mask-image:linear-gradient(90deg,transparent 0,#000 70px,#000 1200px,transparent 1420px)}
+html.kb-m .section-text-8{left:calc(var(--ox) + 88px);top:calc(var(--oy) + 578px);width:auto;writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;letter-spacing:.2em;text-align:left;white-space:nowrap}
+
+/* much more */
+html.kb-m .section-section-6{height:auto;padding:20px 20px 64px}
+html.kb-m .section-title-6{position:static;width:auto;font-size:30px}
+
+/* inside the book */
+html.kb-m .book-section{height:auto;padding:40px 20px 56px}
+html.kb-m .book-title{position:static;font-size:38px}
+html.kb-m .book-box{position:relative;left:auto;top:auto;width:auto;margin-top:26px}
+html.kb-m .book-btn{grid-template-columns:50px minmax(0,1fr) 24px;min-height:68px}
+html.kb-m .book-label-2{font-size:21px}
+html.kb-m .book-label-4{font-size:18px}
+html.kb-m .book-label-5{font-size:14px}
+html.kb-m .book-text{padding:0 8px 20px 50px;font-size:15px}
+html.kb-m .book-link{white-space:normal}
+html.kb-m .book-canvas{width:100%;height:auto;aspect-ratio:740/820}
+html.kb-m .book-figure{position:relative;left:auto;top:auto;width:auto;margin-top:56px}
+html.kb-m .kbspreadbtn{width:100%}
+html.kb-m .book-box-5{width:100%}
+html.kb-m .book-box-6{width:88%}
+html.kb-m .kbspreadbig{height:auto;width:96vw;max-width:none}
+
+/* author */
+html.kb-m .author-section{height:auto;padding:24px 20px 0}
+html.kb-m .author-box{position:relative;left:auto;top:auto;width:250px;height:250px;margin:0 auto 32px}
+html.kb-m .author-img{width:250px;height:250px}
+html.kb-m .author-box-2{position:static;width:auto;gap:18px}
+html.kb-m .author-title{font-size:34px}
+html.kb-m .author-text-2{width:auto;font-size:16px}
+html.kb-m .author-box-4{display:none}
+html.kb-m .author-box-5{position:relative;left:auto;top:auto;width:auto;margin-top:150px;gap:60px}
+html.kb-m .author-img-2{left:auto;right:-96px;top:-176px;width:210px;height:220px;z-index:0;pointer-events:none}
+html.kb-m .author-box-6{position:relative;z-index:1;width:auto;gap:24px}
+html.kb-m .author-text-3{font-size:27px;padding-right:56px}
+html.kb-m .author-link{font-size:20px}
+html.kb-m .author-box-9{grid-template-columns:1fr;gap:26px}
+html.kb-m .author-link-3{margin-top:6px;margin-right:7px}
+html.kb-m .footer-footer{position:static;width:auto;height:auto;margin-top:64px;padding:20px 0 36px;flex-direction:column;align-items:flex-start;gap:18px}
+html.kb-m .footer-box{flex-wrap:wrap;gap:12px 22px}
