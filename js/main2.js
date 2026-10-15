@@ -220,7 +220,14 @@ void main(){
     const R = this.rip, A = this.acc; if (!A.el || !e || this.still() || !R.gl) return;
     const r = A.el.getBoundingClientRect(); const sc = r.width / 740 || 1;
     R.list = (R.list || []).filter((q) => performance.now() - q.t0 < 1300).slice(-2);
-    R.list.push({ x: (e.clientX - r.left) / sc, y: (e.clientY - r.top) / sc, t0: performance.now(), sd: Math.random() });
+    let oy = 0;
+    const rcv = R.gl && R.gl.canvas;
+    if ((window.KB_M || this.props.mobile) && rcv) {   // phone: the chapter list is taller than the ripple canvas, so the canvas moves to the tap
+      const ch = 820 * sc, want = Math.max(0, Math.min(r.height - ch, (e.clientY - r.top) - ch / 2));
+      if (!R.list.length || Math.abs(want - (R.oy || 0)) > ch * 0.25) { R.list = []; R.oy = want; rcv.style.top = want.toFixed(0) + 'px'; }
+      oy = R.oy || 0;
+    }
+    R.list.push({ x: (e.clientX - r.left) / sc, y: (e.clientY - r.top - oy) / sc, t0: performance.now(), sd: Math.random() });
     if (!R.raf) R.raf = requestAnimationFrame((n) => this.ripStep(n));
   }
   ripStep(now) {

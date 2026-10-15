@@ -1,6 +1,12 @@
-// Desktop-only layout for now: phones and tablets render the page at 1440 px and scale it to fit.
+// Phones get their own single-column layout (html.kb-m). Tablets keep the 1440 px design, scaled to fit.
+// ?m=1 forces the phone layout on a desktop browser (for checking); ?m=0 forces the desktop layout.
   window.KB_TOUCH = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-  if (!window.KB_TOUCH) document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1');
+  (function () {
+    var q = /[?&]m=([01])/.exec(location.search), sw = Math.min(screen.width || 9999, screen.height || 9999);
+    window.KB_M = q ? q[1] === '1' : (window.KB_TOUCH ? sw < 600 : window.innerWidth < 600);
+    if (window.KB_M) document.documentElement.classList.add('kb-m');
+    if (!window.KB_TOUCH || window.KB_M) document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1');
+  })();
 ;
 window.KB_SITE = true;
 ;

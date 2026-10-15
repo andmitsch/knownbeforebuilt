@@ -1,10 +1,10 @@
 window.KBB_PROPS = { showPlaceholders: false };
 ;
 (function () {
-  // The design is drawn at 1440 px. Wider screens centre it; narrower ones scale it down.
+  // The design is drawn at 1440 px. Wider screens centre it; narrower ones scale it down. Phones use the kb-m layout instead.
   var page = document.getElementById('kb-page');
   function fit() {
-    var z = window.KB_TOUCH ? 1 : Math.min(1, document.documentElement.clientWidth / 1440);
+    var z = (window.KB_TOUCH || window.KB_M) ? 1 : Math.min(1, document.documentElement.clientWidth / 1440);
     page.style.zoom = z === 1 ? '' : String(z);
   }
   fit(); window.addEventListener('resize', fit);

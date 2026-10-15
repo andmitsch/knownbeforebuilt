@@ -67,8 +67,9 @@ class Component extends DCLogic {
       const nx = Math.max(-1, Math.min(1, dx / R)), ny = Math.max(-1, Math.min(1, dy / R));
       B.tgt.ry = B.turn + 26 - p * 20 + nx * 16 * p; B.tgt.rx = 4 - ny * 10 * p; B.tgt.lift = p * 28; this.bKick(); };
     this.bFar = () => { const B = this.bk; if (B.mode !== 'idle') return; B.tgt.ry = B.turn + 26; B.tgt.rx = 4; B.tgt.lift = 0; this.bKick(); };
+    this.mob = !!(window.KB_M || props.mobile);   // phone layout: the system runs top to bottom, the stream canvas is turned 90°
     this.mouse = null;
-    this.onMove = (e) => { const cv = this.cvMain; if (!cv) return; const r = cv.getBoundingClientRect(); if (!r.width) return;
+    this.onMove = (e) => { const cv = this.cvMain; if (!cv || this.mob) return; const r = cv.getBoundingClientRect(); if (!r.width) return;
       this.mouse = { x: (e.clientX - r.left) / r.width * 1440, y: (e.clientY - r.top) / r.height * 620 }; };
     this.onLeave = () => { this.mouse = null; };
     this.sys = { nodes: {} }; this.setOutLine = (el) => { this.sys.outLine = el; }; this.setSpark = (el) => { this.sys.spark = el; }; this.setMotes = (el) => { this.sys.motes = el; }; this.setSparkCore = (el) => { this.sys.sparkCore = el; }; this.setBuild = (el) => { this.sys.build = el; }; this.glowLv = { AV: 0, G1: 0, P: 0, INV: 0 }; this.curCyc = -1; this.routeLen = 0;
@@ -327,8 +328,8 @@ void main(){
     const cols = ['#FFF6EC', '#FFD2A0', '#FFB36B', '#F57106', '#E6EAF2'];
     this.motes = { t0: t, ps: Array.from(S.motes.children).map((el, i) => {
       el.setAttribute('fill', cols[i % cols.length]);
-      const x0 = i < 8 ? 1240 + Math.random() * 12 : 1248 + Math.random() * 96;
-      return { el, x0, y0: 352 + (Math.random() - 0.5) * 10, delay: (i / 34) * 1.0 + Math.random() * 0.2, rise: 45 + Math.pow(Math.random(), 0.9) * 70, sway: 4 + Math.random() * 9, ph: Math.random() * 6.28, r: 0.8 + Math.random() * 1.6, life: 1.8 + Math.random() * 1.2 };
+      const M = this.mob; const x0 = M ? (i < 8 ? 260 + Math.random() * 12 : 266 + (Math.random() - 0.5) * 92) : (i < 8 ? 1240 + Math.random() * 12 : 1248 + Math.random() * 96);
+      return { el, x0, y0: M ? 626 + (Math.random() - 0.5) * 8 : 352 + (Math.random() - 0.5) * 10, delay: (i / 34) * 1.0 + Math.random() * 0.2, rise: 45 + Math.pow(Math.random(), 0.9) * 70, sway: 4 + Math.random() * 9, ph: Math.random() * 6.28, r: 0.8 + Math.random() * 1.6, life: 1.8 + Math.random() * 1.2 };
     }) };
   }
   moteStep(t) {
@@ -368,11 +369,23 @@ void main(){
   }
   systemLight(t, still) {
     const S = this.sys; if (!S.route || !S.head) return;
-    const H = 'M135 352 L340 352 L545 352', FWD = ' L750 352 L1045 352';
-    const G1AV = ' L530 388 A 85 72 0 0 1 360 390 L340 352 L545 352';
-    const G2P = ' L1010 388 A 120 80 0 0 1 770 390 L750 352 L1045 352';
-    const G2AV = ' L1070 388 A 375 185 0 0 1 320 390 L340 352 L545 352 L750 352 L1045 352';
-    const OUT = ' L1200 352 L1246 352';
+    const M = this.mob;
+    if (M && !this.mobSvg) { this.mobSvg = true;   // phone: the light and spark layers use the vertical diagram's own coordinates
+      for (const sv of [S.route.ownerSVGElement, S.spark && S.spark.ownerSVGElement]) if (sv) { sv.setAttribute('viewBox', '0 0 360 700'); sv.setAttribute('width', '360'); sv.setAttribute('height', '700'); } }
+    let H, FWD, G1AV, G2P, G2AV, OUT;
+    if (M) {
+      H = 'M266 94 L266 205 L266 315'; FWD = ' L266 425 L266 535';
+      G1AV = ' L206 307 C 162 298, 152 222, 182 213 L266 205 L266 315';
+      G2P = ' L176 527 C 150 518, 150 441, 182 433 L266 425 L266 535';
+      G2AV = ' L176 531 C 50 518, 50 236, 182 225 L266 205 L266 315 L266 425 L266 535';
+      OUT = ' L266 585 L266 609';
+    } else {
+      H = 'M135 352 L340 352 L545 352'; FWD = ' L750 352 L1045 352';
+      G1AV = ' L530 388 A 85 72 0 0 1 360 390 L340 352 L545 352';
+      G2P = ' L1010 388 A 120 80 0 0 1 770 390 L750 352 L1045 352';
+      G2AV = ' L1070 388 A 375 185 0 0 1 320 390 L340 352 L545 352 L750 352 L1045 352';
+      OUT = ' L1200 352 L1246 352';
+    }
     const routes = [
       { d: H + FWD + OUT, w: 0.6, win: true },
       { d: H + G1AV + FWD + OUT, w: 0.9, win: true },
@@ -384,7 +397,7 @@ void main(){
       { d: H + G1AV + FWD, w: 1.4 },
       { d: H + FWD + G2P, w: 1.4 }
     ];
-    const V = 340, EXIT = 46, EXD = 1.1;
+    const V = M ? 165 : 340, EXIT = 46, EXD = 1.1;
     if (this.runT0 === undefined || t - this.runT0 > this.runDur) {
       let r = Math.random(); let first = false;
       if (!this.pdsSeen) {
@@ -407,15 +420,15 @@ void main(){
     if (still) Ls = -1;
     else if (this.routeWin) { const t1 = (len - EXIT) / V; if (since <= t1) Ls = since * V; else { const k = Math.min(1, (since - t1) / EXD); Ls = len - EXIT + EXIT * (1 - Math.pow(1 - k, 2)) + (since - t1 > EXD ? (since - t1 - EXD) * 400 : 0); } }
     else Ls = since * V;
-    const tail = 120;
+    const tail = M ? 70 : 120;
     let a = Ls < 0 ? 0 : Math.min(1, Ls / 30) * Math.max(0, Math.min(1, (len - Ls) / (this.routeWin ? 16 : 70) + 0.001));
     if (Ls > len) a = 0;
     const L = Math.max(0, Math.min(Ls, len));
     const p = S.route.getPointAtLength(L);
-    const boxes = { AV: [230, 450], G1: [480, 610], P: [640, 860], INV: [890, 1200] };
+    const boxes = M ? { AV: [179, 231], G1: [291, 339], P: [399, 451], INV: [511, 559] } : { AV: [230, 450], G1: [480, 610], P: [640, 860], INV: [890, 1200] };
     let inside = false;
     for (const k in boxes) {
-      const b = boxes[k]; const hit = a > 0 && p.y > 318 && p.y < 386 && p.x > b[0] && p.x < b[1];
+      const b = boxes[k]; const hit = a > 0 && (M ? (p.x > 170 && p.x < 360 && p.y > b[0] && p.y < b[1]) : (p.y > 318 && p.y < 386 && p.x > b[0] && p.x < b[1]));
       if (hit) inside = true;
       this.glowLv[k] = Math.max(this.glowLv[k] * 0.955, hit ? 1 : 0);
       const n = S.nodes[k]; const g = this.glowLv[k];
@@ -429,14 +442,14 @@ void main(){
     if (!this.routeWin && !this.stopHit && Ls >= len && Ls < len + 200) { this.stopHit = true; const q = S.route.getPointAtLength(len); this.sparkStart(q.x, q.y, t); }
     this.sparkStep(t);
     const wg = this.winT !== undefined ? Math.max(0, (t - this.winT) < 0.25 ? (t - this.winT) / 0.25 : Math.exp(-(t - this.winT - 0.25) / 1.4)) : 0;
-    const exitLv = p.x > 1195 && a > 0 ? a : 0; const og = Math.max(wg, exitLv);
+    const exitLv = (M ? p.y > 556 : p.x > 1195) && a > 0 ? a : 0; const og = Math.max(wg, exitLv);
     if (S.build) {
       const c = (a0, b0) => Math.round(a0 + (b0 - a0) * wg);
       S.build.style.color = 'rgb(' + c(111, 17) + ',' + c(106, 17) + ',' + c(100, 17) + ')';
       S.build.style.textShadow = wg > 0.02 ? '0 0 ' + (4 + 14 * wg).toFixed(1) + 'px rgba(245,113,6,' + (0.7 * wg).toFixed(3) + ')' : 'none';
     }
     if (S.outLine) {
-      S.outLine.style.borderTopColor = og > 0.05 ? 'rgb(' + Math.round(142 + 103 * og) + ',' + Math.round(137 - 24 * og) + ',' + Math.round(132 - 126 * og) + ')' : '#8E8984';
+      S.outLine.style.borderColor = og > 0.05 ? 'rgb(' + Math.round(142 + 103 * og) + ',' + Math.round(137 - 24 * og) + ',' + Math.round(132 - 126 * og) + ')' : '#8E8984';
       S.outLine.style.boxShadow = og > 0.05 ? '0 0 ' + (8 * og).toFixed(1) + 'px rgba(245,113,6,' + (0.6 * og).toFixed(3) + ')' : 'none';
     }
     S.head.setAttribute('cx', p.x.toFixed(1)); S.head.setAttribute('cy', p.y.toFixed(1)); S.head.setAttribute('opacity', (a * (inside ? 0 : 1)).toFixed(3));
