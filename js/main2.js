@@ -27,13 +27,13 @@ class Component extends DCLogic {
     this.setQuote = (el) => { this.al.q = el; this.alignCirc(); };
     this.setWays = (el) => { this.al.w = el; this.alignCirc(); };
     this.setMailRow = (el) => { this.al.m = el; this.alignCirc(); if (el && document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.alignCirc()); if (el) setTimeout(() => this.alignCirc(), 600); };
-    this.state = { open: false, ch: 3 };
+    this.state = { open: false, ch: 2 };   // Chapter III (the AI Productivity Fallacy) starts open, matching the sample pages
     this.acc = { bodies: [], bars: [], h: [], from: [], to: [], t0: 0, raf: 0, el: null, prevCh: 3 };
     this.bodySet = []; this.barSet = []; this.glowSet = []; this.glow = [];
     for (let i = 0; i < 9; i++) {
-      this.bodySet[i] = (el) => { this.acc.bodies[i] = el; if (el && this.acc.h[i] === undefined) { const h = i === 3 ? el.scrollHeight : 0; this.acc.h[i] = h; el.style.height = h + 'px'; } };
-      this.glowSet[i] = (el) => { const G = this.glow[i] || (this.glow[i] = { lv: 0, t0: -1e9, x: 60, y: 38, want: 0 }); G.el = el; if (el && i === 3 && G.want === 0) { G.want = 1; G.lv = 1; G.t0 = -1e9; this.glowPaint(i, performance.now()); } };
-      this.barSet[i] = (el) => { this.acc.bars[i] = el; if (el) el.setAttribute('transform', i === 3 ? 'rotate(90)' : 'rotate(0)'); };
+      this.bodySet[i] = (el) => { this.acc.bodies[i] = el; if (el && this.acc.h[i] === undefined) { const h = i === 2 ? el.scrollHeight : 0; this.acc.h[i] = h; el.style.height = h + 'px'; } };
+      this.glowSet[i] = (el) => { const G = this.glow[i] || (this.glow[i] = { lv: 0, t0: -1e9, x: 60, y: 38, want: 0 }); G.el = el; if (el && i === 2 && G.want === 0) { G.want = 1; G.lv = 1; G.t0 = -1e9; this.glowPaint(i, performance.now()); } };
+      this.barSet[i] = (el) => { this.acc.bars[i] = el; if (el) el.setAttribute('transform', i === 2 ? 'rotate(90)' : 'rotate(0)'); };
     }
     this.setAcc = (el) => { this.acc.el = el; };
     this.rip = { els: [], n: 0, live: [] };
@@ -44,7 +44,7 @@ class Component extends DCLogic {
     this.zm = { raf: 0, closing: false };
     this.setZoom = (el) => { this.zm.ov = el; if (el) { try { el.focus({ preventScroll: true }); } catch (_) {} this.tryOpen(); } };
     this.setBig = (el) => { this.zm.big = el; if (el) { el.style.opacity = '0'; this.tryOpen(); } };
-    this.openSpread = () => { this.setState({ open: true }); };
+    this.openSpread = () => { this.setState({ open: true, readHint: false }); };   // the 'Click the book to read' hint goes once the book has been opened
     this.closeSpread = (e) => { if (e) e.stopPropagation(); this.zoomAnim(false); };
     this.zoomKey = (e) => { if (e.key === 'Escape') this.zoomAnim(false); };
     this.spNear = (e) => {
@@ -79,7 +79,7 @@ class Component extends DCLogic {
   kick() { if (!this.sp.raf) { this.sp.last = performance.now(); this.sp.raf = requestAnimationFrame((n) => this.step(n)); } }
   componentWillUnmount() { if (this.fxDoc) { document.removeEventListener('pointermove', this.fxDoc); document.removeEventListener('mousemove', this.fxDoc); } cancelAnimationFrame(this.sp.raf); cancelAnimationFrame(this.acc.raf); cancelAnimationFrame(this.rip.raf); }
   componentDidUpdate() {
-    const A = this.acc; const cur = this.state && this.state.ch !== undefined ? this.state.ch : 3;
+    const A = this.acc; const cur = this.state && this.state.ch !== undefined ? this.state.ch : 2;
     if (cur === A.prevCh) return; A.prevCh = cur;
     for (let i = 0; i < 9; i++) { const b = A.bodies[i]; if (!b) continue; A.from[i] = A.h[i] || 0; A.to[i] = i === cur ? b.scrollHeight : 0; }
     if (this.still()) { for (let i = 0; i < 9; i++) this.accApply(i, 1); return; }
@@ -176,7 +176,7 @@ void main(){
     this.rip.gl = gl; this.rip.uR = gl.getUniformLocation(pr, 'R'); this.rip.uP = gl.getUniformLocation(pr, 'P');
   }
   glowGo(i, e) {
-    const was = this.state && this.state.ch !== undefined ? this.state.ch : 3; const now = performance.now();
+    const was = this.state && this.state.ch !== undefined ? this.state.ch : 2; const now = performance.now();
     for (let j = 0; j < 9; j++) {
       const G = this.glow[j] || (this.glow[j] = { lv: 0, t0: -1e9, x: 60, y: 38, want: 0 });
       if (j === i && was !== i) {
@@ -369,7 +369,7 @@ void main(){
     const ph = this.props.showPlaceholders ?? true;
     const motion = this.props.motion ?? true;
     const open = !!(this.state && this.state.open);
-    const cur = this.state && this.state.ch !== undefined ? this.state.ch : 3;
+    const cur = this.state && this.state.ch !== undefined ? this.state.ch : 2;
     const C = [
       ['I', 'Trapped Capital', 'Does your company know more than it can see?', 'Where the expertise, institutional knowledge, internal tools and IP that could become products are hiding inside your organisation - be it product-led sales, self-serve or service-embedded.'],
       ['II', 'The Cost of Building Wrong', 'What lacking product thinking costs you.', 'Why the build is the smallest part of what a blindly shipped decision costs: the cost iceberg. And why a backlog-driven culture naturally pushes out a de-risking, outcome-driven one.'],
@@ -384,10 +384,10 @@ void main(){
     const chapters = C.map((c, i) => ({ num: c[0], title: c[1], sub: c[2], body: c[3], open: i === cur, expanded: i === cur ? 'true' : 'false', sign: i === cur ? '−' : '+',
       setBody: this.bodySet[i], setBar: this.barSet[i], link: i === 8,
       setGlow: this.glowSet[i],
-      toggle: (e) => { this.ripple(e); this.glowGo(i, e); this.setState({ ch: (this.state && this.state.ch) === i ? -1 : i }); } }));
+      toggle: (e) => { this.glowGo(i, e); this.setState({ ch: (this.state && this.state.ch) === i ? -1 : i }); } }));
     return { fxRef: this.fxRef,
       rootClass: [ph ? "" : "hide-ph", motion ? "" : "still"].join(" ").trim(),
-      chapters, setAcc: this.setAcc, setPortrait: this.setPortrait, setCirc: this.setCirc, setQuote: this.setQuote, setMailRow: this.setMailRow, setWays: this.setWays, setRipCv: this.setRipCv, setBig: this.setBig, spreadOpen: open, setSpread: this.setSpread, setSpreadShadow: this.setSpreadShadow, setZoom: this.setZoom,
+      chapters, setAcc: this.setAcc, setPortrait: this.setPortrait, setCirc: this.setCirc, setQuote: this.setQuote, setMailRow: this.setMailRow, setWays: this.setWays, setRipCv: this.setRipCv, setBig: this.setBig, spreadOpen: open, hintClass: (this.state && this.state.readHint === false) ? 'book-label-8 kb-gone' : 'book-label-8', setSpread: this.setSpread, setSpreadShadow: this.setSpreadShadow, setZoom: this.setZoom,
       openSpread: this.openSpread, closeSpread: this.closeSpread, zoomKey: this.zoomKey, spNear: this.spNear, spFar: this.spFar
     };
   }
