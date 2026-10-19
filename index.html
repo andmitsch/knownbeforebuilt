@@ -44,6 +44,47 @@
 <meta name="twitter:title" content="Known Before Built — Andreas Mitschke">
 <meta name="twitter:description" content="From Discovery to Decision for Enterprises in Transformation.">
 <meta name="twitter:image" content="https://andmitsch.github.io/knownbeforebuilt/assets/og-book.png">
+<!-- Structured data. At launch add "isbn" and "datePublished" (YYYY-MM-DD) to the Book entry. -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Book",
+   "@id": "https://andmitsch.github.io/knownbeforebuilt/#book",
+   "name": "Known Before Built",
+   "alternativeName": "From Discovery to Decision for Enterprises in Transformation",
+   "description": "A working system for deciding what deserves to be built — before the organisation pays to find out.",
+   "url": "https://andmitsch.github.io/knownbeforebuilt/",
+   "image": "https://andmitsch.github.io/knownbeforebuilt/assets/book-front.jpg",
+   "author": {
+    "@id": "https://andmitsch.github.io/andreasmitschke/#person"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Grant & Bear Publishing",
+    "url": "https://andmitsch.github.io/knownbeforebuilt/grant-and-bear-publishing/"
+   },
+   "numberOfPages": 316,
+   "bookFormat": "https://schema.org/Paperback",
+   "inLanguage": "en"
+  },
+  {
+   "@type": "Person",
+   "@id": "https://andmitsch.github.io/andreasmitschke/#person",
+   "name": "Andreas Mitschke",
+   "jobTitle": "Growth & Product Innovation",
+   "url": "https://andmitsch.github.io/andreasmitschke/",
+   "image": "https://andmitsch.github.io/knownbeforebuilt/assets/andreas-mitschke-portrait-square.jpg",
+   "sameAs": [
+    "https://www.linkedin.com/in/andreasmitschke",
+    "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10956892",
+    "https://andreasmitschke.com"
+   ]
+  }
+ ]
+}
+</script>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/archivo-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/bodoni-moda-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -57,13 +98,8 @@
 <div class="kb-sweep" aria-hidden="true"></div>
 <a class="kb-skip" href="#top">Skip to content</a>
 <main id="kb-page">
-  <div id="kb-main"></div>
-  <div id="kb-main2"></div>
-</main>
-<noscript><p class="kb-noscript">This page needs JavaScript for its interactive figures. Contact: <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.com</a></p></noscript>
-
-<template id="tpl-main">
-<div class="{{rootClass}} tpl-main-box">
+  <div id="kb-main">
+<div class="tpl-main-box" dc-class="{{rootClass}} tpl-main-box">
 
 <!-- NAV -->
 <nav aria-label="Primary" class="nav-nav">
@@ -83,8 +119,8 @@
 <!-- S1 HERO -->
 <section id="top" aria-label="Known Before Built" class="top-section">
 <div class="top-box">
-<sc-if value="{{motionOn}}" hint-placeholder-val="{{ true }}"></sc-if>
-<sc-if value="{{motionOff}}" hint-placeholder-val="{{ false }}"><img src="assets/circle-static.webp" alt="" class="top-img"></sc-if>
+<sc-if value="{{motionOn}}" hint-placeholder-val="{{ true }}" hidden></sc-if>
+<sc-if value="{{motionOff}}" hint-placeholder-val="{{ false }}" hidden><img src="assets/circle-static.webp" alt="" class="top-img"></sc-if>
 <img src="assets/circle-paint.webp" alt="" class="top-img-2"></div>
 
 <div class="top-box-2">
@@ -121,12 +157,12 @@
 <!-- GET THE BOOK -->
 
 <!-- S3 ICEBERG -->
-<section id="get" aria-labelledby="gbh" onMouseMove="{{bNear}}" onMouseLeave="{{bFar}}" class="get-section">
+<section id="get" aria-labelledby="gbh" dc-onMouseMove="{{bNear}}" dc-onMouseLeave="{{bFar}}" class="get-section">
 <!-- 3D book, ported from the Grant & Bear page: drag, arrow keys, leans towards the cursor -->
-<div ref="{{setStage}}" class="kbstage get-box" onPointerDown="{{bDown}}" onPointerMove="{{bMove}}" onPointerUp="{{bUp}}" onPointerCancel="{{bUp}}">
-<div ref="{{setBook3}}" class="kbbook" role="img" aria-label="Known Before Built by Andreas Mitschke. Drag, or use the arrow keys, to turn the book." tabindex="0" onKeyDown="{{bKey}}">
-<div class="kbface kbfront"><img src="assets/book-front.jpg" width="760" height="1216" alt="" draggable="false"><i class="kbshade"></i></div>
-<div class="kbface kbback"><img src="assets/book-back.jpg" width="760" height="1216" alt="" draggable="false"><i class="kbshade"></i></div>
+<div ref="{{setStage}}" class="kbstage get-box" dc-onPointerDown="{{bDown}}" dc-onPointerMove="{{bMove}}" dc-onPointerUp="{{bUp}}" dc-onPointerCancel="{{bUp}}">
+<div ref="{{setBook3}}" class="kbbook" role="img" aria-label="Known Before Built by Andreas Mitschke. Drag, or use the arrow keys, to turn the book." tabindex="0" dc-onKeyDown="{{bKey}}">
+<div class="kbface kbfront"><img src="assets/book-front.jpg" width="760" height="1216" alt="Front cover of Known Before Built: From Discovery to Decision for Enterprises in Transformation, by Andreas Mitschke" draggable="false"><i class="kbshade"></i></div>
+<div class="kbface kbback"><img src="assets/book-back.jpg" width="760" height="1216" alt="Back cover of Known Before Built" draggable="false"><i class="kbshade"></i></div>
 <div class="kbface kbspine"><img src="assets/book-spine.jpg" width="104" height="1216" alt="" draggable="false"><i class="kbshade"></i></div>
 <div class="kbface kbfore"><i class="kbshade"></i></div>
 <div class="kbface kbtop"><i class="kbshade"></i></div>
@@ -156,9 +192,9 @@
 <section aria-labelledby="s3h" class="section-section-2">
 <p class="section-text-2">THE COST OF BUILDING BLINDLY</p>
 <h2 id="s3h" class="section-title-2">The true cost of shipping without validation is higher than you think.</h2>
-</section><section aria-label="The cost iceberg" class="system-section">
+</section><div class="system-section">
 
-<svg ref="{{setBerg}}" class="kbberg system-svg" onPointerDown="{{bergDown}}" onPointerMove="{{bergMove}}" onPointerUp="{{bergUp}}" onPointerCancel="{{bergUp}}" width="640" height="700" viewBox="0 0 640 700" aria-hidden="true">
+<svg ref="{{setBerg}}" class="kbberg system-svg" dc-onPointerDown="{{bergDown}}" dc-onPointerMove="{{bergMove}}" dc-onPointerUp="{{bergUp}}" dc-onPointerCancel="{{bergUp}}" width="640" height="700" viewBox="0 0 640 700" aria-hidden="true">
 <defs>
 <clipPath id="a3berg"><path d="M200 150 L165 205 L135 300 L118 400 L112 500 L128 590 L170 650 L240 690 L400 692 L470 655 L510 590 L528 500 L522 400 L505 300 L475 205 L440 150 Z"></path></clipPath>
 <clipPath id="a3notD"><rect x="0" y="0" width="640" height="410"></rect><rect x="0" y="540" width="640" height="200"></rect></clipPath>
@@ -187,7 +223,7 @@
 
 <!-- tip label -->
 <div class="system-box-2">
-<p class="system-text-3"><span class="system-label">Build</span><span class="system-label-2">L<sub>B</sub></span></p>
+<h3 class="system-text-3"><span class="system-label">Build</span><span class="system-label-2">L<sub>B</sub></span></h3>
 <p class="system-text-4">The visible part: designing, coding, preparing and launching.&nbsp;Engineering, management, go-to-market and marketing that is comfortable to track.</p>
 </div>
 <div aria-hidden="true" class="system-box-3"></div>
@@ -198,26 +234,26 @@
 <div aria-hidden="true" class="system-box-6"></div>
 <div aria-hidden="true" class="system-box-7"></div>
 <div class="system-box-8">
-<p class="system-text-3"><span class="system-label-3">Implementation cost</span><span class="system-label-4">L<sub>I</sub></span></p>
+<h3 class="system-text-3"><span class="system-label-3">Implementation cost</span><span class="system-label-4">L<sub>I</sub></span></h3>
 <p class="system-text-5">Rolling it out: integration, onboarding, training, enablement, progressive optimisation, etc.</p>
 </div>
 <div class="system-box-9">
-<p class="system-text-3"><span class="system-label-3">Carrying cost</span><span class="system-label-4">L<sub>C</sub></span></p>
+<h3 class="system-text-3"><span class="system-label-3">Carrying cost</span><span class="system-label-4">L<sub>C</sub></span></h3>
 <p class="system-text-5">Keeping it alive: maintenance, support, and an ever-increasing complexity that never leaves the codebase.</p>
 </div>
 <div class="system-box-10">
-<p class="system-text-3"><span class="system-label-3">Displacement cost</span><span class="system-label-4">L<sub>D</sub></span></p>
+<h3 class="system-text-3"><span class="system-label-3">Displacement cost</span><span class="system-label-4">L<sub>D</sub></span></h3>
 <p class="system-text-5">What the team could have built instead. It appears on no budget line. The opportunity cost every first business class teaches, yet almost never attributed.</p>
 </div>
 <div class="system-box-11">
-<p class="system-text-3"><span class="system-label-3">Correction cost</span><span class="system-label-4">L<sub>R</sub></span></p>
+<h3 class="system-text-3"><span class="system-label-3">Correction cost</span><span class="system-label-4">L<sub>R</sub></span></h3>
 <p class="system-text-5">Unwinding it once it's dead: sunsetting, migration, reputational friction.</p>
 </div>
 
 <!-- assembled equation -->
 <p aria-label="C sub b equals L sub B plus L sub I plus L sub C plus L sub D plus L sub R" class="system-text-6">C<sub>b</sub> <span class="op">=</span> L<sub>B</sub> <span class="op">+</span> L<sub>I</sub> <span class="op">+</span> L<sub>C</sub> <span class="op">+</span> L<sub>D</sub> <span class="op">+</span> L<sub>R</sub></p>
 
-</section><section aria-labelledby="s4h" class="section-section-3">
+</div><section aria-labelledby="s4h" class="section-section-3">
 <!-- particles -->
 <div ref="{{setParts}}" aria-hidden="true" class="section-box-2">
 <span class="section-label-2">Σ</span>
@@ -238,7 +274,7 @@
 
 <div class="section-box-3">
 
-<h3 class="section-heading">WHY CAN'T WE JUST SHIP IT?</h3><h2 id="s4h" class="section-title-3"><b>N</b>et <b>V</b>alue of <b>V</b>alidation per idea <b class="op">=</b> <mark class="section-mark">Failures Stopped<svg aria-hidden="true" width="100%" height="100%" class="section-svg-3"><rect ref="{{setFS}}" data-k="0" x="0" y="0" width="100%" height="100%" rx="16" ry="16" fill="none" stroke="#F57106" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"></rect></svg></mark> <b class="op">−</b> Validation cost <b class="op">−</b> Delay cost <b class="op">−</b> Good ideas stopped</h2>
+<p class="section-heading">WHY CAN'T WE JUST SHIP IT?</p><h2 id="s4h" class="section-title-3"><b>N</b>et <b>V</b>alue of <b>V</b>alidation per idea <b class="op">=</b> <mark class="section-mark">Failures Stopped<svg aria-hidden="true" width="100%" height="100%" class="section-svg-3"><rect ref="{{setFS}}" data-k="0" x="0" y="0" width="100%" height="100%" rx="16" ry="16" fill="none" stroke="#F57106" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"></rect></svg></mark> <b class="op">−</b> Validation cost <b class="op">−</b> Delay cost <b class="op">−</b> Good ideas stopped</h2>
 <div class="section-box-4">
 <p aria-label="NVV equals p times d times C sub b, minus V sub c, minus one minus p times W sub v times V sub w, minus one minus p times f times V" class="section-text-3">NVV = <span class="section-label-10">p · d · C<sub>b</sub><svg aria-hidden="true" width="100%" height="100%" class="section-svg-3"><rect ref="{{setFS}}" data-k="1" x="0" y="0" width="100%" height="100%" rx="12" ry="12" fill="none" stroke="#F57106" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"></rect></svg></span> − V<sub>c</sub> − (1 − p) · W<sub>v</sub> · V<sub>w</sub> − (1 − p) · f · V</p>
 </div><p class="section-text-4">Chapter 2 shows you how to calculate the value of discovery.</p>
@@ -253,9 +289,10 @@
 </section>
 
 <!-- S5 PDS -->
-<section id="system" aria-labelledby="s5h" onMouseMove="{{onMove}}" onMouseLeave="{{onLeave}}" class="section-section-5">
+<section id="system" aria-labelledby="s5h" dc-onMouseMove="{{onMove}}" dc-onMouseLeave="{{onLeave}}" class="section-section-5">
 <p class="section-text-6">The Product Decision System</p>
 <h2 id="s5h" class="section-title-5">Structured discovery is simple, but not easy.</h2>
+<p class="kb-sr">How the system works: continuous opportunity discovery feeds a hypothesis. The hypothesis goes through assumption validation and Gate 1, then pilot validation and the investment decision, before anything is built and scaled. What each gate learns informs the validation steps before it and the discovery that feeds the next hypothesis.</p>
 
 <!-- light travelling through the system -->
 <svg aria-hidden="true" width="1440" height="600" viewBox="0 0 1440 600" class="section-svg-3 pds-light">
@@ -338,38 +375,76 @@
 </section>
 
 </div>
-</template>
-<template id="tpl-main2">
-<div class="{{rootClass}} tpl-main2-box">
+  </div>
+  <div id="kb-main2">
+<div class="tpl-main2-box" dc-class="{{rootClass}} tpl-main2-box">
 
 <!-- S7 AUTHOR / SIGNAL / CLOSE -->
-<section id="book" aria-labelledby="s6h" onMouseMove="{{spNear}}" onPointerMove="{{spNear}}" onMouseLeave="{{spFar}}" onPointerLeave="{{spFar}}" class="book-section">
+<section id="book" aria-labelledby="s6h" dc-onMouseMove="{{spNear}}" dc-onPointerMove="{{spNear}}" dc-onMouseLeave="{{spFar}}" dc-onPointerLeave="{{spFar}}" class="book-section">
 <h2 id="s6h" class="book-title">Inside the book</h2>
 <div ref="{{setAcc}}" class="book-box">
-<sc-for list="{{chapters}}" as="c" hint-placeholder-count="9">
 <div class="book-box-2">
-<span ref="{{c.setGlow}}" aria-hidden="true" class="book-label"></span>
-<button type="button" aria-expanded="{{c.expanded}}" onClick="{{c.toggle}}" class="book-btn"><span class="book-label-2">{{c.num}}</span><span class="book-label-3"><span class="book-label-4">{{c.title}}</span><span class="book-label-5">{{c.sub}}</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{c.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button>
-<div ref="{{c.setBody}}" class="book-box-3"><p class="book-text">{{c.body}}<sc-if value="{{c.link}}" hint-placeholder-val="{{ false }}"> <a data-goatcounter-click="signal-appendix" href="prelaunch.html?from=signal-appendix" ref="{{fxRef}}" data-fx="link" class="book-link">Try Signal <span aria-hidden="true" data-fx-arrow="right">→</span></a></sc-if></p></div>
+<span ref="{{chapters.0.setGlow}}" aria-hidden="true" class="book-label"></span>
+<h3 class="book-h"><button type="button" aria-controls="ch-1" dc-aria-expanded="{{chapters.0.expanded}}" dc-onClick="{{chapters.0.toggle}}" class="book-btn"><span class="book-label-2">I</span><span class="book-label-3"><span class="book-label-4">Trapped Capital</span><span class="book-label-5">Does your company know more than it can see?</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.0.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
+<div ref="{{chapters.0.setBody}}" id="ch-1" class="book-box-3"><p class="book-text">Where the expertise, institutional knowledge, internal tools and IP that could become products are hiding inside your organisation - be it product-led sales, self-serve or service-embedded.</p></div>
 </div>
-</sc-for>
+<div class="book-box-2">
+<span ref="{{chapters.1.setGlow}}" aria-hidden="true" class="book-label"></span>
+<h3 class="book-h"><button type="button" aria-controls="ch-2" dc-aria-expanded="{{chapters.1.expanded}}" dc-onClick="{{chapters.1.toggle}}" class="book-btn"><span class="book-label-2">II</span><span class="book-label-3"><span class="book-label-4">The Cost of Building Wrong</span><span class="book-label-5">What lacking product thinking costs you.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.1.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
+<div ref="{{chapters.1.setBody}}" id="ch-2" class="book-box-3"><p class="book-text">Why the build is the smallest part of what a blindly shipped decision costs: the cost iceberg. And why a backlog-driven culture naturally pushes out a de-risking, outcome-driven one.</p></div>
+</div>
+<div class="book-box-2 kb-open">
+<span ref="{{chapters.2.setGlow}}" aria-hidden="true" class="book-label"></span>
+<h3 class="book-h"><button type="button" aria-controls="ch-3" dc-aria-expanded="{{chapters.2.expanded}}" dc-onClick="{{chapters.2.toggle}}" class="book-btn"><span class="book-label-2">III</span><span class="book-label-3"><span class="book-label-4">The AI Productivity Fallacy</span><span class="book-label-5">What happens to the cost of building wrong, when building gets cheaper and faster?</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.2.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round" transform="rotate(90)"></line></svg></button></h3>
+<div ref="{{chapters.2.setBody}}" id="ch-3" class="book-box-3"><p class="book-text">Why “speed at all costs” multiplies bad decisions as readily as good ones. Why AI is the answer to delivery speed, not outcome quality. And the pain–gain ratio: how much value your product must deliver before it can even replace pen and paper.</p></div>
+</div>
+<div class="book-box-2">
+<span ref="{{chapters.3.setGlow}}" aria-hidden="true" class="book-label"></span>
+<h3 class="book-h"><button type="button" aria-controls="ch-4" dc-aria-expanded="{{chapters.3.expanded}}" dc-onClick="{{chapters.3.toggle}}" class="book-btn"><span class="book-label-2">IV</span><span class="book-label-3"><span class="book-label-4">The Product Decision System</span><span class="book-label-5">Find decisions that convert to value.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.3.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
+<div ref="{{chapters.3.setBody}}" id="ch-4" class="book-box-3"><p class="book-text">An overview of how everything fits together.</p></div>
+</div>
+<div class="book-box-2">
+<span ref="{{chapters.4.setGlow}}" aria-hidden="true" class="book-label"></span>
+<h3 class="book-h"><button type="button" aria-controls="ch-5" dc-aria-expanded="{{chapters.4.expanded}}" dc-onClick="{{chapters.4.toggle}}" class="book-btn"><span class="book-label-2">V</span><span class="book-label-3"><span class="book-label-4">Continuous Opportunity Discovery</span><span class="book-label-5">The permanent layer that makes the invisible visible.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.4.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
+<div ref="{{chapters.4.setBody}}" id="ch-5" class="book-box-3"><p class="book-text">Discovery doesn’t stop and become a hand-off. It runs continuously.</p></div>
+</div>
+<div class="book-box-2">
+<span ref="{{chapters.5.setGlow}}" aria-hidden="true" class="book-label"></span>
+<h3 class="book-h"><button type="button" aria-controls="ch-6" dc-aria-expanded="{{chapters.5.expanded}}" dc-onClick="{{chapters.5.toggle}}" class="book-btn"><span class="book-label-2">VI</span><span class="book-label-3"><span class="book-label-4">Assumption Validation</span><span class="book-label-5">When observation becomes testing.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.5.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
+<div ref="{{chapters.5.setBody}}" id="ch-6" class="book-box-3"><p class="book-text">Turning a hypothesis into lean, fast tests that can fail, before pilot resources are committed.</p></div>
+</div>
+<div class="book-box-2">
+<span ref="{{chapters.6.setGlow}}" aria-hidden="true" class="book-label"></span>
+<h3 class="book-h"><button type="button" aria-controls="ch-7" dc-aria-expanded="{{chapters.6.expanded}}" dc-onClick="{{chapters.6.toggle}}" class="book-btn"><span class="book-label-2">VII</span><span class="book-label-3"><span class="book-label-4">Pilot Validation</span><span class="book-label-5">Where informed decisions are found.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.6.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
+<div ref="{{chapters.6.setBody}}" id="ch-7" class="book-box-3"><p class="book-text">Proving value is real, repeatable and commercially viable, ideally without your people in the room.</p></div>
+</div>
+<div class="book-box-2">
+<span ref="{{chapters.7.setGlow}}" aria-hidden="true" class="book-label"></span>
+<h3 class="book-h"><button type="button" aria-controls="ch-8" dc-aria-expanded="{{chapters.7.expanded}}" dc-onClick="{{chapters.7.toggle}}" class="book-btn"><span class="book-label-2">VIII</span><span class="book-label-3"><span class="book-label-4">Get Things Done and Drive Impact</span><span class="book-label-5">From here, you lead.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.7.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
+<div ref="{{chapters.7.setBody}}" id="ch-8" class="book-box-3"><p class="book-text">Putting the system to work inside your organisation, and keeping it running.</p></div>
+</div>
+<div class="book-box-2">
+<span ref="{{chapters.8.setGlow}}" aria-hidden="true" class="book-label"></span>
+<h3 class="book-h"><button type="button" aria-controls="ch-9" dc-aria-expanded="{{chapters.8.expanded}}" dc-onClick="{{chapters.8.toggle}}" class="book-btn"><span class="book-label-2">App.</span><span class="book-label-3"><span class="book-label-4">Appendix</span><span class="book-label-5">The Signal Verification System.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.8.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
+<div ref="{{chapters.8.setBody}}" id="ch-9" class="book-box-3"><p class="book-text">The scoring method for internal inbound patterns: a seven-question, natural pattern-mining tool that is less intimidating than a ticket form. <a data-goatcounter-click="signal-appendix" href="prelaunch.html?from=signal-appendix" ref="{{fxRef}}" data-fx="link" class="book-link">Try Signal <span aria-hidden="true" data-fx-arrow="right">→</span></a></p></div>
+</div>
 <!-- quiet CTA under the chapters: ink outline, no orange -->
 <div class="book-box-4"><a data-goatcounter-click="get-the-book-chapters" href="prelaunch.html?from=book-chapters" ref="{{fxRef}}" data-fx="card" class="book-link-2">Get the Book <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
 </div>
 
 <!-- one interior spread: magnet on approach, opens full width on click -->
 <figure id="sample" class="book-figure">
-<button data-goatcounter-click="open-sample-spread" type="button" ref="{{setSpread}}" class="kbspreadbtn" onClick="{{openSpread}}" aria-label="Open pages 60–61 from Chapter III: A lesson from history: the Solow Paradox for today’s AI">
+<button data-goatcounter-click="open-sample-spread" type="button" ref="{{setSpread}}" class="kbspreadbtn" dc-onClick="{{openSpread}}" aria-label="Open pages 60–61 from Chapter III: A lesson from history: the Solow Paradox for today’s AI">
 <div class="kbspread book-box-5">
-<div class="kbpg kbpgL kbpgimg"><img src="assets/page-60.webp" alt="" draggable="false"></div>
-<div class="kbpg kbpgR kbpgimg"><img src="assets/page-61.webp" alt="" draggable="false"></div>
+<div class="kbpg kbpgL kbpgimg"><img src="assets/page-60.webp" alt="Page 60 of Known Before Built: A lesson from history — the Solow Paradox" draggable="false"></div>
+<div class="kbpg kbpgR kbpgimg"><img src="assets/page-61.webp" alt="Page 61 of Known Before Built: the Solow Paradox, continued, applied to AI-assisted delivery" draggable="false"></div>
 </div>
 </button>
 <div ref="{{setSpreadShadow}}" aria-hidden="true" class="book-box-6"></div>
-<figcaption class="book-caption"><span class="book-label-6">Chapter III · Pages 60-61</span><span class="book-label-7">A lesson from history: the Solow Paradox for today’s AI</span><span class="{{hintClass}}">Click the book to read</span></figcaption>
+<figcaption class="book-caption"><span class="book-label-6">Chapter III · Pages 60-61</span><span class="book-label-7">A lesson from history: the Solow Paradox for today’s AI</span><span class="book-label-8" dc-class="{{hintClass}}">Click the book to read</span></figcaption>
 </figure>
-<sc-if value="{{spreadOpen}}" hint-placeholder-val="{{ false }}">
-<div class="kbzoom" role="dialog" aria-modal="true" aria-label="Pages 60–61 from Chapter III. Click or press Escape to close." tabindex="-1" ref="{{setZoom}}" onClick="{{closeSpread}}" onKeyDown="{{zoomKey}}">
+<sc-if value="{{spreadOpen}}" hint-placeholder-val="{{ false }}" hidden>
+<div class="kbzoom" role="dialog" aria-modal="true" aria-label="Pages 60–61 from Chapter III. Click or press Escape to close." tabindex="-1" ref="{{setZoom}}" dc-onClick="{{closeSpread}}" dc-onKeyDown="{{zoomKey}}">
 <div ref="{{setBig}}" class="kbspread kbspreadbig book-box-7">
 <div class="kbpg kbpgL kbpgimg"><img src="assets/page-60.webp" alt="Page 60 of Known Before Built: A lesson from history — the Solow Paradox" draggable="false"></div>
 <div class="kbpg kbpgR kbpgimg"><img src="assets/page-61.webp" alt="Page 61 of Known Before Built: the Solow Paradox, continued, applied to AI-assisted delivery" draggable="false"></div>
@@ -379,7 +454,6 @@
 
 <!-- stories -->
 </section><section id="author" aria-labelledby="s7h" class="author-section">
-<!-- <p class="author-text">Author</p> -->
 <div class="author-box">
 <img ref="{{setPortrait}}" src="assets/andreas-mitschke-portrait-web.webp" alt="Portrait of Andreas Mitschke" class="author-img">
 </div>
@@ -423,7 +497,9 @@
 </footer>
 </section>
 </div>
-</template>
+  </div>
+</main>
+<noscript><p class="kb-noscript">The animated figures on this page need JavaScript; all text is shown without it. Contact: <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.com</a></p></noscript>
 
 <script src="js/vendor/preact.min.js"></script>
 <script src="js/runtime.js"></script>
