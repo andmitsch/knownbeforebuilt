@@ -7,8 +7,11 @@ class Component extends DCLogic {
         const a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null; if (!a) return;
         const id = a.getAttribute('href').slice(1); if (!id) return; const el = document.getElementById(id); if (!el) return;
         e.preventDefault();
+        // #ch-N links (e.g. the chapter citation under the NVV formula) open that chapter in "Inside the book" and land just above its row
+        let tgt = el, off = 0; const cm = /^ch-(\d+)$/.exec(id);
+        if (cm) { tgt = el.closest('.book-box-2') || el; off = 250; window.dispatchEvent(new CustomEvent('kb-chapter', { detail: +cm[1] - 1 })); }
         const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const y0 = window.scrollY || document.documentElement.scrollTop; const y1 = y0 + el.getBoundingClientRect().top;
+        const y0 = window.scrollY || document.documentElement.scrollTop; const y1 = y0 + tgt.getBoundingClientRect().top - off;
         const dist = Math.abs(y1 - y0); if (reduce || dist < 2) { window.scrollTo(0, y1); return; }
         const D = Math.min(2200, 1000 + dist * 0.35); const t0 = performance.now();
         const ease = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
@@ -28,6 +31,7 @@ class Component extends DCLogic {
     this.setWays = (el) => { this.al.w = el; this.alignCirc(); };
     this.setMailRow = (el) => { this.al.m = el; this.alignCirc(); if (el && document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.alignCirc()); if (el) setTimeout(() => this.alignCirc(), 600); };
     this.state = { open: false, ch: 2 };   // Chapter III (the AI Productivity Fallacy) starts open, matching the sample pages
+    window.addEventListener('kb-chapter', (e) => { const i = e.detail; if (i >= 0 && i < 9 && (!this.state || this.state.ch !== i)) { this.glowGo(i, null); this.setState({ ch: i }); } });
     this.acc = { bodies: [], bars: [], h: [], from: [], to: [], t0: 0, raf: 0, el: null, prevCh: 3 };
     this.bodySet = []; this.barSet = []; this.glowSet = []; this.glow = [];
     for (let i = 0; i < 9; i++) {
