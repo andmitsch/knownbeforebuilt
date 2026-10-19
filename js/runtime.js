@@ -1,6 +1,6 @@
 /*
  * kbb-runtime — renders the Design canvas artboards (.dc.html) as a normal web page.
- * Templates use {{holes}}, <sc-if>, <sc-for>, ref / on* handlers; logic classes extend DCLogic.
+ * Templates use {{holes}}, <sc-if>, <sc-for>, ref / dc-on* handlers; logic classes extend DCLogic.
  * Rendering is done with Preact (React-compatible, MIT).
  */
 (function () {
@@ -48,6 +48,9 @@
     for (var a = 0; a < node.attributes.length; a++) {
       var at = node.attributes[a], name = at.name, val = at.value;
       if (name.indexOf('hint-') === 0) continue;
+      // dc-NAME="{{hole}}" is the live binding for NAME; a plain NAME next to it is the static value no-JS readers see.
+      if (name.indexOf('dc-') === 0) name = name.slice(3);
+      else if (node.hasAttribute('dc-' + name)) continue;
       var m = val.match(WHOLE);
       var v = m ? lookup(m[1], scopes) : (val.indexOf('{{') >= 0 ? interp(val, scopes) : val);
       if (name === 'ref') { if (typeof v === 'function') props.ref = v; continue; }
@@ -71,9 +74,20 @@
   };
   window.DCLogic = DCLogic;
 
+  // The page's markup is already in the document (readable without JavaScript). kbbMount keeps a detached copy of it
+  // as the template, strips the binding attributes from the live copy, then renders over it: Preact reuses the
+  // existing elements, so nothing is rebuilt or shifts. A <template id> can still be passed instead of null.
+  function strip(root) {
+    var els = root.querySelectorAll('*');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i], names = [];
+      for (var a = 0; a < el.attributes.length; a++) { var n = el.attributes[a].name; if (n === 'ref' || n.indexOf('dc-') === 0 || n.indexOf('hint-') === 0) names.push(n); }
+      for (var k = 0; k < names.length; k++) el.removeAttribute(names[k]);
+    }
+  }
   window.kbbMount = function (Cls, tplId, mountEl, props) {
-    var tpl = document.getElementById(tplId);
-    Cls.__tpl = tpl.content;
+    if (tplId) Cls.__tpl = document.getElementById(tplId).content;
+    else { Cls.__tpl = mountEl.cloneNode(true); strip(mountEl); }
     P.render(h(Cls, props || {}), mountEl);
   };
 })();

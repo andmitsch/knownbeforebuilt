@@ -1,5 +1,6 @@
 // Phones get their own single-column layout (html.kb-m). Tablets keep the 1440 px design, scaled to fit.
 // ?m=1 forces the phone layout on a desktop browser (for checking); ?m=0 forces the desktop layout.
+  document.documentElement.classList.add('js');   // CSS keeps the no-JS reading layout unless this is set
   window.KB_TOUCH = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   (function () {
     var q = /[?&]m=([01])/.exec(location.search), sw = Math.min(screen.width || 9999, screen.height || 9999);

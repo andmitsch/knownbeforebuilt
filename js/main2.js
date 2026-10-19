@@ -370,19 +370,9 @@ void main(){
     const motion = this.props.motion ?? true;
     const open = !!(this.state && this.state.open);
     const cur = this.state && this.state.ch !== undefined ? this.state.ch : 2;
-    const C = [
-      ['I', 'Trapped Capital', 'Does your company know more than it can see?', 'Where the expertise, institutional knowledge, internal tools and IP that could become products are hiding inside your organisation - be it product-led sales, self-serve or service-embedded.'],
-      ['II', 'The Cost of Building Wrong', 'What lacking product thinking costs you.', 'Why the build is the smallest part of what a blindly shipped decision costs: the cost iceberg. And why a backlog-driven culture naturally pushes out a de-risking, outcome-driven one.'],
-      ['III', 'The AI Productivity Fallacy', 'What happens to the cost of building wrong, when building gets cheaper and faster?', 'Why “speed at all costs” multiplies bad decisions as readily as good ones. Why AI is the answer to delivery speed, not outcome quality. And the pain–gain ratio: how much value your product must deliver before it can even replace pen and paper.'],
-      ['IV', 'The Product Decision System', 'Find decisions that convert to value.', 'An overview of how everything fits together.'],
-      ['V', 'Continuous Opportunity Discovery', 'The permanent layer that makes the invisible visible.', 'Discovery doesn’t stop and become a hand-off. It runs continuously.'],
-      ['VI', 'Assumption Validation', 'When observation becomes testing.', 'Turning a hypothesis into lean, fast tests that can fail, before pilot resources are committed.'],
-      ['VII', 'Pilot Validation', 'Where informed decisions are found.', 'Proving value is real, repeatable and commercially viable, ideally without your people in the room.'],
-      ['VIII', 'Get Things Done and Drive Impact', 'From here, you lead.', 'Putting the system to work inside your organisation, and keeping it running.'],
-      ['App.', 'Appendix', 'The Signal Verification System.', 'The scoring method for internal inbound patterns: a seven-question, natural pattern-mining tool that is less intimidating than a ticket form.']
-    ];
-    const chapters = C.map((c, i) => ({ num: c[0], title: c[1], sub: c[2], body: c[3], open: i === cur, expanded: i === cur ? 'true' : 'false', sign: i === cur ? '−' : '+',
-      setBody: this.bodySet[i], setBar: this.barSet[i], link: i === 8,
+    // The chapter titles and texts live in index.html (readable without JavaScript); this only binds behaviour to the nine rows.
+    const chapters = Array.from({ length: 9 }, (_, i) => ({ expanded: i === cur ? 'true' : 'false',
+      setBody: this.bodySet[i], setBar: this.barSet[i],
       setGlow: this.glowSet[i],
       toggle: (e) => { this.glowGo(i, e); this.setState({ ch: (this.state && this.state.ch) === i ? -1 : i }); } }));
     return { fxRef: this.fxRef,

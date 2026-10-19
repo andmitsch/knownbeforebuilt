@@ -10,6 +10,6 @@ window.KBB_PROPS = { showPlaceholders: false };
   fit(); window.addEventListener('resize', fit);
   var cfg = window.KBB_PROPS || {};
   function props(k) { var d = window.KBB[k].defaults || {}, o = {}; for (var p in d) o[p] = d[p]; for (var q in cfg) o[q] = cfg[q]; return o; }
-  kbbMount(window.KBB.main, 'tpl-main', document.getElementById('kb-main'), props('main'));
-  kbbMount(window.KBB.main2, 'tpl-main2', document.getElementById('kb-main2'), props('main2'));
+  kbbMount(window.KBB.main, null, document.getElementById('kb-main'), props('main'));
+  kbbMount(window.KBB.main2, null, document.getElementById('kb-main2'), props('main2'));
 })();
