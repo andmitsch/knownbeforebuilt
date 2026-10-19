@@ -196,8 +196,8 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 .get-label-4{margin-left: 10px}
 .get-link-2{font: 500 16px/1.4 'Hanken Grotesk', sans-serif; color: #111111}
 .section-section-2{height: 245px; flex-shrink: 0; position: relative}
-.section-text-2{position: absolute; left: 120px; top: 58px; margin: 0; font: 700 12px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; font-size: 18px}
-.section-title-2{position: absolute; left: 120px; top: 88px; width: 1200px; margin: 0; font: 900 60px/1.04 Archivo, sans-serif; letter-spacing: -0.03em; text-wrap: balance}
+.section-title-2{position: absolute; left: 120px; top: 64px; width: 1200px; margin: 0; font: 900 60px/1.04 Archivo, sans-serif; letter-spacing: -0.03em; text-wrap: balance}
+.section-sub-2{position: absolute; left: 120px; top: 148px; width: 1200px; margin: 0; font: var(--bodoni-w) 30px/1.3 'Bodoni Moda', serif; text-wrap: balance}
 .system-section{height: 932px; flex-shrink: 0; position: relative}
 .system-svg{position: absolute; left: 330px; top: 150px; overflow: visible; transform-origin: 320px 150px; touch-action: pan-y}
 .system-svg-2{position: absolute; left: 0; top: 285px; overflow: visible; pointer-events: none}
@@ -235,9 +235,9 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 .section-label-7{position: absolute; left: 520px; top: 656px; font-size: 19px}
 .section-label-8{position: absolute; left: 1000px; top: 660px; font-size: 19px}
 .section-label-9{position: absolute; left: 1010px; top: 30px; font-size: 19px}
-.section-svg{position: absolute; left: 110px; top: 250px; overflow: visible; transform-origin: 160px 75px}
-.section-svg-2{position: absolute; left: 60px; top: 319px; overflow: visible}
-.section-box-3{position: absolute; left: 540px; top: 157px; width: 800px; display: flex; flex-direction: column; gap: 28px; height: 466px}
+.section-svg{position: absolute; left: 110px; top: 158px; overflow: visible; transform-origin: 160px 75px}
+.section-svg-2{position: absolute; left: 60px; top: 227px; overflow: visible}
+.section-box-3{position: absolute; left: 540px; top: 185px; width: 800px; display: flex; flex-direction: column; gap: 28px; height: 466px}
 .section-heading{margin: 0; font: 800 28px/1.1 Archivo, sans-serif; font-family: Hanken Grotesk; font-size: 18px; font-weight: 700; letter-spacing: 0.2em; line-height: 0}
 .section-title-3{margin: 0; font: italic var(--bodoni-w) 46px/1.3 'Bodoni Moda', serif; text-wrap: balance; color: #111111; font-weight: var(--bodoni-w); font-style: normal; line-height: 1.5; height: 211px}
 .section-mark{position: relative; display: inline-block; white-space: nowrap; background: none; color: #111111; padding: 0 14px; margin: 0 2px; line-height: 1.25}
@@ -245,7 +245,10 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 .section-box-4{display: flex; flex-direction: column}
 .section-text-3{margin: 0; font: 700 29px/1.25 Archivo, sans-serif; word-spacing: 0.04em; white-space: nowrap}
 .section-label-10{position: relative; display: inline-block; white-space: nowrap; padding: 0 8px}
-.section-text-4{margin: 0; font-size: 18px; font-family: "Hanken Grotesk", sans-serif; line-height: 0; color: rgb(94, 89, 84); width: 900px}
+/* Citation under the NVV formula, in the style of the sample-pages caption: chapter label + italic link that opens the chapter */
+.nvv-ref{margin: 2px 0 0; display: flex; flex-direction: column; align-items: flex-start; gap: 10px}
+.nvv-ref-k{font: 700 11px/1 'Hanken Grotesk', sans-serif; letter-spacing: 0.18em; text-transform: uppercase; color: #5E5954}
+.nvv-ref-a{font: italic var(--bodoni-w) 22px/1.3 'Bodoni Moda', serif; color: #111111}
 .section-box-5{display: flex; flex-direction: column; gap: 4px; margin-top: 12px; font: 400 14px/1.5 'Hanken Grotesk', sans-serif; color: #5E5954}
 .section-section-4{height: 351px; flex-shrink: 0; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0}
 .section-title-4{margin: 0; width: 1200px; font: 900 60px/1.08 Archivo, sans-serif; letter-spacing: -0.03em; text-wrap: balance; text-align: center}
@@ -410,8 +413,8 @@ html.kb-m .get-box-4{flex-direction:column;align-items:flex-start;gap:18px}
 
 /* cost of building blindly */
 html.kb-m .section-section-2{height:auto;padding:60px 20px 0}
-html.kb-m .section-text-2{position:static;font-size:13px}
-html.kb-m .section-title-2{position:static;width:auto;margin-top:14px;font-size:35px;line-height:1.06}
+html.kb-m .section-title-2{position:static;width:auto;margin-top:0;font-size:35px;line-height:1.06}
+html.kb-m .section-sub-2{position:static;width:auto;margin-top:14px;font-size:22px;line-height:1.3}
 
 /* iceberg: figure on top, the five cost layers as a list below */
 html.kb-m .system-section{height:auto;padding:440px 0 44px;overflow:hidden}
@@ -452,7 +455,7 @@ html.kb-m .section-heading{font-size:13px;line-height:1.3}
 html.kb-m .section-title-3{font-size:27px;line-height:1.5;height:auto}
 html.kb-m .section-mark{padding:0 10px}
 html.kb-m .section-text-3{font-size:18px;line-height:1.6;white-space:normal}
-html.kb-m .section-text-4{font-size:15px;line-height:1.45;width:auto}
+html.kb-m .nvv-ref-a{font-size:19px}
 
 /* outcomes */
 html.kb-m .section-section-4{height:auto;padding:52px 20px 64px}
