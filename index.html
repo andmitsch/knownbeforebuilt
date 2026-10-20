@@ -1,512 +1,464 @@
 <!doctype html>
 <!--
-                     .-'''''''''''''-.
-                 .-'                   '-.
-               .'                         '.
-              /       .-.          .-.      \
-             /       ( o )        ( o )      \
-            |         '-'          '-'        |
-            |                                 |
-            |     \                     /     |
-             \     '.                 .'     /
-              \      '-._         _.-'      /
-               '.        '''''''''        .'
-                 '-.                   .-'
-                    '-.._____________..-'
+                               --)-----------|____________|
+                                             /        /
+               -)------========            /  _____ /
+                        \     \          /   /____/
+                          \     \      /        /
+                            \     \__/_________/__
+                              \ _ _| ^--      || |
+                   ________--------|_____________|\
+    -  \-----------                               ||
+ -     ============================ ______________ |
+    - _____________________________|  |'      || |/
+                               /   |_____________|
+                             /     /  \         \
+                           /     /      \      ___\
+               -)---------========        \    \____\
+                                            \         \
+USE THE FORCE!                                \_________\_
+                              --)-------------|___________|
 
           Thanks for the interest in the code.
           The animations are great, right?
+          -Andreas
 
 -->
-<html lang="en-GB">
+<html lang="en-GB" data-accent="blue">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=1440">
-<script src="js/head.js"></script>
-
-<title>Known Before Built — From Discovery to Decision for Enterprises in Transformation</title>
-<meta name="description" content="A working system for deciding what deserves to be built — before the organisation pays to find out. A book by Andreas Mitschke.">
-<meta name="author" content="Andreas Mitschke">
-<meta name="theme-color" content="#ECE8E5">
-<link rel="canonical" href="https://andmitsch.github.io/knownbeforebuilt/">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://andmitsch.github.io/knownbeforebuilt/">
-<meta property="og:site_name" content="Known Before Built">
-<meta property="og:title" content="Known Before Built — Andreas Mitschke">
-<meta property="og:description" content="From Discovery to Decision for Enterprises in Transformation.">
-<meta property="og:image" content="https://andmitsch.github.io/knownbeforebuilt/assets/og-book.png">
-<meta property="og:image:secure_url" content="https://andmitsch.github.io/knownbeforebuilt/assets/og-book.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:alt" content="Known Before Built by Andreas Mitschke: book cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Andreas Mitschke - Growth &amp; Product Innovation - Open for Roles</title>
+<meta name="description" content="Andreas Mitschke helps leadership teams make better calls on what to build and how to grow it, then builds and runs the growth system that delivers it, across product and marketing. Author of Known Before Built.">
+<meta property="og:title" content="Andreas Mitschke - Stop approving. Start proving.">
+<meta property="og:description" content="Growth &amp; product innovation Director, advisor, author of Known Before Built.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://andmitsch.github.io/andreasmitschke/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Stop approving. Start proving. Andreas Mitschke, growth and product innovation.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Known Before Built — Andreas Mitschke">
-<meta name="twitter:description" content="From Discovery to Decision for Enterprises in Transformation.">
-<meta name="twitter:image" content="https://andmitsch.github.io/knownbeforebuilt/assets/og-book.png">
-<!-- Structured data. At launch add "isbn" and "datePublished" (YYYY-MM-DD) to the Book entry. -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@graph": [
-  {
-   "@type": "Book",
-   "@id": "https://andmitsch.github.io/knownbeforebuilt/#book",
-   "name": "Known Before Built",
-   "alternativeName": "From Discovery to Decision for Enterprises in Transformation",
-   "description": "A working system for deciding what deserves to be built — before the organisation pays to find out.",
-   "url": "https://andmitsch.github.io/knownbeforebuilt/",
-   "image": "https://andmitsch.github.io/knownbeforebuilt/assets/book-front.jpg",
-   "author": {
-    "@id": "https://andmitsch.github.io/andreasmitschke/#person"
-   },
-   "publisher": {
-    "@type": "Organization",
-    "name": "Grant & Bear Publishing",
-    "url": "https://andmitsch.github.io/knownbeforebuilt/grant-and-bear-publishing/"
-   },
-   "numberOfPages": 316,
-   "bookFormat": "https://schema.org/Paperback",
-   "inLanguage": "en"
-  },
-  {
-   "@type": "Person",
-   "@id": "https://andmitsch.github.io/andreasmitschke/#person",
-   "name": "Andreas Mitschke",
-   "jobTitle": "Growth & Product Innovation",
-   "url": "https://andmitsch.github.io/andreasmitschke/",
-   "image": "https://andmitsch.github.io/knownbeforebuilt/assets/andreas-mitschke-portrait-square.jpg",
-   "sameAs": [
-    "https://www.linkedin.com/in/andreasmitschke",
-    "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10956892",
-    "https://andreasmitschke.com"
-   ]
-  }
- ]
-}
-</script>
+<meta name="twitter:image" content="https://andmitsch.github.io/andreasmitschke/assets/og.png">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="fonts/archivo-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/bodoni-moda-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/book.css">
-<!-- GoatCounter: cookie-free visitor stats. Replace [GOATCOUNTER-CODE] with your GoatCounter code. -->
-<script data-goatcounter="https://[GOATCOUNTER-CODE].goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#EEEBE5">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<div class="kb-sweep" aria-hidden="true"></div>
-<a class="kb-skip" href="#top">Skip to content</a>
-<main id="kb-page">
-  <div id="kb-main">
-<div class="tpl-main-box" dc-class="{{rootClass}} tpl-main-box">
-
-<!-- NAV -->
-<nav aria-label="Primary" class="nav-nav">
-<a href="#top" class="nav-link">
-<span class="nav-label">KNOWN</span>
-<span class="nav-label-2">before</span>
-<span class="nav-label">BUILT</span>
-</a>
-<div class="nav-box">
-<a href="#book" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Book</a>
-<a href="#system" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">System</a>
-<a href="#author" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Author</a>
-<a data-goatcounter-click="nav-signal" href="prelaunch.html?from=signal-nav" ref="{{fxRef}}" data-fx="outline" class="nav-link-3">Signal <span aria-hidden="true">→</span></a>
-</div>
-</nav>
-
-<!-- S1 HERO -->
-<section id="top" aria-label="Known Before Built" class="top-section">
-<div class="top-box">
-<sc-if value="{{motionOn}}" hint-placeholder-val="{{ true }}" hidden></sc-if>
-<sc-if value="{{motionOff}}" hint-placeholder-val="{{ false }}" hidden><img src="assets/circle-static.webp" alt="" class="top-img"></sc-if>
-<img src="assets/circle-paint.webp" alt="" class="top-img-2"></div>
-
-<div class="top-box-2">
-<h1 class="top-title">
-<span class="top-label">KNOWN</span>
-<span class="top-label-2"><span aria-hidden="true" class="top-label-3"></span><span class="top-label-4">before</span><span aria-hidden="true" class="top-label-3"></span></span>
-<span class="top-label-5">BUILT</span>
-</h1>
-<p class="top-text">Stop the Innovation Theatre. <br>De-Risk Your Product Bets.</p><p class="top-text-2">You are bleeding R&amp;D capital on stumbling digitalisation and transformation initiatives, all while facing mounting pressure to productise your service IP. This book provides a structured methodology for knowledge-rich organisations that are building, fixing or optimising these initiatives.</p>
-
-<div class="top-box-3"><a data-goatcounter-click="go-to-the-book" href="#get" ref="{{fxRef}}" data-fx="ink" class="top-link">Go to the book <span aria-hidden="true" data-fx-arrow="down">↓</span></a></div>
-</div>
-</section>
-
-<!-- S2 IS THIS YOU -->
-<section aria-labelledby="s2h" class="section-section">
-<h2 id="s2h" class="section-title">Is this you?</h2>
-<div class="section-box">
-<article class="section-article">
-<span class="section-label">i.</span>
-<p class="section-text">You lead a new innovation function in a firm that has only ever known custom delivery. Executives, sales and pet projects all pull at the roadmap. You need a system to filter the noise.</p>
-</article>
-<article class="section-article">
-<span class="section-label">ii.</span>
-<p class="section-text">You are in a running digital transformation. There is a steering committee for everything, yet no product decision that grew revenue.</p>
-</article>
-<article class="section-article">
-<span class="section-label">iii.</span>
-<p class="section-text">You suspect a method, a tool or an acquired piece of IP could stand on its own as a product and you want to know before committing delivery budget.</p>
-</article>
-</div>
-</section>
-
-<!-- GET THE BOOK -->
-
-<!-- S3 ICEBERG -->
-<section id="get" aria-labelledby="gbh" dc-onMouseMove="{{bNear}}" dc-onMouseLeave="{{bFar}}" class="get-section">
-<!-- 3D book, ported from the Grant & Bear page: drag, arrow keys, leans towards the cursor -->
-<div ref="{{setStage}}" class="kbstage get-box" dc-onPointerDown="{{bDown}}" dc-onPointerMove="{{bMove}}" dc-onPointerUp="{{bUp}}" dc-onPointerCancel="{{bUp}}">
-<div ref="{{setBook3}}" class="kbbook" role="img" aria-label="Known Before Built by Andreas Mitschke. Drag, or use the arrow keys, to turn the book." tabindex="0" dc-onKeyDown="{{bKey}}">
-<div class="kbface kbfront"><img src="assets/book-front.jpg" width="760" height="1216" alt="Front cover of Known Before Built: From Discovery to Decision for Enterprises in Transformation, by Andreas Mitschke" draggable="false"><i class="kbshade"></i></div>
-<div class="kbface kbback"><img src="assets/book-back.jpg" width="760" height="1216" alt="Back cover of Known Before Built" draggable="false"><i class="kbshade"></i></div>
-<div class="kbface kbspine"><img src="assets/book-spine.jpg" width="104" height="1216" alt="" draggable="false"><i class="kbshade"></i></div>
-<div class="kbface kbfore"><i class="kbshade"></i></div>
-<div class="kbface kbtop"><i class="kbshade"></i></div>
-<div class="kbface kbbottom"><i class="kbshade"></i></div>
-</div>
-<div ref="{{setBShadow}}" class="kbshadow"></div>
-<p class="kbhint" aria-hidden="true">Drag to turn the book</p>
-</div>
-
-<div class="get-box-2">
-
-<h2 id="gbh" class="get-title"><span class="get-label">KNOWN</span><span class="get-label-2">before</span><span class="get-label">BUILT</span></h2>
-<p class="get-text">From Discovery to Decision for Enterprises in Transformation</p>
-<p class="get-text-2"><span>An intrapreneurial operating system that replaces the innovation theatre of brainstorming sessions and Post-it-plastered whiteboards with evidence-driven discovery methods, allowing you to de-risk every hypothesis before a major investment decision must be made.<br></span></p>
-<dl class="get-list">
-<div class="get-box-3"><dt class="get-term">Format</dt><dd class="get-detail">Paperback</dd></div>
-<div class="get-box-3"><dt class="get-term">Pages</dt><dd class="get-detail">316</dd></div>
-</dl>
-<div class="get-box-4"><a data-goatcounter-click="get-the-book-main" href="prelaunch.html?from=book-main" ref="{{fxRef}}" data-fx="orange" class="get-link">Get the Book <span aria-hidden="true" data-fx-arrow="right" class="get-label-4">→</span></a><a data-goatcounter-click="read-pages-first" href="#sample" ref="{{fxRef}}" data-fx="link" class="get-link-2">or read some pages first <span aria-hidden="true" data-fx-arrow="down">↓</span></a></div>
-</div>
-</section>
-
-<!-- S4 NVV -->
-<!-- THESIS -->
-
-<!-- RESOLUTION -->
-<section aria-labelledby="s3h" class="section-section-2">
-<h2 id="s3h" class="section-title-2">Why can't we just ship it?</h2>
-<p class="section-sub-2">The true cost of shipping without validation is higher than you think.</p>
-</section><div class="system-section">
-
-<svg ref="{{setBerg}}" class="kbberg system-svg" dc-onPointerDown="{{bergDown}}" dc-onPointerMove="{{bergMove}}" dc-onPointerUp="{{bergUp}}" dc-onPointerCancel="{{bergUp}}" width="640" height="700" viewBox="0 0 640 700" aria-hidden="true">
-<defs>
-<clipPath id="a3berg"><path d="M200 150 L165 205 L135 300 L118 400 L112 500 L128 590 L170 650 L240 690 L400 692 L470 655 L510 590 L528 500 L522 400 L505 300 L475 205 L440 150 Z"></path></clipPath>
-<clipPath id="a3notD"><rect x="0" y="0" width="640" height="410"></rect><rect x="0" y="540" width="640" height="200"></rect></clipPath>
-<clipPath id="a3onlyD"><rect x="0" y="410" width="640" height="130"></rect></clipPath>
-</defs>
-<path d="M200 150 L165 205 L135 300 L118 400 L112 500 L128 590 L170 650 L240 690 L400 692 L470 655 L510 590 L528 500 L522 400 L505 300 L475 205 L440 150 Z" fill="#000000" fill-opacity="0"></path>
-<g clip-path="url(#a3berg)">
-<rect x="0" y="150" width="640" height="130" fill="#F57106" fill-opacity="0.12"></rect>
-<rect x="0" y="280" width="640" height="130" fill="#F57106" fill-opacity="0.26"></rect>
-<rect x="0" y="410" width="640" height="130" fill="#F57106" fill-opacity="0.42"></rect>
-<rect x="0" y="540" width="640" height="160" fill="#F57106" fill-opacity="0.62"></rect>
-<line x1="0" y1="280" x2="640" y2="280" stroke="#111111" stroke-width="1.2"></line>
-<line x1="0" y1="410" x2="640" y2="410" stroke="#111111" stroke-width="1.2" stroke-dasharray="6 6"></line>
-<line x1="0" y1="540" x2="640" y2="540" stroke="#111111" stroke-width="1.2" stroke-dasharray="6 6"></line>
-<path d="M240 150 L206 262 M420 150 L468 280 M150 420 L180 520" fill="none" stroke="#111111" stroke-opacity="0.3" stroke-width="1"></path>
-</g>
-<path d="M200 150 L165 205 L135 300 L118 400 L112 500 L128 590 L170 650 L240 690 L400 692 L470 655 L510 590 L528 500 L522 400 L505 300 L475 205 L440 150" fill="none" stroke="#111111" stroke-width="2" stroke-linejoin="round" clip-path="url(#a3notD)"></path>
-<path d="M200 150 L165 205 L135 300 L118 400 L112 500 L128 590 L170 650 L240 690 L400 692 L470 655 L510 590 L528 500 L522 400 L505 300 L475 205 L440 150" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="7 7" clip-path="url(#a3onlyD)"></path>
-<path d="M200 150 L262 70 L285 88 L318 18 L352 80 L372 64 L440 150" fill="#ECE8E5" stroke="#111111" stroke-width="2" stroke-linejoin="round"></path>
-<path d="M318 18 L304 76 L322 110 M372 64 L362 104 M262 70 L270 112" fill="none" stroke="#111111" stroke-width="1.2"></path>
-</svg>
-<svg aria-hidden="true" width="1440" height="30" viewBox="0 0 1440 30" class="system-svg-2"><path ref="{{setW1}}" d="M0 15 L1440 15" fill="none" stroke="#111111" stroke-width="1.5"></path></svg>
-<p class="system-text">Visible on the budget<br></p>
-<p class="system-text-2">Below the surface</p>
-<div ref="{{setBergTip}}" aria-hidden="true" class="system-box"><svg width="44" height="44" viewBox="-50 -50 100 100" class="spin system-svg-3"><g stroke="#F57106" stroke-width="7" stroke-linecap="round"><line x1="0" y1="-26" x2="0" y2="-44"></line><line x1="13" y1="-22.5" x2="22" y2="-38.1" opacity=".12"></line><line x1="22.5" y1="-13" x2="38.1" y2="-22" opacity=".15"></line><line x1="26" y1="0" x2="44" y2="0" opacity=".19"></line><line x1="22.5" y1="13" x2="38.1" y2="22" opacity=".24"></line><line x1="13" y1="22.5" x2="22" y2="38.1" opacity=".3"></line><line x1="0" y1="26" x2="0" y2="44" opacity=".37"></line><line x1="-13" y1="22.5" x2="-22" y2="38.1" opacity=".45"></line><line x1="-22.5" y1="13" x2="-38.1" y2="22" opacity=".54"></line><line x1="-26" y1="0" x2="-44" y2="0" opacity=".64"></line><line x1="-22.5" y1="-13" x2="-38.1" y2="-22" opacity=".76"></line><line x1="-13" y1="-22.5" x2="-22" y2="-38.1" opacity=".88"></line></g></svg></div>
-
-<!-- tip label -->
-<div class="system-box-2">
-<h3 class="system-text-3"><span class="system-label">Build</span><span class="system-label-2">L<sub>B</sub></span></h3>
-<p class="system-text-4">The visible part: designing, coding, preparing and launching.&nbsp;Engineering, management, go-to-market and marketing that is comfortable to track.</p>
-</div>
-<div aria-hidden="true" class="system-box-3"></div>
-
-<!-- layer labels -->
-<div aria-hidden="true" class="system-box-4"></div>
-<div aria-hidden="true" class="system-box-5"></div>
-<div aria-hidden="true" class="system-box-6"></div>
-<div aria-hidden="true" class="system-box-7"></div>
-<div class="system-box-8">
-<h3 class="system-text-3"><span class="system-label-3">Implementation cost</span><span class="system-label-4">L<sub>I</sub></span></h3>
-<p class="system-text-5">Rolling it out: integration, onboarding, training, enablement, progressive optimisation, etc.</p>
-</div>
-<div class="system-box-9">
-<h3 class="system-text-3"><span class="system-label-3">Carrying cost</span><span class="system-label-4">L<sub>C</sub></span></h3>
-<p class="system-text-5">Keeping it alive: maintenance, support, and an ever-increasing complexity that never leaves the codebase.</p>
-</div>
-<div class="system-box-10">
-<h3 class="system-text-3"><span class="system-label-3">Displacement cost</span><span class="system-label-4">L<sub>D</sub></span></h3>
-<p class="system-text-5">What the team could have built instead. It appears on no budget line. The opportunity cost every first business class teaches, yet almost never attributed.</p>
-</div>
-<div class="system-box-11">
-<h3 class="system-text-3"><span class="system-label-3">Correction cost</span><span class="system-label-4">L<sub>R</sub></span></h3>
-<p class="system-text-5">Unwinding it once it's dead: sunsetting, migration, reputational friction.</p>
-</div>
-
-<!-- assembled equation -->
-<p aria-label="C sub b equals L sub B plus L sub I plus L sub C plus L sub D plus L sub R" class="system-text-6">C<sub>b</sub> <span class="op">=</span> L<sub>B</sub> <span class="op">+</span> L<sub>I</sub> <span class="op">+</span> L<sub>C</sub> <span class="op">+</span> L<sub>D</sub> <span class="op">+</span> L<sub>R</sub></p>
-
-</div><section aria-labelledby="s4h" class="section-section-3">
-<!-- particles -->
-<div ref="{{setParts}}" aria-hidden="true" class="section-box-2">
-<span class="section-label-2">Σ</span>
-<span class="section-label-3">∂</span>
-<span class="section-label-4">Δ</span>
-<span class="section-label-5">E[V]</span>
-<span class="section-label-6">p</span>
-<span class="section-label-7">F<sub>s</sub> = p · d · C<sub>b</sub></span>
-<span class="section-label-8">D<sub>l</sub> = (1 − p) · W<sub>v</sub> · V<sub>w</sub></span>
-<span class="section-label-9">G<sub>s</sub> = (1 − p) · f · V</span>
-</div>
-<!-- shrunken iceberg; failures stopped: hull dissolved -->
-<svg ref="{{setBerg2}}" width="320" height="350" viewBox="0 0 640 700" aria-hidden="true" class="section-svg">
-<path ref="{{setBergDash}}" d="M200 150 L165 205 L135 300 L118 400 L112 500 L128 590 L170 650 L240 690 L400 692 L470 655 L510 590 L528 500 L522 400 L505 300 L475 205 L440 150" fill="none" stroke="#F57106" stroke-width="4" stroke-dasharray="4 12" stroke-linecap="round"></path>
-<path d="M200 150 L262 70 L285 88 L318 18 L352 80 L372 64 L440 150" fill="#ECE8E5" stroke="#111111" stroke-width="3" stroke-linejoin="round"></path>
-</svg>
-<svg width="440" height="12" viewBox="0 0 440 12" aria-hidden="true" class="section-svg-2"><path ref="{{setW4}}" d="M0 6 C 70 2, 150 10, 220 6 S 370 2, 440 6" fill="none" stroke="#111111" stroke-width="1.5"></path></svg>
-
-<div class="section-box-3">
-
-<h2 id="s4h" class="section-title-3"><b>N</b>et <b>V</b>alue of <b>V</b>alidation per idea <b class="op">=</b> <mark class="section-mark">Failures Stopped<svg aria-hidden="true" width="100%" height="100%" class="section-svg-3"><rect ref="{{setFS}}" data-k="0" x="0" y="0" width="100%" height="100%" rx="16" ry="16" fill="none" stroke="#F57106" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"></rect></svg></mark> <b class="op">−</b> Validation cost <b class="op">−</b> Delay cost <b class="op">−</b> Good ideas stopped</h2>
-<div class="section-box-4">
-<p aria-label="NVV equals p times d times C sub b, minus V sub c, minus one minus p times W sub v times V sub w, minus one minus p times f times V" class="section-text-3">NVV = <span class="section-label-10">p · d · C<sub>b</sub><svg aria-hidden="true" width="100%" height="100%" class="section-svg-3"><rect ref="{{setFS}}" data-k="1" x="0" y="0" width="100%" height="100%" rx="12" ry="12" fill="none" stroke="#F57106" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"></rect></svg></span> − V<sub>c</sub> − (1 − p) · W<sub>v</sub> · V<sub>w</sub> − (1 − p) · f · V</p>
-</div><p class="nvv-ref"><span class="nvv-ref-k">Chapter II · The Cost of Building Wrong</span><a href="#ch-2" ref="{{fxRef}}" data-fx="link" class="nvv-ref-a">How to calculate the value of discovery <span aria-hidden="true" data-fx-arrow="down">↓</span></a></p>
-<div class="section-box-5">
-
-</div>
-</div>
-</section><section aria-labelledby="resh" class="section-section-4">
-<h2 id="resh" class="section-title-4">Discovery and validation turn faster delivery into <mark class="section-mark-2">outcomes</mark>, not just output.</h2>
-<p class="section-text-5">Ship value, not just tickets!</p>
-<div class="section-box-6"><a data-goatcounter-click="get-the-book-outcomes" href="prelaunch.html?from=book-outcomes" ref="{{fxRef}}" data-fx="orange" class="section-link">Get the Book <span aria-hidden="true" data-fx-arrow="right" class="get-label-4">→</span></a></div>
-</section>
-
-<!-- S5 PDS -->
-<section id="system" aria-labelledby="s5h" dc-onMouseMove="{{onMove}}" dc-onMouseLeave="{{onLeave}}" class="section-section-5">
-<p class="section-text-6">The Product Decision System</p>
-<h2 id="s5h" class="section-title-5">Structured discovery is simple, but not easy.</h2>
-<p class="kb-sr">How the system works: continuous opportunity discovery feeds a hypothesis. The hypothesis goes through assumption validation and Gate 1, then pilot validation and the investment decision, before anything is built and scaled. What each gate learns informs the validation steps before it and the discovery that feeds the next hypothesis.</p>
-
-<!-- light travelling through the system -->
-<svg aria-hidden="true" width="1440" height="600" viewBox="0 0 1440 600" class="section-svg-3 pds-light">
-<defs><filter id="kbsysglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5"></feGaussianBlur></filter></defs>
-<path ref="{{setRoute}}" d="M135 352 L136 352" fill="none" stroke="none"></path>
-<path ref="{{setTrailGlow}}" d="M135 352 L136 352" fill="none" stroke="#F57106" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 100000" filter="url(#kbsysglow)" opacity="0"></path>
-<path ref="{{setTrail}}" d="M135 352 L136 352" fill="none" stroke="#FF9A3D" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="0 100000" opacity="0"></path>
-<circle ref="{{setHeadGlow}}" cx="-50" cy="-50" r="9" fill="#FFB36B" filter="url(#kbsysglow)" opacity="0"></circle>
-<circle ref="{{setHead}}" cx="-50" cy="-50" r="3.2" fill="#FFF6EC" opacity="0"></circle>
-</svg>
-<!-- path -->
-<div class="section-box-7">
-<div aria-hidden="true" class="section-box-8"></div>
-<div ref="{{setOutLine}}" aria-hidden="true" class="section-box-9"></div>
-<div class="section-box-10">
-<div ref="{{setDiamond}}" aria-hidden="true" class="section-box-11"></div>
-<span class="section-label-11">Hypothesis</span>
-</div>
-<div ref="{{setNAV}}" class="section-box-12">Assumption Validation</div>
-<div ref="{{setNG1}}" class="section-box-13">GATE 1</div>
-<div ref="{{setNP}}" class="section-box-14">Pilot Validation</div>
-<div ref="{{setNINV}}" class="section-box-15">
-<span>INVESTMENT DECISION</span>
-</div>
-<p ref="{{setBuild}}" class="section-text-7">Build &amp; Scale</p>
-</div>
-<svg aria-hidden="true" width="1440" height="600" viewBox="0 0 1440 600" class="section-svg-3 pds-sparks"><circle ref="{{setSparkCore}}" cx="-50" cy="-50" r="3" fill="#FFF6EC" opacity="0" filter="url(#kbsysglow)"></circle><g ref="{{setMotes}}"><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle><circle cx="-50" cy="-50" r="1.2" opacity="0"></circle></g><g ref="{{setSpark}}"><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle><circle cx="-50" cy="-50" r="1.5" opacity="0"></circle></g></svg>
-
-<!-- waterline -->
-<svg aria-hidden="true" width="1440" height="40" viewBox="0 0 1440 40" class="section-svg-4"><path ref="{{setW2}}" d="M0 20 L1440 20" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="9 8"></path></svg>
-<svg aria-hidden="true" width="1440" height="40" viewBox="0 0 1440 40" class="section-svg-5"><path ref="{{setW3}}" d="M0 20 L1440 20" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="9 8"></path></svg>
-
-<!-- connectors + the living current -->
-<svg width="1440" height="1250" viewBox="0 0 1440 1250" aria-hidden="true" class="section-svg-3 pds-conn">
-<defs>
-<marker id="kbarr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#111111"></path></marker>
-<marker id="kbarrO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#F57106"></path></marker>
-<filter id="kbgoo" x="-5%" y="-60%" width="110%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" result="g"></feColorMatrix><feComposite in="SourceGraphic" in2="g" operator="atop"></feComposite></filter>
-<filter id="kbglow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="9"></feGaussianBlur></filter>
-<clipPath id="kbribclip"><path d="M0 678 C 240 664, 480 690, 720 676 S 1200 664, 1440 680 L1440 728 C 1200 716, 960 740, 720 726 S 240 716, 0 730 Z"></path></clipPath>
-</defs>
-<!-- gates inform the validation steps (curved) -->
-<path d="M530 388 A 85 72 0 0 1 360 390" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#kbarr)"></path>
-<path d="M1010 388 A 120 80 0 0 1 770 390" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#kbarr)"></path>
-<path d="M1070 388 A 375 185 0 0 1 320 390" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#kbarr)"></path>
-<!-- gates inform the discovery flow -->
-<path d="M560 386 L560 624" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#kbarr)"></path>
-<path d="M1100 386 L1100 624" fill="none" stroke="#111111" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#kbarr)"></path>
-<!-- the flow feeds the hypothesis -->
-
-</svg>
-<!-- phone layout: the same connectors, drawn for the vertical system (hidden on desktop) -->
-<svg width="360" height="700" viewBox="0 0 360 700" aria-hidden="true" class="pds-mconn">
-<defs><marker id="kbarrM" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#111111"></path></marker></defs>
-<g fill="none" stroke="#111111" stroke-width="1.3" stroke-dasharray="5 5" marker-end="url(#kbarrM)">
-<path d="M206 307 C 162 298, 152 222, 182 213"></path>
-<path d="M176 527 C 150 518, 150 441, 182 433"></path>
-<path d="M176 531 C 50 518, 50 236, 182 225"></path>
-<path d="M206 323 L82 323"></path>
-<path d="M176 545 L82 545"></path>
-</g>
-<g font-family="'Bodoni Moda', serif" font-style="italic" font-size="13" font-weight="500" fill="#111111">
-<text x="104" y="128">feeds</text>
-<text x="118" y="342">informs</text>
-</g>
-</svg><p class="section-text-8">Continuous Opportunity Discovery</p>
-<div aria-hidden="true" class="section-box-16">
-<sc-if value="{{glOff}}" hint-placeholder-val="{{ true }}"><svg width="1440" height="190" viewBox="0 0 1440 190" class="section-svg-6"><path d="M0 68 C 240 54, 480 80, 720 66 S 1200 54, 1440 70 L1440 118 C 1200 106, 960 130, 720 116 S 240 106, 0 120 Z" fill="#F57106"></path></svg></sc-if>
-<canvas ref="{{setCanvas}}" width="1440" height="620" class="section-canvas"></canvas>
-</div>
-<span class="section-label-12">feeds</span>
-<span class="section-label-13">informs</span>
-<span class="section-label-14">informs</span>
-<span class="section-label-15">informs</span>
-<span class="section-label-16">informs</span>
-<span class="section-label-17">informs</span>
-
-</section><section aria-labelledby="moreh" class="section-section-6">
-<h2 id="moreh" class="section-title-6">And there is much more in the book to help your transformation initiative turn ideas into products proven by evidence, not belief.</h2>
-</section>
-
-</div>
+<div class="page">
+  <header class="site-head">
+    <nav class="site-nav">
+      <a href="#top" class="brand">Andreas Mitschke</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span class="mb-label">Menu</span><span class="mb-icon" aria-hidden="true"><i></i><i></i></span></button>
+      <div class="nav-links">
+        <a href="#path" class="nl">My Journey<span class="nl1" aria-hidden="true"></span><span class="nl2" aria-hidden="true"></span></a><a href="#beliefs" class="nl">Principles<span class="nl1" aria-hidden="true"></span><span class="nl2" aria-hidden="true"></span></a><a href="#releases" class="nl">Off my desk<span class="nl1" aria-hidden="true"></span><!--<span class="nl2" aria-hidden="true"></span></a><a href="#talks" class="nl">Talks<span class="nl1" aria-hidden="true"></span>--><span class="nl2" aria-hidden="true"></span></a><a href="#contact" class="nl nl-cta">Let's talk →<span class="nl1" aria-hidden="true"></span><span class="nl2" aria-hidden="true"></span></a>
+      </div>
+    </nav>
+  </header>
+  <div id="mnav" class="mnav" aria-hidden="true">
+    <nav class="mnav-inner" aria-label="Mobile">
+      <a href="#path"><span class="mi">01</span>My Journey</a>
+      <a href="#beliefs"><span class="mi">02</span>Principles</a>
+      <a href="#releases"><span class="mi">03</span>Off my desk</a>
+      <!-- <a href="#talks"><span class="mi">04</span>Speaking</a> -->
+      <a href="#contact" class="mnav-cta"><span class="mi">05</span>Let's talk <span aria-hidden="true">→</span></a>
+    </nav>
+    <!-- <p class="mnav-foot">Mannheim · Boston</p> -->
   </div>
-  <div id="kb-main2">
-<div class="tpl-main2-box" dc-class="{{rootClass}} tpl-main2-box">
 
-<!-- S7 AUTHOR / SIGNAL / CLOSE -->
-<section id="book" aria-labelledby="s6h" dc-onMouseMove="{{spNear}}" dc-onPointerMove="{{spNear}}" dc-onMouseLeave="{{spFar}}" dc-onPointerLeave="{{spFar}}" class="book-section">
-<h2 id="s6h" class="book-title">Inside the book</h2>
-<div ref="{{setAcc}}" class="book-box">
-<div class="book-box-2">
-<span ref="{{chapters.0.setGlow}}" aria-hidden="true" class="book-label"></span>
-<h3 class="book-h"><button type="button" aria-controls="ch-1" dc-aria-expanded="{{chapters.0.expanded}}" dc-onClick="{{chapters.0.toggle}}" class="book-btn"><span class="book-label-2">I</span><span class="book-label-3"><span class="book-label-4">Trapped Capital</span><span class="book-label-5">Does your company know more than it can see?</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.0.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
-<div ref="{{chapters.0.setBody}}" id="ch-1" class="book-box-3"><p class="book-text">Where the expertise, institutional knowledge, internal tools and IP that could become products are hiding inside your organisation - be it product-led sales, self-serve or service-embedded.</p></div>
-</div>
-<div class="book-box-2">
-<span ref="{{chapters.1.setGlow}}" aria-hidden="true" class="book-label"></span>
-<h3 class="book-h"><button type="button" aria-controls="ch-2" dc-aria-expanded="{{chapters.1.expanded}}" dc-onClick="{{chapters.1.toggle}}" class="book-btn"><span class="book-label-2">II</span><span class="book-label-3"><span class="book-label-4">The Cost of Building Wrong</span><span class="book-label-5">What lacking product thinking costs you.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.1.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
-<div ref="{{chapters.1.setBody}}" id="ch-2" class="book-box-3"><p class="book-text">Why the build is the smallest part of what a blindly shipped decision costs: the cost iceberg. And why a backlog-driven culture naturally pushes out a de-risking, outcome-driven one.</p></div>
-</div>
-<div class="book-box-2 kb-open">
-<span ref="{{chapters.2.setGlow}}" aria-hidden="true" class="book-label"></span>
-<h3 class="book-h"><button type="button" aria-controls="ch-3" dc-aria-expanded="{{chapters.2.expanded}}" dc-onClick="{{chapters.2.toggle}}" class="book-btn"><span class="book-label-2">III</span><span class="book-label-3"><span class="book-label-4">The AI Productivity Fallacy</span><span class="book-label-5">What happens to the cost of building wrong, when building gets cheaper and faster?</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.2.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round" transform="rotate(90)"></line></svg></button></h3>
-<div ref="{{chapters.2.setBody}}" id="ch-3" class="book-box-3"><p class="book-text">Why “speed at all costs” multiplies bad decisions as readily as good ones. Why AI is the answer to delivery speed, not outcome quality. And the pain–gain ratio: how much value your product must deliver before it can even replace pen and paper.</p></div>
-</div>
-<div class="book-box-2">
-<span ref="{{chapters.3.setGlow}}" aria-hidden="true" class="book-label"></span>
-<h3 class="book-h"><button type="button" aria-controls="ch-4" dc-aria-expanded="{{chapters.3.expanded}}" dc-onClick="{{chapters.3.toggle}}" class="book-btn"><span class="book-label-2">IV</span><span class="book-label-3"><span class="book-label-4">The Product Decision System</span><span class="book-label-5">Find decisions that convert to value.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.3.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
-<div ref="{{chapters.3.setBody}}" id="ch-4" class="book-box-3"><p class="book-text">An overview of how everything fits together.</p></div>
-</div>
-<div class="book-box-2">
-<span ref="{{chapters.4.setGlow}}" aria-hidden="true" class="book-label"></span>
-<h3 class="book-h"><button type="button" aria-controls="ch-5" dc-aria-expanded="{{chapters.4.expanded}}" dc-onClick="{{chapters.4.toggle}}" class="book-btn"><span class="book-label-2">V</span><span class="book-label-3"><span class="book-label-4">Continuous Opportunity Discovery</span><span class="book-label-5">The permanent layer that makes the invisible visible.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.4.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
-<div ref="{{chapters.4.setBody}}" id="ch-5" class="book-box-3"><p class="book-text">Discovery doesn’t stop and become a hand-off. It runs continuously.</p></div>
-</div>
-<div class="book-box-2">
-<span ref="{{chapters.5.setGlow}}" aria-hidden="true" class="book-label"></span>
-<h3 class="book-h"><button type="button" aria-controls="ch-6" dc-aria-expanded="{{chapters.5.expanded}}" dc-onClick="{{chapters.5.toggle}}" class="book-btn"><span class="book-label-2">VI</span><span class="book-label-3"><span class="book-label-4">Assumption Validation</span><span class="book-label-5">When observation becomes testing.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.5.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
-<div ref="{{chapters.5.setBody}}" id="ch-6" class="book-box-3"><p class="book-text">Turning a hypothesis into lean, fast tests that can fail, before pilot resources are committed.</p></div>
-</div>
-<div class="book-box-2">
-<span ref="{{chapters.6.setGlow}}" aria-hidden="true" class="book-label"></span>
-<h3 class="book-h"><button type="button" aria-controls="ch-7" dc-aria-expanded="{{chapters.6.expanded}}" dc-onClick="{{chapters.6.toggle}}" class="book-btn"><span class="book-label-2">VII</span><span class="book-label-3"><span class="book-label-4">Pilot Validation</span><span class="book-label-5">Where informed decisions are found.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.6.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
-<div ref="{{chapters.6.setBody}}" id="ch-7" class="book-box-3"><p class="book-text">Proving value is real, repeatable and commercially viable, ideally without your people in the room.</p></div>
-</div>
-<div class="book-box-2">
-<span ref="{{chapters.7.setGlow}}" aria-hidden="true" class="book-label"></span>
-<h3 class="book-h"><button type="button" aria-controls="ch-8" dc-aria-expanded="{{chapters.7.expanded}}" dc-onClick="{{chapters.7.toggle}}" class="book-btn"><span class="book-label-2">VIII</span><span class="book-label-3"><span class="book-label-4">Get Things Done and Drive Impact</span><span class="book-label-5">From here, you lead.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.7.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
-<div ref="{{chapters.7.setBody}}" id="ch-8" class="book-box-3"><p class="book-text">Putting the system to work inside your organisation, and keeping it running.</p></div>
-</div>
-<div class="book-box-2">
-<span ref="{{chapters.8.setGlow}}" aria-hidden="true" class="book-label"></span>
-<h3 class="book-h"><button type="button" aria-controls="ch-9" dc-aria-expanded="{{chapters.8.expanded}}" dc-onClick="{{chapters.8.toggle}}" class="book-btn"><span class="book-label-2">App.</span><span class="book-label-3"><span class="book-label-4">Appendix</span><span class="book-label-5">The Signal Verification System.</span></span><svg aria-hidden="true" width="18" height="18" viewBox="-9 -9 18 18" class="book-svg"><line x1="-7" y1="0" x2="7" y2="0" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line><line ref="{{chapters.8.setBar}}" x1="0" y1="-7" x2="0" y2="7" stroke="#111111" stroke-width="1.6" stroke-linecap="round"></line></svg></button></h3>
-<div ref="{{chapters.8.setBody}}" id="ch-9" class="book-box-3"><p class="book-text">The scoring method for internal inbound patterns: a seven-question, natural pattern-mining tool that is less intimidating than a ticket form. <a data-goatcounter-click="signal-appendix" href="prelaunch.html?from=signal-appendix" ref="{{fxRef}}" data-fx="link" class="book-link">Try Signal <span aria-hidden="true" data-fx-arrow="right">→</span></a></p></div>
-</div>
-<!-- quiet CTA under the chapters: ink outline, no orange -->
-<div class="book-box-4"><a data-goatcounter-click="get-the-book-chapters" href="prelaunch.html?from=book-chapters" ref="{{fxRef}}" data-fx="card" class="book-link-2">Get the Book <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
-</div>
+  <section id="top" data-ref="setTop" class="hero">
+    <div class="stamp-track">
+      <div class="stamp-pos">
+        <div class="stamp-in">
+          <a href="#contact" data-ref="fxRef" data-fx="magfar" class="stamp">
+            <svg class="stampsvg" viewBox="0 0 200 200" role="img" aria-label="Open for talks: keynotes, panels, workshops">
+              <defs>
+                <path id="amStampRing" d="M100,100 m-71,0 a71,71 0 1,1 142,0 a71,71 0 1,1 -142,0"></path>
+                <filter id="amStampInk" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="7" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"></feDisplacementMap></filter>
+              </defs>
+              <g filter="url(#amStampInk)">
+                <circle cx="100" cy="100" r="95" fill="none" style="stroke:var(--accent)" stroke-width="4.5"></circle>
+                <circle cx="100" cy="100" r="88.5" fill="none" style="stroke:var(--accent)" stroke-width="1.4"></circle>
+                <circle cx="100" cy="100" r="55" fill="none" style="stroke:var(--accent)" stroke-width="1.4" stroke-dasharray="1.5 4"></circle>
+                <circle cx="100" cy="100" r="50" fill="none" style="stroke:var(--accent)" stroke-width="3"></circle>
+                <g class="ringrot"><text style="fill:var(--accent)" class="stamp-ring-text"><textPath href="#amStampRing" textLength="440" lengthAdjust="spacing">Open to Innovation, Product & Growth Roles ✦ Keynotes ✦</textPath></text></g>
+                <text x="100" y="91" text-anchor="middle" fill="#121212" textLength="62" lengthAdjust="spacingAndGlyphs" class="stamp-open">GET IN</text>
+                <text x="100" y="121" text-anchor="middle" fill="#121212" textLength="66" lengthAdjust="spacingAndGlyphs" class="stamp-talks">CONTACT</text>
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="rise d1 kick-row kicker">
+      <span>Memo №&nbsp;001</span><span class="kick-re">Re: How your company decides what to build</span><span>Status: <del class="ink draw">pending sign-off</del> <span class="status-done">field-tested</span></span>
+    </div>
+    <svg width="0" height="0" class="svg-defs" aria-hidden="true"><defs><linearGradient id="amBrushFill" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--accent)" stop-opacity=".92"></stop><stop offset=".18" style="stop-color:var(--accent)"></stop><stop offset=".85" style="stop-color:var(--accent)"></stop><stop offset="1" style="stop-color:var(--accent)" stop-opacity=".88"></stop></linearGradient><filter id="amBrushEdge" x="-2%" y="-30%" width="104%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.22" numOctaves="1" seed="4" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"></feDisplacementMap></filter></defs></svg>
+    <div class="hl">
+      <h1 aria-label="Stop approving. Start proving." class="hl-h1">
+        <span class="rise d2 hl-line" aria-hidden="true">Stop</span>
+        <span class="rise d2 hl-line-word" aria-hidden="true"><del class="hdel" data-hl="del"><span data-hl="c1">approving.</span><svg class="brush" viewBox="0 0 400 48" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#amBrushEdge)"><path fill="url(#amBrushFill)" d="M6 30 C 50 24, 120 20, 200 17.5 C 280 15, 340 12.5, 391 10.5 C 397 10.3, 399 13, 396 15.5 C 360 19.5, 300 23, 220 27 C 150 30.5, 80 34.5, 22 37 C 10 37.5, 3 35.5, 3 33 C 3 31.5, 4 30.4, 6 30 Z"></path><path d="M40 33.5 C 140 27, 260 20.5, 370 14.5" stroke="#FFFFFF" stroke-opacity=".18" stroke-width="1.1" fill="none"></path></g></svg></del></span>
+        <span class="rise d3 hl-line" aria-hidden="true">Start</span>
+        <span class="rise d3 hl-line-word" aria-hidden="true"><span data-hl="c2">proving.</span></span>
+      </h1>
+      <div class="mnote">
+        <div class="rise d4 mnote-body"><span class="mnote-label"><svg class="mnote-hook" viewBox="0 0 255 140" width="66" height="36" aria-hidden="true"><g style="fill:var(--accent)"><path d="M33.8,24c.1.2.3.4.5.7,0,0,0,0,0,0l-.4-.7s0,0,0,0Z"/><path d="M34.4,24.7l.9,1.3c-.6-1.5-.4-2.2-.5-3,.6.6,1.3,1.8.7,1.7l1.1.6-2.2-3.1c0,.8.6,2,0,2.4Z"/><path d="M33.9,25.2c1.2.9-1.4-1.5,0-1.2-.2-.3-.3-.5-.3-.7-.8-.2-.3.8.4,1.9Z"/><path d="M38.7,33c-.2-.8-.4-1.5.2-1.5l.3.7c.3,0,.2-.7,0-1.2-.3.5-1.6-.4-.6,2.1Z"/><path d="M39.3,30.2c-.1,0,0,.4,0,.8,0-.1.1-.4,0-.8Z"/><path d="M35.1,29.8l.5.4c-.4-1.2-.8-2.5-1.3-3.7-.7.9.8,1.6.9,3.3Z"/><path d="M59.3,57.9v.2c0,0,.2.1.3.2,0-.1-.2-.2-.3-.4Z"/><path d="M61,60.8c-.3-.7-.6-1.5-.9-2.2-.2,0-.3-.2-.5-.2.8,1.3,0,1.3,1.4,2.5Z"/><path d="M59.1,58.6v-.4c-.8-.5-1.1-1.2-1.5-2-.3-.8-.7-1.7-1.7-2.7.4,1,.9,2,1.4,2.8.6.8,1.2,1.6,1.8,2.2Z"/><path d="M43.2,49.6h0c-.6,1.4,1.1,2.8,1.2,4.8l1.1-.6c-1.3-1.6-.8-2.4-2.3-4.1,0,0,0,0,0,0Z"/><path d="M57.6,74.5c-.2-.2-.3-.4-.5-.6.2.2.4.4.5.6Z"/><path d="M58.2,73.4c-.3.2.8,2.6-.7,1.1.7.8,1.4,1.6.4,1.4,1.5,1.5.7-.5,2,.1-1.2-.4-1.2-1.7-1.7-2.6Z"/><path d="M63.4,79.6c-.8-.7-.9-1.9-2-2,.6.8,1.4,1.9,2,2Z"/><polygon points="60.1 79.5 60.6 79.7 60.1 78.2 60.1 79.5"/><path d="M65.3,83.8l-3-2.3,2.3,2.6c1.9.9,1.4,0,.4-1.2.2.4.4.7.3.9Z"/><path d="M63.2,80.1l-1.1-.5c-.2.1,1.1,1.3,2.1,2.3-.6-.8-1.1-1.5-1-1.8Z"/><path d="M65,82.9c-.2-.3-.5-.6-.8-1,.3.3.5.7.8,1Z"/><path d="M66.8,86.4l.4.3.7-.6c-1-.5-1,.2-1.1.3Z"/><path d="M69.6,89.5c1.1,1.1,0,.7-.2,1,.4,1.1,2.5,1.7,3.2,2.1-.7-1.2-1.8-1.9-3-3.1Z"/><path d="M72.6,94.2l-2.7-1.9c0,1.2,1.5,1.2,2.7,1.9Z"/><path d="M76.2,95.1l1,1.6c.3,0,.3-.3.8-.1-.2-.6-1.3-1-1.9-1.5Z"/><path d="M225.3,117.7c4.3-1.3,8-3.3,11.7-4.4-.9-2.7-1.8-5.9-8.7-6.4-1,0-2.1,0-3.1,0-1.5-.4-3.1-.7-4.9-1-1.9.8-4.6,1.3-7.4,1.6-.5,0-1,.1-1.6.2-.2,0-.5-.2-.7-.3-.6.2-1.4.4-2.3.5-1.1,0-2.1.1-3,.2-2.5-.3-4.8-.5-7.2-.6-2.3-.1-4.6-.3-6.9-.4-4.5-.2-9-.2-13.4-.5-3.4-.2-7-.1-10.4-.1-1.7,0-3.5,0-5.2.1-.9,0-1.7,0-2.6.1-.8,0-1.7,0-2.5,0-.9-1-2.4-2.4-4.8-2.8-.8-.2-1.7-.3-2.6-.5-.9-.2-1.8-.4-2.7-.6-1.8-.4-3.7-.8-5.6-1.1-3.7-.6-7.2-1-9.9,0-1.9-1.5-4.3-2.2-5.7-2.1-1,0-2.1,0-3.1,0-.8,0-1.5-.2-2.3-.4-.1,0-.2,0-.3-.1-2-.8-4-1.6-5.9-2.4-2-.8-3.9-1.5-5.9-1.9,0,0,0,0,0,0-.3-.2-.7-.3-1-.5-2-1-4-2-5.9-2.9-2.3-.9-4.6-2.1-6.7-3.3-2.1-1.2-4.1-2.3-5.8-3-2.1-.8-3.9-1.7-5.5-2.7-.2-.2-.5-.3-.7-.5-.2-.3-.5-.6-.8-.8,0,0,0,0,0,0h0c-.3-.3-.6-.6-1-.8.4.3.7.6,1,.9l-.2.2c-.5-.3-1-.6-1.5-.9-1.9-1.9-4.3-4.1-4.4-5.3-1.6.2.2,1.4,1.7,2.6-.8-.6-1.7-1.2-2.7-1.9-.9-.7-1.8-1.4-2.6-2.1,0,0-.2-.2-.3-.3.8.5,1.6.6,2.1,1.7.6,0,.7-.3.3-.9-.9-.6-2.1-1.8-3-2.6-.9-.8-1.6-1.5-2-1.2-.2-.4-.4-.8-.5-1.2l-1.3-.2-.2-.4c0,.2,0,.3,0,.5-.7-.7-1.5-1.4-2.1-2.1-1.2-1.3-2.5-2.4-3.7-3.1-.3,0-.6,0-.8,0-.2-.8.6,0,1.1,0-1.3-1.5-2.3-2.5-3.2-2.5.6.9,1.3,1.7,1.9,2.6-.3,0-.5.1-.6.2-1.1-.5-2-1-2.1-1.3-1.3-2.3-2-4.3-2.5-6.2,0,0,.2,0,.3,0,.1.2.2.4.3.6.7,1.1,1.6,2.2,1.9,2.7l-.8-2.4c-.3-.1-.6-.2-.9-.3-.2-.3-.2-.5-.2-.6,0,0,0-.1.1-.2,0,0,.1,0,.1,0h0c0-.2,0-.3,0-.4h-.3c0,0-.7-.7-.7-.7,0,0-.1,0-.1,0,0-1.2,0-2.3-1.1-4.2,0,0,0,0,0,0-.3-1.1-.8-2.2-1.4-3.3,0-.3-.8-.9-1.7-1.3,0,0,0-.1-.1-.2-.6-.4-1.1-.6-1.4-.6-.3-.1-.5-.2-.6-.1-.3.9.1,2.5.7,4.1,0-.1-.2-.2-.2-.3v.2c.1,0,.2,0,.3.1.4,1.3,1,2.6,1.2,3.7-.2.9-.2,1.4-.2,2.4,0,1.5-2-.4-2.5-.8,0,1.2.4,2.7,1.1,4.2.7,1.5,1.7,3.2,2.9,4.9.6.8,1.2,1.7,1.9,2.6.7.8,1.4,1.7,2.1,2.5,1.4,1.7,3,3.3,4.4,4.8.9.9,2.3.7,3.2,1.6.3.6.6,1.2.9,1.8.9.9,2.6,2,2.9,2.6.6,1.1,1.6,2.4,2.8,3.5,1.2,1.1,2.6,2.3,4.1,3.4,1.5,1,3,2.1,4.5,3.1,1.5,1,2.9,1.9,4,2.8.8.6,1.5,1.2,2.4,1.7.8.5,1.7,1,2.6,1.5.9.5,1.8,1,2.7,1.6.9.6,1.8,1.1,2.8,1.8,1.5,1.2,3.6,2.5,6.1,3.4,2.4,1,5.1,2,7.5,2.9.7,0,1.4,0,2.2.1,1,.2,2.1.8,3.1,1.3,1,.5,1.9.9,2.3.9,1.8.3,3.6.7,5.3,1.2,1.7.4,3.4.8,5.1,1.3,1.7.4,3.3.9,4.8,1.2,1.6.3,3.1.6,4.6.8,1.5.2,2.9.5,4.4.7,1.4.2,2.9.4,4.3.7,2.9.4,5.7.9,8.5,1.2,2.8.3,5.6.6,8.3.7.2,0,.3,0,.5,0l.4.6c.9-.2,1.9-.3,2.1-.6.5,0,1,0,1.4,0,1.4.4,2.5.4,3.5-.2,1,.4.3.5.9.8,1.6,0,3.3,0,5.1.1.5.2,1.3.4,2.9.5v-.2c1.3.2,2.6.4,3.9.7,3.9.8,7.4,1.8,9.4,3,1.5-.8,3.1-.8,4.8-.7,1.7,0,3.4.3,5.1,0,4-.3,8.6-1.3,11.7-.6,5,.9,9.3.3,13-.8.2,0,.3,0,.5,0,.2,0,.4-.2.5-.3ZM82.4,81.8c-.1-.1-.3-.3-.4-.4.1.1.3.3.4.4ZM55.3,56h-.1c0,0,0-.2,0-.3,0,.1,0,.2.1.3Z"/></g></svg> margin note:</span>
+          <span data-om-label="The most expensive sentence in any meeting: &quot;We believe customers will love it.&quot;">The most expensive sentence in any meeting: "We believe customers will love it."</span>
+        </div>
+      </div>
+    </div>
+    <div class="rise d4 hero-copy">
+      <p class="hero-lead">I help organisations discover what is worth building, then design and operate the growth systems across product and marketing to turn that newfound certainty into revenue. 15+ years in growth, marketing and product experimentation, in B2C and B2B tech, industrial and deep-tech organisations. Two bigger wins, many smaller wins, many failed bets, author of <em>Known Before Built</em>.</p>
+      <div class="btn-row"><a href="#contact" data-ref="fxRef" data-fx="mag" class="pbtn pb-ink"><span class="pb-fill" aria-hidden="true"></span><span class="pb-label">Start a conversation</span><span class="pb-dot" aria-hidden="true"><span class="pb-arr"><i>→</i><i>→</i></span></span></a></div>
+    </div>
+  </section>
 
-<!-- one interior spread: magnet on approach, opens full width on click -->
-<figure id="sample" class="book-figure">
-<button data-goatcounter-click="open-sample-spread" type="button" ref="{{setSpread}}" class="kbspreadbtn" dc-onClick="{{openSpread}}" aria-label="Open pages 60–61 from Chapter III: A lesson from history: the Solow Paradox for today’s AI">
-<div class="kbspread book-box-5">
-<div class="kbpg kbpgL kbpgimg"><img src="assets/page-60.webp" alt="Page 60 of Known Before Built: A lesson from history — the Solow Paradox" draggable="false"></div>
-<div class="kbpg kbpgR kbpgimg"><img src="assets/page-61.webp" alt="Page 61 of Known Before Built: the Solow Paradox, continued, applied to AI-assisted delivery" draggable="false"></div>
-</div>
-</button>
-<div ref="{{setSpreadShadow}}" aria-hidden="true" class="book-box-6"></div>
-<figcaption class="book-caption"><span class="book-label-6">Chapter III · Pages 60-61</span><span class="book-label-7">A lesson from history: the Solow Paradox for today’s AI</span><span class="book-label-8" dc-class="{{hintClass}}">Click the book to read</span></figcaption>
-</figure>
-<sc-if value="{{spreadOpen}}" hint-placeholder-val="{{ false }}" hidden>
-<div class="kbzoom" role="dialog" aria-modal="true" aria-label="Pages 60–61 from Chapter III. Click or press Escape to close." tabindex="-1" ref="{{setZoom}}" dc-onClick="{{closeSpread}}" dc-onKeyDown="{{zoomKey}}">
-<div ref="{{setBig}}" class="kbspread kbspreadbig book-box-7">
-<div class="kbpg kbpgL kbpgimg"><img src="assets/page-60.webp" alt="Page 60 of Known Before Built: A lesson from history — the Solow Paradox" draggable="false"></div>
-<div class="kbpg kbpgR kbpgimg"><img src="assets/page-61.webp" alt="Page 61 of Known Before Built: the Solow Paradox, continued, applied to AI-assisted delivery" draggable="false"></div>
-</div>
-</div>
-</sc-if>
+  <section id="path" data-ref="setPath" class="path">
+    <div data-ref="setCur" class="cring" aria-hidden="true">
+      <svg width="58" height="58" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="27" fill="none" stroke="rgba(18,18,18,.16)" stroke-width="2"></circle>
+        <circle class="cfill" cx="32" cy="32" r="27" fill="none" style="stroke:var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="169.6" transform="rotate(-90 32 32)"></circle>
+      </svg>
+    </div>
+    <div class="rail" aria-hidden="true">
+      <div class="rail-sticky">
 
-<!-- stories -->
-</section><section id="author" aria-labelledby="s7h" class="author-section">
-<div class="author-box">
-<img ref="{{setPortrait}}" src="assets/andreas-mitschke-portrait-web.webp" alt="Portrait of Andreas Mitschke" class="author-img">
-</div>
-<div class="author-box-2">
-<h2 id="s7h" class="author-title">Andreas Mitschke</h2>
-<p class="author-text-2">I've spent over fifteen years running experiments on products, initially for B2C and SaaS companies, and later for B2B tech, industrial and deep tech organisations. My non-linear journey began at age 15. Before leaving my teens, I ran web design services, coded a Windows utility, and built a travel experience platform. I wrote Known Before Built out of the stark contrast between these worlds. In high-volume tech, “ship fast at all costs, learn, repeat” is a working mantra because a failed release costs you a few anonymous users, a silent digit in churn. In organisations whose customers have names, that same method costs you a relationship. <br>It's designed for those who must decide what is worth building first. I've advised start-ups and scale-ups through funds including 500 Global and Loyal VC, evaluated and brokered deal flow for venture funds across Europe, New York and Silicon Valley, and helped build Germany's largest academic deep tech programme. Closer to the ground, I coached founders at Mannheim's startup centres and lectured on entrepreneurship and product discovery at universities in Germany.</p>
-<div class="author-box-3">
-<a data-goatcounter-click="author-site" href="https://andmitsch.github.io/andreasmitschke/" ref="{{fxRef}}" data-fx="link" class="get-link-2">More about me at andreasmitschke.com <span aria-hidden="true" data-fx-arrow="right">→</span></a>
-</div>
+        <span class="railline"><span class="railbar"></span></span>
+      </div>
+    </div>
+    <div class="path-inner">
+      <div class="section-head">
+        <h2 class="h2-display">How I got <span class="serif-it">here</span></h2>
+        <span class="section-kicker">Range, with depth · Bridging disciplines for full-stack product development.</span>
+      </div>
+      <div class="pgrp pgrp-box">
+        <div class="pgrp-head">
+          <!-- <span class="pgrp-meta">Build it</span> -->
+          <span class="pgrp-title">Where it started</span>
+        </div>
+        <div class="pgrp-rows">
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">UX Design &amp; Research</span>
+              </div>
+              <p class="prow-text">Since my teens I've been designing interfaces for perceived ease of use and functionality, and task flows that are based on real usage analysis. Research always came first, the market the interface lives in and the person using it. Twenty years on, the principle hasn’t changed.</p>
+            </div>
+          </div>
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">Code &amp; Builder</span>
+              </div>
+              <p class="prow-text">Design was a choice, code was an unwanted trial by fire. For three years, a veteran developer pushed us through the complete O'Reilly C++ Object-Oriented Programming manual in school, which led to a .NET Win XP tune-up tool (complete with performance monitoring and a dangerous safety-overwriting task-killer) coded by two friends and me. This also led to tutoring informatics students while still navigating my own non-informatics curriculum. Only years later did I appreciate the full ROI of this trial. While heavy back-end wasn't my thing, front-end stuck. During the blogging era, I built and grew blogs, custom PHP WordPress themes and widgets—launching, monetizing, and selling them. Though I've never worked as an engineer, this code literacy gives me an edge in product and growth leadership: the ability to analyze codebases, design and develope product and growth experiments, and speak eye-to-eye with engineering.</p>
+            </div>
+          </div>
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">Founder</span>
+              </div>
+              <p class="prow-text">First venture at 15 with web design services, then a travel-experience platform. The path was anything but straight, with plenty of failures, yet plenty of small wins, and two exits.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pgrp pgrp-box">
+        <div class="pgrp-head">
+          <!-- <span class="pgrp-meta">Grow it</span> -->
+          <span class="pgrp-title">The early years</span>
+        </div>
+        <div class="pgrp-rows">
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">Growth, product &amp; marketing</span>
+              </div>
+              <p class="prow-text">My growth path began in 2008 with technical SEO—experimenting with early black-hat methods and exploiting algorithm gaps to engineer organic search visibility at scale. That quantitative search foundation naturally evolved into conversion rate optimization, combining data analysis with my background in creative design, and expanding into organic social as social media marketing exploded in the 2010s. As the teams and products I worked with matured toward scaling potential, I expanded organic into paid acquisition, building out performance marketing across social (pioneering the granular power-seller segmentation we all miss) and search with Google 360. Together, these verticals form the core of my T-shaped profile, anchored by continuous product discovery, validation, and rapid experimentation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pgrp pgrp-box">
+        <div class="pgrp-head">
+         <!-- <span class="pgrp-meta">Apply it</span> -->
+          <span class="pgrp-title">The practice</span>
+        </div>
+        <div class="pgrp-rows">
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">Product & Growth Practitioner · Department Head · Strategic & Executive Advisor</span>
+              </div>
+              <p class="prow-text">From ground-level product discovery and growth loops to departmental leadership and executive advisory Partnering with scaleup and enterprise leaders to embed discovery frameworks, engineer growth engines, and scale complex teams backed by 15+ years of execution and strategy across B2C and B2B tech, SaaS, industrial, and deep-tech sectors.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pgrp pgrp-box">
+        <div class="pgrp-head">
+          <!-- <span class="pgrp-meta">Back it</span> -->
+          <span class="pgrp-title">The investor side</span>
+        </div>
+        <div class="pgrp-rows">
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">Venture</span>
+              </div>
+              <p class="prow-text">VC fellowship in New York. About two years of venture scouting and deal brokering for four funds in Europe, New York and Silicon Valley. Accepted to VC Lab, 2023.</p>
+            </div>
+          </div>
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">Advisor (SWEAT)</span>
+              </div>
+              <p class="prow-text">Growth and product advisor to startups through 500 Global and Loyal VC. Around half a dozen advisory seats active right now.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pgrp pgrp-box">
+        <div class="pgrp-head">
+         <!-- <span class="pgrp-meta">Teach it</span> -->
+          <span class="pgrp-title">The teaching side</span>
+        </div>
+        <div class="pgrp-rows">
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">Startup coach</span>
+              </div>
+              <p class="prow-text">Coached founders at the Mannheim startup centres. Lean Startup principles, Knapp's Design Sprint ideas, BMC and Design Thinking, none of which work until you also teach people to get out of the building and find real-world data.</p>
+            </div>
+          </div>
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">University lecturer</span>
+              </div>
+              <p class="prow-text">Taught entrepreneurship and product discovery at universities in Mannheim. Guest lectures on growth in Heidelberg and Karlsruhe.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pgrp pgrp-box">
+        <div class="pgrp-head">
+          <!-- <span class="pgrp-meta">Share it</span> -->
+          <span class="pgrp-title">The writing side</span>
+        </div>
+        <div class="pgrp-rows">
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">Researcher</span>
+              </div>
+              <p class="prow-text">Independent research, currently on entrepreneurship education. The same habit I bring to every problem: go deep, find evidence, analyze, synthesize and decide</p>
+            </div>
+          </div>
+          <div class="prow reveal">
+            <span class="dot"></span>
+            <div class="prow-body">
+              <div class="prow-headline">
+                <span class="prow-role">Author</span>
+              </div>
+              <p class="prow-text"><em>Known Before Built</em>. Written, designed and typeset from 0 to 1.</p>
+              <div class="prow-cta"><a href="#releases-start" data-ref="fxRef" data-fx="mag" class="pbtn pb-outline pb-sm"><span class="pb-fill" aria-hidden="true"></span><span class="pb-label">Learn more about the book</span><span class="pb-dot" aria-hidden="true"><span class="pb-arr pb-down"><i>↓</i><i>↓</i></span></span></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="path-side">
+      <div class="pgrp pgrp-side">
+        <div class="pgrp-head">
+          <!-- <span class="pgrp-meta">Start it</span> -->
+          <span class="pgrp-title">Side quests</span>
+        </div>
+        <div class="side-grid">
+        <div class="side reveal">
+          <span class="side-title">Deep Tech Hub</span>
+          <span class="side-text">Helped build Germany’s largest academic deep-tech programme.</span>
+        </div>
+        <div class="side reveal">
+          <span class="side-title">Social Media Marketing Club Mannheim &amp; Twittwoch Frankfurt</span>
+          <span class="side-text">Co-created both recurring professional education events for people figuring out social media marketing before it had a known playbook.</span>
+        </div>
+        <div class="side reveal">
+          <span class="side-title">Personal Fitness Trainer</span>
+          <span class="side-text">Something personal about me: for a while, I was coaching people to become their most effective selves, just not in product or marketing. Same lesson: what people do beats what they plan.</span>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <section id="beliefs" data-ref="setBelief" class="section-rule">
+    <div class="split-inner">
+      <div class="split-aside">
+        <span class="section-kicker">Principles</span>
+        <span class="aside-title">What I keep repeating.</span>
+        <svg class="spin" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true"><line x1="18.00" y1="12.00" x2="22.00" y2="12.00" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.25"></line><line x1="17.20" y1="15.00" x2="20.66" y2="17.00" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.32"></line><line x1="15.00" y1="17.20" x2="17.00" y2="20.66" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.39"></line><line x1="12.00" y1="18.00" x2="12.00" y2="22.00" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.45"></line><line x1="9.00" y1="17.20" x2="7.00" y2="20.66" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.52"></line><line x1="6.80" y1="15.00" x2="3.34" y2="17.00" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.59"></line><line x1="6.00" y1="12.00" x2="2.00" y2="12.00" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.66"></line><line x1="6.80" y1="9.00" x2="3.34" y2="7.00" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.73"></line><line x1="9.00" y1="6.80" x2="7.00" y2="3.34" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.80"></line><line x1="12.00" y1="6.00" x2="12.00" y2="2.00" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.86"></line><line x1="15.00" y1="6.80" x2="17.00" y2="3.34" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.93"></line><line x1="17.20" y1="9.00" x2="20.66" y2="7.00" style="stroke:var(--accent)" stroke-width="2" stroke-linecap="round" opacity="1.00"></line></svg>
+      </div>
+      <div class="split-list">
+          <div class="reveal thesis">
+            <div class="thesis-body">
+              <p class="thesis-head">Don’t ask for <del class="bdel">opinions.<svg class="brush" viewBox="0 0 400 48" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#amBrushEdge)"><path fill="url(#amBrushFill)" d="M6 30 C 50 24, 120 20, 200 17.5 C 280 15, 340 12.5, 391 10.5 C 397 10.3, 399 13, 396 15.5 C 360 19.5, 300 23, 220 27 C 150 30.5, 80 34.5, 22 37 C 10 37.5, 3 35.5, 3 33 C 3 31.5, 4 30.4, 6 30 Z"></path><path d="M40 33.5 C 140 27, 260 20.5, 370 14.5" stroke="#FFFFFF" stroke-opacity=".18" stroke-width="1.1" fill="none"></path></g></svg></del> Ask for behaviour.</p>
+              <p class="thesis-text">"Opinions describe what people believe they would do. Behaviour shows what they did. Reported behaviour beats opinion, and observed behaviour beats both." — Quote of my book <em>Known Before Built</em></p>
+            </div>
+          </div>
+          <div class="reveal thesis">
+            <div class="thesis-body">
+              <p class="thesis-head">They are the rock stars. You are their fan.</p>
+              <p class="thesis-text">Customers, buyers and users are the experts on their own problems. Your job is to listen and observe to understand their reality to see what they can't see.</p>
+            </div>
+          </div>
+          <div class="reveal thesis">
+            <div class="thesis-body">
+              <p class="thesis-head">Research is the foundation of everything.</p>
+              <p class="thesis-text">Know the market, the customers, the buyers and the users in depth. That is how you find the right product and also the channels to grow it.</p>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
 
-<div ref="{{setCirc}}" aria-hidden="true" class="author-box-4">
+  <section id="releases" class="releases">
+   <div class="releases-inner">
+    <div id="releases-start" data-scroll-offset="36" class="releases-head">
+      <h2 class="h2-display">Off my <span class="serif-it">desk</span></h2>
+      <!-- <span class="section-kicker">Made because something needed to change.</span> -->
+    </div>
+    <div class="book-row">
+      <div class="book-stage-wrap">
+        <div data-ref="setStage" class="kbstage kbstage-pos" data-on-pointerdown="bDown" data-on-pointermove="bMove" data-on-pointerup="bUp" data-on-pointercancel="bUp">
+          <div data-ref="setBook3" class="kbbook" role="img" aria-label="Known Before Built by Andreas Mitschke. Drag, or use the arrow keys, to turn the book." tabindex="0" data-on-keydown="bKey">
+            <div class="kbface kbfront"><img src="assets/kbb-front.jpg" width="760" height="1216" alt="" draggable="false"><i class="kbshade"></i></div>
+            <div class="kbface kbback"><img src="assets/kbb-back.jpg" width="760" height="1216" alt="" draggable="false"><i class="kbshade"></i></div>
+            <div class="kbface kbspine"><img src="assets/kbb-spine.jpg" width="104" height="1216" alt="" draggable="false"><i class="kbshade"></i></div>
+            <div class="kbface kbfore"><i class="kbshade"></i></div>
+            <div class="kbface kbtop"><i class="kbshade"></i></div>
+            <div class="kbface kbbottom"><i class="kbshade"></i></div>
+          </div>
+          <div data-ref="setBShadow" class="kbshadow"></div>
+          <p class="kbhint" aria-hidden="true">Drag to turn the book</p>
+        </div>
+      </div>
+      <div class="book-copy">
+        <!-- <span class="section-kicker">Latest · Book · Grant &amp; Bear</span> -->
+        <span class="book-title">Known <span class="book-title-it">before</span> Built</span>
+        <p class="book-desc">From Discovery to Decision for Enterprises in Transformation.&nbsp;<br><br>An intrapreneurial operating system that replaces the innovation theatre of brainstorming sessions and Post-it-plastered whiteboards with evidence-driven discovery and validation methods, enabling you to de-risk every hypothesis before a major investment decision must be made.</p>
+        <div class="btn-group"><a href="https://andmitsch.github.io/knownbeforebuilt/buy.html?from=am" data-ref="fxRef" data-fx="mag" class="pbtn pb-orange pb-book"><span class="pb-fill" aria-hidden="true"></span><span class="pb-label">Get the book</span><span class="pb-dot" aria-hidden="true"><span class="pb-arr"><i>→</i><i>→</i></span></span></a><a href="https://andmitsch.github.io/knownbeforebuilt/?from=am" data-ref="fxRef" data-fx="mag" class="pbtn pb-outline"><span class="pb-fill" aria-hidden="true"></span><span class="pb-label">knownbeforebuilt.com</span><span class="pb-dot" aria-hidden="true"><span class="pb-arr"><i>→</i><i>→</i></span></span></a></div>
+      </div>
+    </div>
+    <div class="rlist">
+      <div class="rrow reveal">
+        <span class="rrow-kind">Research · SSRN, public</span><div class="rrow-main"><span class="rrow-title">Research Paper</span>
+          <span class="rrow-sub">When something keeps failing, I want to know why.</span>
+        </div>
+        
+        <span class="rrow-status"></span>
+        <a href="https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10956892" data-ref="fxRef" data-fx="link" class="rrow-link">Read the papers <span data-fx-arrow="right" aria-hidden="true">→</span><span class="fxl0" aria-hidden="true"></span><span class="fxl" aria-hidden="true"></span></a>
+      </div>
 
-</div>
+      <div class="rrow reveal">
+        <span class="rrow-kind">Tool · free, no sign-up</span>
+        <div class="rrow-main"><span class="rrow-title">Signal</span>
+          <span class="rrow-sub">The freebie that comes with the book: a conversational UI feedback tool for internal pattern mining.<br></span>
+        </div>
+        <!-- <span class="rrow-status">Coming with the book</span> -->
+        <a href="https://andmitsch.github.io/knownbeforebuilt/prelaunch.html?from=am" data-ref="fxRef" data-fx="link" class="rrow-link">Get notified <span data-fx-arrow="right" aria-hidden="true">→</span><span class="fxl0" aria-hidden="true"></span><span class="fxl" aria-hidden="true"></span></a>
+      </div>
+      <div class="rrow reveal">
+        <span class="rrow-kind">Template · free, Notion</span>
+        <div class="rrow-main"><span class="rrow-title">The Ultimate Data Room</span>
+          <span class="rrow-sub">A "template of the month" selected by the Notion team. Became one of the most rated templates in the startup category. A ready-made, exhaustive data room for startups going into due diligence.</span>
+        </div>
+        <!-- <span class="rrow-status">Free</span> -->
+        <a href="https://www.notion.com/templates/the-ultimate-data-room" data-ref="fxRef" data-fx="link" class="rrow-link">Duplicate it <span data-fx-arrow="right" aria-hidden="true">→</span><span class="fxl0" aria-hidden="true"></span><span class="fxl" aria-hidden="true"></span></a>
+      </div>
+      <div class="rrow-last">
+        <span class="rrow-kind">Off the record</span>
+        <div class="rrow-main"><span class="rrow-title">More on request</span>
+          <span class="rrow-sub">Systems, templates, talks and working papers. Happy to share, happy to collab.</span>
+        </div>
+        <a href="#contact" data-ref="fxRef" data-fx="link" class="rrow-link">Ask <span data-fx-arrow="right" aria-hidden="true">→</span><span class="fxl0" aria-hidden="true"></span><span class="fxl" aria-hidden="true"></span></a>
+      </div>
+    </div>
+   </div>
+  </section>
 
-<div class="author-box-5">
-<img src="assets/circle.webp" alt="" class="breathe author-img-2"><div class="author-box-6">
-<p ref="{{setQuote}}" class="author-text-3">If you run the system inside your organisation, I would like to hear what happened. What worked, what got adopted, and what you think is missing.</p>
-<div ref="{{setMailRow}}" class="author-box-7"><a data-goatcounter-click="email-author" href="mailto:andreas@knownbeforebuilt.com" ref="{{fxRef}}" data-fx="link" class="author-link">andreas@knownbeforebuilt.com</a></div>
-</div>
-<div ref="{{setWays}}" class="author-box-8">
-<h3 class="author-heading">Other ways to work with the book</h3>
-<div class="author-box-9">
-<div class="author-box-10"><h3 class="author-heading-2">Buying for a team</h3><p class="author-text-4">Bulk and corporate orders.</p><a href="mailto:andreas@knownbeforebuilt.com?subject=Bulk%20order" ref="{{fxRef}}" data-fx="link" class="author-link-2">Ask about bulk orders <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
-<div class="author-box-10"><h3 class="author-heading-2">Teaching with it</h3><p class="author-text-4">Inspection copies for faculty using the book in a course.</p><a href="mailto:andreas@knownbeforebuilt.com?subject=Faculty%20copy" ref="{{fxRef}}" data-fx="link" class="author-link-2">Request a faculty copy <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
-<div class="author-box-10"><h3 class="author-heading-2">Speaking, Workshops &amp; Advisory</h3><p class="author-text-5">Talks, workshops and advisory on running the Product Decision System.<br></p><a href="talks-press.html" ref="{{fxRef}}" data-fx="link" class="author-link-2">Read more <span aria-hidden="true" data-fx-arrow="right">→</span></a></div>
-<a data-goatcounter-click="signal-card" href="prelaunch.html?from=signal-card" ref="{{fxRef}}" data-fx="card" class="author-link-3">
-<span class="author-label">Free · No sign-up</span>
-<span class="author-label-2">Try Signal</span>
-<span class="author-label-3">A seven-question intake tool that turns what colleagues notice into scored input.</span>
-<span class="author-label-4">Open Signal <span aria-hidden="true" data-fx-arrow="right">→</span></span>
-</a>
-</div>
-</div>
-</div>
+  <section id="talks" class="section-rule">
+    <div class="talks-inner">
+      <div class="split-aside">
+        <div class="talks-id">
+          <div class="portrait-wrap" data-ref="fxRef" data-fx="magfar" data-fx-k="0.3" data-fx-t="1.3"><img class="portrait" src="assets/andreas-mitschke-portrait-circle.jpg" width="96" height="96" alt="Andreas Mitschke" loading="lazy" decoding="async"><video class="portrait-vid" muted playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"><source src="assets/andreas-mitschke-stage.mp4" type="video/mp4"><source src="assets/andreas-mitschke-stage.webm" type="video/webm"></video><span class="portrait-ring" aria-hidden="true"></span></div>
+          <span class="kicker-accent" data-fx-follow="0.7">Speaking Availability</span>
+        </div>
+        <span class="aside-title">Put me on your stage.</span>
+        <p class="talks-intro">Keynotes, speeches, panels, fireside chats, workshops, guest lectures and podcasts in English or German. I created and organised many event series long before I spoke at them, so I know what organisers need.</p>
+        <div class="btn-group"><a href="https://andmitsch.github.io/knownbeforebuilt/talks-press" data-ref="fxRef" data-fx="magfar" class="pbtn pb-orange"><span class="pb-fill" aria-hidden="true"></span><span class="pb-label">Talks & Press</span><span class="pb-dot" aria-hidden="true"><span class="pb-arr"><i>→</i><i>→</i></span></span></a></div>
+      </div>
+      <div class="split-list">
+        <span class="section-kicker talks-label">Common talk topics</span>
+        <a class="rrow reveal trow" href="https://andmitsch.github.io/knownbeforebuilt/talks-press#talk-1">
+          <div class="trow-main"><span class="trow-title">Known before built</span>
+            <span class="trow-sub">How enterprises decide what is worth building, before the big budget is spent.</span>
+          </div>
+          <!-- <span class="trow-format">Keynote · Workshop · Guest lecture</span> -->
+        </a>
+        <a class="rrow reveal trow" href="https://andmitsch.github.io/knownbeforebuilt/talks-press#talk-2">
+          <div class="trow-main">
+            <span class="trow-title">The AI productivity fallacy</span>
+            <span class="trow-sub">Why engineering speed was never the bottleneck, and what is.</span>
+          </div>
+          
+        </a>
+        <a class="rrow reveal trow" href="https://andmitsch.github.io/knownbeforebuilt/talks-press#talk-3">
+          <div class="trow-main">
+            <span class="trow-title">Don’t ask for opinions</span>
+            <span class="trow-sub">Customer research that predicts what people will actually do.</span>
+          </div>
+          
+        </a>
+        <a class="rrow reveal trow" href="https://andmitsch.github.io/knownbeforebuilt/talks-press#talk-4">
+          <div class="trow-main">
+            <span class="trow-title">Growth is one system</span>
+            <span class="trow-sub">Experimentation across marketing and product, aimed at revenue.</span>
+          </div>
+          
+        </a>
+      </div>
+    </div>
+  </section>
 
-<footer class="footer-footer">
-<span class="footer-label">Built with <svg width="16" height="15" viewBox="0 0 24 22" role="img" aria-label="love" class="system-svg-3"><path d="M12 21.5 C 5 16.2 1 12.4 1 7.4 C 1 3.8 3.7 1 7.1 1 C 9.2 1 10.9 2 12 3.7 C 13.1 2 14.8 1 16.9 1 C 20.3 1 23 3.8 23 7.4 C 23 12.4 19 16.2 12 21.5 Z" fill="#F57106"></path></svg> by Andreas Mitschke</span>
-<div class="footer-box"><a href="talks-press.html" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Talks &amp; Press</a><a href="grant-and-bear-publishing/" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Grant &amp; Bear Publishing</a><a href="legal-notice.html" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Legal-Notice</a><a href="privacy.html" ref="{{fxRef}}" data-fx="nav" class="nav-link-2">Privacy</a></div>
-</footer>
-</section>
+  <section id="contact" class="contact">
+    <canvas class="dotfield" aria-hidden="true"></canvas>
+    <div class="contact-inner">
+      <div class="contact-kicker"><span>Available for Product, Growth &amp; Innovation Roles</span><span>Advisory</span></div>
+      <h2 class="contact-title">Where does your next revenue come from?</h2>
+      <p class="contact-lead">A new channel, a new vertical, a new product or feature. Let’s find it, then grow it, then scale it.</p>
+      <a href="mailto:andreas@andreasmitschke.com" data-ref="fxRef" data-fx="big" class="talkbig" aria-label="Let’s talk — email Andreas"><span class="tb-base">Let’s talk</span><span class="tb-fill" aria-hidden="true">Let’s talk</span></a>
+      <div class="footer-row">
+        <span class="madeby">Built with <svg class="heart hl-line" width="16" height="15" viewBox="0 0 24 22" role="img" aria-label="love"><path d="M12 21.5 C 5 16.2 1 12.4 1 7.4 C 1 3.8 3.7 1 7.1 1 C 9.2 1 10.9 2 12 3.7 C 13.1 2 14.8 1 16.9 1 C 20.3 1 23 3.8 23 7.4 C 23 12.4 19 16.2 12 21.5 Z" style="fill:var(--accent)"></path></svg> by Andreas Mitschke</span><div class="footer-links"><a href="https://www.linkedin.com/in/andreasmitschke" class="footer-link">LinkedIn</a><a href="https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10956892" class="footer-link">SSRN</a><a href="https://andmitsch.github.io/knownbeforebuilt/" class="footer-link">knownbeforebuilt.com</a></div>
+      </div>
+    </div>
+  </section>
 </div>
-  </div>
-</main>
-<noscript><p class="kb-noscript">The animated figures on this page need JavaScript; all text is shown without it. Contact: <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.com</a></p></noscript>
-
-<script src="js/vendor/preact.min.js"></script>
-<script src="js/runtime.js"></script>
-<script src="js/main.js"></script>
-<script src="js/main2.js"></script>
-<script src="js/boot.js"></script>
-<script src="js/portrait.js"></script>
-
+<script src="assets/site.js"></script>
 </body>
 </html>
