@@ -262,6 +262,44 @@ section.sec + section.sec{border-top:1px solid rgba(167,132,68,.35)}
 .crafts h3{font-weight:400;font-size:1.35rem;line-height:1.25;margin:1rem 0 .55rem}
 .crafts p{margin:0;font-size:1.02rem;line-height:1.6;color:#3d2c20}
 
+/* ---------- Two details ---------- */
+.details{margin-top:clamp(3rem,7vw,4.5rem);border-top:1px solid var(--gilt);padding-top:1.25rem}
+.details .gallery-head{margin-bottom:1rem}
+.details-list{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:0}
+.details-list li{border-top:0;padding-top:0}
+.details-list h3{margin-top:0}
+
+/* ---------- From the working files ---------- */
+.gallery{margin-top:clamp(3rem,7vw,4.5rem);border-top:1px solid var(--gilt);padding-top:1.25rem}
+.gallery-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 1rem;margin-bottom:1.75rem}
+.gallery-head h3{font-weight:400;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--umber);margin:0}
+.gallery-head p{margin:0;font-style:italic;font-size:.95rem;color:var(--umber)}
+.g-row{display:flex;gap:1rem;align-items:flex-start;margin-bottom:2rem}
+.g-row figure{margin:0;min-width:0}
+.zoom{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.zoom img{display:block;width:100%;height:auto;border-radius:2px;box-shadow:0 1px 0 rgba(46,33,24,.08),0 18px 40px -24px rgba(46,33,24,.5);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.zoom:hover img{transform:translateY(-3px);box-shadow:0 1px 0 rgba(46,33,24,.08),0 26px 50px -24px rgba(46,33,24,.6)}
+.g-row figcaption{margin-top:.75rem;font-size:.92rem;line-height:1.5;color:#3d2c20}
+.g-row .fig{font-style:italic;color:var(--gilt-deep);margin-right:.4rem}
+dialog.lightbox{position:fixed;inset:0;width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(20,14,9,0);color:#EEE7D8;overflow:hidden;cursor:zoom-out}
+dialog.lightbox::backdrop{background:transparent}
+.lb-stage{position:fixed;inset:0;pointer-events:none;perspective:2400px}
+.lb-stage img{position:absolute;left:50%;top:46%;display:block;max-width:min(92vw,1500px);max-height:76vh;width:auto;height:auto;transform:translate(-50%,-50%);transform-origin:50% 50%;opacity:0;will-change:transform,opacity;backface-visibility:hidden}
+.lb-cap{position:fixed;left:0;right:0;bottom:max(1.25rem,3vh);margin:0 auto;max-width:46rem;padding:0 1rem;text-align:center;font-size:.95rem;line-height:1.5;color:#D6CBB6;opacity:0;transition:opacity .4s ease}
+.lightbox.cap .lb-cap{opacity:1}
+.lightbox .fig{font-style:italic;color:#CDAE72;margin-right:.4rem}
+.lightbox .close{position:fixed;top:1rem;right:1rem;width:48px;height:48px;border:1px solid rgba(205,174,114,.5);border-radius:50%;background:rgba(34,24,17,.6);color:#F3ECDD;font:inherit;font-size:1.4rem;line-height:1;cursor:pointer;opacity:0;transition:opacity .35s ease}
+.lightbox .close:hover{border-color:#CDAE72;color:#CDAE72}
+.lightbox.ui .close,.lightbox.ui .nav,.lightbox.ui .count{opacity:1}
+.lightbox .nav{position:fixed;top:46%;width:52px;height:52px;margin-top:-26px;border:1px solid rgba(205,174,114,.5);border-radius:50%;background:rgba(34,24,17,.6);color:#F3ECDD;cursor:pointer;opacity:0;transition:opacity .35s ease,border-color .2s,color .2s;display:flex;align-items:center;justify-content:center;padding:0}
+.lightbox .nav svg{width:20px;height:20px}
+.lightbox .prev{left:max(1rem,2vw)}
+.lightbox .next{right:max(1rem,2vw)}
+.lightbox .nav:hover{border-color:#CDAE72;color:#CDAE72}
+.lightbox .count{position:fixed;top:1.55rem;left:1.25rem;margin:0;font-size:.78rem;letter-spacing:.22em;color:#CDAE72;opacity:0;transition:opacity .35s ease;font-variant-numeric:lining-nums}
+.zoom img{transition:transform .5s var(--ease),box-shadow .5s var(--ease),opacity .28s ease}
+.lightbox .close:hover{border-color:#CDAE72;color:#CDAE72}
+
 /* ---------- Imprint ---------- */
 .imprint-text{max-width:var(--measure);margin:1.75rem 0 0}
 .imprint-text p{margin:0 0 1rem}
@@ -303,6 +341,8 @@ footer a:hover{color:var(--gilt-light)}
   .actions{justify-content:center}
   .record{grid-template-columns:1fr}
   .crafts,.enq{grid-template-columns:1fr;gap:2rem}
+  .g-row{flex-direction:column;gap:1.75rem;margin-bottom:1.75rem}
+  .g-row figure{flex:none!important;width:100%}
   .legal{grid-template-columns:1fr}
 }
 @media (max-width:40rem){
@@ -382,7 +422,7 @@ footer a:hover{color:var(--gilt-light)}
           <h3 id="kbb-title" class="reveal d1">Known Before Built</h3>
           <p class="subtitle reveal d1">From Discovery to Decision for Enterprises in Transformation</p>
           <p class="byline reveal d2">Andreas Mitschke</p>
-          <p class="desc reveal d2">Large organizations hold decades of expertise and still struggle to turn it into products worth building. <em>Known Before Built</em> is a practical system for deciding what deserves investment: from the first signal in the field to a build decision made on evidence rather than belief.</p>
+          <p class="desc reveal d2">Large organisations hold decades of expertise and still struggle to turn it into products worth building, whether for their own operations or for the market. <em>Known Before Built</em> is a practical system that helps established companies, corporate venture units and innovation teams decide what deserves investment: from the first signal in the field to a build decision made on evidence rather than belief.</p>
           <div class="actions reveal d3">
             <!-- Replace # with the Amazon product link once the book is live -->
             <a class="btn" href="https://andmitsch.github.io/knownbeforebuilt/buy">Buy the paperback <span class="arr" aria-hidden="true">&rarr;</span></a>
@@ -406,13 +446,13 @@ footer a:hover{color:var(--gilt-light)}
           <div><dt>Author</dt><dd>Andreas Mitschke</dd></div>
           <div><dt>Publisher</dt><dd>Grant &amp; Bear Publishing, Mannheim</dd></div>
           <div><dt>Published</dt><dd>2026</dd></div>
-          <div><dt>Format</dt><dd>Paperback, 5 &times; 8 in (127 &times; 203 mm)</dd></div>
+          <div><dt>Format</dt><dd>Paperback, 5.06 &times; 7.81 in (128.5 &times; 198.4 mm)</dd></div>
           <div><dt>Extent</dt><dd>316 pages</dd></div>
           <div><dt>Language</dt><dd>English</dd></div>
           <!-- Replace the placeholder with the ISBN-13 once assigned -->
           <div><dt>ISBN</dt><dd class="pending"></dd></div>
           <div><dt>Distribution</dt><dd>Amazon, and bookshops worldwide</dd></div>
-          <div class="full"><dt>Subjects</dt><dd>Research &amp; development; product management; organizational change</dd></div>
+          <div class="full"><dt>Subjects</dt><dd>Corporate Innovation, Corporate Venture, Research &amp; development, product management, digital transformation</dd></div>
         </dl>
       </div>
     </div>
@@ -425,7 +465,7 @@ footer a:hover{color:var(--gilt-light)}
         <h2 id="making">The Making</h2>
       </div>
       <div>
-        <p class="lead reveal d1">Every stage between the manuscript and the printed copy was done in-house, <em>by the author.</em></p>
+        <p class="lead reveal d1">Every stage between the manuscript and the printed copy was done in-house, <em>by Andreas.</em></p>
         <ol class="crafts">
           <li class="reveal d1">
             <span class="roman" aria-hidden="true">I</span>
@@ -443,6 +483,25 @@ footer a:hover{color:var(--gilt-light)}
             <p>Each copy is printed when it is ordered, so there is no warehoused stock and no edition goes out of print.</p>
           </li>
         </ol>
+        <div class="details">
+          <div class="gallery-head reveal"><h3>Two details</h3></div>
+          <ul class="crafts details-list">
+            <li class="reveal d1">
+              <h3>The format</h3>
+              <p>The book was first set at 5 &times; 8 in, close to the golden ratio, and in the hand it felt slightly too long. Re-set at 5.06 &times; 7.81 in, the extra width gives the inner margin enough room that the text no longer pulls towards the spine. The page kept the measures that make it easy to read: 33 lines per page, around 65 characters per line. It now sits more easily in one hand, and level with the other business books on a shelf.</p>
+            </li>
+            <li class="reveal d2">
+              <h3>The fore-edge</h3>
+              <p>Every chapter opens with a dark bar that runs to the edge of the page. Closed, the book shows each chapter as a line along its side, so a reader can find one with a thumb instead of the contents page. It was a deliberate choice, made whilst designing the book.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="gallery">
+          <div class="gallery-head reveal"><h3>From the working files</h3><p>Select an image to enlarge</p></div>
+          <div class="g-row"><figure class="reveal d1" style="flex:1.600 1 0%"><button type="button" class="zoom" data-src="process/00-moodboard.webp" aria-label="Enlarge figure 1"><img src="process/00-moodboard.webp" width="1600" height="1000" alt="Illustrator canvas with a moodboard of typographic posters and early Known Before Built cover studies" loading="lazy" decoding="async"></button><figcaption><span class="fig">Fig. 1</span>The cover moodboard.</figcaption></figure><figure class="reveal d2" style="flex:1.600 1 0%"><button type="button" class="zoom" data-src="process/01-cover-concepts.webp" aria-label="Enlarge figure 2"><img src="process/01-cover-concepts.webp" width="1600" height="1000" alt="Illustrator window with four early cover concepts for Known Before Built" loading="lazy" decoding="async"></button><figcaption><span class="fig">Fig. 2</span>Early cover concepts in Illustrator.</figcaption></figure></div>
+          <div class="g-row"><figure class="reveal d3" style="flex:1.256 1 0%"><button type="button" class="zoom" data-src="process/03-spread-grid.webp" aria-label="Enlarge figure 3"><img src="process/03-spread-grid.webp" width="1134" height="903" alt="InDesign spread of the Chapter III opening with layout guides visible" loading="lazy" decoding="async"></button><figcaption><span class="fig">Fig. 3</span>Chapter III opening in InDesign, with grid, margins and text frames.</figcaption></figure><figure class="reveal d1" style="flex:1.295 1 0%"><button type="button" class="zoom" data-src="process/04-spread-finished.webp" aria-label="Enlarge figure 4"><img src="process/04-spread-finished.webp" width="1098" height="848" alt="The Chapter III opening spread without guides" loading="lazy" decoding="async"></button><figcaption><span class="fig">Fig. 4</span>The clean digital look.</figcaption></figure></div>
+          <div class="g-row"><figure class="reveal d2" style="flex:1.373 1 0%"><button type="button" class="zoom" data-src="process/02-cover-wrap.webp" aria-label="Enlarge figure 5"><img src="process/02-cover-wrap.webp" width="1387" height="1010" alt="Full cover wrap of Known Before Built in Photoshop with guides" loading="lazy" decoding="async"></button><figcaption><span class="fig">Fig. 5</span>The final cover wrap in Photoshop: back, spine and front, with trim and bleed guides.</figcaption></figure><figure class="reveal d3" style="flex:0.750 1 0%"><button type="button" class="zoom" data-src="process/05-printed-proof.webp" aria-label="Enlarge figure 6"><img src="process/05-printed-proof.webp" width="1050" height="1400" alt="Photograph of the printed book open at the Chapter III opening" loading="lazy" decoding="async"></button><figcaption><span class="fig">Fig. 6</span>The printed proof. Little needed correcting, because the digital preparation was thorough. The only change afterwards was the format.</figcaption></figure><figure class="reveal d3" style="flex:0.750 1 0%"><button type="button" class="zoom" data-src="process/06-fore-edge.webp" aria-label="Enlarge figure 7"><img src="process/06-fore-edge.webp" width="900" height="1200" alt="The closed proof copy seen from the fore-edge, with a thin dark line marking each chapter" loading="lazy" decoding="async"></button><figcaption><span class="fig">Fig. 7</span>The fore-edge of the proof: one dark line for each chapter.</figcaption></figure></div>
+        </div>
       </div>
     </div>
   </section>
@@ -470,7 +529,7 @@ footer a:hover{color:var(--gilt-light)}
       </div>
       <div>
         <ul class="enq">
-          <li class="reveal d1"><h3>Bulk &amp; corporate orders</h3><p>Copies for teams, leadership programs and events.</p></li>
+          <li class="reveal d1"><h3>Bulk &amp; corporate orders</h3><p>Copies for teams, leadership programmes and events.</p></li>
           <li class="reveal d2"><h3>Faculty examination copies</h3><p>For instructors considering the book for a course.</p></li>
           <li class="reveal d3"><h3>Rights &amp; permissions</h3><p>Translations, excerpts and reprints.</p></li>
         </ul>
@@ -514,6 +573,14 @@ footer a:hover{color:var(--gilt-light)}
     </div>
   </footer>
 
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged image">
+  <p class="count" id="lb-count" aria-live="polite"></p>
+  <button type="button" class="close" aria-label="Close">&times;</button>
+  <button type="button" class="nav prev" aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"></path></svg></button>
+  <button type="button" class="nav next" aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"></path></svg></button>
+  <div class="lb-stage"><img id="lb-a" src="" alt=""><img id="lb-b" src="" alt=""></div>
+  <p class="lb-cap" id="lb-cap"></p>
+</dialog>
 </main>
 <div class="under-spacer" aria-hidden="true"></div>
 </div>
@@ -646,6 +713,99 @@ footer a:hover{color:var(--gilt-light)}
   }
   function onScroll(){if(native||reduce)return;if(!raf)raf=requestAnimationFrame(step)}
   if(!reduce&&!native){cur=Math.max(0,window.scrollY||0);apply(cur);window.addEventListener('scroll',onScroll,{passive:true})}
+
+  /* Lightbox for the working files. A picture lifts out of its thumbnail and grows to full size
+     (the same motion as the spread preview on the book page). Previous / next overlap two flights:
+     the current picture sinks back towards its place in the page while the next one rises from its own. */
+  var lb=document.getElementById('lightbox');
+  if(lb&&lb.showModal){
+    var lbA=document.getElementById('lb-a'),lbB=document.getElementById('lb-b'),lbCap=document.getElementById('lb-cap'),lbCount=document.getElementById('lb-count');
+    var lbStill=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var lbZooms=Array.prototype.slice.call(document.querySelectorAll('.zoom'));
+    var lbIdx=0,lbCur=lbA,lbBusy=false,lbJobs=0;
+    function thumbOf(i){var b=lbZooms[i];return b?b.querySelector('img'):null}
+    function easeO(x){return 1-Math.pow(1-x,4)}
+    function easeIO(x){return x<.5?8*x*x*x*x:1-Math.pow(-2*x+2,4)/2}
+    /* where the thumbnail sits, clamped into the screen so a picture never flies off it */
+    function startOf(el,thumb){
+      el.style.transform='translate(-50%,-50%)';var nat=el.getBoundingClientRect();
+      var r=thumb?thumb.getBoundingClientRect():null;
+      if(!r||!r.width||!nat.width)return{dx:0,dy:window.innerHeight*.25,sc:.3};
+      var m=60,cx=Math.min(window.innerWidth-m,Math.max(m,r.left+r.width/2)),cy=Math.min(window.innerHeight-m,Math.max(m,r.top+r.height/2));
+      return{dx:cx-(nat.left+nat.width/2),dy:cy-(nat.top+nat.height/2),sc:Math.max(.08,r.width/nat.width)};
+    }
+    function pose(el,g,k,opening){
+      var arc=Math.sin(Math.PI*k)*40*(opening?1:.6);
+      el.style.transform='translate(-50%,-50%) translate('+(g.dx*(1-k)).toFixed(1)+'px,'+(g.dy*(1-k)-arc).toFixed(1)+'px) scale('+(g.sc+(1-g.sc)*k).toFixed(4)+') rotateX('+((1-k)*10).toFixed(2)+'deg) rotateY('+((1-k)*-14).toFixed(2)+'deg) rotateZ('+((1-k)*4).toFixed(2)+'deg)';
+      el.style.boxShadow='0 '+(30*k).toFixed(0)+'px '+(80*k).toFixed(0)+'px -20px rgba(0,0,0,'+(.6*k).toFixed(3)+')';
+    }
+    /* one flight: opening = out of the thumbnail, closing = back into it. Fades at the thumbnail end,
+       so the hand-over between page and overlay never pops. */
+    function fly(el,i,opening,dur,delay,fadeBg,done){
+      var thumb=thumbOf(i),g=startOf(el,thumb);
+      if(opening){pose(el,g,0,true);el.style.opacity='0'}
+      lbJobs++;
+      function end(){lbJobs--;done&&done()}
+      if(lbStill){el.style.transform='translate(-50%,-50%)';el.style.opacity=opening?'1':'0';if(thumb)thumb.style.opacity=opening?'0':'';if(fadeBg)lb.style.background=opening?'rgba(20,14,9,.92)':'rgba(20,14,9,0)';end();return}
+      var t0=performance.now()+(delay||0),handed=false;
+      function step(now){
+        var x=Math.max(0,Math.min(1,(now-t0)/dur)),k=opening?easeO(x):1-easeIO(x);
+        pose(el,g,k,opening);
+        el.style.opacity=Math.min(1,k*2.4).toFixed(3);
+        if(thumb&&!handed){ /* the thumbnail hides as the picture leaves it, and returns as it lands */
+          if(opening&&k>.02){thumb.style.opacity='0';handed=true}
+          if(!opening&&k<.35){thumb.style.opacity='';handed=true}
+        }
+        if(fadeBg)lb.style.background='rgba(20,14,9,'+(.92*Math.min(1,k*1.2)).toFixed(3)+')';
+        if(x<1)requestAnimationFrame(step);else end();
+      }
+      requestAnimationFrame(step);
+    }
+    function load(el,i,go){
+      var b=lbZooms[i],img=b.querySelector('img');
+      el.alt=img.alt;el.style.opacity='0';
+      el.src=b.getAttribute('data-src');
+      var ready=function(){requestAnimationFrame(go)};
+      if(el.decode){el.decode().then(ready,ready)}else if(el.complete){ready()}else{el.onload=ready}
+    }
+    function label(i){
+      var cap=lbZooms[i].parentNode.querySelector('figcaption');
+      lbCap.textContent=cap?cap.textContent.replace(/^(Fig\. \d+)\s*/,'$1 — '):'';
+      lbCount.textContent=(i+1)+' / '+lbZooms.length;
+    }
+    function lbOpen(i){
+      if(lb.open||lbBusy)return;lbBusy=true;lbIdx=i;lbCur=lbA;lbB.style.opacity='0';
+      lb.style.background='rgba(20,14,9,0)';label(i);lb.showModal();
+      load(lbCur,i,function(){fly(lbCur,i,true,820,0,true,function(){lb.classList.add('ui','cap');lbBusy=false})});
+    }
+    function lbClose(){
+      if(!lb.open||lbBusy)return;lbBusy=true;lb.classList.remove('ui','cap');
+      fly(lbCur,lbIdx,false,620,0,true,function(){lb.close();lbBusy=false});
+    }
+    function lbStep(dir){
+      if(!lb.open||lbBusy)return;lbBusy=true;
+      var from=lbIdx,to=(lbIdx+dir+lbZooms.length)%lbZooms.length,out=lbCur,inn=lbCur===lbA?lbB:lbA;
+      lb.classList.remove('cap');
+      load(inn,to,function(){                      /* the next picture is decoded before anything moves */
+        var left=2;function both(){if(--left===0){lbIdx=to;lbCur=inn;label(to);lb.classList.add('cap');lbBusy=false}}
+        fly(out,from,false,560,0,false,both);
+        fly(inn,to,true,760,140,false,both);
+      });
+    }
+    lbZooms.forEach(function(b,i){b.addEventListener('click',function(){lbOpen(i)})});
+    lb.querySelector('.close').addEventListener('click',function(e){e.stopPropagation();lbClose()});
+    lb.querySelector('.prev').addEventListener('click',function(e){e.stopPropagation();lbStep(-1)});
+    lb.querySelector('.next').addEventListener('click',function(e){e.stopPropagation();lbStep(1)});
+    var lbX=null,lbSwiped=false;
+    lb.addEventListener('click',function(){if(lbSwiped){lbSwiped=false;return}lbClose()});
+    lb.addEventListener('cancel',function(e){e.preventDefault();lbClose()});
+    lb.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){e.preventDefault();lbStep(1)}
+      else if(e.key==='ArrowLeft'){e.preventDefault();lbStep(-1)}
+    });
+    lb.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')lbX=e.clientX});
+    lb.addEventListener('pointerup',function(e){if(lbX===null)return;var d=e.clientX-lbX;lbX=null;if(Math.abs(d)>50){lbSwiped=true;lbStep(d<0?1:-1)}});
+  }
 
   /* Gentle reveal as each block enters */
   var els=document.querySelectorAll('.reveal');
