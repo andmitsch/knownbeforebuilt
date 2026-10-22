@@ -7,6 +7,8 @@
     window.KB_M = q ? q[1] === '1' : (window.KB_TOUCH ? sw < 600 : window.innerWidth < 600);
     if (window.KB_M) document.documentElement.classList.add('kb-m');
     if (!window.KB_TOUCH || window.KB_M) document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1');
+    // Desktop windows under 1440 px: scale the page now, before the first paint, so it never shows at full size and then jumps.
+    if (!window.KB_TOUCH && !window.KB_M) { var z = Math.min(1, document.documentElement.clientWidth / 1440); if (z < 1) document.documentElement.style.setProperty('--kb-zoom', String(z)); }
   })();
 ;
 window.KB_SITE = true;

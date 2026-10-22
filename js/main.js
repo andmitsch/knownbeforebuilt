@@ -570,9 +570,8 @@ void main(){
       u.style.cssText = 'position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#F57106;transform-origin:0 50%;transform:scaleX(0);pointer-events:none';
       const u0 = document.createElement('span'); u0.setAttribute('aria-hidden', 'true');
       u0.style.cssText = 'position:absolute;left:0;right:0;bottom:-3px;height:1px;background:rgba(17,17,17,.35);pointer-events:none';
-      if (kind === 'nav') { u.style.left = '-6px'; u.style.right = '-6px'; u.style.bottom = '-7px'; u.style.height = '1.5px'; u.style.background = '#111111'; u.style.transformOrigin = '50% 50%'; u.style.borderRadius = '1px'; el.appendChild(u); }
-      else { el.appendChild(u0); el.appendChild(u); }
-      F.line = u;
+      // nav links: the two-line underline (ink, then orange) is drawn by CSS (.nl1 / .nl2), as on the personal site
+      if (kind !== 'nav') { el.appendChild(u0); el.appendChild(u); F.line = u; }
     }
     F.arrow = el.querySelector('[data-fx-arrow]');
     const loc = (e) => { const r = el.getBoundingClientRect(); return [(e.clientX - r.left) / (r.width || 1), (e.clientY - r.top) / (r.height || 1)]; };

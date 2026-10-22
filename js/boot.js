@@ -5,7 +5,7 @@ window.KBB_PROPS = { showPlaceholders: false };
   var page = document.getElementById('kb-page');
   function fit() {
     var z = (window.KB_TOUCH || window.KB_M) ? 1 : Math.min(1, document.documentElement.clientWidth / 1440);
-    page.style.zoom = z === 1 ? '' : String(z);
+    document.documentElement.style.setProperty('--kb-zoom', String(z));   // set first in js/head.js; kept up to date on resize
   }
   fit(); window.addEventListener('resize', fit);
   var cfg = window.KBB_PROPS || {};
