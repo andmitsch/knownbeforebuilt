@@ -122,7 +122,7 @@ html.kbgrabbing,html.kbgrabbing *{cursor:grabbing!important}
 
 html { background: #ECE8E5; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-#kb-page { width: 1440px; margin: 0 auto; }
+#kb-page { width: 1440px; margin: 0 auto; zoom: var(--kb-zoom, 1); }
 #kb-main > div, #kb-main2 > div { margin: 0 auto; }
 .kb-skip { position: absolute; left: -9999px; top: 8px; z-index: 100; background: #111111; color: #ECE8E5; padding: 10px 14px; font: 600 14px/1 'Hanken Grotesk', sans-serif; }
 .kb-skip:focus { left: 8px; }
@@ -168,8 +168,10 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 .top-label-3{width: 110px; height: 2px; background: #111111}
 .top-label-4{font: italic var(--bodoni-w) 92px/1 'Bodoni Moda', serif}
 .top-label-5{font: 900 148px/0.86 Archivo, sans-serif; letter-spacing: -0.035em; text-align: center}
-.top-text{margin: 28px 0 0; font: var(--bodoni-w) 25px/1.3 'Bodoni Moda', serif; font-size: 28px; width: 727px; line-height: 1.35}
-.top-text-2{margin: 12px 0 0; font: 400 15px/1.5 'Hanken Grotesk', sans-serif; font-size: 16px}
+.top-text{margin: 28px 0 0; font: 900 30px/1.35 Archivo, sans-serif; width: 727px}
+/* 'Stop' and 'De-Risk': set back to Archivo Black in the canvas (still 12% larger than the rest of the line) */
+.top-em{font: 900 1.12em/1 Archivo, sans-serif}
+.top-text-2{margin: 12px 0 0; font: 400 15px/1.5 'Hanken Grotesk', sans-serif; font-size: 18px}
 .top-box-3{margin-top: 30px; display: flex; align-items: center; gap: 28px}
 .top-link{display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 26px; background: #111111; color: #ECE8E5; text-decoration: none; font: 600 16px/1 'Hanken Grotesk', sans-serif; border-radius: 2px}
 .section-section{height: 540px; flex-shrink: 0; position: relative}
@@ -351,6 +353,19 @@ html.js .book-box-2:not(.kb-open) > .book-box-3{height: 0px}
 /* Text for screen readers and crawlers that describes a figure; not shown on screen. */
 .kb-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
+/* Links the scripts animate become inline-blocks with drawn underlines; give them that box from the start so nothing moves when the scripts attach. */
+[data-fx="nav"],[data-fx="link"]{display:inline-block;position:relative}
+html.js [data-fx="nav"],html.js [data-fx="link"]{text-decoration:none}
+
+/* Nav and footer links: on hover an ink line sweeps in from the left, then an orange one over it; on leave they retract
+   to the right in reverse order. Same motion as on andreasmitschke.com, in the book's orange. Pure CSS. */
+.nl1,.nl2{position:absolute;left:0;right:0;bottom:-7px;height:2px;border-radius:2px;transform:scaleX(0);transform-origin:right center;pointer-events:none}
+.nl1{background:#111111;transition:transform .5s cubic-bezier(.65,0,.35,1) .14s}
+.nl2{background:#F57106;transition:transform .5s cubic-bezier(.65,0,.35,1) 0s}
+.nav-link-2:hover .nl1,.nav-link-2:focus-visible .nl1{transform:scaleX(1);transform-origin:left center;transition-delay:0s}
+.nav-link-2:hover .nl2,.nav-link-2:focus-visible .nl2{transform:scaleX(1);transform-origin:left center;transition-delay:.18s}
+@media (prefers-reduced-motion: reduce){.nl1,.nl2{transition:none}}
+
 /* ==== Without JavaScript ===============================================================
    The page is plain HTML first; JS adds html.js (in js/head.js) and then animates. These rules only apply
    when that never happens: hints for gestures that do nothing are hidden, and the chapter list, which is
@@ -389,8 +404,8 @@ html.kb-m .top-label,html.kb-m .top-label-5{font-size:clamp(60px,20.5vw,128px)}
 html.kb-m .top-label-2{gap:14px;margin:8px 0 8px 2px}
 html.kb-m .top-label-3{width:15vw}
 html.kb-m .top-label-4{font-size:clamp(40px,14.5vw,80px)}
-html.kb-m .top-text{width:auto;margin-top:26px;font-size:23px;line-height:1.3}
-html.kb-m .top-text-2{font-size:16px;line-height:1.55;margin-top:14px}
+html.kb-m .top-text{width:auto;margin-top:26px;font-size:22px;line-height:1.3}
+html.kb-m .top-text-2{font-size:17px;line-height:1.55;margin-top:14px}
 html.kb-m .top-box-3{margin-top:28px}
 
 /* is this you */
