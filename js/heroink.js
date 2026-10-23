@@ -2,7 +2,7 @@
    The ring paints itself once (circle-paint.webp, ~2 s). After that a WebGL layer takes over with the identical
    final frame (circle-static.webp) and lets it breathe: the wet paint flows a little, a soft light travels round
    the ring, now and then a small hive of glints twinkles on the thick paint, a few orange motes drift past it,
-   and a cursor moving over the brush leaves a short trail of brighter glints. Same material as the plasma stream further down.
+   and a cursor moving over the brush sets off a few brighter glints scattered around it. Same material as the plasma stream further down.
    Motion fades in over a few seconds, so the switch is invisible. Paused when off screen or in a hidden tab;
    reduced motion and no WebGL keep the plain image. */
 (function () {
@@ -53,12 +53,11 @@
     ' vec3 sc=vec3(1.,.97,.91)*spk*paint; col+=sc; float sA=0.;',
     // cursor trail: where the pointer passes over the brush, a few brighter glints light up and fade (TP: x, y, life, seed)
     ' float tr=0.; vec2 qq=uv*R; float u2=R.y/669.;',
-    ' for(int i=0;i<24;i++){vec4 P=TP[i]; if(P.z<=0.) continue; vec2 dc=qq-P.xy*R; if(dot(dc,dc)>900.*u2*u2) continue; float ag=1.-P.z;',
-    '  for(int j=0;j<3;j++){float fj=float(j); vec2 o=(vec2(hs(vec2(P.w,fj+.5)),hs(vec2(fj+.5,P.w+1.7)))*2.-1.)*9.*u2;',
-    '   float st=hs(vec2(P.w+fj,3.3))*.22, lx=clamp((ag-st)/(1.-st),0.,1.), b=smoothstep(0.,.08,lx)*pow(1.-lx,1.6)*(.8+.2*sin(T*9.+fj*2.1+P.w));',
-    '   float sz=(1.1+.9*hs(vec2(P.w,fj+9.1)))*u2; vec2 dq=dc-o;',
-    '   tr+=(exp(-dot(dq,dq)/(sz*sz))+.3*(exp(-abs(dq.x)/(sz*2.2))*exp(-dq.y*dq.y/(sz*sz*.12))+exp(-abs(dq.y)/(sz*2.2))*exp(-dq.x*dq.x/(sz*sz*.12))))*b;}}',
-    ' col+=vec3(1.,.97,.91)*tr*1.6*K*paint;',
+    ' for(int i=0;i<24;i++){vec4 P=TP[i]; if(P.z<=0.) continue; vec2 dq=qq-P.xy*R; if(dot(dq,dq)>144.*u2*u2) continue; float ag=1.-P.z;',
+    '  float st=hs(vec2(P.w,3.3))*.3, lx=clamp((ag-st)/(1.-st),0.,1.), b=smoothstep(0.,.15,lx)*pow(1.-lx,1.4)*(.8+.2*sin(T*7.+P.w));',
+    '  float sz=(1.1+.8*hs(vec2(P.w,9.1)))*u2;',
+    '  tr+=(exp(-dot(dq,dq)/(sz*sz))+.28*(exp(-abs(dq.x)/(sz*2.2))*exp(-dq.y*dq.y/(sz*sz*.12))+exp(-abs(dq.y)/(sz*2.2))*exp(-dq.x*dq.x/(sz*sz*.12))))*b;}',
+    ' col+=vec3(1.,.97,.91)*tr*1.3*K*paint;',
     // motes drifting round the ring
     ' float m=0.;',
     ' for(int i=0;i<22;i++){float fi=float(i); float sp=.035+.05*hs(vec2(fi,1.)); float dir=hs(vec2(fi,2.))>.5?1.:-1.;',
@@ -93,19 +92,25 @@
     var loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
     var uR = gl.getUniformLocation(pr, 'R'), uT = gl.getUniformLocation(pr, 'T'), uK = gl.getUniformLocation(pr, 'K');
     var uSP = gl.getUniformLocation(pr, 'SP[0]'), uSR = gl.getUniformLocation(pr, 'SR[0]'), uTP = gl.getUniformLocation(pr, 'TP[0]');
-    // cursor trail over the brush (mouse and pen only): a point every ~12 px, each glistens for about a second
-    var trail = [], tpA = new Float32Array(96), lastP = null, LIFE = 1100;
+    // cursor over the brush (mouse and pen only): every ~22 px of movement one or two single glints light up
+    // somewhere within ~50 px around the cursor, only where there is paint; each glistens for about 1.3 s
+    var trail = [], tpA = new Float32Array(96), lastP = null, LIFE = 1300, amap = null, aw = 0, ah = 0;
+    function onPaint(x, y) { if (!amap) return true; var i = Math.min(aw - 1, Math.max(0, (x * aw) | 0)), j = Math.min(ah - 1, Math.max(0, (y * ah) | 0)); return amap[j * aw + i] > 200; }
     function onMove(e) {
       if (!ready || e.pointerType === 'touch') return;
       var r = cv.getBoundingClientRect(); if (!r.width) return;
       var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height, now = performance.now();
       if (x < 0 || x > 1 || y < 0 || y > 1) { lastP = null; return; }
-      var add = function (px, py) { trail.push({ x: px, y: py, t: now, seed: 1 + ((Math.random() * 900) | 0) }); if (trail.length > 24) trail.shift(); lastP = { x: px, y: py }; };
-      if (!lastP) add(x, y);
-      else {
-        var dist = Math.hypot((x - lastP.x) * r.width, (y - lastP.y) * r.height), n = Math.min(6, Math.floor(dist / 12));
-        for (var k = 1; k <= n; k++) { var f = k / n; add(lastP.x + (x - lastP.x) * f, lastP.y + (y - lastP.y) * f); }
-      }
+      var spray = function () {
+        var m = Math.random() < 0.35 ? 2 : 1;
+        for (var k = 0; k < m; k++) for (var tries = 0; tries < 5; tries++) {
+          var ang = Math.random() * 6.2832, rad = 50 * Math.sqrt(Math.random());
+          var px = x + Math.cos(ang) * rad / r.width, py = y + Math.sin(ang) * rad / r.height;
+          if (onPaint(px, py)) { trail.push({ x: px, y: py, t: now, seed: 1 + ((Math.random() * 900) | 0) }); if (trail.length > 24) trail.shift(); break; }
+        }
+      };
+      if (!lastP) { lastP = { x: x, y: y }; spray(); }
+      else if (Math.hypot((x - lastP.x) * r.width, (y - lastP.y) * r.height) > 22) { lastP = { x: x, y: y }; spray(); }
       kick();
     }
     function trailU(now) {
@@ -123,6 +128,7 @@
         var w = 128, h = Math.round(w * src.naturalHeight / src.naturalWidth), oc = document.createElement('canvas');
         oc.width = w; oc.height = h; var cx = oc.getContext('2d'); cx.drawImage(src, 0, 0, w, h);
         var d = cx.getImageData(0, 0, w, h).data;
+        aw = w; ah = h; amap = new Uint8Array(w * h); for (var q = 0; q < w * h; q++) amap[q] = d[q * 4 + 3];
         for (var y = 2; y < h - 2; y++) for (var x = 2; x < w - 2; x++) {
           var o = (y * w + x) * 4;
           if (d[o + 3] > 245 && d[o + 3 - 8] > 245 && d[o + 3 + 8] > 245 && d[o + 3 - w * 8] > 245 && d[o + 3 + w * 8] > 245) spots.push([(x + 0.5) / w, (y + 0.5) / h]);
@@ -162,7 +168,7 @@
     }
     function frame(now) {
       raf = 0; if (!vis || document.hidden) return;
-      if (now - last >= 32) {           // ~30 fps is plenty for slow motion
+      if (now - last >= 12.6) {         // up to 60 fps (every 2nd frame on 120 Hz); the slack keeps timing jitter from dropping frames
         last = now;
         var t = (now - t0) / 1000, k = Math.min(1, Math.max(0, (now - kStart) / 3200)); k = k * k * (3 - 2 * k);
         gl.uniform2f(uR, cv.width, cv.height); gl.uniform1f(uT, t + 40.0); gl.uniform1f(uK, k); sparkles(t); trailU(now);
