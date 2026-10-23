@@ -3,7 +3,7 @@
    final frame (circle-static.webp) and lets it breathe: the wet paint flows a little, a soft light travels round
    the ring, now and then a small hive of glints twinkles on the thick paint, a few orange motes drift past it,
    and a cursor moving over the brush sets off a few brighter glints scattered around it. Same material as the plasma stream further down.
-   Motion fades in over a few seconds, so the switch is invisible. Paused when off screen or in a hidden tab;
+   The swap is a single frame onto an identical picture, then the motion eases in over a few seconds. Paused when off screen or in a hidden tab;
    reduced motion and no WebGL keep the plain image. */
 (function () {
   if (window.KBHeroInk) return;
@@ -20,7 +20,7 @@
     ' vec2 uv=vUv; vec2 C=vec2(.51,.509); vec2 p=uv-C; p.x*=R.x/R.y;',
     ' float r=length(p); float a=atan(p.y,p.x);',
     // slow sway of the whole stroke (about one degree) and wet-paint flow along and across the ring
-    ' float sw=.016*sin(T*.13)+.006*sin(T*.31+1.); float ca=cos(sw), sa=sin(sw);',
+    ' float sw=(.016*sin(T*.13)+.006*sin(T*.31+1.))*K; float ca=cos(sw), sa=sin(sw);',
     ' vec2 q=vec2(ca*p.x-sa*p.y, sa*p.x+ca*p.y);',
     ' vec2 tang=vec2(-sin(a),cos(a)); vec2 rad=vec2(cos(a),sin(a));',
     ' float f1=nz(vec2(a*2.2+T*.11, r*9.-T*.07)); float f2=nz(vec2(a*5.1-T*.17, r*21.+T*.05));',
@@ -158,17 +158,18 @@
     var src = new Image(); src.decoding = 'async';
     src.src = staticSrc || img.getAttribute('data-ink-src') || img.src.replace('circle-paint', 'circle-static');
     var ready = false, t0 = 0, raf = 0, last = 0, vis = true, kStart = 0;
-    cv.style.cssText = 'position:absolute;pointer-events:none;opacity:0;transition:opacity .9s cubic-bezier(.22,1,.36,1)';
+    cv.style.cssText = 'position:absolute;pointer-events:none;opacity:0';
     function place() {
       cv.style.left = img.offsetLeft + 'px'; cv.style.top = img.offsetTop + 'px';
       cv.style.width = img.offsetWidth + 'px'; cv.style.height = img.offsetHeight + 'px';
-      var dpr = Math.min(1.5, window.devicePixelRatio || 1);
-      var w = Math.max(2, Math.round(img.offsetWidth * dpr)), h = Math.max(2, Math.round(img.offsetHeight * dpr));
+      // render at the ring's real on-screen pixel size (page zoom and Retina included), as sharp as the image it replaces
+      var dpr = Math.min(2, window.devicePixelRatio || 1), rc = img.getBoundingClientRect();
+      var w = Math.max(2, Math.round((rc.width || img.offsetWidth) * dpr)), h = Math.max(2, Math.round((rc.height || img.offsetHeight) * dpr));
       if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; gl.viewport(0, 0, w, h); }
     }
     function frame(now) {
       raf = 0; if (!vis || document.hidden) return;
-      if (now - last >= 12.6) {         // up to 60 fps (every 2nd frame on 120 Hz); the slack keeps timing jitter from dropping frames
+      if (now - last >= 29.3) {         // capped at 30 fps; the 4 ms slack keeps timing jitter from dropping frames (a tight 32 ms cap stuttered)
         last = now;
         var t = (now - t0) / 1000, k = Math.min(1, Math.max(0, (now - kStart) / 3200)); k = k * k * (3 - 2 * k);
         gl.uniform2f(uR, cv.width, cv.height); gl.uniform1f(uT, t + 40.0); gl.uniform1f(uK, k); sparkles(t); trailU(now);
@@ -186,10 +187,11 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       findSpots(); gl.uniform4fv(uSP, spA); gl.uniform1fv(uSR, spR);
-      ready = true; t0 = performance.now(); kStart = t0 + 400;
-      // first frame (motion still 0) is the same picture as the image: swap, then let the motion fade in
+      ready = true; t0 = performance.now(); kStart = t0 + 700;
+      // the first frames (motion still 0) are pixel for pixel the image's last frame: swap in one step, no crossfade
+      // (a fade between two layers reads as a blurry double image), then let the motion ease in
       last = 0; frame(performance.now());
-      requestAnimationFrame(function () { cv.style.opacity = '1'; setTimeout(function () { img.style.visibility = 'hidden'; }, 950); });
+      requestAnimationFrame(function () { requestAnimationFrame(function () { cv.style.opacity = '1'; img.style.visibility = 'hidden'; }); });
       if (window.ResizeObserver) new ResizeObserver(place).observe(img); else window.addEventListener('resize', place);
       if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; kick(); }, { rootMargin: '120px 0px' }).observe(cv);
       document.addEventListener('visibilitychange', kick);
