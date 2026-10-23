@@ -139,7 +139,7 @@
       var p = spots[(Math.random() * spots.length) | 0];
       s.x = p[0]; s.y = p[1]; s.dur = 1.3 + Math.random() * 0.9; s.sz = 0.012 + Math.random() * 0.012; s.seed = 1 + ((Math.random() * 900) | 0);
       s.amp = 0.75 + Math.random() * 0.25;
-      s.t0 = t + (first ? 0.8 + Math.random() * 3.5 : 0.45 + Math.random() * 2.6);
+      s.t0 = t + (first ? 0.15 + slots.indexOf(s) * 0.45 + Math.random() * 0.5 : 0.45 + Math.random() * 2.6);
     }
     function sparkles(t) {
       if (!spots.length) return;
@@ -171,7 +171,7 @@
       raf = 0; if (!vis || document.hidden) return;
       if (now - last >= 29.3) {         // capped at 30 fps; the 4 ms slack keeps timing jitter from dropping frames (a tight 32 ms cap stuttered)
         last = now;
-        var t = (now - t0) / 1000, k = Math.min(1, Math.max(0, (now - kStart) / 3200)); k = k * k * (3 - 2 * k);
+        var t = (now - t0) / 1000, k = Math.min(1, Math.max(0, (now - kStart) / 1200)); k = 1 - (1 - k) * (1 - k);   // eases in fast: glistening shows within a few hundred ms
         gl.uniform2f(uR, cv.width, cv.height); gl.uniform1f(uT, t + 40.0); gl.uniform1f(uK, k); sparkles(t); trailU(now);
         gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLES, 0, 6);
       }
@@ -187,7 +187,7 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       findSpots(); gl.uniform4fv(uSP, spA); gl.uniform1fv(uSR, spR);
-      ready = true; t0 = performance.now(); kStart = t0 + 700;
+      ready = true; t0 = performance.now(); kStart = t0;
       // the first frames (motion still 0) are pixel for pixel the image's last frame: swap in one step, no crossfade
       // (a fade between two layers reads as a blurry double image), then let the motion ease in
       last = 0; frame(performance.now());
@@ -198,9 +198,33 @@
       window.addEventListener('pointermove', onMove, { passive: true });
       kick();
     }
-    // wait for the painted ring to finish (59 frames × 34 ms) and for the still frame to decode
-    var go = function () { (src.decode ? src.decode() : Promise.resolve()).then(function () { setTimeout(start, 2300); }, function () {}); };
-    if (img.complete) go(); else img.addEventListener('load', go, { once: true });
+        // take over the moment the paint-in ends (60 frames x 34 ms from when the image appears, plus a small margin), as soon as the still has decoded
+    // The paint-in plays from the moment the image is first painted. If that happened before this script ran, find
+    // that moment: element timing (Chromium) gives it exactly; otherwise the later of image arrival and first paint.
+    var loadedAt = 0;
+    function shownAt(cb) {
+      if (loadedAt) return cb(loadedAt);
+      var seen = 0, po = null;   // earliest paint of this image (it can be reported again later; the first one is when the animation starts)
+      try {
+        po = new PerformanceObserver(function (l) { l.getEntries().forEach(function (e) { var t = e.renderTime || e.loadTime; if (e.element === img && t && (!seen || t < seen)) seen = t; }); });
+        po.observe({ type: 'element', buffered: true });
+      } catch (_) {}
+      setTimeout(function () {
+        try { if (po) po.disconnect(); } catch (_) {}
+        if (seen) return cb(seen);
+        var t = 0;
+        try { var pe = performance.getEntriesByName(img.currentSrc || img.src)[0]; if (pe) t = pe.responseEnd; } catch (_) {}
+        try { performance.getEntriesByType('paint').forEach(function (e) { if (e.name === 'first-paint' || e.name === 'first-contentful-paint') t = Math.max(t, e.startTime); }); } catch (_) {}
+        cb(t || performance.now());
+      }, 300);
+    }
+    var go = function () {
+      shownAt(function (base) {
+        var end = base + 2200;   // 60 frames x 34 ms, plus a small margin
+        (src.decode ? src.decode() : Promise.resolve()).then(function () { setTimeout(start, Math.max(0, end - performance.now())); }, function () {});
+      });
+    };
+    if (img.complete) go(); else img.addEventListener('load', function () { loadedAt = performance.now(); go(); }, { once: true });
   }
   window.KBHeroInk = { attach: attach };
   var auto = function () { var el = document.querySelector('.top-img-2'); if (el) attach(el); };
