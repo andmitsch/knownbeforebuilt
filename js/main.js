@@ -79,22 +79,47 @@ class Component extends DCLogic {
                       : { x: (e.clientX - r.left) / r.width * 1440, y: (e.clientY - r.top) / r.height * 620 }; };
     this.onMove = (e) => { if (this.touchId != null) return; const p = this.toStream(e); if (p) this.mouse = p; };
     this.onLeave = () => { if (this.touchId == null) this.mouse = null; };
-    // touch and pen: put a finger on the stream and pull it sideways to draw the plasma out (a big enough pull tears off
-    // a ball, as with the mouse). Vertical swipes keep scrolling the page: the section only claims sideways movement.
+    // touch (phone layout, where the stream runs top to bottom): a touch that starts on the stream belongs to the stream.
+    // Its first 10 px decide: any real sideways part = a pull (diagonal is fine), a near-vertical swipe = scrolling, which
+    // is then done here 1:1 with the finger plus a fling, because the browser can no longer take the gesture over.
     this.touchId = null;
     this.touchOn = (sec) => {
-      if (!sec || sec.__kbTouch) return; sec.__kbTouch = 1;
-      sec.style.touchAction = 'pan-y pinch-zoom';
+      if (!sec || sec.__kbTouch || !this.mob) return; sec.__kbTouch = 1;
       const cyf = (x) => { const t = (performance.now() - this.t0) / 1000 + 12.0; return 403 + 7 * Math.sin(x * 0.0045 + t * 0.35) + 4 * Math.sin(x * 0.011 - t * 0.6); };
-      sec.addEventListener('pointerdown', (e) => {
-        if (e.pointerType === 'mouse' || this.isStill()) return;
-        const p = this.toStream(e); if (!p || p.x < 20 || p.x > 1420 || Math.abs(p.y - cyf(p.x)) > 75) return;
-        this.touchId = e.pointerId; p.tol = 75; this.mouse = p;
+      let T = null, fl = 0;
+      const stopFling = () => { if (fl) { cancelAnimationFrame(fl); fl = 0; } };
+      const fling = (v) => { let last = performance.now();
+        const step = (n) => { const dt = Math.min(40, n - last); last = n; window.scrollBy(0, v * dt); v *= Math.pow(0.9975, dt); fl = Math.abs(v) > 0.02 ? requestAnimationFrame(step) : 0; };
+        fl = requestAnimationFrame(step); };
+      document.addEventListener('touchstart', stopFling, { passive: true });
+      const pick = (e) => { for (const q of e.changedTouches) if (T && q.identifier === T.id) return q; return null; };
+      const grab = (t) => { const p = this.toStream({ clientX: t.clientX, clientY: t.clientY }); if (p) { p.tol = 75; this.mouse = p; } };
+      sec.addEventListener('touchstart', (e) => {
+        if (T || e.touches.length !== 1 || this.isStill()) return;
+        const t = e.changedTouches[0], p = this.toStream({ clientX: t.clientX, clientY: t.clientY });
+        if (!p || p.x < 20 || p.x > 1420 || Math.abs(p.y - cyf(p.x)) > 75) return;
+        T = { id: t.identifier, x0: t.clientX, y0: t.clientY, mode: '?', ly: t.clientY, lt: e.timeStamp, v: 0 };
+        this.touchId = t.identifier; grab(t);   // the stream answers the touch at once
         if (!this.raf) this.frame(performance.now());
       }, { passive: true });
-      sec.addEventListener('pointermove', (e) => { if (e.pointerId !== this.touchId) return; const p = this.toStream(e); if (p) { p.tol = 75; this.mouse = p; } }, { passive: true });
-      const end = (e) => { if (e.pointerId !== this.touchId) return; this.touchId = null; this.mouse = null; };
-      sec.addEventListener('pointerup', end); sec.addEventListener('pointercancel', end);
+      sec.addEventListener('touchmove', (e) => {
+        const t = pick(e); if (!t) return;
+        if (e.cancelable) e.preventDefault();
+        const dx = t.clientX - T.x0, dy = t.clientY - T.y0;
+        if (T.mode === '?' && Math.hypot(dx, dy) > 10) {
+          T.mode = Math.abs(dy) > 2.4 * Math.abs(dx) ? 'scroll' : 'pull';
+          if (T.mode === 'scroll') { this.touchId = null; this.mouse = null; window.scrollBy(0, -dy); T.ly = t.clientY; }
+        }
+        if (T.mode === 'scroll') {
+          const d = T.ly - t.clientY; if (d) window.scrollBy(0, d);
+          const ms = Math.max(1, e.timeStamp - T.lt); if (d) T.v = 0.8 * (d / ms) + 0.2 * T.v;
+        } else grab(t);
+        T.ly = t.clientY; T.lt = e.timeStamp;
+      }, { passive: false });
+      const end = (e) => { const t = pick(e); if (!t) return;
+        if (T.mode === 'scroll' && Math.abs(T.v) > 0.05 && e.timeStamp - T.lt < 80) fling(T.v);
+        T = null; this.touchId = null; this.mouse = null; };
+      sec.addEventListener('touchend', end); sec.addEventListener('touchcancel', end);
     };
     this.sys = { nodes: {} }; this.setOutLine = (el) => { this.sys.outLine = el; }; this.setSpark = (el) => { this.sys.spark = el; }; this.setMotes = (el) => { this.sys.motes = el; }; this.setSparkCore = (el) => { this.sys.sparkCore = el; }; this.setBuild = (el) => { this.sys.build = el; }; this.glowLv = { AV: 0, G1: 0, P: 0, INV: 0 }; this.curCyc = -1; this.routeLen = 0;
     const S = this.sys;
@@ -499,7 +524,8 @@ void main(){
       else {
         G.ax += (m.x - G.ax) * Math.min(1, dt * 0.3);
         const ay = cyf(G.ax);
-        if (Math.hypot(G.px - G.ax, G.py - ay) > 190) {
+        const touch = this.touchId != null, tear = touch ? 120 : 190;
+        if (Math.hypot(G.px - G.ax, G.py - ay) > tear || Math.hypot(m.x - G.ax, m.y - ay) > tear * 1.15) {
           G.grab = false;
           const dl = Math.hypot(G.px - G.ax, G.py - ay) || 1;
           this.ball = { x: G.px, y: G.py, vx: G.vx * 0.3 + (G.px - G.ax) / dl * 38, vy: G.vy * 0.3 + (G.py - ay) / dl * 38, r0: 18, r: 18, age: 0, life: 4.5, back: Math.random() < 0.5, merge: 0 };
@@ -509,7 +535,7 @@ void main(){
       }
     }
     const tx = G.grab ? m.x : G.ax, ty = G.grab ? m.y : cyf(G.ax);
-    const k = G.grab ? 13 : 18, c = G.grab ? 7 : 3.2;
+    const k = G.grab ? 34 : 18, c = G.grab ? 11 : 3.2;   // grabbed (mouse or finger): the plasma stays right under the pointer
     G.vx += ((tx - G.px) * k - G.vx * c) * dt; G.vy += ((ty - G.py) * k - G.vy * c) * dt;
     G.px += G.vx * dt; G.py += G.vy * dt;
     const away = Math.hypot(G.px - G.ax, G.py - cyf(G.ax)); const speed = Math.hypot(G.vx, G.vy);
