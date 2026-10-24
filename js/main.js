@@ -75,8 +75,15 @@ class Component extends DCLogic {
     // pointer -> stream canvas coordinates (1440 x 620). On the phone the canvas is turned 90° clockwise, so its x runs
     // down the screen and its y runs right to left; the bounding box of the turned canvas gives the mapping directly.
     this.toStream = (e) => { const cv = this.cvMain; if (!cv) return null; const r = cv.getBoundingClientRect(); if (!r.width || !r.height) return null;
-      return this.mob ? { x: (e.clientY - r.top) / r.height * 1440, y: (r.right - e.clientX) / r.width * 620 }
+      return this.mob ? { x: (e.clientY - r.top) / r.height * 1440, y: (r.right - e.clientX) / r.width * 620,
+                          yL: r.right / r.width * 620, yR: (r.right - window.innerWidth) / r.width * 620 }   // stream y at the screen's left / right edge
                       : { x: (e.clientX - r.left) / r.width * 1440, y: (e.clientY - r.top) / r.height * 620 }; };
+    // where a free ball may fly (stream units): the canvas, and on the phone only the part that is on screen
+    // edge zone (mx, my) and braking (k): desktop narrow and firm, so balls fly freely over the whole diagram; phone wider
+    this.ballBounds = () => { const cv = this.cvMain, b = { x0: 0, x1: 1440, y0: 0, y1: 620, mx: 130, my: 60, k: 120 }; if (!cv || !this.mob) return b;
+      b.mx = 260; b.my = 150; b.k = 38;
+      const r = cv.getBoundingClientRect(); if (!r.width) return b;
+      b.y0 = Math.max(0, (r.right - window.innerWidth) / r.width * 620); b.y1 = Math.min(620, r.right / r.width * 620); return b; };
     this.onMove = (e) => { if (this.touchId != null) return; const p = this.toStream(e); if (p) this.mouse = p; };
     this.onLeave = () => { if (this.touchId == null) this.mouse = null; };
     // touch (phone layout, where the stream runs top to bottom): a touch that starts on the stream belongs to the stream.
@@ -99,7 +106,7 @@ class Component extends DCLogic {
         const t = e.changedTouches[0], p = this.toStream({ clientX: t.clientX, clientY: t.clientY });
         if (!p || p.x < 20 || p.x > 1420 || Math.abs(p.y - cyf(p.x)) > 75) return;
         T = { id: t.identifier, x0: t.clientX, y0: t.clientY, mode: '?', ly: t.clientY, lt: e.timeStamp, v: 0 };
-        this.touchId = t.identifier; grab(t);   // the stream answers the touch at once
+        this.touchId = t.identifier; this.grabOK = true; grab(t);   // the stream answers the touch at once (one grab per touch)
         if (!this.raf) this.frame(performance.now());
       }, { passive: true });
       sec.addEventListener('touchmove', (e) => {
@@ -291,7 +298,7 @@ void main(){
    if(r>.4){D=smin(D,length(P-c)-r,9.);vec2 hl=c+vec2(-.3,-.35)*r;bhl+=exp(-dot(P-hl,P-hl)/(.07*r*r+.4));}}}
  if(G.w>.01){vec2 GA=vec2(G.z,cyf(G.z));vec2 GB=G.xy;vec2 pa=P-GA,ba=GB-GA;float bl=max(dot(ba,ba),1e-3);float hh=clamp(dot(pa,ba)/bl,0.,1.);
   float st=clamp(sqrt(bl)/190.,0.,1.);float rr=mix(30.,13.,pow(hh,.55))*(1.-.25*st)*G.w;
-  D=smin(D,length((P-GA)*vec2(.55,1.))-16.*G.w,24.);D=smin(D,length(pa-ba*hh)-rr,26.);D=smin(D,length(P-GB)-(17.+2.*sin(T*4.))*G.w,14.);}
+  vec2 gd=ba/max(sqrt(bl),1.);D=smin(D,length((P-GA-gd*9.*G.w)*vec2(.55,1.))-13.*G.w,24.);D=smin(D,length(pa-ba*hh)-rr,26.);D=smin(D,length(P-GB)-(17.+2.*sin(T*4.))*G.w,14.);}
  if(F.z>.5){D=smin(D,length(P-F.xy)-F.z,26.);}
  if(D>120.&&abs(v-cy)>95.&&length(P-vec2(135.,120.))>90.){gl_FragColor=vec4(0.);return;}
  float fadeTip=1.-into*.75*step(Db,Ds);
@@ -516,20 +523,34 @@ void main(){
     const cyf = (x) => 403 + 7 * Math.sin(x * 0.0045 + t * 0.35) + 4 * Math.sin(x * 0.011 - t * 0.6);
     const G = this.goo || (this.goo = { px: 0, py: 0, vx: 0, vy: 0, ax: 0, grab: false, s: 0 });
     const m = this.mouse;
-    if (m && !G.grab && Math.abs(m.y - cyf(m.x)) < (m.tol || 26) && m.x > 20 && m.x < 1420) {
-      G.grab = true; G.ax = m.x; if (G.s < 0.05) { G.px = m.x; G.py = cyf(m.x); G.vx = 0; G.vy = 0; }
+    const touchNow = this.touchId != null;
+    // mouse: after a tear-off the stream only grabs again once the cursor has left it (or after a short pause)
+    if (G.cool > 0) { G.cool -= dt; if (!m || Math.abs(m.y - cyf(m.x)) > 60) G.cool = 0; }
+    if (m && !G.grab && !(G.cool > 0) && Math.abs(m.y - cyf(m.x)) < (m.tol || 26) && m.x > 20 && m.x < 1420 && (!touchNow || this.grabOK)) {
+      G.grab = true; if (touchNow) this.grabOK = false;   // after a tear-off the finger must lift before the stream grabs again
+      // start from the grab point unless the plasma is already right there (a stale position would read as an instant tear-off)
+      G.ax = m.x; if (G.s < 0.05 || Math.hypot(G.px - m.x, G.py - cyf(m.x)) > 40) { G.px = m.x; G.py = cyf(m.x); G.vx = 0; G.vy = 0; }
     }
     if (G.grab) {
       if (!m) G.grab = false;
       else {
-        G.ax += (m.x - G.ax) * Math.min(1, dt * 0.3);
+        // close to the stream the grab point slides along with the pointer (a travelling bulge); pulled away it stays put
+        const off = Math.abs(m.y - cyf(m.x)), slide = 0.3 + 7 * (1 - Math.min(1, Math.max(0, (off - 20) / 60)));
+        G.ax += (m.x - G.ax) * Math.min(1, dt * slide);
         const ay = cyf(G.ax);
-        if (Math.hypot(G.px - G.ax, G.py - ay) > 190) {
-          G.grab = false;
+        let tear = 190;
+        if (touchNow && m.yL != null) {   // pulling towards the near screen edge: tear before the finger runs out of room
+          const avail = G.py > ay ? m.yL - ay : ay - m.yR; tear = Math.max(70, Math.min(190, avail * 0.8)); }
+        if (Math.hypot(G.px - G.ax, G.py - ay) > tear) {
+          G.grab = false; G.cool = 1.2;
           const dl = Math.hypot(G.px - G.ax, G.py - ay) || 1;
-          this.ball = { x: G.px, y: G.py, vx: G.vx * 0.3 + (G.px - G.ax) / dl * 38, vy: G.vy * 0.3 + (G.py - ay) / dl * 38, r0: 18, r: 18, age: 0, life: 4.5, back: Math.random() < 0.5, merge: 0 };
+          // about one ball in three is heavy: a little larger, slower off the mark, and it drops back into the stream within
+          // about a second; the others fly free and fade (near the edges every ball grows heavy and sinks back)
+          const hv = Math.random() < 0.3, sp = hv ? 0.7 : 1;
+          this.ball = { x: G.px, y: G.py, vx: (G.vx * 0.3 + (G.px - G.ax) / dl * 38) * sp, vy: (G.vy * 0.3 + (G.py - ay) / dl * 38) * sp, r0: hv ? 21 : 18, r: hv ? 21 : 18, age: 0, life: 4.5, back: hv, heavy: hv, merge: 0 };
           if (this.touchId != null && navigator.vibrate) try { navigator.vibrate(12); } catch (_) {}   // a small tick as the ball tears off (Android)
-          G.px = G.ax + (G.px - G.ax) * 0.4; G.py = ay + (G.py - ay) * 0.4; G.vx *= -0.3; G.vy *= -0.3;
+          // no jump: the stub starts pulling back from where it tore, like a drop pinching off
+          G.vx = -(G.px - G.ax) / dl * 300; G.vy = -(G.py - ay) / dl * 300;
         }
       }
     }
@@ -537,18 +558,28 @@ void main(){
     // pulled plasma stays close to the pointer (lag ~15 units at a slow pull, a slight jelly wobble when it stops);
     // a thumb a touch tighter than the mouse. Tear-off stays at 190 units from the stream.
     const tch = G.grab && this.touchId != null;
-    const k = G.grab ? (tch ? 120 : 100) : 18, c = G.grab ? (tch ? 12 : 13) : 3.2;
+    // released (torn off or let go): pulled back quickly and smoothly, without swinging past the stream
+    const k = G.grab ? (tch ? 120 : 100) : 60, c = G.grab ? (tch ? 12 : 13) : 14;
     G.vx += ((tx - G.px) * k - G.vx * c) * dt; G.vy += ((ty - G.py) * k - G.vy * c) * dt;
     G.px += G.vx * dt; G.py += G.vy * dt;
     const away = Math.hypot(G.px - G.ax, G.py - cyf(G.ax)); const speed = Math.hypot(G.vx, G.vy);
-    const target = G.grab || away > 2 || speed > 15 ? 1 : 0;
-    G.s += (target - G.s) * Math.min(1, dt * 4);
+    const target = G.grab || away > 5 || speed > 40 ? 1 : 0;
+    G.s += (target - G.s) * Math.min(1, dt * (target ? 4 : 7));   // once the stub is home, the base settles quickly
     const B = this.ball;
     if (B) {
-      B.age += dt; const dr = Math.exp(-dt * 2.4); B.vx *= dr; B.vy *= dr;
-      const dy = cyf(B.x) - B.y; const g = B.back ? 2.2 : 0.35;
+      B.age += dt;
+      // near the edges of the field the ball grows heavy: its motion towards the edge is braked hard (it stops well short
+      // of it, even from a full-speed throw), and it drops back into the stream
+      const bd = this.ballBounds();
+      const ex = Math.min(1, Math.max(0, 1 - (B.x - bd.x0) / bd.mx, 1 - (bd.x1 - B.x) / bd.mx)), ey = Math.min(1, Math.max(0, 1 - (B.y - bd.y0) / bd.my, 1 - (bd.y1 - B.y) / bd.my)), e = Math.max(ex, ey);
+      if (e > 0.2) { B.back = true; B.edge = true; }
+      const air = B.heavy ? 3.2 : 2.4;
+      B.vx *= Math.exp(-dt * (air + bd.k * ex)); B.vy *= Math.exp(-dt * (air + bd.k * ey));
+      const dy = cyf(B.x) - B.y;
+      const g = B.edge ? 3.2 + 8 * e : B.heavy ? 6.5 * Math.min(1, Math.max(0, (B.age - 0.15) / 0.25)) : 0.35;
       B.vy += dy * g * dt; B.vx += 8 * dt;
       B.x += B.vx * dt; B.y += B.vy * dt;
+      B.x = Math.max(bd.x0 + 12, Math.min(bd.x1 - 12, B.x)); B.y = Math.max(bd.y0 + 12, Math.min(bd.y1 - 12, B.y));   // never past the edge
       if (B.back) {
         if (Math.abs(dy) < 16) B.merge += dt;
         B.r = B.r0 * Math.max(0, 1 - B.merge / 0.9);
