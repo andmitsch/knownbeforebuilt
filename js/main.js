@@ -72,16 +72,37 @@ class Component extends DCLogic {
     this.bFar = () => { const B = this.bk; if (B.mode !== 'idle') return; B.tgt.ry = B.turn + 26; B.tgt.rx = 4; B.tgt.lift = 0; this.bKick(); };
     this.mob = !!(window.KB_M || props.mobile);   // phone layout: the system runs top to bottom, the stream canvas is turned 90°
     this.mouse = null;
-    this.onMove = (e) => { const cv = this.cvMain; if (!cv || this.mob) return; const r = cv.getBoundingClientRect(); if (!r.width) return;
-      this.mouse = { x: (e.clientX - r.left) / r.width * 1440, y: (e.clientY - r.top) / r.height * 620 }; };
-    this.onLeave = () => { this.mouse = null; };
+    // pointer -> stream canvas coordinates (1440 x 620). On the phone the canvas is turned 90° clockwise, so its x runs
+    // down the screen and its y runs right to left; the bounding box of the turned canvas gives the mapping directly.
+    this.toStream = (e) => { const cv = this.cvMain; if (!cv) return null; const r = cv.getBoundingClientRect(); if (!r.width || !r.height) return null;
+      return this.mob ? { x: (e.clientY - r.top) / r.height * 1440, y: (r.right - e.clientX) / r.width * 620 }
+                      : { x: (e.clientX - r.left) / r.width * 1440, y: (e.clientY - r.top) / r.height * 620 }; };
+    this.onMove = (e) => { if (this.touchId != null) return; const p = this.toStream(e); if (p) this.mouse = p; };
+    this.onLeave = () => { if (this.touchId == null) this.mouse = null; };
+    // touch and pen: put a finger on the stream and pull it sideways to draw the plasma out (a big enough pull tears off
+    // a ball, as with the mouse). Vertical swipes keep scrolling the page: the section only claims sideways movement.
+    this.touchId = null;
+    this.touchOn = (sec) => {
+      if (!sec || sec.__kbTouch) return; sec.__kbTouch = 1;
+      sec.style.touchAction = 'pan-y pinch-zoom';
+      const cyf = (x) => { const t = (performance.now() - this.t0) / 1000 + 12.0; return 403 + 7 * Math.sin(x * 0.0045 + t * 0.35) + 4 * Math.sin(x * 0.011 - t * 0.6); };
+      sec.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse' || this.isStill()) return;
+        const p = this.toStream(e); if (!p || p.x < 20 || p.x > 1420 || Math.abs(p.y - cyf(p.x)) > 75) return;
+        this.touchId = e.pointerId; p.tol = 75; this.mouse = p;
+        if (!this.raf) this.frame(performance.now());
+      }, { passive: true });
+      sec.addEventListener('pointermove', (e) => { if (e.pointerId !== this.touchId) return; const p = this.toStream(e); if (p) { p.tol = 75; this.mouse = p; } }, { passive: true });
+      const end = (e) => { if (e.pointerId !== this.touchId) return; this.touchId = null; this.mouse = null; };
+      sec.addEventListener('pointerup', end); sec.addEventListener('pointercancel', end);
+    };
     this.sys = { nodes: {} }; this.setOutLine = (el) => { this.sys.outLine = el; }; this.setSpark = (el) => { this.sys.spark = el; }; this.setMotes = (el) => { this.sys.motes = el; }; this.setSparkCore = (el) => { this.sys.sparkCore = el; }; this.setBuild = (el) => { this.sys.build = el; }; this.glowLv = { AV: 0, G1: 0, P: 0, INV: 0 }; this.curCyc = -1; this.routeLen = 0;
     const S = this.sys;
     this.setRoute = (el) => { S.route = el; }; this.setTrail = (el) => { S.trail = el; }; this.setTrailGlow = (el) => { S.trailGlow = el; };
     this.setHead = (el) => { S.head = el; }; this.setHeadGlow = (el) => { S.headGlow = el; };
     this.setNAV = (el) => { S.nodes.AV = el; }; this.setNG1 = (el) => { S.nodes.G1 = el; }; this.setNP = (el) => { S.nodes.P = el; }; this.setNINV = (el) => { S.nodes.INV = el; };
     this.setDiamond = (el) => { this.diamond = el; };
-    this.setCanvas = (el) => { if (el && el !== this.cvMain) { this.cvMain = el; this.addGL(el, 1440, 620, this.mainFS(), true); } };
+    this.setCanvas = (el) => { if (el && el !== this.cvMain) { this.cvMain = el; this.addGL(el, 1440, 620, this.mainFS(), true); this.touchOn(el.closest('section')); } };
     this.waves = {};
     this.setW1 = (el) => { this.waves.w1 = el; };
     this.setW2 = (el) => { this.waves.w2 = el; };
@@ -470,7 +491,7 @@ void main(){
     const cyf = (x) => 403 + 7 * Math.sin(x * 0.0045 + t * 0.35) + 4 * Math.sin(x * 0.011 - t * 0.6);
     const G = this.goo || (this.goo = { px: 0, py: 0, vx: 0, vy: 0, ax: 0, grab: false, s: 0 });
     const m = this.mouse;
-    if (m && !G.grab && Math.abs(m.y - cyf(m.x)) < 26 && m.x > 20 && m.x < 1420) {
+    if (m && !G.grab && Math.abs(m.y - cyf(m.x)) < (m.tol || 26) && m.x > 20 && m.x < 1420) {
       G.grab = true; G.ax = m.x; if (G.s < 0.05) { G.px = m.x; G.py = cyf(m.x); G.vx = 0; G.vy = 0; }
     }
     if (G.grab) {
@@ -482,6 +503,7 @@ void main(){
           G.grab = false;
           const dl = Math.hypot(G.px - G.ax, G.py - ay) || 1;
           this.ball = { x: G.px, y: G.py, vx: G.vx * 0.3 + (G.px - G.ax) / dl * 38, vy: G.vy * 0.3 + (G.py - ay) / dl * 38, r0: 18, r: 18, age: 0, life: 4.5, back: Math.random() < 0.5, merge: 0 };
+          if (this.touchId != null && navigator.vibrate) try { navigator.vibrate(12); } catch (_) {}   // a small tick as the ball tears off (Android)
           G.px = G.ax + (G.px - G.ax) * 0.4; G.py = ay + (G.py - ay) * 0.4; G.vx *= -0.3; G.vy *= -0.3;
         }
       }
