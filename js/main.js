@@ -524,8 +524,7 @@ void main(){
       else {
         G.ax += (m.x - G.ax) * Math.min(1, dt * 0.3);
         const ay = cyf(G.ax);
-        const touch = this.touchId != null, tear = touch ? 120 : 190;
-        if (Math.hypot(G.px - G.ax, G.py - ay) > tear || Math.hypot(m.x - G.ax, m.y - ay) > tear * 1.15) {
+        if (Math.hypot(G.px - G.ax, G.py - ay) > 190) {
           G.grab = false;
           const dl = Math.hypot(G.px - G.ax, G.py - ay) || 1;
           this.ball = { x: G.px, y: G.py, vx: G.vx * 0.3 + (G.px - G.ax) / dl * 38, vy: G.vy * 0.3 + (G.py - ay) / dl * 38, r0: 18, r: 18, age: 0, life: 4.5, back: Math.random() < 0.5, merge: 0 };
@@ -535,7 +534,10 @@ void main(){
       }
     }
     const tx = G.grab ? m.x : G.ax, ty = G.grab ? m.y : cyf(G.ax);
-    const k = G.grab ? 34 : 18, c = G.grab ? 11 : 3.2;   // grabbed (mouse or finger): the plasma stays right under the pointer
+    // pulled plasma stays close to the pointer (lag ~15 units at a slow pull, a slight jelly wobble when it stops);
+    // a thumb a touch tighter than the mouse. Tear-off stays at 190 units from the stream.
+    const tch = G.grab && this.touchId != null;
+    const k = G.grab ? (tch ? 120 : 100) : 18, c = G.grab ? (tch ? 12 : 13) : 3.2;
     G.vx += ((tx - G.px) * k - G.vx * c) * dt; G.vy += ((ty - G.py) * k - G.vy * c) * dt;
     G.px += G.vx * dt; G.py += G.vy * dt;
     const away = Math.hypot(G.px - G.ax, G.py - cyf(G.ax)); const speed = Math.hypot(G.vx, G.vy);
