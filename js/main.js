@@ -297,8 +297,8 @@ void main(){
    float r=11.*sin(3.1416*min(a*1.3,1.))*(1.-a*.45);float off=16.+a*40.;vec2 c=vec2(x,cyf(x)+side*off);
    if(r>.4){D=smin(D,length(P-c)-r,9.);vec2 hl=c+vec2(-.3,-.35)*r;bhl+=exp(-dot(P-hl,P-hl)/(.07*r*r+.4));}}}
  if(G.w>.01){vec2 GA=vec2(G.z,cyf(G.z));vec2 GB=G.xy;vec2 pa=P-GA,ba=GB-GA;float bl=max(dot(ba,ba),1e-3);float hh=clamp(dot(pa,ba)/bl,0.,1.);
-  float st=clamp(sqrt(bl)/190.,0.,1.);float rr=mix(30.,13.,pow(hh,.55))*(1.-.25*st)*G.w;
-  vec2 gd=ba/max(sqrt(bl),1.);D=smin(D,length((P-GA-gd*9.*G.w)*vec2(.55,1.))-13.*G.w,24.);D=smin(D,length(pa-ba*hh)-rr,26.);D=smin(D,length(P-GB)-(17.+2.*sin(T*4.))*G.w,14.);}
+  float st=clamp(sqrt(bl)/160.,0.,1.);float fl=mix(.25,1.,smoothstep(.08,.55,st));float rr=(13.+31.*fl*pow(1.-hh,1.6))*(1.-.25*st)*G.w;
+  vec2 gd=ba/max(sqrt(bl),1.);D=smin(D,length((P-GA-gd*9.*G.w)*vec2(.55,1.))-13.*G.w,24.);D=smin(D,length(pa-ba*hh)-rr,34.);D=smin(D,length(P-GB)-(17.+2.*sin(T*4.))*G.w,14.);}
  if(F.z>.5){D=smin(D,length(P-F.xy)-F.z,26.);}
  if(D>120.&&abs(v-cy)>95.&&length(P-vec2(135.,120.))>90.){gl_FragColor=vec4(0.);return;}
  float fadeTip=1.-into*.75*step(Db,Ds);
@@ -538,16 +538,16 @@ void main(){
         const off = Math.abs(m.y - cyf(m.x)), slide = 0.3 + 7 * (1 - Math.min(1, Math.max(0, (off - 20) / 60)));
         G.ax += (m.x - G.ax) * Math.min(1, dt * slide);
         const ay = cyf(G.ax);
-        let tear = 190;
+        let tear = 160;   // how long the neck gets before the ball separates
         if (touchNow && m.yL != null) {   // pulling towards the near screen edge: tear before the finger runs out of room
-          const avail = G.py > ay ? m.yL - ay : ay - m.yR; tear = Math.max(70, Math.min(190, avail * 0.8)); }
+          const avail = G.py > ay ? m.yL - ay : ay - m.yR; tear = Math.max(70, Math.min(160, avail * 0.8)); }
         if (Math.hypot(G.px - G.ax, G.py - ay) > tear) {
           G.grab = false; G.cool = 1.2;
           const dl = Math.hypot(G.px - G.ax, G.py - ay) || 1;
           // about one ball in three is heavy: a little larger, slower off the mark, and it drops back into the stream within
           // about a second; the others fly free and fade (near the edges every ball grows heavy and sinks back)
-          const hv = Math.random() < 0.3, sp = hv ? 0.7 : 1;
-          this.ball = { x: G.px, y: G.py, vx: (G.vx * 0.3 + (G.px - G.ax) / dl * 38) * sp, vy: (G.vy * 0.3 + (G.py - ay) / dl * 38) * sp, r0: hv ? 21 : 18, r: hv ? 21 : 18, age: 0, life: 4.5, back: hv, heavy: hv, merge: 0 };
+          const hv = Math.random() < 0.3, sp = hv ? 0.7 : 1;   // the pinch-off gives the ball a small push away from the stream
+          this.ball = { x: G.px, y: G.py, vx: (G.vx * 0.3 + (G.px - G.ax) / dl * 75) * sp, vy: (G.vy * 0.3 + (G.py - ay) / dl * 75) * sp, r0: hv ? 21 : 18, r: hv ? 21 : 18, age: 0, life: 4.5, back: hv, heavy: hv, merge: 0 };
           if (this.touchId != null && navigator.vibrate) try { navigator.vibrate(12); } catch (_) {}   // a small tick as the ball tears off (Android)
           // no jump: the stub starts pulling back from where it tore, like a drop pinching off
           G.vx = -(G.px - G.ax) / dl * 300; G.vy = -(G.py - ay) / dl * 300;
@@ -556,7 +556,7 @@ void main(){
     }
     const tx = G.grab ? m.x : G.ax, ty = G.grab ? m.y : cyf(G.ax);
     // pulled plasma stays close to the pointer (lag ~15 units at a slow pull, a slight jelly wobble when it stops);
-    // a thumb a touch tighter than the mouse. Tear-off stays at 190 units from the stream.
+    // a thumb a touch tighter than the mouse. Tear-off at 160 units from the stream.
     const tch = G.grab && this.touchId != null;
     // released (torn off or let go): pulled back quickly and smoothly, without swinging past the stream
     const k = G.grab ? (tch ? 120 : 100) : 60, c = G.grab ? (tch ? 12 : 13) : 14;
