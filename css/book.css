@@ -170,18 +170,16 @@ html.kb-nav-off .nav-nav:focus-within{transform: none}
 .top-box{position: absolute; left: 720px; top: 30px; width: 640px; height: 669px}
 .top-img{width: 640px; height: 669px; display: block}
 .top-img-2{display: block; position: absolute; left: 41px; top: -47px}
-.top-box-2{position: absolute; left: 120px; top: 44px; width: 640px; display: flex; flex-direction: column}
-.top-title{margin: 0; display: flex; flex-direction: column; align-items: flex-start}
-.top-label{font: 900 148px/0.86 Archivo, sans-serif; letter-spacing: -0.035em}
-.top-label-2{display: flex; align-items: center; gap: 22px; margin: 6px 0 0 4px; justify-content: center; margin-top: 10px; margin-bottom: 10px}
-.top-label-3{width: 110px; height: 2px; background: #111111}
-.top-label-4{font: italic var(--bodoni-w) 92px/1 'Bodoni Moda', serif}
-.top-label-5{font: 900 148px/0.86 Archivo, sans-serif; letter-spacing: -0.035em; text-align: center}
-.top-text{margin: 28px 0 0; font: 900 30px/1.35 Archivo, sans-serif; width: 727px}
-/* 'Stop' and 'De-Risk': set back to Archivo Black in the canvas (still 12% larger than the rest of the line) */
-.top-em{font: 900 1.12em/1 Archivo, sans-serif}
-.top-text-2{margin: 12px 0 0; font: 400 16px/1.5 'Hanken Grotesk', sans-serif; font-size: 18px}
-.top-box-3{margin-top: 30px; display: flex; align-items: center; gap: 28px}
+.top-copy{position: absolute; left: 120px; top: 50px; width: 660px}
+/* the promise is the headline; the book's title is in the navigation */
+.top-h{margin: 0; font: 900 88px/.97 Archivo, sans-serif; letter-spacing: -0.035em; text-wrap: balance}
+.top-h-o{color: #F57106; background: linear-gradient(100deg, #F57106 0 40%, #FFD7AE 50%, #F57106 60% 100%) 100% 0 / 300% 100% no-repeat; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent}
+/* once the brush has been painted (js/heroink.js adds .kb-brushed), one warm sheen passes over the orange line */
+.kb-brushed .top-h-o{animation: kbHeroSheen 1.9s cubic-bezier(.4,0,.4,1) .15s 1 both}
+@keyframes kbHeroSheen{from{background-position: 100% 0} to{background-position: 0 0}}
+@media (prefers-reduced-motion: reduce){.kb-brushed .top-h-o{animation: none}}
+.top-dek{margin: 32px 0 0; max-width: 560px; font: 400 19px/1.55 'Hanken Grotesk', sans-serif; color: #3F3B37}
+.top-ctas{margin-top: 36px; display: flex; align-items: center; gap: 28px}
 .top-link{display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 26px; background: #111111; color: #ECE8E5; text-decoration: none; font: 600 16px/1 'Hanken Grotesk', sans-serif; border-radius: 2px}
 .section-section{height: 740px; flex-shrink: 0; position: relative}
 .section-title{position: absolute; left: 120px; top: 30px; margin: 0; font: 900 64px/1 Archivo, sans-serif; letter-spacing: -0.03em}
@@ -430,14 +428,10 @@ html.kb-m .top-section{height:auto;padding:20px 20px 64px;overflow:hidden}
 html.kb-m .top-box{left:auto;right:-118px;top:-6px;width:280px;height:293px;pointer-events:none}
 html.kb-m .top-img{width:280px;height:auto}
 html.kb-m .top-img-2{left:18px;top:-21px;width:280px;height:auto}
-html.kb-m .top-box-2{position:relative;left:auto;top:auto;width:auto}
-html.kb-m .top-label,html.kb-m .top-label-5{font-size:clamp(60px,20.5vw,128px)}
-html.kb-m .top-label-2{gap:14px;margin:8px 0 8px 2px}
-html.kb-m .top-label-3{width:15vw}
-html.kb-m .top-label-4{font-size:clamp(40px,14.5vw,80px)}
-html.kb-m .top-text{width:auto;margin-top:26px;font-size:22px;line-height:1.3}
-html.kb-m .top-text-2{font-size:17px;line-height:1.55;margin-top:14px}
-html.kb-m .top-box-3{margin-top:28px}
+html.kb-m .top-copy{position:relative;left:auto;top:auto;width:auto}
+html.kb-m .top-h{margin-top:8px;font-size:clamp(40px,12.4vw,56px)}
+html.kb-m .top-dek{font-size:17px;margin-top:22px}
+html.kb-m .top-ctas{margin-top:28px;gap:22px}
 
 /* is this you */
 html.kb-m .section-section{height:auto;padding:8px 20px 64px}
