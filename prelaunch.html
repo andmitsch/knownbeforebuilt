@@ -187,8 +187,6 @@ form button[disabled]{opacity:.6;cursor:progress}
 @media (max-width:860px){.pre{grid-template-columns:1fr;gap:40px;padding-top:8px}.cover{order:-1;width:min(62%,260px)}.row{grid-template-columns:1fr}}
 </style>
 
-<!-- GoatCounter: cookie-free visitor stats. Replace [GOATCOUNTER-CODE] with your GoatCounter code. -->
-<script data-goatcounter="https://[GOATCOUNTER-CODE].goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script>
 /* hello, developer */
 (function(){try{console.log("%c"+"                     .-'''''''''''''-.\n                 .-'                   '-.\n               .'                         '.\n              /       .-.          .-.      \\\n             /       ( o )        ( o )      \\\n            |         '-'          '-'        |\n            |                                 |\n            |     \\                     /     |\n             \\     '.                 .'     /\n              \\      '-._         _.-'      /\n               '.        '''''''''        .'\n                 '-.                   .-'\n                    '-.._____________..-'\n\n          Thanks for the interest in the code.\n          The animations are great, right?","font:600 13px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#F57106");}catch(e){}})();
@@ -209,7 +207,7 @@ form button[disabled]{opacity:.6;cursor:progress}
 <label for="f-mail">Email address<input id="f-mail" type="email" name="email_address" autocomplete="email" required maxlength="160"></label>
 </div>
 <input type="hidden" name="fields[source]" id="f-src" value="book">
-<button type="submit" id="f-btn" data-goatcounter-click="prelaunch-submit">Notify me at launch <span aria-hidden="true">→</span></button>
+<button type="submit" id="f-btn">Notify me at launch <span aria-hidden="true">→</span></button>
 <p class="err" id="f-err" role="alert">Please enter your first name and a valid email address.</p>
 </form>
 <p class="consent">You'll first get an email asking you to confirm your address (double opt-in). After that: one email when the book launches, nothing else. Unsubscribe any time with one click.</p>
@@ -222,7 +220,6 @@ form button[disabled]{opacity:.6;cursor:progress}
 (function () {
   var q = new URLSearchParams(location.search), raw = (q.get('from') || '').toLowerCase(), from = /^(book|signal)(-[a-z]{1,16})?$/.test(raw) ? raw : 'book';
   document.getElementById('f-src').value = from;
-  document.getElementById('f-btn').setAttribute('data-goatcounter-click', 'prelaunch-submit-' + from);
   if (from.indexOf('signal') === 0) document.body.classList.add('from-signal');
   if (q.get('subscribed') === '1') document.body.classList.add('done');
   if (q.get('confirmed') === '1') { document.body.classList.add('done', 'confirmed'); document.getElementById('pre-h').innerHTML = 'You’re <i>in.</i>'; }

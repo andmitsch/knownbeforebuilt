@@ -44,6 +44,15 @@ body{font:400 17px/1.6 'Hanken Grotesk','Helvetica Neue',Arial,sans-serif}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 
 /* ---------- header (same as index.html) ---------- */
+/* the header follows the reader: fixed, it slides away while scrolling down and returns on the first scroll up;
+   body padding (set from its height by the script) keeps its place */
+body>header.wrap{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--paper);box-shadow:0 0 0 100vmax var(--paper);clip-path:inset(0 -100vmax -1px);transition:transform .6s var(--ease)}
+body>header.wrap::after{content:"";position:absolute;left:-100vmax;right:-100vmax;bottom:0;height:1px;background:var(--rule);opacity:0;transition:opacity .4s ease}
+html.kb-nav-float body>header.wrap::after{opacity:.55}
+html.kb-nav-off body>header.wrap{transform:translateY(-100%)}
+html.kb-nav-off body>header.wrap:focus-within{transform:none}
+body{padding-top:var(--navh,112px)}
+@media (prefers-reduced-motion:reduce){body>header.wrap{transition:none}}
 .nav{min-height:88px;display:flex;align-items:center;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
 .brand{display:inline-flex;align-items:baseline;gap:8px;text-decoration:none;color:var(--ink)}
 .brand b{font:900 17px/1 Archivo,sans-serif;letter-spacing:-.01em}
@@ -270,8 +279,6 @@ div.dl-row .dl-n{color:var(--soft)}
   body{background:#fff}
 }
 </style>
-<!-- GoatCounter: cookie-free visitor stats. Replace [GOATCOUNTER-CODE] with your GoatCounter code. -->
-<script data-goatcounter="https://[GOATCOUNTER-CODE].goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <div class="kb-sweep" aria-hidden="true"></div>
@@ -285,7 +292,7 @@ div.dl-row .dl-n{color:var(--soft)}
 <a class="u-nav" href="./#book">The Book</a>
 <a class="u-nav hide-s" href="./#author">Author</a>
 <a class="u-nav" href="talks-press.html" aria-current="page">Talks &amp; Press</a>
-<a class="pill" data-goatcounter-click="nav-signal-talks" href="prelaunch.html?from=signal-nav">Signal <span class="arw" aria-hidden="true" data-fx-arrow="right">→</span></a>
+<a class="pill" href="prelaunch.html?from=signal-nav">Signal <span class="arw" aria-hidden="true" data-fx-arrow="right">→</span></a>
 </div>
 </nav>
 </header>
@@ -338,7 +345,7 @@ div.dl-row .dl-n{color:var(--soft)}
 <div>
 <p class="lab">Abstract</p>
 <p class="abs" id="abs-1">In established companies, the decision to build is usually made long before anyone has evidence that it should be. Roadmaps fill with client requests, executive conviction and competitive gap-fills, and the cost of a wrong bet hides below the waterline: years of maintenance, capacity pulled from the core business, and quiet write-offs. Drawing on his book Known Before Built, Andreas shows how leadership teams move from belief to evidence before committing serious money, using observed customer behavior, cheap assumption tests and pilots designed to end in a clear decision. He closes with the question every product leader hears, “Why can’t we just ship it?”, and how to answer it with a number.</p>
-<div class="abs-row"><button type="button" class="copy" data-copy="abs-1" data-what="Abstract for Known before built"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy abstract</span></button><a class="u-link" href="assets/press/Talk%201%20%C2%B7%20Known%20before%20built.pdf" download="talk-01-known-before-built.pdf" data-goatcounter-click="press-talk-01">Download one-page PDF</a></div>
+<div class="abs-row"><button type="button" class="copy" data-copy="abs-1" data-what="Abstract for Known before built"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy abstract</span></button><a class="u-link" href="assets/press/Talk%201%20%C2%B7%20Known%20before%20built.pdf" download="talk-01-known-before-built.pdf">Download one-page PDF</a></div>
 </div>
 <div class="side">
 <div><p class="lab">Takeaways</p>
@@ -366,7 +373,7 @@ div.dl-row .dl-n{color:var(--soft)}
 <div>
 <p class="lab">Abstract</p>
 <p class="abs" id="abs-2">Boards are funding AI on a simple promise: engineers ship faster, so the business grows faster. The first half may come true. The second does not follow. In a 2025 randomized trial by METR, experienced developers using AI tools took 19% longer on real tasks, yet believed they had been 20% faster. And where speed is real, it multiplies whatever enters the pipeline: a backlog of sales requests and stakeholder wishes becomes more features, shipped sooner, maintained forever. Andreas argues that the bottleneck was never engineering speed but deciding what is worth building, and shows what leaders must change so AI speed turns into outcomes.</p>
-<div class="abs-row"><button type="button" class="copy" data-copy="abs-2" data-what="Abstract for The AI productivity fallacy"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy abstract</span></button><a class="u-link" href="assets/press/Talk%202%20%C2%B7%20AI%20productivity%20fallacy.pdf" download="talk-02-the-ai-productivity-fallacy.pdf" data-goatcounter-click="press-talk-02">Download one-page PDF</a></div>
+<div class="abs-row"><button type="button" class="copy" data-copy="abs-2" data-what="Abstract for The AI productivity fallacy"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy abstract</span></button><a class="u-link" href="assets/press/Talk%202%20%C2%B7%20AI%20productivity%20fallacy.pdf" download="talk-02-the-ai-productivity-fallacy.pdf">Download one-page PDF</a></div>
 </div>
 <div class="side">
 <div><p class="lab">Takeaways</p>
@@ -394,7 +401,7 @@ div.dl-row .dl-n{color:var(--soft)}
 <div>
 <p class="lab">Abstract</p>
 <p class="abs" id="abs-3">Most customer research asks people what they think. Would they use it? would they pay? And treats the answers as evidence. They are not. People are unreliable reporters of their own behavior: when Porter and Nohria tracked 27 CEOs minute by minute, their time went somewhere very different from where they believed it went. This session teaches research built on past and observed behavior: interviews that surface real workflows, workarounds and spend; how to tell normalized pain from complaints nobody would pay to fix; and how to define, before the conversation, which behaviors would confirm or end a hypothesis. Participants leave with question patterns they can use the next morning. The session is the hands-on companion to Known before built.</p>
-<div class="abs-row"><button type="button" class="copy" data-copy="abs-3" data-what="Abstract for Stop asking customers what they think"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy abstract</span></button><a class="u-link" href="assets/press/Talk%203%20%C2%B7%20Stop%20asking%20customers.pdf" download="talk-03-stop-asking-customers-what-they-think.pdf" data-goatcounter-click="press-talk-03">Download one-page PDF</a></div>
+<div class="abs-row"><button type="button" class="copy" data-copy="abs-3" data-what="Abstract for Stop asking customers what they think"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy abstract</span></button><a class="u-link" href="assets/press/Talk%203%20%C2%B7%20Stop%20asking%20customers.pdf" download="talk-03-stop-asking-customers-what-they-think.pdf">Download one-page PDF</a></div>
 </div>
 <div class="side">
 <div><p class="lab">Takeaways</p>
@@ -422,7 +429,7 @@ div.dl-row .dl-n{color:var(--soft)}
 <div>
 <p class="lab">Abstract</p>
 <p class="abs" id="abs-4">In many companies, growth means hunting small incremental uplifts everywhere but the product itself. Onboarding, activation, adoption, retention, churn, expansion often have no clear owner once a product has reached a market. Andreas has spent more than fifteen years running experiments on both sides, from search, social and interface optimization to product experimentation led by behavioral goals. He argues that growth must work on the live product and feature development as much as on the marketing side. Growth runs its own experiments on what has shipped, alongside the product teams rather than downstream of them. A conversation for leaders who want experiments that move revenue, not only satisfaction and perceived usability upticks.</p>
-<div class="abs-row"><button type="button" class="copy" data-copy="abs-4" data-what="Abstract for One growth engine"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy abstract</span></button><a class="u-link" href="assets/press/Talk%204%20%C2%B7%20One%20growth%20engine.pdf" download="talk-04-one-growth-engine.pdf" data-goatcounter-click="press-talk-04">Download one-page PDF</a></div>
+<div class="abs-row"><button type="button" class="copy" data-copy="abs-4" data-what="Abstract for One growth engine"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy abstract</span></button><a class="u-link" href="assets/press/Talk%204%20%C2%B7%20One%20growth%20engine.pdf" download="talk-04-one-growth-engine.pdf">Download one-page PDF</a></div>
 </div>
 <div class="side">
 <div><p class="lab">Takeaways</p>
@@ -577,13 +584,13 @@ div.dl-row .dl-n{color:var(--soft)}
 <ul class="dl">
 <li><div class="dl-row" data-src="assets/andreas-mitschke-portrait-square.jpg" data-kind="JPG"><span><span class="dl-n">Portrait, square</span><span class="dl-d">1920 × 1920 px, for programmes, posters and articles</span></span><span class="dl-m"><span class="tbd">Placeholder</span></span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></div></li>
 <li><div class="dl-row" data-src="assets/andreas-mitschke-portrait-circle.png" data-kind="PNG"><span><span class="dl-n">Portrait, round cut-out</span><span class="dl-d">Transparent background, for speaker grids and event pages</span></span><span class="dl-m"><span class="tbd">Placeholder</span></span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></div></li>
-<li><a class="dl-row" href="assets/book-front.jpg" download="known-before-built-cover-front.jpg" data-goatcounter-click="press-cover-front"><span><span class="dl-n">Book cover, front</span><span class="dl-d">760 × 1216 px</span></span><span class="dl-m" data-size>JPG · 103 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
-<li><a class="dl-row" href="assets/press/Book%20%26%20media%20one-sheet.pdf" download="known-before-built-media-one-sheet.pdf" data-goatcounter-click="press-known-before-built-media-one-sheet"><span><span class="dl-n">Book and media one-sheet</span><span class="dl-d">Synopsis, conversation angles, quotes and author bio</span></span><span class="dl-m" data-size>PDF · 903 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
-<li><a class="dl-row" href="assets/press/Talks%20%C2%B7%20overview.pdf" download="andreas-mitschke-talks-overview.pdf" data-goatcounter-click="press-andreas-mitschke-talks-overview"><span><span class="dl-n">Talks overview</span><span class="dl-d">Talk topics, formats and lengths, and bio</span></span><span class="dl-m" data-size>PDF · 698 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
-<li><a class="dl-row" href="assets/press/Talk%201%20%C2%B7%20Known%20before%20built.pdf" download="talk-01-known-before-built.pdf" data-goatcounter-click="press-talk-01-known-before-built"><span><span class="dl-n">Talk 01 · Known before built</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 637 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
-<li><a class="dl-row" href="assets/press/Talk%202%20%C2%B7%20AI%20productivity%20fallacy.pdf" download="talk-02-the-ai-productivity-fallacy.pdf" data-goatcounter-click="press-talk-02-the-ai-productivity-fallacy"><span><span class="dl-n">Talk 02 · The AI productivity fallacy</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 581 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
-<li><a class="dl-row" href="assets/press/Talk%203%20%C2%B7%20Stop%20asking%20customers.pdf" download="talk-03-stop-asking-customers-what-they-think.pdf" data-goatcounter-click="press-talk-03-stop-asking-customers-what-they-think"><span><span class="dl-n">Talk 03 · Stop asking customers what they think</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 618 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
-<li><a class="dl-row" href="assets/press/Talk%204%20%C2%B7%20One%20growth%20engine.pdf" download="talk-04-one-growth-engine.pdf" data-goatcounter-click="press-talk-04-one-growth-engine"><span><span class="dl-n">Talk 04 · One growth engine</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 630 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
+<li><a class="dl-row" href="assets/book-front.jpg" download="known-before-built-cover-front.jpg"><span><span class="dl-n">Book cover, front</span><span class="dl-d">760 × 1216 px</span></span><span class="dl-m" data-size>JPG · 103 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
+<li><a class="dl-row" href="assets/press/Book%20%26%20media%20one-sheet.pdf" download="known-before-built-media-one-sheet.pdf"><span><span class="dl-n">Book and media one-sheet</span><span class="dl-d">Synopsis, conversation angles, quotes and author bio</span></span><span class="dl-m" data-size>PDF · 903 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
+<li><a class="dl-row" href="assets/press/Talks%20%C2%B7%20overview.pdf" download="andreas-mitschke-talks-overview.pdf"><span><span class="dl-n">Talks overview</span><span class="dl-d">Talk topics, formats and lengths, and bio</span></span><span class="dl-m" data-size>PDF · 698 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
+<li><a class="dl-row" href="assets/press/Talk%201%20%C2%B7%20Known%20before%20built.pdf" download="talk-01-known-before-built.pdf"><span><span class="dl-n">Talk 01 · Known before built</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 637 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
+<li><a class="dl-row" href="assets/press/Talk%202%20%C2%B7%20AI%20productivity%20fallacy.pdf" download="talk-02-the-ai-productivity-fallacy.pdf"><span><span class="dl-n">Talk 02 · The AI productivity fallacy</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 581 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
+<li><a class="dl-row" href="assets/press/Talk%203%20%C2%B7%20Stop%20asking%20customers.pdf" download="talk-03-stop-asking-customers-what-they-think.pdf"><span><span class="dl-n">Talk 03 · Stop asking customers what they think</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 618 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
+<li><a class="dl-row" href="assets/press/Talk%204%20%C2%B7%20One%20growth%20engine.pdf" download="talk-04-one-growth-engine.pdf"><span><span class="dl-n">Talk 04 · One growth engine</span><span class="dl-d">Abstract, takeaways, audience and lengths</span></span><span class="dl-m" data-size>PDF · 630 KB</span><span class="dl-i" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7.5l4 4 4-4M2.5 14h11"/></svg></span></a></li>
 </ul>
 </section>
 
@@ -594,7 +601,7 @@ div.dl-row .dl-n{color:var(--soft)}
 <h2 class="h2" id="h-contact">Talks, interviews and press.</h2>
 </div></div>
 <div class="contact">
-<a class="mail u-link" id="mail" href="mailto:andreas@knownbeforebuilt.com" data-goatcounter-click="press-email">andreas@<wbr>knownbeforebuilt.com</a>
+<a class="mail u-link" id="mail" href="mailto:andreas@knownbeforebuilt.com">andreas@<wbr>knownbeforebuilt.com</a>
 <button type="button" class="copy" data-copy="mail" data-what="Email address"><svg class="ic-copy" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg><svg class="ic-done" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span class="cl">Copy address</span></button>
 <p class="contact-note">English or German. Everything on this page may be used as published.</p>
 </div>
@@ -611,6 +618,25 @@ div.dl-row .dl-n{color:var(--soft)}
 
 <script src="js/portrait.js"></script>
 <script>
+
+/* The navigation follows the reader: it slides away while scrolling down and comes back on the first scroll up.
+   Sets two classes on <html>: kb-nav-float once the page has left the very top, kb-nav-off while it is tucked away. */
+(function () {
+  var hd = document.querySelector('body>header.wrap');
+  function navh() { if (hd) document.documentElement.style.setProperty('--navh', hd.offsetHeight + 'px'); }
+  navh(); window.addEventListener('resize', navh);
+  var h = document.documentElement, last = window.scrollY || 0, ticking = false;
+  function update() {
+    ticking = false;
+    var y = window.scrollY || 0, d = y - last;
+    if (y <= 8) { h.classList.remove('kb-nav-off', 'kb-nav-float'); last = y; return; }
+    h.classList.add('kb-nav-float');
+    if (d > 6 && y > 140) { h.classList.add('kb-nav-off'); last = y; }
+    else if (d < -6) { h.classList.remove('kb-nav-off'); last = y; }
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+})();
+
 /* Page behaviour. The function between the KB-INIT markers is also what the design canvas runs. */
 (/*KB-INIT-START*/function (root, flag) {
   'use strict';
@@ -756,7 +782,6 @@ div.dl-row .dl-n{color:var(--soft)}
       }
       if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(t).then(function () { done(true); }, function () { done(fallbackCopy(t)); });
       else done(fallbackCopy(t));
-      if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'copy-' + id, title: what, event: true });
     });
   });
 
@@ -939,7 +964,6 @@ div.dl-row .dl-n{color:var(--soft)}
         if (!r.ok || !/image|pdf/.test(r.headers.get('content-type') || '')) return;
         var len = +r.headers.get('content-length'), a = document.createElement('a');
         a.className = 'dl-row'; a.href = src; a.setAttribute('download', row.getAttribute('data-name') || decodeURIComponent(src.split('/').pop()));
-        a.setAttribute('data-goatcounter-click', 'press-' + src.split('/').pop().replace(/\.\w+$/, ''));
         while (row.firstChild) a.appendChild(row.firstChild);
         var m = a.querySelector('.dl-m'); m.setAttribute('data-size', ''); m.textContent = row.getAttribute('data-kind') + (len ? ' · ' + fmtSize(len) : '');
         row.parentNode.replaceChild(a, row);
