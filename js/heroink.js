@@ -377,6 +377,8 @@
       if (WC) return (src.decode ? src.decode() : Promise.resolve()).then(start, bail);
       shownAt(function (base) {
         var end = base + 2200;   // 60 frames x 34 ms, plus a small margin
+        // tell the page the brush has been painted (the hero line's sheen waits for it)
+        setTimeout(function () { document.documentElement.classList.add('kb-brushed'); }, Math.max(0, end - performance.now()));
         (src.decode ? src.decode() : Promise.resolve()).then(function () { setTimeout(start, Math.max(0, end - performance.now())); }, function () {});
       });
     };
