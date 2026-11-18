@@ -12,18 +12,33 @@
   })();
 ;
 window.KB_SITE = true;
+// Chromium browsers (Chrome, Edge, Opera, Brave) get the liquid glass navigation; everyone else the frosted one (css/book.css)
+(function(){var b=navigator.userAgentData&&navigator.userAgentData.brands;if(b&&b.some(function(x){return /Chromium/.test(x.brand)}))document.documentElement.classList.add('ng-cr');})();
 
-/* The navigation follows the reader: it slides away while scrolling down and comes back on the first scroll up.
-   Sets two classes on <html>: kb-nav-float once the page has left the very top, kb-nav-off while it is tucked away. */
+/* The navigation follows the reader. It stays through the opening of the page; from "Is this you?" on it slides away while
+   scrolling down and comes back on the first scroll up. Once back, it stays for the next 120 px of scrolling down
+   before it leaves again, so a small correction does not chase it away.
+   Sets kb-nav-float once the page has left the very top and kb-nav-off while the bar is tucked away. */
 (function () {
-  var h = document.documentElement, last = window.scrollY || 0, ticking = false;
+  var h = document.documentElement, last = window.scrollY || 0, ticking = false, anchor = null, STAY = 120;
+  function start() {   /* the scroll position where the section begins to pass under the bar */
+    var el = document.querySelector('.section-section'), nav = document.querySelector('.nav-nav');
+    if (!el) return 140;
+    return el.getBoundingClientRect().top + (window.scrollY || 0) - (nav ? nav.getBoundingClientRect().height : 0);
+  }
   function update() {
     ticking = false;
-    var y = window.scrollY || 0, d = y - last;
-    if (y <= 8) { h.classList.remove('kb-nav-off', 'kb-nav-float'); last = y; return; }
-    h.classList.add('kb-nav-float');
-    if (d > 6 && y > 140) { h.classList.add('kb-nav-off'); last = y; }
-    else if (d < -6) { h.classList.remove('kb-nav-off'); last = y; }
+    var y = window.scrollY || 0;
+    h.classList.toggle('kb-nav-float', y > 8);
+    if (y <= start()) { h.classList.remove('kb-nav-off'); anchor = null; last = y; return; }
+    if (h.classList.contains('kb-nav-off')) {                 /* away: back on 6 px of scrolling up */
+      if (y > last) last = y; else if (last - y > 6) { h.classList.remove('kb-nav-off'); anchor = y; last = y; }
+      return;
+    }
+    if (anchor === null) { if (y > last) h.classList.add('kb-nav-off'); last = y; return; }   /* reaching the section: leave */
+    anchor = Math.min(anchor, y);                              /* back in view: stay for STAY px of scrolling down */
+    if (y - anchor > STAY) { h.classList.add('kb-nav-off'); anchor = null; }
+    last = y;
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
 })();
