@@ -173,54 +173,57 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
    on the first scroll up. A spacer keeps its place in the layout; its paper runs to the window edges. */
 .tpl-main-box::before{content: ""; height: 88px; flex-shrink: 0}
 .nav-nav{position: fixed; top: 0; left: 0; right: 0; width: 1440px; margin: 0 auto; z-index: 50; isolation: isolate;}
+/* ================= navigation glass and motion, shared by the book page (nav.nav-nav) and Talks & press
+   (body > header.wrap). Every value lives here; js/navlens.js reads the lens numbers from these properties and
+   js/nav.js decides when the bar leaves and returns. ================= */
 /* how the bar leaves and returns. Leaving, the contents go first: they lift and fade a little ahead of the glass, then the
    slab glides up, starting gently and gathering speed, like something being lifted away. Returning, the slab arrives
    first, easing to a stop, and the contents settle into it a beat later. */
-.nav-nav{transition:transform .75s cubic-bezier(.55,.05,.35,1) .06s}
-.nav-nav > :not(.nav-glass){transition:opacity .32s ease,transform .45s cubic-bezier(.4,0,.6,1),filter .32s ease}
-html.kb-nav-off .nav-nav{transform:translateY(calc(-100% - var(--ng-ext) - 8px))}
-html.kb-nav-off .nav-nav > :not(.nav-glass){opacity:0;transform:translateY(-10px);filter:blur(3px)}
-html:not(.kb-nav-off) .nav-nav{transition:transform .62s cubic-bezier(.16,1,.3,1)}
-html:not(.kb-nav-off) .nav-nav > :not(.nav-glass){transition:opacity .45s ease .14s,transform .6s cubic-bezier(.16,1,.3,1) .1s,filter .45s ease .14s}
-html.kb-nav-off .nav-nav:focus-within{transform:none}
-html.kb-nav-off .nav-nav:focus-within > :not(.nav-glass){opacity:1;transform:none;filter:none}
-@media (prefers-reduced-motion: reduce){.nav-nav,.nav-nav > :not(.nav-glass){transition:none!important}}
+:is(.nav-nav,body>header.wrap){transition:transform .75s cubic-bezier(.55,.05,.35,1) .06s}
+:is(.nav-nav,body>header.wrap) > :not(.nav-glass){transition:opacity .32s ease,transform .45s cubic-bezier(.4,0,.6,1),filter .32s ease}
+html.kb-nav-off :is(.nav-nav,body>header.wrap){transform:translateY(calc(-100% - var(--ng-ext) - 8px))}
+html.kb-nav-off :is(.nav-nav,body>header.wrap) > :not(.nav-glass){opacity:0;transform:translateY(-10px);filter:blur(3px)}
+html:not(.kb-nav-off) :is(.nav-nav,body>header.wrap){transition:transform .62s cubic-bezier(.16,1,.3,1)}
+html:not(.kb-nav-off) :is(.nav-nav,body>header.wrap) > :not(.nav-glass){transition:opacity .45s ease .14s,transform .6s cubic-bezier(.16,1,.3,1) .1s,filter .45s ease .14s}
+html.kb-nav-off :is(.nav-nav,body>header.wrap):focus-within{transform:none}
+html.kb-nav-off :is(.nav-nav,body>header.wrap):focus-within > :not(.nav-glass){opacity:1;transform:none;filter:none}
+@media (prefers-reduced-motion: reduce){:is(.nav-nav,body>header.wrap),:is(.nav-nav,body>header.wrap) > :not(.nav-glass){transition:none!important}}
 /* liquid glass navigation: a slab of thick, very clear glass. What is behind it stays sharp; it is gently magnified
    through the middle, and the bottom rim bends in what lies just below the bar (the layer reaches --lq-reach under the
    bar, hidden by the mask, so the rim has something to bend), with fine color fringes where it bends most.
    The bending is an SVG filter built by js/navlens.js (Chrome and Edge render it, and html.ng-lens switches it on);
    Safari and Firefox get the frosted glass instead (below). Values tuned in the nav-glass playground. */
-.nav-nav{--lq-thick:38px;--lq-refr:42px;--lq-mag:8;--lq-ca:1;--lq-clar:1.2px;--lq-tint:52%;--lq-sat:1.2;--lq-bright:1.05;--lq-spec:.42;--lq-depth:0;--lq-shadow:0;
+:is(.nav-nav,body>header.wrap){--lq-thick:38px;--lq-refr:42px;--lq-mag:8;--lq-ca:3;--lq-clar:1.2px;--lq-tint:52%;--lq-sat:1.2;--lq-bright:1.05;--lq-spec:.42;--lq-depth:0;--lq-shadow:0;
   --lq-reach:calc(var(--lq-refr) + 2px);--ng-ext:calc(var(--lq-reach) + 4px);--ng-line:0}
 /* exactly as wide as the window (the page may be scaled by --kb-zoom): a wider layer, masked, would exceed the graphics
    card's texture size on Retina screens, and Chrome then silently drops the lens */
-.nav-nav .nav-glass{position:absolute;left:calc(50% - 50vw / var(--kb-zoom, 1));width:calc(100vw / var(--kb-zoom, 1));top:0;height:100%;z-index:-1;pointer-events:none}
-.nav-nav .nav-glass::before,.nav-nav .nav-glass::after{content:"";position:absolute;left:0;right:0;top:0}
-.nav-nav .nav-glass::before{bottom:calc(var(--lq-reach) * -1);
+:is(.nav-nav,body>header.wrap) .nav-glass{position:absolute;left:calc(50% - 50vw / var(--kb-zoom, 1));width:calc(100vw / var(--kb-zoom, 1));top:0;height:100%;z-index:-1;pointer-events:none}
+:is(.nav-nav,body>header.wrap) .nav-glass::before,:is(.nav-nav,body>header.wrap) .nav-glass::after{content:"";position:absolute;left:0;right:0;top:0}
+:is(.nav-nav,body>header.wrap) .nav-glass::before{bottom:calc(var(--lq-reach) * -1);
   -webkit-mask:linear-gradient(to bottom,#000 calc(100% - var(--lq-reach)),transparent calc(100% - var(--lq-reach)));mask:linear-gradient(to bottom,#000 calc(100% - var(--lq-reach)),transparent calc(100% - var(--lq-reach)));
   -webkit-backdrop-filter:saturate(var(--lq-sat)) brightness(var(--lq-bright));backdrop-filter:saturate(var(--lq-sat)) brightness(var(--lq-bright));
   background:color-mix(in srgb,#ECE8E5 var(--lq-tint),transparent)}
-html.ng-lens .nav-nav .nav-glass::before{-webkit-backdrop-filter:url(#ng-lens) saturate(var(--lq-sat)) brightness(var(--lq-bright));backdrop-filter:url(#ng-lens) saturate(var(--lq-sat)) brightness(var(--lq-bright))}
-.nav-nav .nav-glass::after{bottom:0;
+html.ng-lens :is(.nav-nav,body>header.wrap) .nav-glass::before{-webkit-backdrop-filter:url(#ng-lens) saturate(var(--lq-sat)) brightness(var(--lq-bright));backdrop-filter:url(#ng-lens) saturate(var(--lq-sat)) brightness(var(--lq-bright))}
+:is(.nav-nav,body>header.wrap) .nav-glass::after{bottom:0;
   background:linear-gradient(to bottom,rgba(255,255,255,calc(var(--lq-spec) * .7)) 0 1px,rgba(255,255,255,calc(var(--lq-spec) * .16)) 1px,rgba(255,255,255,0) 46%),
     linear-gradient(to top,rgba(255,255,255,calc(var(--lq-spec) * .95)) 0 1px,rgba(17,17,17,calc(var(--lq-depth) * .5)) 1px 2px,rgba(17,17,17,calc(var(--lq-depth) * .14)) 2px,rgba(255,255,255,calc(var(--lq-spec) * .22)) calc(var(--lq-thick) * .45),rgba(255,255,255,0) var(--lq-thick));
   box-shadow:0 1px 0 rgba(17,17,17,calc(var(--lq-depth) * .3)),0 3px 6px -3px rgba(17,17,17,calc(var(--lq-shadow) * .8)),0 16px 30px -16px rgba(17,17,17,var(--lq-shadow))}
 /* Safari and Firefox cannot bend the backdrop (only Chromium can use an SVG filter there), so they get the frosted glass
    instead, with the values tuned in the playground ("Your pick"). html.ng-cr is set in the page head for Chromium browsers. */
-.nav-nav{--nf-blur:8px;--nf-sat:1.2;--nf-bright:1;--nf-sheen:.25;--nf-tint:72%;--nf-tint2:42%;--nf-soft:6px;--nf-ext:3px;
+:is(.nav-nav,body>header.wrap){--nf-blur:8px;--nf-sat:1.2;--nf-bright:1;--nf-sheen:.25;--nf-tint:72%;--nf-tint2:42%;--nf-soft:6px;--nf-ext:3px;
   --nf-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .04 0 0 0 -.008'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-html:not(.ng-cr) .nav-nav .nav-glass::before{bottom:calc(var(--nf-ext) * -.45);
+html:not(.ng-cr) :is(.nav-nav,body>header.wrap) .nav-glass::before{bottom:calc(var(--nf-ext) * -.45);
   -webkit-backdrop-filter:blur(var(--nf-blur)) saturate(var(--nf-sat)) brightness(var(--nf-bright));backdrop-filter:blur(var(--nf-blur)) saturate(var(--nf-sat)) brightness(var(--nf-bright));
   background:var(--nf-grain),linear-gradient(to bottom,rgba(255,255,255,var(--nf-sheen)),rgba(255,255,255,calc(var(--nf-sheen) * .18)) 55%,rgba(255,255,255,0));
   -webkit-mask:linear-gradient(to bottom,#000 0,#000 70%,transparent);mask:linear-gradient(to bottom,#000 0,#000 70%,transparent)}
-html:not(.ng-cr) .nav-nav .nav-glass::after{bottom:calc(var(--nf-ext) * -1);box-shadow:none;
+html:not(.ng-cr) :is(.nav-nav,body>header.wrap) .nav-glass::after{bottom:calc(var(--nf-ext) * -1);box-shadow:none;
   -webkit-backdrop-filter:blur(var(--nf-soft));backdrop-filter:blur(var(--nf-soft));
   background:linear-gradient(to bottom,color-mix(in srgb,#ECE8E5 var(--nf-tint),transparent),color-mix(in srgb,#ECE8E5 var(--nf-tint2),transparent) 60%,transparent);
   -webkit-mask:linear-gradient(to bottom,#000 0,#000 50%,transparent);mask:linear-gradient(to bottom,#000 0,#000 50%,transparent)}
 /* browsers without backdrop-filter get a solid paper bar instead */
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.nav-nav .nav-glass::before{background:#ECE8E5}}
-.nav-nav::after{content: ""; position: absolute; left: -100vmax; right: -100vmax; bottom: 0; height: 1px; background: rgba(17,17,17,var(--ng-line)); opacity: 0; transition: opacity .4s ease}
-html.kb-nav-float .nav-nav::after{opacity: 1}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){:is(.nav-nav,body>header.wrap) .nav-glass::before{background:#ECE8E5}}
+:is(.nav-nav,body>header.wrap)::after{content: ""; position: absolute; left: -100vmax; right: -100vmax; bottom: 0; height: 1px; background: rgba(17,17,17,var(--ng-line)); opacity: 0; transition: opacity .4s ease}
+html.kb-nav-float :is(.nav-nav,body>header.wrap)::after{opacity: 1}
 .nav-link{text-decoration: none; display: flex; align-items: baseline; gap: 8px}
 .nav-label{font: 900 17px/1 Archivo, sans-serif; letter-spacing: -0.01em}
 .nav-label-2{font: italic var(--bodoni-w) 19px/1 'Bodoni Moda', serif}
