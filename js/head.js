@@ -16,11 +16,12 @@ window.KB_SITE = true;
 (function(){var b=navigator.userAgentData&&navigator.userAgentData.brands;if(b&&b.some(function(x){return /Chromium/.test(x.brand)}))document.documentElement.classList.add('ng-cr');})();
 
 /* The navigation follows the reader. It stays through the opening of the page; from "Is this you?" on it slides away while
-   scrolling down and comes back on the first scroll up. Once back, it stays for the next 120 px of scrolling down
-   before it leaves again, so a small correction does not chase it away.
+   scrolling down and comes back on the first scroll up. Once back, it stays for the next half screen (at least 320 px)
+   of scrolling down before it leaves again, so reading on a little does not chase it away.
    Sets kb-nav-float once the page has left the very top and kb-nav-off while the bar is tucked away. */
 (function () {
-  var h = document.documentElement, last = window.scrollY || 0, ticking = false, anchor = null, STAY = 120;
+  var h = document.documentElement, last = window.scrollY || 0, ticking = false, anchor = null;
+  function stay() { return Math.max(320, window.innerHeight * .5); }   /* once back, it stays for half a screen (at least 320 px) of scrolling down */
   function start() {   /* the scroll position where the section begins to pass under the bar */
     var el = document.querySelector('.section-section'), nav = document.querySelector('.nav-nav');
     if (!el) return 140;
@@ -36,8 +37,8 @@ window.KB_SITE = true;
       return;
     }
     if (anchor === null) { if (y > last) h.classList.add('kb-nav-off'); last = y; return; }   /* reaching the section: leave */
-    anchor = Math.min(anchor, y);                              /* back in view: stay for STAY px of scrolling down */
-    if (y - anchor > STAY) { h.classList.add('kb-nav-off'); anchor = null; }
+    anchor = Math.min(anchor, y);                              /* back in view: stay for a while when scrolling down again */
+    if (y - anchor > stay()) { h.classList.add('kb-nav-off'); anchor = null; }
     last = y;
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
