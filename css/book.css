@@ -89,6 +89,24 @@ sub{font-size:.56em;vertical-align:-.3em;line-height:0}
 .kbshadow{position:absolute;left:8%;right:-4%;bottom:-36px;height:48px;border-radius:50%;background:radial-gradient(closest-side,rgba(46,33,24,.34),rgba(46,33,24,0));filter:blur(14px);transform:translateX(var(--sx,0px)) scale(var(--ss,1));opacity:var(--so,.85);pointer-events:none}
 .kbhint{position:absolute;left:0;right:0;bottom:-72px;margin:0;text-align:center;font:italic var(--bodoni-w) 15px/1 'Bodoni Moda',serif;color:#5E5954;opacity:.85;transition:opacity .6s}
 .kbstage.touched .kbhint{opacity:0}
+/* the hint gets a small turning book in front of it (same as andreasmitschke.com): it rests, turns to one side, settles a hair past,
+   rests, turns back, then gathers itself and spins once all the way round */
+.kbhint{display:flex;align-items:center;justify-content:center;gap:12px}
+.kb-ic{position:relative;width:18px;height:20px;perspective:60px;flex:none}
+.kb-ic i{position:absolute;left:3px;top:2px;width:12px;height:16px;border-radius:1.5px 2.5px 2.5px 1.5px;background:currentColor;box-shadow:inset 2px 0 0 rgba(0,0,0,.28);transform-origin:50% 50%;animation:kb-turn 8s linear infinite}
+@keyframes kb-turn{
+  0%{transform:rotateY(-28deg)}
+  8.75%{transform:rotateY(-28deg);animation-timing-function:cubic-bezier(.45,0,.2,1)}
+  23.75%{transform:rotateY(34deg);animation-timing-function:cubic-bezier(.3,0,.4,1)}
+  27.5%{transform:rotateY(28deg)}
+  41.25%{transform:rotateY(28deg);animation-timing-function:cubic-bezier(.45,0,.2,1)}
+  56.25%{transform:rotateY(-34deg);animation-timing-function:cubic-bezier(.3,0,.4,1)}
+  60%{transform:rotateY(-28deg)}
+  67.5%{transform:rotateY(-28deg);animation-timing-function:cubic-bezier(.4,0,.6,1)}
+  71.25%{transform:rotateY(-40deg);animation-timing-function:cubic-bezier(.5,0,.2,1)}
+  86.25%{transform:rotateY(340deg);animation-timing-function:cubic-bezier(.3,0,.4,1)}
+  91.25%,100%{transform:rotateY(332deg)}}
+@media (prefers-reduced-motion:reduce){.kb-ic i{animation:none;transform:rotateY(-28deg)}}
 .kbberg,.kbberg *{cursor:grab!important}
 html.kbgrabbing,html.kbgrabbing *{cursor:grabbing!important}
 .kbspreadbtn{all:unset;cursor:zoom-in;display:block;perspective:1600px;will-change:transform}
@@ -154,10 +172,44 @@ body { margin: 0; background: #ECE8E5; color: #111111; overflow-x: hidden; -webk
 /* the navigation follows the reader (js/head.js): fixed at the top, it slides away while scrolling down and returns
    on the first scroll up. A spacer keeps its place in the layout; its paper runs to the window edges. */
 .tpl-main-box::before{content: ""; height: 88px; flex-shrink: 0}
-.nav-nav{position: fixed; top: 0; left: 0; right: 0; width: 1440px; margin: 0 auto; z-index: 50; background: #ECE8E5; box-shadow: 0 0 0 100vmax #ECE8E5; clip-path: inset(0 -100vmax -1px); transition: transform .6s cubic-bezier(.22,1,.36,1)}
-.nav-nav::after{content: ""; position: absolute; left: -100vmax; right: -100vmax; bottom: 0; height: 1px; background: rgba(17,17,17,.12); opacity: 0; transition: opacity .4s ease}
+.nav-nav{position: fixed; top: 0; left: 0; right: 0; width: 1440px; margin: 0 auto; z-index: 50; isolation: isolate; transition: transform .6s cubic-bezier(.22,1,.36,1)}
+/* liquid glass navigation: a slab of thick, very clear glass. What is behind it stays sharp; it is gently magnified
+   through the middle, and the bottom rim bends in what lies just below the bar (the layer reaches --lq-reach under the
+   bar, hidden by the mask, so the rim has something to bend), with fine color fringes where it bends most.
+   The bending is an SVG filter built by js/navlens.js (Chrome and Edge render it, and html.ng-lens switches it on);
+   Safari and Firefox get the frosted glass instead (below). Values tuned in the nav-glass playground. */
+.nav-nav{--lq-thick:38px;--lq-refr:42px;--lq-mag:8;--lq-ca:1;--lq-clar:1.2px;--lq-tint:52%;--lq-sat:1.2;--lq-bright:1.05;--lq-spec:.42;--lq-depth:0;--lq-shadow:0;
+  --lq-reach:calc(var(--lq-refr) + 2px);--ng-ext:calc(var(--lq-reach) + 4px);--ng-line:0}
+/* exactly as wide as the window (the page may be scaled by --kb-zoom): a wider layer, masked, would exceed the graphics
+   card's texture size on Retina screens, and Chrome then silently drops the lens */
+.nav-nav .nav-glass{position:absolute;left:calc(50% - 50vw / var(--kb-zoom, 1));width:calc(100vw / var(--kb-zoom, 1));top:0;height:100%;z-index:-1;pointer-events:none}
+.nav-nav .nav-glass::before,.nav-nav .nav-glass::after{content:"";position:absolute;left:0;right:0;top:0}
+.nav-nav .nav-glass::before{bottom:calc(var(--lq-reach) * -1);
+  -webkit-mask:linear-gradient(to bottom,#000 calc(100% - var(--lq-reach)),transparent calc(100% - var(--lq-reach)));mask:linear-gradient(to bottom,#000 calc(100% - var(--lq-reach)),transparent calc(100% - var(--lq-reach)));
+  -webkit-backdrop-filter:saturate(var(--lq-sat)) brightness(var(--lq-bright));backdrop-filter:saturate(var(--lq-sat)) brightness(var(--lq-bright));
+  background:color-mix(in srgb,#ECE8E5 var(--lq-tint),transparent)}
+html.ng-lens .nav-nav .nav-glass::before{-webkit-backdrop-filter:url(#ng-lens) saturate(var(--lq-sat)) brightness(var(--lq-bright));backdrop-filter:url(#ng-lens) saturate(var(--lq-sat)) brightness(var(--lq-bright))}
+.nav-nav .nav-glass::after{bottom:0;
+  background:linear-gradient(to bottom,rgba(255,255,255,calc(var(--lq-spec) * .7)) 0 1px,rgba(255,255,255,calc(var(--lq-spec) * .16)) 1px,rgba(255,255,255,0) 46%),
+    linear-gradient(to top,rgba(255,255,255,calc(var(--lq-spec) * .95)) 0 1px,rgba(17,17,17,calc(var(--lq-depth) * .5)) 1px 2px,rgba(17,17,17,calc(var(--lq-depth) * .14)) 2px,rgba(255,255,255,calc(var(--lq-spec) * .22)) calc(var(--lq-thick) * .45),rgba(255,255,255,0) var(--lq-thick));
+  box-shadow:0 1px 0 rgba(17,17,17,calc(var(--lq-depth) * .3)),0 3px 6px -3px rgba(17,17,17,calc(var(--lq-shadow) * .8)),0 16px 30px -16px rgba(17,17,17,var(--lq-shadow))}
+/* Safari and Firefox cannot bend the backdrop (only Chromium can use an SVG filter there), so they get the frosted glass
+   instead, with the values tuned in the playground ("Your pick"). html.ng-cr is set in the page head for Chromium browsers. */
+.nav-nav{--nf-blur:8px;--nf-sat:1.2;--nf-bright:1;--nf-sheen:.25;--nf-tint:72%;--nf-tint2:42%;--nf-soft:6px;--nf-ext:3px;
+  --nf-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .04 0 0 0 -.008'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+html:not(.ng-cr) .nav-nav .nav-glass::before{bottom:calc(var(--nf-ext) * -.45);
+  -webkit-backdrop-filter:blur(var(--nf-blur)) saturate(var(--nf-sat)) brightness(var(--nf-bright));backdrop-filter:blur(var(--nf-blur)) saturate(var(--nf-sat)) brightness(var(--nf-bright));
+  background:var(--nf-grain),linear-gradient(to bottom,rgba(255,255,255,var(--nf-sheen)),rgba(255,255,255,calc(var(--nf-sheen) * .18)) 55%,rgba(255,255,255,0));
+  -webkit-mask:linear-gradient(to bottom,#000 0,#000 70%,transparent);mask:linear-gradient(to bottom,#000 0,#000 70%,transparent)}
+html:not(.ng-cr) .nav-nav .nav-glass::after{bottom:calc(var(--nf-ext) * -1);box-shadow:none;
+  -webkit-backdrop-filter:blur(var(--nf-soft));backdrop-filter:blur(var(--nf-soft));
+  background:linear-gradient(to bottom,color-mix(in srgb,#ECE8E5 var(--nf-tint),transparent),color-mix(in srgb,#ECE8E5 var(--nf-tint2),transparent) 60%,transparent);
+  -webkit-mask:linear-gradient(to bottom,#000 0,#000 50%,transparent);mask:linear-gradient(to bottom,#000 0,#000 50%,transparent)}
+/* browsers without backdrop-filter get a solid paper bar instead */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.nav-nav .nav-glass::before{background:#ECE8E5}}
+.nav-nav::after{content: ""; position: absolute; left: -100vmax; right: -100vmax; bottom: 0; height: 1px; background: rgba(17,17,17,var(--ng-line)); opacity: 0; transition: opacity .4s ease}
 html.kb-nav-float .nav-nav::after{opacity: 1}
-html.kb-nav-off .nav-nav{transform: translateY(-100%)}
+html.kb-nav-off .nav-nav{transform: translateY(calc(-100% - var(--ng-ext) - 8px))}
 html.kb-nav-off .nav-nav:focus-within{transform: none}
 @media (prefers-reduced-motion: reduce){.nav-nav{transition: none}}
 .nav-link{text-decoration: none; display: flex; align-items: baseline; gap: 8px}
