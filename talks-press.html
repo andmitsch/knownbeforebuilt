@@ -30,6 +30,7 @@
 {"@context": "https://schema.org", "@type": "Person", "@id": "https://andmitsch.github.io/andreasmitschke/#person", "name": "Andreas Mitschke", "jobTitle": "Growth & Product Innovation", "description": "Growth and product innovation director, advisor, and author of Known Before Built.", "url": "https://andmitsch.github.io/andreasmitschke/", "image": "https://andmitsch.github.io/knownbeforebuilt/assets/andreas-mitschke-portrait-square.jpg", "sameAs": ["https://www.linkedin.com/in/andreasmitschke", "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10956892", "https://andreasmitschke.com"], "subjectOf": {"@type": "Book", "@id": "https://andmitsch.github.io/knownbeforebuilt/#book", "name": "Known Before Built", "url": "https://andmitsch.github.io/knownbeforebuilt/"}, "email": "mailto:andreas@knownbeforebuilt.com", "knowsLanguage": ["en", "de"]}
 </script>
 <script>
+(function(){var b=navigator.userAgentData&&navigator.userAgentData.brands;if(b&&b.some(function(x){return /Chromium/.test(x.brand)}))document.documentElement.classList.add('ng-cr');})();
 (function(){var d=document.documentElement;d.classList.add('js');if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)&&'IntersectionObserver' in window)d.classList.add('js-motion');})();
 </script>
 <style>
@@ -46,10 +47,44 @@ body{font:400 17px/1.6 'Hanken Grotesk','Helvetica Neue',Arial,sans-serif}
 /* ---------- header (same as index.html) ---------- */
 /* the header follows the reader: fixed, it slides away while scrolling down and returns on the first scroll up;
    body padding (set from its height by the script) keeps its place */
-body>header.wrap{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--paper);box-shadow:0 0 0 100vmax var(--paper);clip-path:inset(0 -100vmax -1px);transition:transform .6s var(--ease)}
-body>header.wrap::after{content:"";position:absolute;left:-100vmax;right:-100vmax;bottom:0;height:1px;background:var(--rule);opacity:0;transition:opacity .4s ease}
-html.kb-nav-float body>header.wrap::after{opacity:.55}
-html.kb-nav-off body>header.wrap{transform:translateY(-100%)}
+body>header.wrap{position:fixed;top:0;left:0;right:0;z-index:50;isolation:isolate;transition:transform .6s var(--ease)}
+/* liquid glass navigation: a slab of thick, very clear glass. What is behind it stays sharp; it is gently magnified
+   through the middle, and the bottom rim bends in what lies just below the bar (the layer reaches --lq-reach under the
+   bar, hidden by the mask, so the rim has something to bend), with fine color fringes where it bends most.
+   The bending is an SVG filter built by js/navlens.js (Chrome and Edge render it, and html.ng-lens switches it on);
+   Safari and Firefox get the frosted glass instead (below). Values tuned in the nav-glass playground. */
+body>header.wrap{--lq-thick:38px;--lq-refr:42px;--lq-mag:8;--lq-ca:1;--lq-clar:1.2px;--lq-tint:52%;--lq-sat:1.2;--lq-bright:1.05;--lq-spec:.42;--lq-depth:0;--lq-shadow:0;
+  --lq-reach:calc(var(--lq-refr) + 2px);--ng-ext:calc(var(--lq-reach) + 4px);--ng-line:0}
+/* exactly as wide as the window (the page may be scaled by --kb-zoom): a wider layer, masked, would exceed the graphics
+   card's texture size on Retina screens, and Chrome then silently drops the lens */
+body>header.wrap .nav-glass{position:absolute;left:calc(50% - 50vw / var(--kb-zoom, 1));width:calc(100vw / var(--kb-zoom, 1));top:0;height:100%;z-index:-1;pointer-events:none}
+body>header.wrap .nav-glass::before,body>header.wrap .nav-glass::after{content:"";position:absolute;left:0;right:0;top:0}
+body>header.wrap .nav-glass::before{bottom:calc(var(--lq-reach) * -1);
+  -webkit-mask:linear-gradient(to bottom,#000 calc(100% - var(--lq-reach)),transparent calc(100% - var(--lq-reach)));mask:linear-gradient(to bottom,#000 calc(100% - var(--lq-reach)),transparent calc(100% - var(--lq-reach)));
+  -webkit-backdrop-filter:saturate(var(--lq-sat)) brightness(var(--lq-bright));backdrop-filter:saturate(var(--lq-sat)) brightness(var(--lq-bright));
+  background:color-mix(in srgb,var(--paper) var(--lq-tint),transparent)}
+html.ng-lens body>header.wrap .nav-glass::before{-webkit-backdrop-filter:url(#ng-lens) saturate(var(--lq-sat)) brightness(var(--lq-bright));backdrop-filter:url(#ng-lens) saturate(var(--lq-sat)) brightness(var(--lq-bright))}
+body>header.wrap .nav-glass::after{bottom:0;
+  background:linear-gradient(to bottom,rgba(255,255,255,calc(var(--lq-spec) * .7)) 0 1px,rgba(255,255,255,calc(var(--lq-spec) * .16)) 1px,rgba(255,255,255,0) 46%),
+    linear-gradient(to top,rgba(255,255,255,calc(var(--lq-spec) * .95)) 0 1px,rgba(17,17,17,calc(var(--lq-depth) * .5)) 1px 2px,rgba(17,17,17,calc(var(--lq-depth) * .14)) 2px,rgba(255,255,255,calc(var(--lq-spec) * .22)) calc(var(--lq-thick) * .45),rgba(255,255,255,0) var(--lq-thick));
+  box-shadow:0 1px 0 rgba(17,17,17,calc(var(--lq-depth) * .3)),0 3px 6px -3px rgba(17,17,17,calc(var(--lq-shadow) * .8)),0 16px 30px -16px rgba(17,17,17,var(--lq-shadow))}
+/* Safari and Firefox cannot bend the backdrop (only Chromium can use an SVG filter there), so they get the frosted glass
+   instead, with the values tuned in the playground ("Your pick"). html.ng-cr is set in the page head for Chromium browsers. */
+body>header.wrap{--nf-blur:8px;--nf-sat:1.2;--nf-bright:1;--nf-sheen:.25;--nf-tint:72%;--nf-tint2:42%;--nf-soft:6px;--nf-ext:3px;
+  --nf-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .04 0 0 0 -.008'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+html:not(.ng-cr) body>header.wrap .nav-glass::before{bottom:calc(var(--nf-ext) * -.45);
+  -webkit-backdrop-filter:blur(var(--nf-blur)) saturate(var(--nf-sat)) brightness(var(--nf-bright));backdrop-filter:blur(var(--nf-blur)) saturate(var(--nf-sat)) brightness(var(--nf-bright));
+  background:var(--nf-grain),linear-gradient(to bottom,rgba(255,255,255,var(--nf-sheen)),rgba(255,255,255,calc(var(--nf-sheen) * .18)) 55%,rgba(255,255,255,0));
+  -webkit-mask:linear-gradient(to bottom,#000 0,#000 70%,transparent);mask:linear-gradient(to bottom,#000 0,#000 70%,transparent)}
+html:not(.ng-cr) body>header.wrap .nav-glass::after{bottom:calc(var(--nf-ext) * -1);box-shadow:none;
+  -webkit-backdrop-filter:blur(var(--nf-soft));backdrop-filter:blur(var(--nf-soft));
+  background:linear-gradient(to bottom,color-mix(in srgb,var(--paper) var(--nf-tint),transparent),color-mix(in srgb,var(--paper) var(--nf-tint2),transparent) 60%,transparent);
+  -webkit-mask:linear-gradient(to bottom,#000 0,#000 50%,transparent);mask:linear-gradient(to bottom,#000 0,#000 50%,transparent)}
+/* browsers without backdrop-filter get a solid paper bar instead */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){body>header.wrap .nav-glass::before{background:var(--paper)}}
+body>header.wrap::after{content:"";position:absolute;left:-100vmax;right:-100vmax;bottom:0;height:1px;background:rgba(17,17,17,var(--ng-line));opacity:0;transition:opacity .4s ease}
+html.kb-nav-float body>header.wrap::after{opacity:1}
+html.kb-nav-off body>header.wrap{transform:translateY(calc(-100% - var(--ng-ext) - 8px))}
 html.kb-nav-off body>header.wrap:focus-within{transform:none}
 body{padding-top:var(--navh,112px)}
 @media (prefers-reduced-motion:reduce){body>header.wrap{transition:none}}
@@ -288,6 +323,7 @@ div.dl-row .dl-n{color:var(--soft)}
 <a class="kb-skip" href="#content">Skip to content</a>
 
 <header class="wrap">
+<span class="nav-glass" aria-hidden="true"></span>
 <nav class="nav" aria-label="Primary">
 <a class="brand" href="./"><b>KNOWN</b><i>before</i><b>BUILT</b></a>
 <div class="nav-links">
@@ -621,22 +657,36 @@ div.dl-row .dl-n{color:var(--soft)}
 <div class="sr" role="status" aria-live="polite" id="live"></div>
 
 <script src="js/portrait.js"></script>
+<script src="js/navlens.js"></script>
 <script>
 
-/* The navigation follows the reader: it slides away while scrolling down and comes back on the first scroll up.
-   Sets two classes on <html>: kb-nav-float once the page has left the very top, kb-nav-off while it is tucked away. */
+/* The navigation follows the reader. It stays through the opening of the page; from the first section (Keynotes) on it slides away while
+   scrolling down and comes back on the first scroll up. Once back, it stays for the next 120 px of scrolling down
+   before it leaves again, so a small correction does not chase it away.
+   Sets kb-nav-float once the page has left the very top and kb-nav-off while the bar is tucked away. */
 (function () {
   var hd = document.querySelector('body>header.wrap');
   function navh() { if (hd) document.documentElement.style.setProperty('--navh', hd.offsetHeight + 'px'); }
   navh(); window.addEventListener('resize', navh);
-  var h = document.documentElement, last = window.scrollY || 0, ticking = false;
+  var h = document.documentElement, last = window.scrollY || 0, ticking = false, anchor = null, STAY = 120;
+  function start() {   /* the scroll position where the section begins to pass under the bar */
+    var el = document.querySelector('#talks'), nav = document.querySelector('body>header.wrap');
+    if (!el) return 140;
+    return el.getBoundingClientRect().top + (window.scrollY || 0) - (nav ? nav.getBoundingClientRect().height : 0);
+  }
   function update() {
     ticking = false;
-    var y = window.scrollY || 0, d = y - last;
-    if (y <= 8) { h.classList.remove('kb-nav-off', 'kb-nav-float'); last = y; return; }
-    h.classList.add('kb-nav-float');
-    if (d > 6 && y > 140) { h.classList.add('kb-nav-off'); last = y; }
-    else if (d < -6) { h.classList.remove('kb-nav-off'); last = y; }
+    var y = window.scrollY || 0;
+    h.classList.toggle('kb-nav-float', y > 8);
+    if (y <= start()) { h.classList.remove('kb-nav-off'); anchor = null; last = y; return; }
+    if (h.classList.contains('kb-nav-off')) {                 /* away: back on 6 px of scrolling up */
+      if (y > last) last = y; else if (last - y > 6) { h.classList.remove('kb-nav-off'); anchor = y; last = y; }
+      return;
+    }
+    if (anchor === null) { if (y > last) h.classList.add('kb-nav-off'); last = y; return; }   /* reaching the section: leave */
+    anchor = Math.min(anchor, y);                              /* back in view: stay for STAY px of scrolling down */
+    if (y - anchor > STAY) { h.classList.add('kb-nav-off'); anchor = null; }
+    last = y;
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
 })();
