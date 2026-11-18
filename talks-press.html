@@ -47,7 +47,19 @@ body{font:400 17px/1.6 'Hanken Grotesk','Helvetica Neue',Arial,sans-serif}
 /* ---------- header (same as index.html) ---------- */
 /* the header follows the reader: fixed, it slides away while scrolling down and returns on the first scroll up;
    body padding (set from its height by the script) keeps its place */
-body>header.wrap{position:fixed;top:0;left:0;right:0;z-index:50;isolation:isolate;transition:transform .6s var(--ease)}
+body>header.wrap{position:fixed;top:0;left:0;right:0;z-index:50;isolation:isolate}
+/* how the bar leaves and returns. Leaving, the contents go first: they lift and fade a little ahead of the glass, then the
+   slab glides up, starting gently and gathering speed, like something being lifted away. Returning, the slab arrives
+   first, easing to a stop, and the contents settle into it a beat later. */
+body>header.wrap{transition:transform .75s cubic-bezier(.55,.05,.35,1) .06s}
+body>header.wrap > :not(.nav-glass){transition:opacity .32s ease,transform .45s cubic-bezier(.4,0,.6,1),filter .32s ease}
+html.kb-nav-off body>header.wrap{transform:translateY(calc(-100% - var(--ng-ext) - 8px))}
+html.kb-nav-off body>header.wrap > :not(.nav-glass){opacity:0;transform:translateY(-10px);filter:blur(3px)}
+html:not(.kb-nav-off) body>header.wrap{transition:transform .62s cubic-bezier(.16,1,.3,1)}
+html:not(.kb-nav-off) body>header.wrap > :not(.nav-glass){transition:opacity .45s ease .14s,transform .6s cubic-bezier(.16,1,.3,1) .1s,filter .45s ease .14s}
+html.kb-nav-off body>header.wrap:focus-within{transform:none}
+html.kb-nav-off body>header.wrap:focus-within > :not(.nav-glass){opacity:1;transform:none;filter:none}
+@media (prefers-reduced-motion: reduce){body>header.wrap,body>header.wrap > :not(.nav-glass){transition:none!important}}
 /* liquid glass navigation: a slab of thick, very clear glass. What is behind it stays sharp; it is gently magnified
    through the middle, and the bottom rim bends in what lies just below the bar (the layer reaches --lq-reach under the
    bar, hidden by the mask, so the rim has something to bend), with fine color fringes where it bends most.
@@ -84,8 +96,6 @@ html:not(.ng-cr) body>header.wrap .nav-glass::after{bottom:calc(var(--nf-ext) * 
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){body>header.wrap .nav-glass::before{background:var(--paper)}}
 body>header.wrap::after{content:"";position:absolute;left:-100vmax;right:-100vmax;bottom:0;height:1px;background:rgba(17,17,17,var(--ng-line));opacity:0;transition:opacity .4s ease}
 html.kb-nav-float body>header.wrap::after{opacity:1}
-html.kb-nav-off body>header.wrap{transform:translateY(calc(-100% - var(--ng-ext) - 8px))}
-html.kb-nav-off body>header.wrap:focus-within{transform:none}
 body{padding-top:var(--navh,112px)}
 @media (prefers-reduced-motion:reduce){body>header.wrap{transition:none}}
 .nav{min-height:88px;display:flex;align-items:center;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
@@ -661,14 +671,15 @@ div.dl-row .dl-n{color:var(--soft)}
 <script>
 
 /* The navigation follows the reader. It stays through the opening of the page; from the first section (Keynotes) on it slides away while
-   scrolling down and comes back on the first scroll up. Once back, it stays for the next 120 px of scrolling down
-   before it leaves again, so a small correction does not chase it away.
+   scrolling down and comes back on the first scroll up. Once back, it stays for the next half screen (at least 320 px)
+   of scrolling down before it leaves again, so reading on a little does not chase it away.
    Sets kb-nav-float once the page has left the very top and kb-nav-off while the bar is tucked away. */
 (function () {
   var hd = document.querySelector('body>header.wrap');
   function navh() { if (hd) document.documentElement.style.setProperty('--navh', hd.offsetHeight + 'px'); }
   navh(); window.addEventListener('resize', navh);
-  var h = document.documentElement, last = window.scrollY || 0, ticking = false, anchor = null, STAY = 120;
+  var h = document.documentElement, last = window.scrollY || 0, ticking = false, anchor = null;
+  function stay() { return Math.max(320, window.innerHeight * .5); }   /* once back, it stays for half a screen (at least 320 px) of scrolling down */
   function start() {   /* the scroll position where the section begins to pass under the bar */
     var el = document.querySelector('#talks'), nav = document.querySelector('body>header.wrap');
     if (!el) return 140;
@@ -684,8 +695,8 @@ div.dl-row .dl-n{color:var(--soft)}
       return;
     }
     if (anchor === null) { if (y > last) h.classList.add('kb-nav-off'); last = y; return; }   /* reaching the section: leave */
-    anchor = Math.min(anchor, y);                              /* back in view: stay for STAY px of scrolling down */
-    if (y - anchor > STAY) { h.classList.add('kb-nav-off'); anchor = null; }
+    anchor = Math.min(anchor, y);                              /* back in view: stay for a while when scrolling down again */
+    if (y - anchor > stay()) { h.classList.add('kb-nav-off'); anchor = null; }
     last = y;
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
