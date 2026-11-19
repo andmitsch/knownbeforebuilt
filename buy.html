@@ -24,59 +24,141 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Buy the book Known Before Built</title>
 <meta name="description" content="Buy Known Before Built by Andreas Mitschke: Amazon, Bookshop.org or Blackwell’s.">
-<meta name="robots" content="noindex">
+<meta name="robots" content="index,follow">
 <meta name="theme-color" content="#ECE8E5">
-<!-- Structured data. At launch add "isbn", "datePublished" and an "offers" list (one Offer per shop, with url, price, priceCurrency) to the Book entry, and remove the noindex above. -->
+<!-- Structured data. One Offer per shop: US 24.99 USD, Germany 23.00 EUR, UK 19.00 GBP. -->
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
  "@graph": [
   {
    "@type": "WebPage",
-   "@id": "https://andmitsch.github.io/knownbeforebuilt/buy.html",
-   "url": "https://andmitsch.github.io/knownbeforebuilt/buy.html",
+   "@id": "https://knownbeforebuilt.com/buy.html",
+   "url": "https://knownbeforebuilt.com/buy.html",
    "name": "Buy the book Known Before Built",
    "about": {
-    "@id": "https://andmitsch.github.io/knownbeforebuilt/#book"
+    "@id": "https://knownbeforebuilt.com/#book"
    }
   },
   {
    "@type": "Book",
-   "@id": "https://andmitsch.github.io/knownbeforebuilt/#book",
+   "@id": "https://knownbeforebuilt.com/#book",
    "name": "Known Before Built",
-   "alternativeName": "From Discovery to Decision for Enterprises in Transformation",
-   "description": "A working system for deciding what deserves to be built — before the organization pays to find out.",
-   "url": "https://andmitsch.github.io/knownbeforebuilt/",
-   "image": "https://andmitsch.github.io/knownbeforebuilt/assets/book-front.jpg",
+   "alternativeHeadline": "How Established Enterprises Build Scalable Growth By Productizing Their Expertise",
+   "description": "A practical system for the decisions that should happen before a build goes into the delivery pipeline. Designed for enterprise leaders in innovation, product, growth, and transformation, the book provides 8 field observation methods, 9 validation frameworks, 5 economic decision tools, 4 market value assessment tools, 7 organizational anti-patterns, and 23 cognitive bias controls for de-risking R&D investments.",
+   "isbn": "9783000897276",
+   "datePublished": "2026-12-01",
+   "url": "https://knownbeforebuilt.com/",
+   "image": "https://knownbeforebuilt.com/assets/book-front.jpg",
    "author": {
-    "@id": "https://andmitsch.github.io/andreasmitschke/#person"
+    "@id": "https://andreasmitschke.com/#person"
    },
    "publisher": {
     "@type": "Organization",
+    "@id": "https://knownbeforebuilt.com/grant-and-bear-publishing/#imprint",
     "name": "Grant & Bear Publishing",
-    "url": "https://andmitsch.github.io/knownbeforebuilt/grant-and-bear-publishing/"
+    "url": "https://knownbeforebuilt.com/grant-and-bear-publishing/"
    },
    "numberOfPages": 316,
    "bookFormat": "https://schema.org/Paperback",
-   "inLanguage": "en"
+   "inLanguage": "en",
+   "offers": [
+    {
+     "@type": "Offer",
+     "url": "https://www.amazon.com/s?k=9783000897276",
+     "price": "24.99",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "availabilityStarts": "2026-12-01",
+     "itemCondition": "https://schema.org/NewCondition",
+     "seller": {
+      "@type": "Organization",
+      "name": "Amazon.com"
+     }
+    },
+    {
+     "@type": "Offer",
+     "url": "https://bookshop.org/book/9783000897276",
+     "price": "24.99",
+     "priceCurrency": "USD",
+     "availability": "https://schema.org/InStock",
+     "availabilityStarts": "2026-12-01",
+     "itemCondition": "https://schema.org/NewCondition",
+     "seller": {
+      "@type": "Organization",
+      "name": "Bookshop.org"
+     }
+    },
+    {
+     "@type": "Offer",
+     "url": "https://www.amazon.de/s?k=9783000897276",
+     "price": "23.00",
+     "priceCurrency": "EUR",
+     "availability": "https://schema.org/InStock",
+     "availabilityStarts": "2026-12-01",
+     "itemCondition": "https://schema.org/NewCondition",
+     "seller": {
+      "@type": "Organization",
+      "name": "Amazon.de"
+     }
+    },
+    {
+     "@type": "Offer",
+     "url": "https://www.amazon.co.uk/s?k=9783000897276",
+     "price": "19.00",
+     "priceCurrency": "GBP",
+     "availability": "https://schema.org/InStock",
+     "availabilityStarts": "2026-12-01",
+     "itemCondition": "https://schema.org/NewCondition",
+     "seller": {
+      "@type": "Organization",
+      "name": "Amazon.co.uk"
+     }
+    },
+    {
+     "@type": "Offer",
+     "url": "https://uk.bookshop.org/book/9783000897276",
+     "price": "19.00",
+     "priceCurrency": "GBP",
+     "availability": "https://schema.org/InStock",
+     "availabilityStarts": "2026-12-01",
+     "itemCondition": "https://schema.org/NewCondition",
+     "seller": {
+      "@type": "Organization",
+      "name": "Bookshop.org UK"
+     }
+    },
+    {
+     "@type": "Offer",
+     "url": "https://blackwells.co.uk/bookshop/product/9783000897276",
+     "price": "19.00",
+     "priceCurrency": "GBP",
+     "availability": "https://schema.org/InStock",
+     "availabilityStarts": "2026-12-01",
+     "itemCondition": "https://schema.org/NewCondition",
+     "seller": {
+      "@type": "Organization",
+      "name": "Blackwell's"
+     }
+    }
+   ]
   },
   {
    "@type": "Person",
-   "@id": "https://andmitsch.github.io/andreasmitschke/#person",
+   "@id": "https://andreasmitschke.com/#person",
    "name": "Andreas Mitschke",
    "jobTitle": "Growth & Product Innovation",
-   "url": "https://andmitsch.github.io/andreasmitschke/",
-   "image": "https://andmitsch.github.io/knownbeforebuilt/assets/andreas-mitschke-portrait-square.jpg",
+   "url": "https://andreasmitschke.com/",
+   "image": "https://knownbeforebuilt.com/assets/andreas-mitschke-portrait-square.jpg",
    "sameAs": [
     "https://www.linkedin.com/in/andreasmitschke",
-    "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10956892",
-    "https://andreasmitschke.com"
+    "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10956892"
    ]
   }
  ]
 }
 </script>
-<link rel="canonical" href="https://andmitsch.github.io/knownbeforebuilt/buy.html">
+<link rel="canonical" href="https://knownbeforebuilt.com/buy.html">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <style>@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/archivo-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
 @font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/archivo-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
@@ -215,9 +297,9 @@ form button[disabled]{opacity:.6;cursor:progress}
 <h1 id="buy-h">Get the <i>book.</i></h1>
 <p class="lede"></p>
 <h2 class="grp">Amazon</h2>
-<div class="shops"><a class="shop" href="https://www.amazon.com/s?k=[ISBN-13]" target="_blank" rel="noopener"><span class="shop-n">Amazon.com</span><span class="shop-s">United States</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.de/s?k=978-3-00-089727-6" target="_blank" rel="noopener"><span class="shop-n">Amazon.de</span><span class="shop-s">Germany · Austria</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.co.uk/s?k=978-3-00-089727-6" target="_blank" rel="noopener"><span class="shop-n">Amazon.co.uk</span><span class="shop-s">United Kingdom</span><span class="shop-a" aria-hidden="true">→</span></a></div>
+<div class="shops"><a class="shop" href="https://www.amazon.com/s?k=9783000897276" target="_blank" rel="noopener"><span class="shop-n">Amazon.com</span><span class="shop-s">United States</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.de/s?k=9783000897276" target="_blank" rel="noopener"><span class="shop-n">Amazon.de</span><span class="shop-s">Germany · Austria</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.co.uk/s?k=9783000897276" target="_blank" rel="noopener"><span class="shop-n">Amazon.co.uk</span><span class="shop-s">United Kingdom</span><span class="shop-a" aria-hidden="true">→</span></a></div>
 <h2 class="grp">Not on Amazon</h2>
-<div class="shops"><a class="shop" href="https://bookshop.org/book/[ISBN-13]" target="_blank" rel="noopener"><span class="shop-n">Bookshop.org</span><span class="shop-s">US · supports indie bookshops</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://uk.bookshop.org/book/978-3-00-089727-6" target="_blank" rel="noopener"><span class="shop-n">Bookshop.org</span><span class="shop-s">UK · supports indie bookshops</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://blackwells.co.uk/bookshop/product/978-3-00-089727-6" target="_blank" rel="noopener"><span class="shop-n">Blackwell's</span><span class="shop-s">Free delivery worldwide</span><span class="shop-a" aria-hidden="true">→</span></a></div>
+<div class="shops"><a class="shop" href="https://bookshop.org/book/9783000897276" target="_blank" rel="noopener"><span class="shop-n">Bookshop.org</span><span class="shop-s">US · supports indie bookshops</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://uk.bookshop.org/book/9783000897276" target="_blank" rel="noopener"><span class="shop-n">Bookshop.org</span><span class="shop-s">UK · supports indie bookshops</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://blackwells.co.uk/bookshop/product/9783000897276" target="_blank" rel="noopener"><span class="shop-n">Blackwell's</span><span class="shop-s">Free delivery worldwide</span><span class="shop-a" aria-hidden="true">→</span></a></div>
 <p class="isbn">Prefer your local bookshop? Any bookshop can order it with the ISBN <b>978-3-00-089727-6</b>.</p>
 </section>
 <figure class="cover" style="margin:0"><img src="assets/book-front.jpg" width="760" height="1216" alt="Cover of Known Before Built by Andreas Mitschke">

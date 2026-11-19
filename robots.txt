@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://knownbeforebuilt.com/sitemap.xml
