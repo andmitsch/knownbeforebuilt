@@ -290,10 +290,14 @@ form button[disabled]{opacity:.6;cursor:progress}
 .shop:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .shop-n{font:800 18px/1.1 Archivo,sans-serif;letter-spacing:-.01em}
 .shop-s{font:400 13px/1.35 'Hanken Grotesk',sans-serif;color:var(--muted)}
+.shop-p{margin-top:auto;padding-top:4px;font:700 15px/1 Archivo,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.005em}
 .shop-a{position:absolute;right:14px;top:16px;font-weight:700;transition:transform .25s}
 .shop:hover .shop-a{transform:translateX(3px)}
 .isbn{margin:26px 0 0;max-width:560px;font-size:14.5px;color:var(--muted)}
-.isbn b{color:var(--ink);font-weight:600;letter-spacing:.02em}
+.isbn + .isbn{margin-top:10px}
+.isbn a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:1.5px;text-underline-offset:3px}
+.isbn a:hover{text-decoration-color:var(--ink)}
+.isbn b{color:var(--ink);font-weight:600;letter-spacing:.02em;white-space:nowrap}
 .facts{margin-top:28px}
 @media (max-width:860px){.pre{grid-template-columns:1fr;gap:40px;padding-top:8px}.cover{order:-1;width:min(62%,260px)}.shops{grid-template-columns:1fr}}
 </style>
@@ -302,6 +306,7 @@ form button[disabled]{opacity:.6;cursor:progress}
 /* hello, developer */
 (function(){try{console.log("%c"+"                     .-'''''''''''''-.\n                 .-'                   '-.\n               .'                         '.\n              /       .-.          .-.      \\\n             /       ( o )        ( o )      \\\n            |         '-'          '-'        |\n            |                                 |\n            |     \\                     /     |\n             \\     '.                 .'     /\n              \\      '-._         _.-'      /\n               '.        '''''''''        .'\n                 '-.                   .-'\n                    '-.._____________..-'\n\n          Thanks for the interest in the code.\n          The animations are great, right?","font:600 13px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#F57106");}catch(e){}})();
 </script>
+<script src="js/analytics.js" defer></script>
 </head>
 <body>
 <div class="kb-sweep" aria-hidden="true"></div>
@@ -311,10 +316,12 @@ form button[disabled]{opacity:.6;cursor:progress}
 <h1 id="buy-h">Get the <i>book.</i></h1>
 <p class="lede"></p>
 <h2 class="grp">Amazon</h2>
-<div class="shops"><a class="shop" href="https://www.amazon.com/s?k=9783000897276" target="_blank" rel="noopener"><span class="shop-n">Amazon.com</span><span class="shop-s">United States</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.de/s?k=9783000897276" target="_blank" rel="noopener"><span class="shop-n">Amazon.de</span><span class="shop-s">Germany · Austria</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.co.uk/s?k=9783000897276" target="_blank" rel="noopener"><span class="shop-n">Amazon.co.uk</span><span class="shop-s">United Kingdom</span><span class="shop-a" aria-hidden="true">→</span></a></div>
+<div class="shops"><a class="shop" href="https://www.amazon.com/s?k=9783000897276" target="_blank" rel="noopener"><span class="shop-n">Amazon.com</span><span class="shop-s">United States</span><span class="shop-p">$24.99</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.de/s?k=9783000897276" target="_blank" rel="noopener"><span class="shop-n">Amazon.de</span><span class="shop-s">Germany · Austria</span><span class="shop-p">€23</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://www.amazon.co.uk/s?k=9783000897276" target="_blank" rel="noopener"><span class="shop-n">Amazon.co.uk</span><span class="shop-s">United Kingdom</span><span class="shop-p">£19</span><span class="shop-a" aria-hidden="true">→</span></a></div>
 <h2 class="grp">Not on Amazon</h2>
-<div class="shops"><a class="shop" href="https://bookshop.org/book/9783000897276" target="_blank" rel="noopener"><span class="shop-n">Bookshop.org</span><span class="shop-s">US · supports indie bookshops</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://uk.bookshop.org/book/9783000897276" target="_blank" rel="noopener"><span class="shop-n">Bookshop.org</span><span class="shop-s">UK · supports indie bookshops</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://blackwells.co.uk/bookshop/product/9783000897276" target="_blank" rel="noopener"><span class="shop-n">Blackwell's</span><span class="shop-s">Free delivery worldwide</span><span class="shop-a" aria-hidden="true">→</span></a></div>
-<p class="isbn">Prefer your local bookshop? Any bookshop can order it with the ISBN <b>978-3-00-089727-6</b>.</p>
+<div class="shops"><a class="shop" href="https://bookshop.org/book/9783000897276" target="_blank" rel="noopener"><span class="shop-n">Bookshop.org</span><span class="shop-s">US · supports indie bookshops</span><span class="shop-p">$24.99</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://uk.bookshop.org/book/9783000897276" target="_blank" rel="noopener"><span class="shop-n">Bookshop.org</span><span class="shop-s">UK · supports indie bookshops</span><span class="shop-p">£19</span><span class="shop-a" aria-hidden="true">→</span></a><a class="shop" href="https://blackwells.co.uk/bookshop/product/9783000897276" target="_blank" rel="noopener"><span class="shop-n">Blackwell's</span><span class="shop-s">Free delivery worldwide</span><span class="shop-p">£19</span><span class="shop-a" aria-hidden="true">→</span></a></div>
+<p class="isbn">Prefer your local bookshop? Any bookshop can order it with the ISBN <b>978-3-00-089727-6</b>. Prices shown are list prices; some shops sell for less.</p>
+<p class="isbn">Paperback for now. The e-book is coming.</p>
+<p class="isbn">Ordering for your team? Copies at volume pricing: <a href="mailto:publishing@andreasmitschke.com">publishing@andreasmitschke.com</a></p>
 </section>
 <figure class="cover" style="margin:0"><img src="assets/book-front.jpg" width="760" height="1216" alt="Cover of Known Before Built by Andreas Mitschke">
   <!-- <button type="button" class="stamp" aria-label="Status: out now"><span class="stamp-ink" aria-hidden="true"><span class="stamp-top">Grant &amp; Bear</span><span class="stamp-main">Out now</span></span></button></figure><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="kb-ink" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -11 7.4" result="speck"/><feComposite in="SourceGraphic" in2="speck" operator="in" result="inked"/><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="3" result="w"/><feDisplacementMap in="inked" in2="w" scale="2.2" xChannelSelector="R" yChannelSelector="G"/></filter></svg><script>document.querySelectorAll(".stamp").forEach(function(b){b.addEventListener("click",function(){b.classList.remove("again");void b.offsetWidth;b.classList.add("again");});});</script> -->

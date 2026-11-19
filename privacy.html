@@ -25,7 +25,7 @@
 <title>Privacy — Known Before Built</title>
 
 <meta name="robots" content="index,follow">
-<meta name="description" content="How knownbeforebuilt.com handles personal data: no cookies, no tracking, no advertising profiles.">
+<meta name="description" content="How knownbeforebuilt.com handles personal data: no cookies, no advertising trackers, only anonymous, cookieless visitor statistics.">
 <link rel="canonical" href="https://knownbeforebuilt.com/privacy.html">
 <meta name="theme-color" content="#ECE8E5">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -91,6 +91,7 @@ a:hover{text-decoration-thickness:3px}
 /* hello, developer */
 (function(){try{console.log("%c"+"                     .-'''''''''''''-.\n                 .-'                   '-.\n               .'                         '.\n              /       .-.          .-.      \\\n             /       ( o )        ( o )      \\\n            |         '-'          '-'        |\n            |                                 |\n            |     \\                     /     |\n             \\     '.                 .'     /\n              \\      '-._         _.-'      /\n               '.        '''''''''        .'\n                 '-.                   .-'\n                    '-.._____________..-'\n\n          Thanks for the interest in the code.\n          The animations are great, right?","font:600 13px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#F57106");}catch(e){}})();
 </script>
+<script src="js/analytics.js" defer></script>
 </head>
 <body>
 <div class="kb-sweep" aria-hidden="true"></div>
@@ -112,7 +113,11 @@ Email: <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.co
 <h2>3. Fonts</h2>
 <p>All fonts are served from this website itself. No connection is made to Google Fonts or any other font provider.</p>
 
-<h2>4. Launch notification (Kit)</h2>
+<h2>4. Visitor statistics (PostHog)</h2>
+<p>To understand how many people visit this website, where they come from (for example a link in an email signature or a post) and which links they use (for example which bookshop), I use PostHog, a web analytics service of PostHog Inc., USA. The statistics are processed on PostHog’s servers in the EU (Frankfurt, Germany).</p>
+<p>PostHog runs in a cookieless mode: nothing is stored on or read from your device — no cookies, no local storage. To count a visit within one day, PostHog’s servers turn your IP address and browser identification, together with a random value, into a one-way code. The random value changes and is deleted every day, so visits cannot be linked across days or traced back to you, and your IP address is not stored in the statistics. Recorded are: the pages visited and how long they stay open, the referring website and campaign tags (such as <code>utm_source</code>), browser, operating system and screen size, and clicks on selected links (bookshops, downloads, email addresses and links to other websites). No form contents, no names or email addresses, no session recordings and no profiles. If your browser sends a “Do Not Track” or “Global Privacy Control” signal, nothing is recorded.</p>
+<p>Legal basis: Art. 6(1)(f) GDPR — my legitimate interest in anonymous reach statistics to improve the website. As no information is stored on or read from your device, no consent is required under § 25 TDDDG. PostHog acts as my processor under a data processing agreement (Art. 28 GDPR); where PostHog staff outside the EU can access data, this is covered by the EU Standard Contractual Clauses. The statistics are kept for at most 12 months. More: <a href="https://posthog.com/privacy" rel="noopener">PostHog Privacy Policy</a>.</p>
+<h2>5. Launch notification (Kit)</h2>
 <p>On the pre-launch page you can leave your first name and email address to be told when the book is published.</p>
 <ul>
 <li><b>Purpose:</b> one email on the day the book launches. Nothing else is sent unless you separately agree to it.</li>
@@ -123,13 +128,13 @@ Email: <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.co
 <li><b>Service provider:</b> the list is managed with Kit (formerly ConvertKit), USA, as a processor under a data processing agreement (Art. 28 GDPR). Kit is certified under the EU-U.S. Data Privacy Framework and additionally uses the EU Standard Contractual Clauses. More: <a href="https://kit.com/privacy" rel="noopener">Kit Privacy Policy</a>.</li>
 </ul>
 
-<h2>5. Contact by email</h2>
+<h2>6. Contact by email</h2>
 <p>If you email me, I process your email address and the content of your message to answer your inquiry. Legal basis: Art. 6(1)(b) GDPR where your inquiry relates to a contract (e.g. bulk orders, speaking), otherwise Art. 6(1)(f) GDPR — my legitimate interest in answering inquiries. I delete these emails once your inquiry has been dealt with, unless statutory retention periods apply.</p>
 
-<h2>6. Links to other websites</h2>
+<h2>7. Links to other websites</h2>
 <p>This site links to other websites, for example LinkedIn or the publisher's page. Data is only transmitted to those providers if you click such a link; their own privacy policies then apply.</p>
 
-<h2>7. Your rights</h2>
+<h2>8. Your rights</h2>
 <p>Under the GDPR you have the right to:</p>
 <ul>
 <li>access the personal data stored about you (Art. 15),</li>
@@ -142,7 +147,7 @@ Email: <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.co
 </ul>
 <p>To exercise these rights, an email to <a href="mailto:andreas@knownbeforebuilt.com">andreas@knownbeforebuilt.com</a> is enough.</p>
 
-<h2>8. No automated decisions</h2>
+<h2>9. No automated decisions</h2>
 <p>No automated decision-making or profiling within the meaning of Art. 22 GDPR takes place.</p>
 
 <p class="meta">Last updated: November 2026. I will update this policy if the website or the services used change.</p>
