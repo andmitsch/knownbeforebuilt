@@ -68,6 +68,7 @@ a:not(.fx-on):hover .arw,button:not(.fx-on):hover .arw{transform:translateX(4px)
 .sub{margin:14px 0 0;max-width:640px;color:var(--soft);font-size:16px}
 .sec{padding-top:clamp(72px,9vw,120px);scroll-margin-top:24px}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px 32px;flex-wrap:wrap;margin-bottom:36px}
+.sec-note{margin:14px 0 0;max-width:620px;font-size:16px;line-height:1.5;color:var(--muted)}
 .u-link{position:relative;text-decoration:none;color:var(--ink);font-weight:600}
 .u-link::before,.u-link::after{content:"";position:absolute;left:0;right:0;bottom:-3px;pointer-events:none}
 .u-link::before{height:1px;background:rgba(17,17,17,.35)}
@@ -148,16 +149,6 @@ a:not(.fx-on):hover .arw,button:not(.fx-on):hover .arw{transform:translateX(4px)
   .t-in{grid-template-columns:1fr;padding-left:0}
 }
 
-/* ---------- formats ---------- */
-.fmts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink);margin:0}
-.fmt{padding:24px 24px 26px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:8px}
-.fmt dt{font:800 20px/1.15 Archivo,sans-serif}
-.fmt dd{margin:0}
-.fmt .len{font:var(--bodoni-w) 30px/1.1 'Bodoni Moda',serif}
-.fmt .note{font-size:15px;color:var(--muted);line-height:1.45}
-.lang{margin:24px 0 0;font:italic var(--bodoni-w) 22px/1.3 'Bodoni Moda',serif}
-@media (max-width:860px){.fmts{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.fmts{grid-template-columns:1fr}}
 
 /* ---------- sheets (bios, quotes) ---------- */
 .sheet{background:var(--sheet);border:1.5px solid var(--ink);border-radius:2px;padding:clamp(22px,3vw,32px)}
@@ -306,7 +297,6 @@ div.dl-row .dl-n{color:var(--soft)}
 <p class="role">Growth &amp; Product Innovation · Author of <i>Known Before Built</i></p>
 <ul class="toc" aria-label="On this page">
 <li><a class="u-link" data-portrait-wave href="#talks">Talks</a></li>
-<li><a class="u-link" data-portrait-wave href="#formats">Formats</a></li>
 <li><a class="u-link" data-portrait-wave href="#bios">Bios</a></li>
 <li><a class="u-link" data-portrait-wave href="#angles">Conversation angles</a></li>
 <li><a class="u-link" data-portrait-wave href="#quotes">Quotes</a></li>
@@ -326,6 +316,7 @@ div.dl-row .dl-n{color:var(--soft)}
 <div class="sec-head">
 <div>
 <h2 class="h2" id="h-talks">Keynotes &amp; Sessions</h2>
+<p class="sec-note">Keynote, fireside chat, panel, executive session, workshop or guest lecture, from 20 minutes to half a day. In English or German.</p>
 </div>
 <button type="button" class="ctl u-link" id="toggle-all" aria-controls="talk-1-p talk-2-p talk-3-p talk-4-p">Expand all</button>
 </div>
@@ -447,21 +438,6 @@ div.dl-row .dl-n{color:var(--soft)}
 </ul>
 </section>
 
-<!-- 3 · FORMATS -->
-<section id="formats" class="sec rv" aria-labelledby="h-formats">
-<div class="sec-head"><div>
-<h2 class="h2" id="h-formats">Formats</h2>
-</div></div>
-<dl class="fmts">
-<div class="fmt"><dt>Keynote</dt><dd class="len">20, 30 or 45 min</dd></div>
-<div class="fmt"><dt>Fireside chat</dt><dd class="len">30–45 min</dd></div>
-<div class="fmt"><dt>Panel</dt><dd class="len">45–60 min</dd><dd class="note">As one of 3–5 panellists</dd></div>
-<div class="fmt"><dt>Executive session</dt><dd class="len">90 min</dd><dd class="note">Leadership team, up to ~8</dd></div>
-<div class="fmt"><dt>Workshop</dt><dd class="len">90 min or half day</dd><dd class="note">Up to ~30 participants</dd></div>
-<div class="fmt"><dt>Guest lecture</dt><dd class="len">60–90 min</dd><dd class="note">MBA and executive education</dd></div>
-</dl>
-<p class="lang">All talks in English or German.</p>
-</section>
 
 <!-- 4 · BIOS -->
 <section id="bios" class="sec rv" aria-labelledby="h-bios">
