@@ -3,8 +3,8 @@
  *
  * 1. Reveal: when the portrait scrolls into view, a drop lands in its centre and the wave rolls outward,
  *    uncovering the photo behind its front, with a little orange light on the crest. The dashed
- *    placeholder ring fades as the wave reaches it. It resets once the portrait has left the screen
- *    completely, so the drop falls again on every return.
+ *    placeholder ring fades as the wave reaches it. It plays once per visit: after that the photo
+ *    simply stays, also when it scrolls out of view and back.
  * 2. Interaction: moving over the photo swells it gently towards the pointer and warms it with the
  *    site's orange; a click sends the same wave out from that point. Hovering the andreasmitschke.com
  *    link (or any link marked data-portrait-wave) sends a wave in from the side the link is on.
@@ -184,14 +184,6 @@
         timer = setTimeout(function () { box.classList.add('kbp-done'); }, reduce ? 0 : 900);
       }
     }
-    /* out of view: back to the unrevealed state, so the drop falls again next time */
-    function reset() {
-      if (!shown) return; shown = false;
-      clearTimeout(timer); if (fx) fx.reset();
-      box.classList.add('kbp-reset');
-      box.classList.remove('kbp-on', 'kbp-done', 'kbp-ring-off', 'kbp-gl-on');
-      void box.offsetWidth; box.classList.remove('kbp-reset');
-    }
     function ok() { if (!img.naturalWidth) return; loaded = true; go(); }
     /* Links marked data-portrait-wave (or the andreasmitschke.com link): hovering or focusing one sends
        a wave into the portrait from the edge that faces the link. */
@@ -212,7 +204,8 @@
       var io = new IntersectionObserver(function (es) {
         es.forEach(function (e) {
           if (e.intersectionRatio >= 0.25) { visible = true; go(); }
-          else if (!e.isIntersecting) { visible = false; reset(); }
+          else if (!e.isIntersecting) visible = false;   /* not yet revealed (image still loading): wait until it is back in view */
+          if (shown) io.disconnect();                     /* revealed once: it stays, no reset when it leaves the screen */
         });
       }, { threshold: [0, 0.25] });
       io.observe(box);
